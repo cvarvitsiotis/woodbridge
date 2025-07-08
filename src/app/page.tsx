@@ -12,7 +12,7 @@ import { urls } from "@/config/data";
 export default function Home() {
   return (
     <div className="relative flex grow flex-col items-center justify-center">
-      <div className="absolute h-full w-full bg-[radial-gradient(#a8a8a8_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] dark:bg-[radial-gradient(#4a4a4a_1px,transparent_1px)]" />
+      <div className="absolute h-full w-full bg-[radial-gradient(#cbcbcb_1px,transparent_2px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_50%,transparent_100%)] dark:bg-[radial-gradient(#4a4a4a_1px,transparent_2px)]" />
       <div className="z-10 text-center">
         <div
           className={clsx("text-4xl font-light tracking-tight md:text-5xl", fontSerif.className)}

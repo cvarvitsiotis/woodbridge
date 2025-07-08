@@ -37,21 +37,32 @@ const instructionSections = {
 };
 
 function AppleAndGoogleLinks({
-  appleUrl,
-  googleUrl,
+  coordinates,
+  includeWaypoint,
   name,
 }: {
-  appleUrl: string;
-  googleUrl: string;
+  coordinates: string;
+  includeWaypoint: boolean;
   name: string;
 }) {
   return (
     <>
-      <Link isExternal aria-label={`${name} Apple Maps`} href={appleUrl}>
+      <Link
+        isExternal
+        aria-label={`${name} Apple Maps`}
+        href={`https://maps.apple.com/place?coordinate=${coordinates}`}
+      >
         Apple
       </Link>{" "}
       |{" "}
-      <Link isExternal aria-label={`${name} Google Maps`} href={googleUrl}>
+      <Link
+        isExternal
+        aria-label={`${name} Google Maps`}
+        href={
+          `https://www.google.com/maps/dir/?api=1&destination=${coordinates}` +
+          (includeWaypoint ? `&waypoints=${urls.parking.waypoint}` : "")
+        }
+      >
         Google
       </Link>{" "}
       Maps
@@ -77,14 +88,14 @@ function ModalLink({
 }
 
 function LotForBus1({
-  appleUrl,
-  googleUrl,
+  coordinates,
+  includeWaypoint,
   name,
   modalTitle,
   handleOpenModal,
 }: {
-  appleUrl: string;
-  googleUrl: string;
+  coordinates: string;
+  includeWaypoint: boolean;
   name: string;
   modalTitle: string;
   handleOpenModal: (title: string) => void;
@@ -92,22 +103,26 @@ function LotForBus1({
   return (
     <div>
       <p>{name}</p>
-      <AppleAndGoogleLinks appleUrl={appleUrl} googleUrl={googleUrl} name={name} />
+      <AppleAndGoogleLinks
+        coordinates={coordinates}
+        includeWaypoint={includeWaypoint}
+        name={name}
+      />
       <ModalLink title={modalTitle} handleOpenModal={handleOpenModal} />
     </div>
   );
 }
 
 function LotForBus2({
-  appleUrl,
-  googleUrl,
+  coordinates,
+  includeWaypoint,
   name,
   modalTitle1,
   modalTitle2,
   handleOpenModal,
 }: {
-  appleUrl: string;
-  googleUrl: string;
+  coordinates: string;
+  includeWaypoint: boolean;
   name: string;
   modalTitle1: string;
   modalTitle2: string;
@@ -116,7 +131,11 @@ function LotForBus2({
   return (
     <div>
       <p>{name}</p>
-      <AppleAndGoogleLinks appleUrl={appleUrl} googleUrl={googleUrl} name={name} />
+      <AppleAndGoogleLinks
+        coordinates={coordinates}
+        includeWaypoint={includeWaypoint}
+        name={name}
+      />
       <ModalLink title={modalTitle1} handleOpenModal={handleOpenModal} />
       <ModalLink title={modalTitle2} handleOpenModal={handleOpenModal} />
     </div>
@@ -124,14 +143,14 @@ function LotForBus2({
 }
 
 function PortolaLot({
-  appleUrl,
-  googleUrl,
+  coordinates,
+  includeWaypoint,
   name,
   description,
   handleOpenModal,
 }: {
-  appleUrl: string;
-  googleUrl: string;
+  coordinates: string;
+  includeWaypoint: boolean;
   name: string;
   description: string;
   handleOpenModal: (title: string) => void;
@@ -139,15 +158,19 @@ function PortolaLot({
   return (
     <div>
       <p>{description}</p>
-      <AppleAndGoogleLinks appleUrl={appleUrl} googleUrl={googleUrl} name={name} />
+      <AppleAndGoogleLinks
+        coordinates={coordinates}
+        includeWaypoint={includeWaypoint}
+        name={name}
+      />
       <ModalLink title={name} handleOpenModal={handleOpenModal} />
     </div>
   );
 }
 
 function getLot(
-  appleUrl: string,
-  googleUrl: string,
+  coordinates: string,
+  includeWaypoint: boolean,
   title: string,
   name: string,
   description: string,
@@ -156,7 +179,11 @@ function getLot(
   return (
     <AccordionItem key={title} aria-label={title} title={title}>
       <p>{description}</p>
-      <AppleAndGoogleLinks appleUrl={appleUrl} googleUrl={googleUrl} name={name} />
+      <AppleAndGoogleLinks
+        coordinates={coordinates}
+        includeWaypoint={includeWaypoint}
+        name={name}
+      />
       <ModalLink title={name} handleOpenModal={handleOpenModal} />
     </AccordionItem>
   );
@@ -427,16 +454,16 @@ export default function ParkingAndDirections() {
                     when your team is ready to leave.
                   </p>
                   <LotForBus2
-                    appleUrl={urls.parking.lot1.apple}
-                    googleUrl={urls.parking.lot1.google}
+                    coordinates={urls.parking.lot1}
+                    includeWaypoint={true}
                     name="Bus dropoff and pickup (Lot 1)"
                     modalTitle1={modalTitles.freewayToBusDropoff}
                     modalTitle2={modalTitles.stagingAreaToBusPickup}
                     handleOpenModal={handleOpenModal}
                   />
                   <LotForBus1
-                    appleUrl={urls.parking.busStaging.apple}
-                    googleUrl={urls.parking.busStaging.google}
+                    coordinates={urls.parking.busStaging}
+                    includeWaypoint={false}
                     name="Bus staging area"
                     modalTitle={modalTitles.busDropoffToStagingArea}
                     handleOpenModal={handleOpenModal}
@@ -459,72 +486,72 @@ export default function ParkingAndDirections() {
                 <Accordion>
                   {/* Must call getLot as function rather than nesting JSX component due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
                   {getLot(
-                    urls.parking.lot0.apple,
-                    urls.parking.lot0.google,
+                    urls.parking.lot0,
+                    true,
                     "Lot 0",
                     modalTitles.freewayToLot0,
                     "200 meter walk (2 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot1.apple,
-                    urls.parking.lot1.google,
+                    urls.parking.lot1,
+                    true,
                     "Lot 1",
                     modalTitles.freewayToLot1,
                     "150 meter walk (1 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot2.apple,
-                    urls.parking.lot2.google,
+                    urls.parking.lot2,
+                    true,
                     "Lot 2",
                     modalTitles.freewayToLot2,
                     "250 meter walk (3 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot3.apple,
-                    urls.parking.lot3.google,
+                    urls.parking.lot3,
+                    true,
                     "Lot 3",
                     modalTitles.freewayToLot3,
                     "300 meter walk (5 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot4.apple,
-                    urls.parking.lot4.google,
+                    urls.parking.lot4,
+                    true,
                     "Lot 4",
                     modalTitles.freewayToLot4,
                     "800 meter walk (9 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot5.apple,
-                    urls.parking.lot5.google,
+                    urls.parking.lot5,
+                    true,
                     "Lot 5",
                     modalTitles.freewayToLot5,
                     "1500 meter walk (12 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot6.apple,
-                    urls.parking.lot6.google,
+                    urls.parking.lot6,
+                    true,
                     "Lot 6",
                     modalTitles.freewayToLot6,
                     "800 meter walk (8 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot7.apple,
-                    urls.parking.lot7.google,
+                    urls.parking.lot7,
+                    true,
                     "Lot 7",
                     modalTitles.freewayToLot7,
                     "600 meter walk (5 min) to finish line",
                     handleOpenModal,
                   )}
                   {getLot(
-                    urls.parking.lot8.apple,
-                    urls.parking.lot8.google,
+                    urls.parking.lot8,
+                    true,
                     "Lot 8 (Wild Rivers)",
                     modalTitles.freewayToLot8,
                     "1600 meter walk (14 min) to finish line",
@@ -538,22 +565,22 @@ export default function ParkingAndDirections() {
                     <div className="space-y-4">
                       <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
                       <PortolaLot
-                        appleUrl={urls.parking.portolaChinon.apple}
-                        googleUrl={urls.parking.portolaChinon.google}
+                        coordinates={urls.parking.portolaChinon}
+                        includeWaypoint={true}
                         name={modalTitles.freewayToPortolaEntrance1}
                         description="Entrance 1 - Off Chinon (west side of school)"
                         handleOpenModal={handleOpenModal}
                       />
                       <PortolaLot
-                        appleUrl={urls.parking.portolaCadence.apple}
-                        googleUrl={urls.parking.portolaCadence.google}
+                        coordinates={urls.parking.portolaCadence}
+                        includeWaypoint={true}
                         name={modalTitles.freewayToPortolaEntrance2}
                         description="Entrance 2 - Off Cadence"
                         handleOpenModal={handleOpenModal}
                       />
                       <PortolaLot
-                        appleUrl={urls.parking.portolaMerit.apple}
-                        googleUrl={urls.parking.portolaMerit.google}
+                        coordinates={urls.parking.portolaMerit}
+                        includeWaypoint={true}
                         name={modalTitles.freewayToPortolaEntrance3}
                         description="Entrance 3 - Off Merit (east side by stadium)"
                         handleOpenModal={handleOpenModal}
@@ -572,8 +599,8 @@ export default function ParkingAndDirections() {
               >
                 <p>On Phantom next to Lot 1 between Ridge Valley and Corsair</p>
                 <AppleAndGoogleLinks
-                  appleUrl={urls.parking.runnerDropoffPickup.apple}
-                  googleUrl={urls.parking.runnerDropoffPickup.google}
+                  coordinates={urls.parking.runnerDropoffPickup}
+                  includeWaypoint={true}
                   name={"Runner dropoff and pickup"}
                 />
               </AccordionItem>
@@ -591,28 +618,6 @@ export default function ParkingAndDirections() {
               />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="space-y-4 pt-2">
-        <Subtitle label="On gridlock" />
-        <div className={clsx("space-y-4 px-10 text-lg sm:text-xl", fontSerif.className)}>
-          <p>
-            We all know that with large athletic events, there will be traffic. However, nothing
-            frustrates us more, and takes the fun out of a meet quicker, than gridlock traffic. The
-            Irvine PD and our management team have devised a plan that will minimize the chances of
-            this occurring (gridlock). This plan worked well last year and will work again with your
-            help and cooperation. Please take the time at your Back-to-School nights, early season
-            team meetings, weekly newsletters, team competitions, social activities, etc. to educate
-            your team&apos;s families on the elements of this plan.
-          </p>
-          <p>
-            We will count on each and every coach to reach out, educate and encourage each family
-            member on your team, and all your friends and running enthusiasts that might attend the
-            meet, to be aware and follow this plan to assure a smooth flow of the vehicles into the{" "}
-            {siteConfig.greatPark}. Please give this URL to your runners and hound them to make sure
-            that they take it home. Encourage them to tell their family and friends to purchase
-            their parking passes ASAP, as well as to follow the driving directions provided above.
-          </p>
         </div>
       </div>
     </>

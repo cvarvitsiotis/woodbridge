@@ -11,14 +11,13 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { Link } from "@heroui/link";
-import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 
 import NavbarDropdown from "./navbarDropdown";
 
 import { pages, pageParents, siteConfig } from "@/config/site";
 import ThemeSwitch from "@/components/theme-switch";
-import { XIcon, InstagramIcon, Logo } from "@/components/icons";
+import { XIcon, InstagramIcon } from "@/components/icons";
 import { urls } from "@/config/data";
 
 function Menus({
@@ -103,16 +102,12 @@ export function Navbar() {
       classNames={{ base: "bg-transparent" }}
     >
       <NavbarBrand as="li" className="max-w-fit gap-3">
-        <NextLink
-          className="flex items-center justify-start"
+        <Link
           href={pages.home.path}
-          onClick={handleMenuAction}
+          className="mb-0.5 text-xl font-bold italic text-default-700 sm:text-2xl"
         >
-          <Logo />
-          <p className="text-xl font-bold italic text-inherit sm:text-2xl">
-            {siteConfig.woodbridge}
-          </p>
-        </NextLink>
+          {siteConfig.woodbridge}
+        </Link>
       </NavbarBrand>
       <NavbarContent className="ml-2 hidden basis-1/5 lg:flex lg:basis-full" justify="start">
         <Menus isMenu={false} pathname={pathname} handleMenuAction={handleMenuAction} />

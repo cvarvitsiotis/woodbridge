@@ -57,83 +57,21 @@ export const urls = {
       "https://www.hilton.com/en/hotels/kolcaes-embassy-suites-irvine-orange-county-airport/",
   },
   parking: {
-    lot0: {
-      apple:
-        "https://maps.apple.com/place?address=Great+Park%2C+Phantom%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6742342%2C-117.7481335&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67441530099316,-117.74813794406717&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot1: {
-      apple: "https://maps.apple.com/place?place-id=ID5EA8D2A18F0D7F8&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67415547083599,-117.74815275109665&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot2: {
-      apple: "https://maps.apple.com/place?place-id=IDB6EFBB62792F07F&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67614981951949,-117.74483361819793&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot3: {
-      apple: "https://maps.apple.com/place?place-id=I663CA9977BE188FD&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67435940869166,-117.74097384535757&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot4: {
-      apple: "https://maps.apple.com/place?place-id=I9C5B250E50EF17C9&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67535880565344,-117.73544093394585&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot5: {
-      apple: "https://maps.apple.com/place?place-id=IF187CE3EFBC6A605&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.669419217851036,-117.73792923917985&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot6: {
-      apple: "https://maps.apple.com/place?place-id=I2AF8796888EEF80C&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.668434811890535,-117.74149029360404&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot7: {
-      apple: "https://maps.apple.com/place?place-id=I2C131B2FE4C73F61&_provider=9902",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.66996071213284,-117.74523029229603&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    lot8: {
-      apple:
-        "https://maps.apple.com/place?address=950%E2%80%93956+Skyhawk%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6691254%2C-117.7357257&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.66881469250246,-117.73195718812212&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    portolaChinon: {
-      apple:
-        "https://maps.apple.com/place?map=explore&address=Chinon%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6743194%2C-117.7148924&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67424716551163,-117.71482275547011&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    portolaCadence: {
-      apple:
-        "https://maps.apple.com/place?address=1045%E2%80%931063+Cadence%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6724037%2C-117.7160253&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67257862990563,-117.71576210656995&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    portolaMerit: {
-      apple:
-        "https://maps.apple.com/place?map=explore&address=Portola+High+School%2C+Bulldog+Way%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6707018%2C-117.7123912&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.670865494647906,-117.71242756986437&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    runnerDropoffPickup: {
-      apple:
-        "https://maps.apple.com/place?address=Great+Park%2C+Phantom%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6747727%2C-117.7464505&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.67462515265455,-117.74650695673266&waypoints=33.69166722737075,-117.76647333982905",
-    },
-    busStaging: {
-      apple:
-        "https://maps.apple.com/place?address=15545+Sand+Canyon+Ave%2C+Irvine%2C+CA++92618%2C+United+States&coordinate=33.6681605%2C-117.7696703&name=Marked+Location",
-      google:
-        "https://www.google.com/maps/dir/?api=1&destination=33.66811163961207,-117.76805627347623",
-    },
+    lot0: "33.67441530099316%2C-117.74813794406717",
+    lot1: "33.67415547083599%2C-117.74815275109665",
+    lot2: "33.67614981951949%2C-117.74483361819793",
+    lot3: "33.67435940869166%2C-117.74097384535757",
+    lot4: "33.67535880565344%2C-117.73544093394585",
+    lot5: "33.669419217851036%2C-117.73792923917985",
+    lot6: "33.668434811890535%2C-117.74149029360404",
+    lot7: "33.66996071213284%2C-117.74523029229603",
+    lot8: "33.66905734418818%2C-117.73574196690696",
+    portolaChinon: "33.67424716551163%2C-117.71482275547011",
+    portolaCadence: "33.67257862990563%2C-117.71576210656995",
+    portolaMerit: "33.670865494647906%2C-117.71242756986437",
+    runnerDropoffPickup: "33.67462515265455%2C-117.74650695673266",
+    busStaging: "33.66811163961207%2C-117.76805627347623",
+    waypoint: "33.69166722737075%2C-117.76647333982905",
   },
 };
 

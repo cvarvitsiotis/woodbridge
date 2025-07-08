@@ -5,10 +5,18 @@ import { AsicsLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import { siteConfig } from "@/config/site";
 
+function FooterLink({ url, name }: { url: string; name: string }) {
+  return (
+    <Link isExternal href={url} className="text-sm">
+      {name}
+    </Link>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="z-10 flex w-full max-w-screen-2xl items-start justify-between gap-4 px-3 py-6 text-sm text-default-600">
-      <div className="flex flex-col items-center justify-between sm:flex-row sm:gap-1">
+    <footer className="z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 px-3 py-6 text-sm text-default-600">
+      <div className="flex flex-col items-center justify-between gap-0.5 sm:flex-row sm:gap-1">
         <span className="sm:mt-1">Presented by</span>
         <Link isExternal href={urls.sponsors.asics}>
           <AsicsLogo />
@@ -16,27 +24,15 @@ export default function Footer() {
         <span className="sm:mt-1">AMERICA</span>
       </div>
 
-      <div>
+      <div className="space-y-3 text-left sm:space-y-1 sm:text-left">
         <div>
           Hosted by{" "}
-          <Link
-            isExternal
-            href={urls.schools.woodbridgeHighSchool}
-            className="text-sm text-primary"
-          >
-            {siteConfig.woodbridge}
-          </Link>{" "}
-          and{" "}
-          <Link isExternal href={urls.schools.northwoodHighSchool} className="text-sm text-primary">
-            {siteConfig.northwood}
-          </Link>{" "}
-          High Schools
+          <FooterLink url={urls.schools.woodbridgeHighSchool} name={siteConfig.woodbridge} /> and{" "}
+          <FooterLink url={urls.schools.northwoodHighSchool} name={siteConfig.northwood} /> High
+          Schools
         </div>
         <div>
-          Results by{" "}
-          <Link isExternal href={urls.athleticNet.irvineTiming} className="text-sm text-primary">
-            Irvine Timing
-          </Link>
+          Results by <FooterLink url={urls.athleticNet.irvineTiming} name="Irvine Timing" />
         </div>
       </div>
     </footer>
