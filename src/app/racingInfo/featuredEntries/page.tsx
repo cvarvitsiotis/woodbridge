@@ -1,8 +1,5 @@
-import { featuredIndividuals } from "@/config/featuredIndividuals";
-import { featuredTeams } from "@/config/featuredTeams";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
-import FeaturedTeamsAndIndividualsSection from "@/components/featuredTeamsAndIndividualsSection";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import clsx from "clsx";
