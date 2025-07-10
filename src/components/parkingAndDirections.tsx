@@ -13,9 +13,6 @@ import { fontSerif } from "@/styles/fonts";
 import { siteConfig } from "@/config/site";
 
 const modalTitles = {
-  freewayToBusDropoff: "Freeway to bus dropoff",
-  stagingAreaToBusPickup: "Staging area to bus pickup",
-  busDropoffToStagingArea: "Bus dropoff to staging area",
   freewayToLot0: "Freeway to Lot 0",
   freewayToLot1: "Freeway to Lot 1",
   freewayToLot2: "Freeway to Lot 2",
@@ -28,28 +25,30 @@ const modalTitles = {
   freewayToPortolaEntrance1: "Freeway to Portola Entrance 1",
   freewayToPortolaEntrance2: "Freeway to Portola Entrance 2",
   freewayToPortolaEntrance3: "Freeway to Portola Entrance 3",
+  freewayToRunnerDropoffAndPickup: "Freeway to runner dropoff and pickup",
+  freewayToBusDropoff: "Freeway to bus dropoff",
+  stagingAreaToBusPickup: "Staging area to bus pickup",
+  busDropoffToStagingArea: "Bus dropoff to staging area",
 };
 
 const instructionSections = {
-  buses: "Buses",
   spectators: "Spectators",
   runnerDropoffAndPickup: "Runner dropoff and pickup",
+  buses: "Buses",
 };
 
 function AppleAndGoogleLinks({
   coordinates,
   includeWaypoint,
-  name,
 }: {
   coordinates: string;
   includeWaypoint: boolean;
-  name: string;
 }) {
   return (
     <>
       <Link
         isExternal
-        aria-label={`${name} Apple Maps`}
+        aria-label="Apple Maps"
         href={`https://maps.apple.com/place?coordinate=${coordinates}`}
       >
         Apple
@@ -57,7 +56,7 @@ function AppleAndGoogleLinks({
       |{" "}
       <Link
         isExternal
-        aria-label={`${name} Google Maps`}
+        aria-label="Google Maps"
         href={
           `https://www.google.com/maps/dir/?api=1&destination=${coordinates}` +
           (includeWaypoint ? `&waypoints=${urls.parking.waypoint}` : "")
@@ -87,83 +86,27 @@ function ModalLink({
   );
 }
 
-function LotForBus1({
+function DescriptionMapsModalInDiv({
   coordinates,
   includeWaypoint,
-  name,
-  modalTitle,
-  handleOpenModal,
-}: {
-  coordinates: string;
-  includeWaypoint: boolean;
-  name: string;
-  modalTitle: string;
-  handleOpenModal: (title: string) => void;
-}) {
-  return (
-    <div>
-      <p>{name}</p>
-      <AppleAndGoogleLinks
-        coordinates={coordinates}
-        includeWaypoint={includeWaypoint}
-        name={name}
-      />
-      <ModalLink title={modalTitle} handleOpenModal={handleOpenModal} />
-    </div>
-  );
-}
-
-function LotForBus2({
-  coordinates,
-  includeWaypoint,
-  name,
-  modalTitle1,
-  modalTitle2,
-  handleOpenModal,
-}: {
-  coordinates: string;
-  includeWaypoint: boolean;
-  name: string;
-  modalTitle1: string;
-  modalTitle2: string;
-  handleOpenModal: (title: string) => void;
-}) {
-  return (
-    <div>
-      <p>{name}</p>
-      <AppleAndGoogleLinks
-        coordinates={coordinates}
-        includeWaypoint={includeWaypoint}
-        name={name}
-      />
-      <ModalLink title={modalTitle1} handleOpenModal={handleOpenModal} />
-      <ModalLink title={modalTitle2} handleOpenModal={handleOpenModal} />
-    </div>
-  );
-}
-
-function PortolaLot({
-  coordinates,
-  includeWaypoint,
-  name,
+  name1,
+  name2,
   description,
   handleOpenModal,
 }: {
   coordinates: string;
   includeWaypoint: boolean;
-  name: string;
+  name1: string;
+  name2?: string;
   description: string;
   handleOpenModal: (title: string) => void;
 }) {
   return (
     <div>
       <p>{description}</p>
-      <AppleAndGoogleLinks
-        coordinates={coordinates}
-        includeWaypoint={includeWaypoint}
-        name={name}
-      />
-      <ModalLink title={name} handleOpenModal={handleOpenModal} />
+      <AppleAndGoogleLinks coordinates={coordinates} includeWaypoint={includeWaypoint} />
+      <ModalLink title={name1} handleOpenModal={handleOpenModal} />
+      {name2 && <ModalLink title={name2} handleOpenModal={handleOpenModal} />}
     </div>
   );
 }
@@ -178,13 +121,13 @@ function getLot(
 ) {
   return (
     <AccordionItem key={title} aria-label={title} title={title}>
-      <p>{description}</p>
-      <AppleAndGoogleLinks
+      <DescriptionMapsModalInDiv
         coordinates={coordinates}
         includeWaypoint={includeWaypoint}
-        name={name}
+        name1={name}
+        description={description}
+        handleOpenModal={handleOpenModal}
       />
-      <ModalLink title={name} handleOpenModal={handleOpenModal} />
     </AccordionItem>
   );
 }
@@ -198,36 +141,7 @@ function ModalBodyList({ start, children }: { start?: number; children: React.Re
 }
 
 function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
-  return modalTitle === modalTitles.freewayToBusDropoff ? (
-    <ModalBodyList>
-      <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
-      <li>North on Jeffrey</li>
-      <li>Right on Trabuco</li>
-      <li>Pass Sand Canyon where it turns into Great Park Blvd</li>
-      <li>Right on Ridge Valley</li>
-      <li>Left on Phantom</li>
-      <li>Right into lot</li>
-    </ModalBodyList>
-  ) : modalTitle === modalTitles.stagingAreaToBusPickup ? (
-    <ModalBodyList>
-      <li>Exit staging area on Valley Oak and turn right</li>
-      <li>Right on Irvine Center Drive</li>
-      <li>Left on Sand Canyon</li>
-      <li>Right on Marine Way</li>
-      <li>Left on Ridge Valley</li>
-      <li>Right on Phantom</li>
-      <li>Right into lot</li>
-    </ModalBodyList>
-  ) : modalTitle === modalTitles.busDropoffToStagingArea ? (
-    <ModalBodyList>
-      <li>Exit Lot 1 on Phantom and turn left</li>
-      <li>Right on Ridge Valley</li>
-      <li>Left on Great Park Blvd</li>
-      <li>Left on Sand Canyon</li>
-      <li>Drive to Waterworks and turn right into lot</li>
-      <li>Follow signs to staging area</li>
-    </ModalBodyList>
-  ) : modalTitle === modalTitles.freewayToLot0 ? (
+  return modalTitle === modalTitles.freewayToLot0 ? (
     <ModalBodyList>
       <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
       <li>North on Jeffrey</li>
@@ -369,6 +283,46 @@ function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
       <li>Left on Merit</li>
       <li>Left into lot</li>
     </ModalBodyList>
+  ) : modalTitle === modalTitles.freewayToRunnerDropoffAndPickup ? (
+    <ModalBodyList>
+      <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
+      <li>North on Jeffrey</li>
+      <li>Right on Trabuco</li>
+      <li>Pass Sand Canyon where it turns into Great Park Blvd</li>
+      <li>Right on Ridge Valley</li>
+      <li>Left on Phantom</li>
+      <li>Pass Lot 1</li>
+      <li>On the right before Corsair</li>
+    </ModalBodyList>
+  ) : modalTitle === modalTitles.freewayToBusDropoff ? (
+    <ModalBodyList>
+      <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
+      <li>North on Jeffrey</li>
+      <li>Right on Trabuco</li>
+      <li>Pass Sand Canyon where it turns into Great Park Blvd</li>
+      <li>Right on Ridge Valley</li>
+      <li>Left on Phantom</li>
+      <li>Right into lot</li>
+    </ModalBodyList>
+  ) : modalTitle === modalTitles.stagingAreaToBusPickup ? (
+    <ModalBodyList>
+      <li>Exit staging area on Valley Oak and turn right</li>
+      <li>Right on Irvine Center Drive</li>
+      <li>Left on Sand Canyon</li>
+      <li>Right on Marine Way</li>
+      <li>Left on Ridge Valley</li>
+      <li>Right on Phantom</li>
+      <li>Right into lot</li>
+    </ModalBodyList>
+  ) : modalTitle === modalTitles.busDropoffToStagingArea ? (
+    <ModalBodyList>
+      <li>Exit Lot 1 on Phantom and turn left</li>
+      <li>Right on Ridge Valley</li>
+      <li>Left on Great Park Blvd</li>
+      <li>Left on Sand Canyon</li>
+      <li>Drive to Waterworks and turn right into lot</li>
+      <li>Follow signs to staging area</li>
+    </ModalBodyList>
   ) : (
     <></>
   );
@@ -440,36 +394,6 @@ export default function ParkingAndDirections() {
         <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
           <div className="w-[768px] max-w-full basis-1/2 px-8">
             <Accordion className="px-0">
-              <AccordionItem
-                key={instructionSections.buses}
-                aria-label={instructionSections.buses}
-                title={instructionSections.buses}
-                classNames={{
-                  title: clsx("text-xl", fontSerif.className),
-                }}
-              >
-                <div className="space-y-4">
-                  <p>
-                    Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call
-                    when your team is ready to leave.
-                  </p>
-                  <LotForBus2
-                    coordinates={urls.parking.lot1}
-                    includeWaypoint={true}
-                    name="Bus dropoff and pickup (Lot 1)"
-                    modalTitle1={modalTitles.freewayToBusDropoff}
-                    modalTitle2={modalTitles.stagingAreaToBusPickup}
-                    handleOpenModal={handleOpenModal}
-                  />
-                  <LotForBus1
-                    coordinates={urls.parking.busStaging}
-                    includeWaypoint={false}
-                    name="Bus staging area"
-                    modalTitle={modalTitles.busDropoffToStagingArea}
-                    handleOpenModal={handleOpenModal}
-                  />
-                </div>
-              </AccordionItem>
               <AccordionItem
                 key={instructionSections.spectators}
                 aria-label={instructionSections.spectators}
@@ -564,24 +488,24 @@ export default function ParkingAndDirections() {
                   >
                     <div className="space-y-4">
                       <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
-                      <PortolaLot
+                      <DescriptionMapsModalInDiv
                         coordinates={urls.parking.portolaChinon}
                         includeWaypoint={true}
-                        name={modalTitles.freewayToPortolaEntrance1}
+                        name1={modalTitles.freewayToPortolaEntrance1}
                         description="Entrance 1 - Off Chinon (west side of school)"
                         handleOpenModal={handleOpenModal}
                       />
-                      <PortolaLot
+                      <DescriptionMapsModalInDiv
                         coordinates={urls.parking.portolaCadence}
                         includeWaypoint={true}
-                        name={modalTitles.freewayToPortolaEntrance2}
+                        name1={modalTitles.freewayToPortolaEntrance2}
                         description="Entrance 2 - Off Cadence"
                         handleOpenModal={handleOpenModal}
                       />
-                      <PortolaLot
+                      <DescriptionMapsModalInDiv
                         coordinates={urls.parking.portolaMerit}
                         includeWaypoint={true}
-                        name={modalTitles.freewayToPortolaEntrance3}
+                        name1={modalTitles.freewayToPortolaEntrance3}
                         description="Entrance 3 - Off Merit (east side by stadium)"
                         handleOpenModal={handleOpenModal}
                       />
@@ -597,12 +521,43 @@ export default function ParkingAndDirections() {
                   title: clsx("text-xl", fontSerif.className),
                 }}
               >
-                <p>On Phantom next to Lot 1 between Ridge Valley and Corsair</p>
-                <AppleAndGoogleLinks
+                <DescriptionMapsModalInDiv
                   coordinates={urls.parking.runnerDropoffPickup}
                   includeWaypoint={true}
-                  name={"Runner dropoff and pickup"}
+                  name1={modalTitles.freewayToRunnerDropoffAndPickup}
+                  description="On Phantom next to Lot 1 between Ridge Valley and Corsair"
+                  handleOpenModal={handleOpenModal}
                 />
+              </AccordionItem>
+              <AccordionItem
+                key={instructionSections.buses}
+                aria-label={instructionSections.buses}
+                title={instructionSections.buses}
+                classNames={{
+                  title: clsx("text-xl", fontSerif.className),
+                }}
+              >
+                <div className="space-y-4">
+                  <p>
+                    Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call
+                    when your team is ready to leave.
+                  </p>
+                  <DescriptionMapsModalInDiv
+                    coordinates={urls.parking.lot1}
+                    includeWaypoint={true}
+                    name1={modalTitles.freewayToBusDropoff}
+                    name2={modalTitles.stagingAreaToBusPickup}
+                    description="Bus dropoff and pickup (Lot 1)"
+                    handleOpenModal={handleOpenModal}
+                  />
+                  <DescriptionMapsModalInDiv
+                    coordinates={urls.parking.busStaging}
+                    includeWaypoint={false}
+                    name1={modalTitles.busDropoffToStagingArea}
+                    description="Bus staging area"
+                    handleOpenModal={handleOpenModal}
+                  />
+                </div>
               </AccordionItem>
             </Accordion>
           </div>

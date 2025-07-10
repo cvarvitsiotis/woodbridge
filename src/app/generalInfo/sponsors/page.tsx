@@ -1,4 +1,4 @@
-import { KeckLogo } from "@/components/icons";
+import { AsicsLogo, KeckLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import Image from "next/image";
 import martinLawLogo from "@/../public/martin-law-logo.png";
@@ -12,6 +12,27 @@ export const metadata: Metadata = {
   title: pages.sponsors.menuLabel,
 };
 
+function Sponsor({
+  url,
+  motto,
+  children,
+}: {
+  url: string;
+  motto: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="md:justify-auto grid items-center justify-center justify-items-start gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
+      <div className="justify-self-center md:justify-self-auto">
+        <Link isExternal href={url}>
+          {children}
+        </Link>
+      </div>
+      <p className="justify-self-center text-lg font-light md:justify-self-auto">{motto}</p>
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <>
@@ -22,33 +43,22 @@ export default function Page() {
         The following are the sponsors that make this great meet possible.
       </p>
       <div className="mx-auto max-w-2xl">
-        <div className="md:justify-auto grid items-center justify-center justify-items-start gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
-          <div className="justify-self-center md:justify-self-auto">
-            <Link isExternal href={urls.sponsors.keck}>
-              <KeckLogo />
-            </Link>
-          </div>
-          <p className="justify-self-center text-lg font-light md:justify-self-auto">
-            Limitless Possibilities
-          </p>
-        </div>
-        <div className="md:justify-auto grid items-center justify-center justify-items-start gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
-          <div className="justify-self-center md:justify-self-auto">
-            <Link isExternal href={urls.sponsors.martinLaw}>
-              <Image
-                height={40}
-                src={martinLawLogo}
-                quality={100}
-                placeholder="blur"
-                alt="Martin Law Logo"
-                className="dark:invert"
-              />
-            </Link>
-          </div>
-          <p className="justify-self-center text-lg font-light md:justify-self-auto">
-            Dedicated to Representing Employers
-          </p>
-        </div>
+        <Sponsor url={urls.sponsors.asics} motto="Sound Mind, Sound Body">
+          <AsicsLogo height="h-16" />
+        </Sponsor>
+        <Sponsor url={urls.sponsors.keck} motto="Limitless Possibilities">
+          <KeckLogo />
+        </Sponsor>
+        <Sponsor url={urls.sponsors.martinLaw} motto="Dedicated to Representing Employers">
+          <Image
+            height={40}
+            src={martinLawLogo}
+            quality={100}
+            placeholder="blur"
+            alt="Martin Law Logo"
+            className="dark:invert"
+          />
+        </Sponsor>
       </div>
     </>
   );

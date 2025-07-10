@@ -54,8 +54,12 @@ export default function Page() {
             </div>
             <div className="px-8 font-light sm:text-lg">
               <p>{people.bryan}</p>
-              <p>{people.bryanPhone}</p>
-              <ParagraphLink url={`mailto:${people.bryanEmail}`} name={people.bryanEmail} />
+              <div>
+                <ParagraphLink url={`tel:+${people.bryanPhone}`} name={people.bryanPhone} />
+              </div>
+              <div>
+                <ParagraphLink url={`mailto:${people.bryanEmail}`} name={people.bryanEmail} />
+              </div>
             </div>
           </div>
         </Card>

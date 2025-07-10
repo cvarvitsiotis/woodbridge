@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { IconSvgProps } from "@/types";
+import clsx from "clsx";
 
 export function ChevronDown({ fill, size, height, width, ...props }: IconSvgProps) {
   return (
@@ -114,14 +113,17 @@ export function SunFilledIcon({ size = 24, width, height, ...props }: IconSvgPro
   );
 }
 
-export function AsicsLogo(props: IconSvgProps) {
+export function AsicsLogo({ height = undefined, ...props }: IconSvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 301 101"
       fill="currentColor"
-      className="h-[35px] text-[#001E62] lg:h-[40px] dark:text-[color:hsl(var(--heroui-foreground))]"
+      className={clsx(
+        height ?? "h-[35px] lg:h-[40px]",
+        "text-[#001E62] dark:text-[color:hsl(var(--heroui-foreground))]",
+      )}
       {...props}
     >
       <defs>
