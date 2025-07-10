@@ -37,11 +37,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex min-h-dvh flex-col items-center">
+          <div className="relative flex min-h-dvh flex-col items-center space-y-3 sm:space-y-4">
             <Navbar />
-            <main className="container flex grow flex-col px-3 py-4 sm:px-6">
+            <main className="container flex grow flex-col space-y-3 px-3 sm:px-6">
               <BreadcrumbsAndSponsor />
-              <div className="mt-3 flex grow flex-col space-y-4">{children}</div>
+              <div className="flex grow flex-col space-y-4">{children}</div>
             </main>
             <Footer />
           </div>
