@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="z-10 mt-20 flex gap-3">
+      <div className="z-10 mt-12 flex gap-3 md:mt-20">
         <Button
           as={Link}
           className={buttonStyles({
@@ -102,7 +102,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="z-10 mt-20 text-default-600">
+      <div className="z-10 mt-12 text-default-600 md:mt-20">
         <div className="flex items-center justify-center gap-1">
           <CalendarIcon />
           <div>{dates.meetStartToEndDateShort}</div>
