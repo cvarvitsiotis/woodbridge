@@ -141,6 +141,7 @@ export default function AllTimeTeamsTable() {
               onChange={onGenderFilterChange}
               label="Gender"
               variant="faded"
+              className="basis-1/3"
             >
               {genderOptions.map((gender) => (
                 <SelectItem key={gender}>{gender}</SelectItem>
@@ -152,6 +153,7 @@ export default function AllTimeTeamsTable() {
               onChange={onCourseFilterChange}
               label="Course"
               variant="faded"
+              className="basis-2/3"
             >
               {courseOptions.map((course) => (
                 <SelectItem key={course}>{course}</SelectItem>

@@ -8,12 +8,37 @@ import { AsicsLogo, CalendarIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import { urls } from "@/config/data";
+import { Alert } from "@heroui/alert";
 
 export default function Home() {
   return (
     <div className="relative flex grow flex-col items-center justify-center">
       <div className="absolute h-full w-full bg-[radial-gradient(#cbcbcb_1px,transparent_2px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_50%,transparent_100%)] dark:bg-[radial-gradient(#4a4a4a_1px,transparent_2px)]" />
-      <div className="z-10 text-center">
+
+      <div>
+        <Alert
+          hideIcon
+          color="primary"
+          title={
+            <p>
+              Our website got a facelift. We welcome all{" "}
+              <Link href={pages.contact.path} className="text-sm font-semibold">
+                feedback
+              </Link>
+              .
+            </p>
+          }
+          variant="flat"
+          radius="sm"
+          classNames={{
+            base: "p-2",
+            mainWrapper: "ms-0 min-h-0 text-center",
+            title: "font-normal",
+          }}
+        />
+      </div>
+
+      <div className="z-10 mt-12 text-center">
         <div
           className={clsx("text-4xl font-light tracking-tight md:text-5xl", fontSerif.className)}
         >

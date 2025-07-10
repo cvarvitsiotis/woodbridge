@@ -3,6 +3,9 @@ import { featuredTeams } from "@/config/featuredTeams";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import FeaturedTeamsAndIndividualsSection from "@/components/featuredTeamsAndIndividualsSection";
+import { dates } from "@/config/dates";
+import { fontSerif } from "@/styles/fonts";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
   title: pages.featuredEntries.menuLabel,
@@ -15,7 +18,16 @@ export default function Page() {
         <span className="font-bold">Sweepstakes</span> & <span className="font-bold">Rated</span>{" "}
         Entries
       </h1>
-      <FeaturedTeamsAndIndividualsSection
+      <div
+        className={clsx(
+          "pt-8 text-center text-xl font-light sm:pt-10 sm:text-2xl",
+          fontSerif.className,
+        )}
+      >
+        <p>Entries will be posted on {dates.featuredEntriesUpdateDateParts.monthDayLong}.</p>
+      </div>
+
+      {/* <FeaturedTeamsAndIndividualsSection
         sectionDescription="Boys Sweepstakes"
         teams={featuredTeams.sweepstakesBoysTeams}
         individuals={featuredIndividuals.sweepstakesBoysIndividuals}
@@ -34,7 +46,7 @@ export default function Page() {
         sectionDescription="Girls Rated"
         teams={featuredTeams.ratedGirlsTeams}
         individuals={featuredIndividuals.ratedGirlsIndividuals}
-      />
+      /> */}
     </>
   );
 }

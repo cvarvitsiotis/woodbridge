@@ -1,7 +1,5 @@
-import { AsicsLogo, KeckLogo } from "@/components/icons";
+import { AsicsLogo } from "@/components/icons";
 import { urls } from "@/config/data";
-import Image from "next/image";
-import martinLawLogo from "@/../public/martin-law-logo.png";
 import { Link } from "@heroui/link";
 import { fontSerif } from "@/styles/fonts";
 import clsx from "clsx";
@@ -43,21 +41,8 @@ export default function Page() {
         The following are the sponsors that make this great meet possible.
       </p>
       <div className="mx-auto max-w-2xl">
-        <Sponsor url={urls.sponsors.asics} motto="Sound Mind, Sound Body">
+        <Sponsor url={urls.sponsors.asics} motto="sound mind, sound body">
           <AsicsLogo height="h-16" />
-        </Sponsor>
-        <Sponsor url={urls.sponsors.keck} motto="Limitless Possibilities">
-          <KeckLogo />
-        </Sponsor>
-        <Sponsor url={urls.sponsors.martinLaw} motto="Dedicated to Representing Employers">
-          <Image
-            height={40}
-            src={martinLawLogo}
-            quality={100}
-            placeholder="blur"
-            alt="Martin Law Logo"
-            className="dark:invert"
-          />
         </Sponsor>
       </div>
     </>

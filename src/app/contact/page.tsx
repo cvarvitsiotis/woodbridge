@@ -55,7 +55,7 @@ export default function Page() {
             <div className="px-8 font-light sm:text-lg">
               <p>{people.bryan}</p>
               <div>
-                <ParagraphLink url={`tel:+${people.bryanPhone}`} name={people.bryanPhone} />
+                <ParagraphLink url={`tel:${people.bryanPhone}`} name={people.bryanPhone} />
               </div>
               <div>
                 <ParagraphLink url={`mailto:${people.bryanEmail}`} name={people.bryanEmail} />

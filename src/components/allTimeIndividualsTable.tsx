@@ -251,6 +251,7 @@ export default function AllTimeIndividualsTable() {
               onChange={onGenderFilterChange}
               label="Gender"
               variant="faded"
+              className="basis-1/4"
             >
               {genderOptions.map((gender) => (
                 <SelectItem key={gender}>{gender}</SelectItem>
@@ -262,6 +263,7 @@ export default function AllTimeIndividualsTable() {
               onChange={onGradeFilterChange}
               label="Grade"
               variant="faded"
+              className="basis-1/4"
             >
               {gradeOptions.map((grade) => (
                 <SelectItem key={grade}>{grade}</SelectItem>
@@ -273,6 +275,7 @@ export default function AllTimeIndividualsTable() {
               onChange={onCourseFilterChange}
               label="Course"
               variant="faded"
+              className="basis-2/4"
             >
               {courseOptions.map((course) => (
                 <SelectItem key={course}>{course}</SelectItem>

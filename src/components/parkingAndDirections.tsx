@@ -11,6 +11,7 @@ import { ReactNode, useState } from "react";
 import clsx from "clsx";
 import { fontSerif } from "@/styles/fonts";
 import { siteConfig } from "@/config/site";
+import { Alert } from "@heroui/alert";
 
 const modalTitles = {
   freewayToLot0: "Freeway to Lot 0",
@@ -37,7 +38,7 @@ const instructionSections = {
   buses: "Buses",
 };
 
-function AppleAndGoogleLinks({
+function MapLink({
   coordinates,
   includeWaypoint,
 }: {
@@ -46,14 +47,6 @@ function AppleAndGoogleLinks({
 }) {
   return (
     <>
-      <Link
-        isExternal
-        aria-label="Apple Maps"
-        href={`https://maps.apple.com/place?coordinate=${coordinates}`}
-      >
-        Apple
-      </Link>{" "}
-      |{" "}
       <Link
         isExternal
         aria-label="Google Maps"
@@ -86,7 +79,7 @@ function ModalLink({
   );
 }
 
-function DescriptionMapsModalInDiv({
+function DescriptionMapModalInDiv({
   coordinates,
   includeWaypoint,
   name1,
@@ -104,7 +97,7 @@ function DescriptionMapsModalInDiv({
   return (
     <div>
       <p>{description}</p>
-      <AppleAndGoogleLinks coordinates={coordinates} includeWaypoint={includeWaypoint} />
+      <MapLink coordinates={coordinates} includeWaypoint={includeWaypoint} />
       <ModalLink title={name1} handleOpenModal={handleOpenModal} />
       {name2 && <ModalLink title={name2} handleOpenModal={handleOpenModal} />}
     </div>
@@ -121,7 +114,7 @@ function getLot(
 ) {
   return (
     <AccordionItem key={title} aria-label={title} title={title}>
-      <DescriptionMapsModalInDiv
+      <DescriptionMapModalInDiv
         coordinates={coordinates}
         includeWaypoint={includeWaypoint}
         name1={name}
@@ -357,38 +350,51 @@ export default function ParkingAndDirections() {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <div className="space-y-4 pt-6">
-        <Subtitle label="Critical notes" />
-        <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
-          <ol
-            className={clsx(
-              "w-[768px] max-w-full basis-1/2 list-outside list-decimal space-y-4 px-10 text-lg sm:text-xl",
-              fontSerif.className,
-            )}
-          >
-            <li>
-              Ingore Apple and Google Maps! DO NOT exit Interstate 5 or 405 at Sand Canyon. You will
-              hit gridlock. You must exit Jeffery, instead.
-            </li>
-            <li>
-              All parking passes must be purchased online prior to arriving at the{" "}
-              {siteConfig.greatPark}. No parking passes will be sold onsite.
-            </li>
-          </ol>
-          <div className="w-full basis-1/2">
-            <div className="relative mx-auto aspect-[3741/3614] max-h-96 w-full max-w-96 lg:mx-0">
-              <Image
-                fill
-                src={directionsGridlock}
-                quality={100}
-                placeholder="blur"
-                alt="Gridlock Note"
-                className="rounded-lg object-contain drop-shadow-xl"
-              />
-            </div>
-          </div>
+
+      <div className="mx-auto max-w-2xl space-y-6 pt-6">
+        <div>
+          <Alert
+            hideIconWrapper
+            color="danger"
+            title={
+              <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
+                <div className="space-y-2">
+                  <p>
+                    <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                    Canyon. You will hit gridlock. You must exit Jeffrey, instead.
+                  </p>
+                  <p>Use the Google Maps links below. They force you through Jeffrey.</p>
+                </div>
+                <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56">
+                  <Image
+                    fill
+                    src={directionsGridlock}
+                    quality={100}
+                    placeholder="blur"
+                    alt="Gridlock Note"
+                    className="rounded-lg object-contain drop-shadow-xl"
+                  />
+                </div>
+              </div>
+            }
+            variant="faded"
+            radius="sm"
+          />
+        </div>
+        <div>
+          <Alert
+            hideIconWrapper
+            color="primary"
+            title={`All parking passes must be purchased online prior to arriving at the ${siteConfig.greatPark}. No parking passes will be sold onsite.`}
+            variant="flat"
+            radius="sm"
+            classNames={{
+              title: "font-normal",
+            }}
+          />
         </div>
       </div>
+
       <div className="pt-6">
         <Subtitle label="Instructions" />
         <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
@@ -488,21 +494,21 @@ export default function ParkingAndDirections() {
                   >
                     <div className="space-y-4">
                       <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
-                      <DescriptionMapsModalInDiv
+                      <DescriptionMapModalInDiv
                         coordinates={urls.parking.portolaChinon}
                         includeWaypoint={true}
                         name1={modalTitles.freewayToPortolaEntrance1}
                         description="Entrance 1 - Off Chinon (west side of school)"
                         handleOpenModal={handleOpenModal}
                       />
-                      <DescriptionMapsModalInDiv
+                      <DescriptionMapModalInDiv
                         coordinates={urls.parking.portolaCadence}
                         includeWaypoint={true}
                         name1={modalTitles.freewayToPortolaEntrance2}
                         description="Entrance 2 - Off Cadence"
                         handleOpenModal={handleOpenModal}
                       />
-                      <DescriptionMapsModalInDiv
+                      <DescriptionMapModalInDiv
                         coordinates={urls.parking.portolaMerit}
                         includeWaypoint={true}
                         name1={modalTitles.freewayToPortolaEntrance3}
@@ -521,7 +527,7 @@ export default function ParkingAndDirections() {
                   title: clsx("text-xl", fontSerif.className),
                 }}
               >
-                <DescriptionMapsModalInDiv
+                <DescriptionMapModalInDiv
                   coordinates={urls.parking.runnerDropoffPickup}
                   includeWaypoint={true}
                   name1={modalTitles.freewayToRunnerDropoffAndPickup}
@@ -542,7 +548,7 @@ export default function ParkingAndDirections() {
                     Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call
                     when your team is ready to leave.
                   </p>
-                  <DescriptionMapsModalInDiv
+                  <DescriptionMapModalInDiv
                     coordinates={urls.parking.lot1}
                     includeWaypoint={true}
                     name1={modalTitles.freewayToBusDropoff}
@@ -550,7 +556,7 @@ export default function ParkingAndDirections() {
                     description="Bus dropoff and pickup (Lot 1)"
                     handleOpenModal={handleOpenModal}
                   />
-                  <DescriptionMapsModalInDiv
+                  <DescriptionMapModalInDiv
                     coordinates={urls.parking.busStaging}
                     includeWaypoint={false}
                     name1={modalTitles.busDropoffToStagingArea}

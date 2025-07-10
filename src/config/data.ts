@@ -6,6 +6,8 @@ export const data = {
   teamRegistrationStartDate: new Date(2025, 0, 1, 0, 0, 0),
   athleteRegistrationStartDate: new Date(2025, 8, 1, 0, 0, 0),
   athleteRegistrationEndDate: new Date(2025, 8, 12, 0, 0, 0),
+  participatingTeamsUpdateDate: new Date(2025, 7, 1, 0, 0, 0),
+  featuredEntriesUpdateDate: new Date(2025, 8, 1, 0, 0, 0),
   altheticNetMeet: 237534,
   altheticLIVEMeet: 40009,
   runnerSpaceEvent: 361,
@@ -37,8 +39,6 @@ export const urls = {
   },
   sponsors: {
     asics: "https://www.asics.com",
-    keck: "https://www.keckmedicine.org/",
-    martinLaw: "https://employmentdefenselaw.com/",
   },
   hotels: {
     hiltonIrvine: "https://www.hilton.com/en/hotels/snaochf-hilton-irvine-orange-county-airport/",
