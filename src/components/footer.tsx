@@ -15,7 +15,7 @@ function FooterLink({ url, name }: { url: string; name: string }) {
 
 export default function Footer() {
   return (
-    <footer className="z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 px-3 py-6 text-sm text-default-600">
+    <footer className="z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 px-3 pb-3 pt-6 text-sm text-default-600 sm:pb-6">
       <div className="flex flex-col items-center justify-between gap-0.5 sm:flex-row sm:gap-1">
         <span className="sm:mt-1">Presented by</span>
         <Link isExternal href={urls.sponsors.asics}>
