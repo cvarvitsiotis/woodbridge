@@ -19,7 +19,7 @@ export default function Page() {
           hideIcon
           color="primary"
           title={`Division and Varsity Heat will be added ${dates.participatingTeamsUpdateDateParts.monthDayLong}`}
-          variant="flat"
+          variant="faded"
           radius="sm"
           classNames={{
             base: "p-3",

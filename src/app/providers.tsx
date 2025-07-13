@@ -2,10 +2,10 @@
 
 import type { ThemeProviderProps } from "next-themes";
 
-import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ReactNode } from "react";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -17,7 +17,7 @@ export function Providers({
   children,
   themeProps,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   themeProps?: ThemeProviderProps;
 }) {
   const router = useRouter();

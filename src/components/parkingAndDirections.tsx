@@ -38,6 +38,260 @@ const instructionSections = {
   buses: "Buses",
 };
 
+function InstructionsModal({
+  isOpen,
+  onOpenChange,
+  modalTitle,
+}: {
+  isOpen: boolean;
+  onOpenChange: () => void;
+  modalTitle: string;
+}) {
+  return (
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      size="xl"
+      placement="top"
+      scrollBehavior="inside"
+    >
+      <ModalContent>
+        <ModalHeader className="flex flex-col gap-1">{modalTitle}</ModalHeader>
+        <ModalBody>
+          <ModalBodyInternal modalTitle={modalTitle} />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+}
+
+function Alerts() {
+  return (
+    <div className="mx-auto max-w-2xl space-y-6 pt-6">
+      <div>
+        <Alert
+          hideIconWrapper
+          color="danger"
+          title={
+            <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
+              <div className="space-y-2">
+                <p>
+                  <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                  Canyon. You will hit gridlock. You must exit Jeffrey, instead.
+                </p>
+                <p>Use the Google Maps links below. They guide you through Jeffrey.</p>
+              </div>
+              <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56">
+                <Image
+                  fill
+                  src={directionsGridlock}
+                  quality={100}
+                  placeholder="blur"
+                  alt="Gridlock Note"
+                  className="rounded-lg object-contain drop-shadow-xl"
+                />
+              </div>
+            </div>
+          }
+          variant="faded"
+          radius="sm"
+          classNames={{ title: "text-medium font-normal" }}
+        />
+      </div>
+      <div>
+        <Alert
+          hideIconWrapper
+          color="primary"
+          title={`All parking passes must be purchased online prior to arriving at the ${siteConfig.greatPark}. No parking passes will be sold onsite.`}
+          variant="faded"
+          radius="sm"
+          classNames={{ title: "text-medium font-normal" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Instructions({ handleOpenModal }: { handleOpenModal: (title: string) => void }) {
+  return (
+    <div className="w-[768px] max-w-full basis-1/2 px-8">
+      <Accordion className="px-0">
+        <AccordionItem
+          key={instructionSections.spectators}
+          aria-label={instructionSections.spectators}
+          title={instructionSections.spectators}
+          classNames={{
+            title: clsx("text-xl", fontSerif.className),
+          }}
+        >
+          <p>
+            All vehicles (including school vans) will park in Lots 1 through 8 or Portola High
+            School (shuttle service available) with a $20 pass purchased online.
+          </p>
+
+          <Accordion>
+            {/* Must call getLot as function rather than nesting JSX component due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
+            {getLot(
+              urls.parking.lot0,
+              true,
+              "Lot 0",
+              modalTitles.freewayToLot0,
+              "200 meter walk (2 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot1,
+              true,
+              "Lot 1",
+              modalTitles.freewayToLot1,
+              "150 meter walk (1 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot2,
+              true,
+              "Lot 2",
+              modalTitles.freewayToLot2,
+              "250 meter walk (3 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot3,
+              true,
+              "Lot 3",
+              modalTitles.freewayToLot3,
+              "300 meter walk (5 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot4,
+              true,
+              "Lot 4",
+              modalTitles.freewayToLot4,
+              "800 meter walk (9 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot5,
+              true,
+              "Lot 5",
+              modalTitles.freewayToLot5,
+              "1500 meter walk (12 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot6,
+              true,
+              "Lot 6",
+              modalTitles.freewayToLot6,
+              "800 meter walk (8 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot7,
+              true,
+              "Lot 7",
+              modalTitles.freewayToLot7,
+              "600 meter walk (5 min) to finish line",
+              handleOpenModal,
+            )}
+            {getLot(
+              urls.parking.lot8,
+              true,
+              "Lot 8 (Wild Rivers)",
+              modalTitles.freewayToLot8,
+              "1600 meter walk (14 min) to finish line",
+              handleOpenModal,
+            )}
+            <AccordionItem
+              key="Portola High School"
+              aria-label="Portola High School"
+              title="Portola High School"
+            >
+              <div className="space-y-4">
+                <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
+                <DescriptionMapModalInDiv
+                  coordinates={urls.parking.portolaChinon}
+                  includeWaypoint={true}
+                  name={modalTitles.freewayToPortolaEntrance1}
+                  description="Entrance 1 - Off Chinon (west side of school)"
+                  handleOpenModal={handleOpenModal}
+                />
+                <DescriptionMapModalInDiv
+                  coordinates={urls.parking.portolaCadence}
+                  includeWaypoint={true}
+                  name={modalTitles.freewayToPortolaEntrance2}
+                  description="Entrance 2 - Off Cadence"
+                  handleOpenModal={handleOpenModal}
+                />
+                <DescriptionMapModalInDiv
+                  coordinates={urls.parking.portolaMerit}
+                  includeWaypoint={true}
+                  name={modalTitles.freewayToPortolaEntrance3}
+                  description="Entrance 3 - Off Merit (east side by stadium)"
+                  handleOpenModal={handleOpenModal}
+                />
+              </div>
+            </AccordionItem>
+          </Accordion>
+        </AccordionItem>
+        <AccordionItem
+          key={instructionSections.runnerDropoffAndPickup}
+          aria-label={instructionSections.runnerDropoffAndPickup}
+          title={instructionSections.runnerDropoffAndPickup}
+          classNames={{
+            title: clsx("text-xl", fontSerif.className),
+          }}
+        >
+          <DescriptionMapModalInDiv
+            coordinates={urls.parking.runnerDropoffPickup}
+            includeWaypoint={true}
+            name={modalTitles.freewayToRunnerDropoffAndPickup}
+            description="On Phantom next to Lot 1 between Ridge Valley and Corsair"
+            handleOpenModal={handleOpenModal}
+          />
+        </AccordionItem>
+        <AccordionItem
+          key={instructionSections.buses}
+          aria-label={instructionSections.buses}
+          title={instructionSections.buses}
+          classNames={{
+            title: clsx("text-xl", fontSerif.className),
+          }}
+        >
+          <div className="space-y-4">
+            <p>
+              Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call when
+              your team is ready to leave.
+            </p>
+            <DescriptionMapModalInDiv
+              coordinates={urls.parking.lot1}
+              includeWaypoint={true}
+              name={modalTitles.freewayToBusDropoff}
+              description="Team dropoff (Lot 1)"
+              handleOpenModal={handleOpenModal}
+            />
+            <DescriptionMapModalInDiv
+              coordinates={urls.parking.busStaging}
+              includeWaypoint={false}
+              name={modalTitles.busDropoffToStagingArea}
+              description="Bus staging area"
+              handleOpenModal={handleOpenModal}
+            />
+            <DescriptionMapModalInDiv
+              coordinates={urls.parking.lot1}
+              includeWaypoint={false}
+              name={modalTitles.stagingAreaToBusPickup}
+              description="Team pickup (Lot 1)"
+              handleOpenModal={handleOpenModal}
+            />
+          </div>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}
+
 function MapLink({
   coordinates,
   includeWaypoint,
@@ -55,9 +309,8 @@ function MapLink({
           (includeWaypoint ? `&waypoints=${urls.parking.waypoint}` : "")
         }
       >
-        Google
-      </Link>{" "}
-      Maps
+        Google Maps
+      </Link>
     </>
   );
 }
@@ -74,7 +327,12 @@ function ModalLink({
       onClick={() => handleOpenModal(title)}
       className="cursor-pointer text-base text-primary transition-opacity tap-highlight-transparent hover:opacity-hover active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus"
     >
-      Turn by turn - {title}
+      Turn by turn instructions from{" "}
+      {title === modalTitles.stagingAreaToBusPickup
+        ? "bus staging area"
+        : title === modalTitles.busDropoffToStagingArea
+          ? "bus dropoff"
+          : "freeway"}
     </p>
   );
 }
@@ -82,15 +340,13 @@ function ModalLink({
 function DescriptionMapModalInDiv({
   coordinates,
   includeWaypoint,
-  name1,
-  name2,
+  name,
   description,
   handleOpenModal,
 }: {
   coordinates: string;
   includeWaypoint: boolean;
-  name1: string;
-  name2?: string;
+  name: string;
   description: string;
   handleOpenModal: (title: string) => void;
 }) {
@@ -98,8 +354,7 @@ function DescriptionMapModalInDiv({
     <div>
       <p>{description}</p>
       <MapLink coordinates={coordinates} includeWaypoint={includeWaypoint} />
-      <ModalLink title={name1} handleOpenModal={handleOpenModal} />
-      {name2 && <ModalLink title={name2} handleOpenModal={handleOpenModal} />}
+      <ModalLink title={name} handleOpenModal={handleOpenModal} />
     </div>
   );
 }
@@ -117,7 +372,7 @@ function getLot(
       <DescriptionMapModalInDiv
         coordinates={coordinates}
         includeWaypoint={includeWaypoint}
-        name1={name}
+        name={name}
         description={description}
         handleOpenModal={handleOpenModal}
       />
@@ -125,7 +380,7 @@ function getLot(
   );
 }
 
-function ModalBodyList({ start, children }: { start?: number; children: React.ReactNode }) {
+function ModalBodyList({ start, children }: { start?: number; children: ReactNode }) {
   return (
     <ol start={start ?? 1} className="list-outside list-decimal space-y-4 px-4">
       {children}
@@ -321,8 +576,21 @@ function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
   );
 }
 
-function Subtitle({ label }: { label: string }) {
-  return <h1 className="text-xl font-light sm:text-2xl">{label}</h1>;
+function GreatParkParkingLots() {
+  return (
+    <div className="w-full basis-1/2">
+      <div className="max-h-2xl relative mx-auto aspect-[1357/957] w-full max-w-2xl lg:mx-0">
+        <Image
+          fill
+          src={greatParkParkingLots}
+          quality={100}
+          placeholder="blur"
+          alt="Great Park Parking Lots"
+          className="rounded-lg object-contain drop-shadow-xl"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default function ParkingAndDirections() {
@@ -336,250 +604,12 @@ export default function ParkingAndDirections() {
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        size="xl"
-        placement="top"
-        scrollBehavior="inside"
-      >
-        <ModalContent>
-          <ModalHeader className="flex flex-col gap-1">{modalTitle}</ModalHeader>
-          <ModalBody>
-            <ModalBodyInternal modalTitle={modalTitle} />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-
-      <div className="mx-auto max-w-2xl space-y-6 pt-6">
-        <div>
-          <Alert
-            hideIconWrapper
-            color="danger"
-            title={
-              <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
-                <div className="space-y-2">
-                  <p>
-                    <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
-                    Canyon. You will hit gridlock. You must exit Jeffrey, instead.
-                  </p>
-                  <p>Use the Google Maps links below. They force you through Jeffrey.</p>
-                </div>
-                <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56">
-                  <Image
-                    fill
-                    src={directionsGridlock}
-                    quality={100}
-                    placeholder="blur"
-                    alt="Gridlock Note"
-                    className="rounded-lg object-contain drop-shadow-xl"
-                  />
-                </div>
-              </div>
-            }
-            variant="faded"
-            radius="sm"
-          />
-        </div>
-        <div>
-          <Alert
-            hideIconWrapper
-            color="primary"
-            title={`All parking passes must be purchased online prior to arriving at the ${siteConfig.greatPark}. No parking passes will be sold onsite.`}
-            variant="flat"
-            radius="sm"
-            classNames={{
-              title: "font-normal",
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="pt-6">
-        <Subtitle label="Instructions" />
-        <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
-          <div className="w-[768px] max-w-full basis-1/2 px-8">
-            <Accordion className="px-0">
-              <AccordionItem
-                key={instructionSections.spectators}
-                aria-label={instructionSections.spectators}
-                title={instructionSections.spectators}
-                classNames={{
-                  title: clsx("text-xl", fontSerif.className),
-                }}
-              >
-                <p>
-                  All vehicles (including school vans) will park in Lots 1 through 8 or Portola High
-                  School (shuttle service available) with a $20 pass purchased online.
-                </p>
-
-                <Accordion>
-                  {/* Must call getLot as function rather than nesting JSX component due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
-                  {getLot(
-                    urls.parking.lot0,
-                    true,
-                    "Lot 0",
-                    modalTitles.freewayToLot0,
-                    "200 meter walk (2 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot1,
-                    true,
-                    "Lot 1",
-                    modalTitles.freewayToLot1,
-                    "150 meter walk (1 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot2,
-                    true,
-                    "Lot 2",
-                    modalTitles.freewayToLot2,
-                    "250 meter walk (3 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot3,
-                    true,
-                    "Lot 3",
-                    modalTitles.freewayToLot3,
-                    "300 meter walk (5 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot4,
-                    true,
-                    "Lot 4",
-                    modalTitles.freewayToLot4,
-                    "800 meter walk (9 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot5,
-                    true,
-                    "Lot 5",
-                    modalTitles.freewayToLot5,
-                    "1500 meter walk (12 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot6,
-                    true,
-                    "Lot 6",
-                    modalTitles.freewayToLot6,
-                    "800 meter walk (8 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot7,
-                    true,
-                    "Lot 7",
-                    modalTitles.freewayToLot7,
-                    "600 meter walk (5 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  {getLot(
-                    urls.parking.lot8,
-                    true,
-                    "Lot 8 (Wild Rivers)",
-                    modalTitles.freewayToLot8,
-                    "1600 meter walk (14 min) to finish line",
-                    handleOpenModal,
-                  )}
-                  <AccordionItem
-                    key="Portola High School"
-                    aria-label="Portola High School"
-                    title="Portola High School"
-                  >
-                    <div className="space-y-4">
-                      <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
-                      <DescriptionMapModalInDiv
-                        coordinates={urls.parking.portolaChinon}
-                        includeWaypoint={true}
-                        name1={modalTitles.freewayToPortolaEntrance1}
-                        description="Entrance 1 - Off Chinon (west side of school)"
-                        handleOpenModal={handleOpenModal}
-                      />
-                      <DescriptionMapModalInDiv
-                        coordinates={urls.parking.portolaCadence}
-                        includeWaypoint={true}
-                        name1={modalTitles.freewayToPortolaEntrance2}
-                        description="Entrance 2 - Off Cadence"
-                        handleOpenModal={handleOpenModal}
-                      />
-                      <DescriptionMapModalInDiv
-                        coordinates={urls.parking.portolaMerit}
-                        includeWaypoint={true}
-                        name1={modalTitles.freewayToPortolaEntrance3}
-                        description="Entrance 3 - Off Merit (east side by stadium)"
-                        handleOpenModal={handleOpenModal}
-                      />
-                    </div>
-                  </AccordionItem>
-                </Accordion>
-              </AccordionItem>
-              <AccordionItem
-                key={instructionSections.runnerDropoffAndPickup}
-                aria-label={instructionSections.runnerDropoffAndPickup}
-                title={instructionSections.runnerDropoffAndPickup}
-                classNames={{
-                  title: clsx("text-xl", fontSerif.className),
-                }}
-              >
-                <DescriptionMapModalInDiv
-                  coordinates={urls.parking.runnerDropoffPickup}
-                  includeWaypoint={true}
-                  name1={modalTitles.freewayToRunnerDropoffAndPickup}
-                  description="On Phantom next to Lot 1 between Ridge Valley and Corsair"
-                  handleOpenModal={handleOpenModal}
-                />
-              </AccordionItem>
-              <AccordionItem
-                key={instructionSections.buses}
-                aria-label={instructionSections.buses}
-                title={instructionSections.buses}
-                classNames={{
-                  title: clsx("text-xl", fontSerif.className),
-                }}
-              >
-                <div className="space-y-4">
-                  <p>
-                    Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call
-                    when your team is ready to leave.
-                  </p>
-                  <DescriptionMapModalInDiv
-                    coordinates={urls.parking.lot1}
-                    includeWaypoint={true}
-                    name1={modalTitles.freewayToBusDropoff}
-                    name2={modalTitles.stagingAreaToBusPickup}
-                    description="Bus dropoff and pickup (Lot 1)"
-                    handleOpenModal={handleOpenModal}
-                  />
-                  <DescriptionMapModalInDiv
-                    coordinates={urls.parking.busStaging}
-                    includeWaypoint={false}
-                    name1={modalTitles.busDropoffToStagingArea}
-                    description="Bus staging area"
-                    handleOpenModal={handleOpenModal}
-                  />
-                </div>
-              </AccordionItem>
-            </Accordion>
-          </div>
-          <div className="w-full basis-1/2">
-            <div className="max-h-2xl relative mx-auto aspect-[1357/957] w-full max-w-2xl lg:mx-0">
-              <Image
-                fill
-                src={greatParkParkingLots}
-                quality={100}
-                placeholder="blur"
-                alt="Great Park Parking Lots"
-                className="rounded-lg object-contain drop-shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
+      <InstructionsModal isOpen={isOpen} onOpenChange={onOpenChange} modalTitle={modalTitle} />
+      <Alerts />
+      <h1 className="pt-6 text-xl font-light sm:text-2xl">Instructions</h1>
+      <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
+        <Instructions handleOpenModal={handleOpenModal} />
+        <GreatParkParkingLots />
       </div>
     </>
   );

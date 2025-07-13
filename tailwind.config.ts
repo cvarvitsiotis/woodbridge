@@ -18,8 +18,11 @@ const config: Config = {
   plugins: [
     heroui({
       themes: {
-        dark: {
-          colors: { foreground: "#E4E4E7" },
+        light: {
+          colors: {
+            foreground: { DEFAULT: "#1e1b4b" },
+            default: { foreground: "#1e1b4b" },
+          },
         },
       },
     }),

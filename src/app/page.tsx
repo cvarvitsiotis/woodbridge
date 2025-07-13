@@ -4,11 +4,11 @@ import { Button } from "@heroui/button";
 
 import clsx from "clsx";
 import { pageParents, pages, siteConfig } from "@/config/site";
-import { AsicsLogo, CalendarIcon } from "@/components/icons";
+import { CalendarIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
-import { urls } from "@/config/data";
 import { Alert } from "@heroui/alert";
+import PresentedByAsics from "@/components/presentedByAsics";
 
 export default function Home() {
   return (
@@ -16,17 +16,17 @@ export default function Home() {
       <div className="mx-auto">
         <Alert
           hideIcon
-          color="primary"
+          color="warning"
           title={
             <p>
-              Our website got a facelift. We welcome all{" "}
-              <Link href={pages.contact.path} className="text-sm font-semibold">
+              Our website got a facelift. We welcome{" "}
+              <Link href={pages.contact.path} className="text-sm font-semibold text-warning-800">
                 feedback
               </Link>
               .
             </p>
           }
-          variant="flat"
+          variant="faded"
           radius="sm"
           classNames={{
             base: "p-2",
@@ -36,7 +36,7 @@ export default function Home() {
         />
       </div>
       <div className="relative flex grow flex-col items-center justify-center">
-        <div className="absolute h-full w-full bg-[radial-gradient(#cbcbcb_1px,transparent_2px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_50%,transparent_100%)] dark:bg-[radial-gradient(#4a4a4a_1px,transparent_2px)]" />
+        <div className="absolute h-full w-full bg-[radial-gradient(#220b592d_1px,transparent_2px)] [background-size:25px_25px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
         <div className="z-10 text-center">
           <div
@@ -63,17 +63,13 @@ export default function Home() {
           <div className="text-center text-xl font-light">
             {dates.meetAge}
             <sup>{dates.meetAgeOrdinal}</sup> Annual{" "}
-            <span className="text-3xl font-extrabold text-default-600">
+            <span className="text-3xl font-bold tracking-tighter text-sky-950">
               {siteConfig.woodbridge}
             </span>{" "}
             Cross Country Classic
           </div>
-          <div className="mt-3 flex items-center justify-center gap-1">
-            <span className="mt-1">Presented by</span>
-            <Link isExternal href={urls.sponsors.asics}>
-              <AsicsLogo />
-            </Link>
-            <span className="mt-1">AMERICA</span>
+          <div className="mt-3">
+            <PresentedByAsics />
           </div>
         </div>
 

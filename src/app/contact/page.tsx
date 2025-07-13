@@ -7,29 +7,30 @@ import Image from "next/image";
 import bryanPacheco from "@/../public/bryan-pacheco.jpg";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
-import { AddressCardIcon } from "@/components/icons";
+import { MailIcon, CallIcon } from "@/components/icons";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: pages.contact.menuLabel,
 };
 
-function ParagraphLink({ url, name }: { url: string; name: string }) {
+function IconAndLink({ url, name, icon }: { url: string; name: string; icon: ReactNode }) {
   return (
-    <Link isExternal href={url} className="sm:text-lg">
-      {name}
-    </Link>
+    <div className="flex items-center gap-2">
+      {icon}
+      <Link isExternal href={url} className="text-indigo-600 sm:text-lg">
+        {name}
+      </Link>
+    </div>
   );
 }
 
 export default function Page() {
   return (
     <>
-      <div className="flex items-center justify-center gap-6 pt-4 sm:pt-8">
-        <h1 className="text-2xl font-extralight sm:text-3xl">
-          <span className="font-bold">Contact</span> Us
-        </h1>
-        <AddressCardIcon className="text-default-400" />
-      </div>
+      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+        <span className="font-bold">Contact</span> Us
+      </h1>
       <div
         className={clsx(
           "space-y-4 pt-8 text-center text-xl font-light sm:pt-10 sm:text-2xl",
@@ -40,8 +41,8 @@ export default function Page() {
         <p>Please contact {people.coachPacheco} and he will get in touch with you shortly.</p>
       </div>
       <div className="mx-auto pt-14">
-        <Card shadow="sm">
-          <div className="flex items-center">
+        <Card shadow="lg">
+          <div className="flex items-center bg-indigo-300">
             <div className="relative aspect-[400/415] h-32 sm:h-36">
               <Image
                 fill
@@ -52,13 +53,21 @@ export default function Page() {
                 className="saturate-[.75]"
               />
             </div>
-            <div className="px-8 font-light sm:text-lg">
-              <p>{people.bryan}</p>
+            <div className="px-8">
+              <p className="text-lg font-light sm:text-xl">{people.bryan}</p>
               <div>
-                <ParagraphLink url={`tel:${people.bryanPhone}`} name={people.bryanPhone} />
+                <IconAndLink
+                  url={`tel:${people.bryanPhone}`}
+                  name={people.bryanPhone}
+                  icon={<CallIcon />}
+                />
               </div>
               <div>
-                <ParagraphLink url={`mailto:${people.bryanEmail}`} name={people.bryanEmail} />
+                <IconAndLink
+                  url={`mailto:${people.bryanEmail}`}
+                  name={people.bryanEmail}
+                  icon={<MailIcon />}
+                />
               </div>
             </div>
           </div>

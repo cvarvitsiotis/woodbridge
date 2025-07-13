@@ -7,6 +7,7 @@ import { fontSans } from "@/styles/fonts";
 import { Navbar } from "@/components/navbar";
 import Footer from "@/components/footer";
 import BreadcrumbsAndSponsor from "@/components/breadcrumbsAndSponsor";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -26,17 +27,17 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
       <body
         className={clsx(
-          "bg-gradient-to-r from-slate-50 via-slate-50 to-violet-100 font-sans antialiased dark:from-zinc-800 dark:to-zinc-900",
+          "bg-gradient-to-br from-indigo-50 from-50% to-rose-100 font-sans antialiased",
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class" }}>
           <div className="relative flex min-h-dvh flex-col items-center space-y-3 sm:space-y-4">
             <Navbar />
             <main className="container flex grow flex-col space-y-3 px-3 sm:px-6">

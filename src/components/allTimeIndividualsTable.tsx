@@ -3,12 +3,11 @@
 import { useMemo, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
 import { getKeyValue } from "@heroui/table";
-import { Input } from "@heroui/input";
 import { allTimeIndividuals } from "@/config/allTimeIndividuals";
-import { Select, SelectItem } from "@heroui/select";
-import { SearchIcon } from "@/components/icons";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { pages } from "@/config/site";
+import StyledSelect from "./styledSelect";
+import StyledInput from "./styledInput";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -230,57 +229,34 @@ export default function AllTimeIndividualsTable() {
 
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <Input
-            isClearable
+          <StyledInput
             placeholder="Search by name..."
-            startContent={<SearchIcon className="text-default-400" />}
-            variant="faded"
-            radius="sm"
             value={nameFilter}
-            onClear={() => setNameFilter("")}
             onValueChange={setNameFilter}
             className="basis-2/5"
-            classNames={{
-              inputWrapper: "min-h-12 h-12",
-            }}
           />
           <div className="flex basis-3/5 gap-3">
-            <Select
-              selectedKeys={[genderFilter]}
-              size="sm"
+            <StyledSelect
+              selectedKey={genderFilter}
               onChange={onGenderFilterChange}
               label="Gender"
-              variant="faded"
               className="basis-1/4"
-            >
-              {genderOptions.map((gender) => (
-                <SelectItem key={gender}>{gender}</SelectItem>
-              ))}
-            </Select>
-            <Select
-              selectedKeys={[gradeFilter]}
-              size="sm"
+              options={genderOptions}
+            />
+            <StyledSelect
+              selectedKey={gradeFilter}
               onChange={onGradeFilterChange}
               label="Grade"
-              variant="faded"
               className="basis-1/4"
-            >
-              {gradeOptions.map((grade) => (
-                <SelectItem key={grade}>{grade}</SelectItem>
-              ))}
-            </Select>
-            <Select
-              selectedKeys={[courseFilter]}
-              size="sm"
+              options={gradeOptions}
+            />
+            <StyledSelect
+              selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              variant="faded"
               className="basis-2/4"
-            >
-              {courseOptions.map((course) => (
-                <SelectItem key={course}>{course}</SelectItem>
-              ))}
-            </Select>
+              options={courseOptions}
+            />
           </div>
         </div>
       );

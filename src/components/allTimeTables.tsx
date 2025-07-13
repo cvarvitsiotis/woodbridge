@@ -10,8 +10,13 @@ export default function AllTimeTables() {
       fullWidth
       size="lg"
       radius="sm"
+      variant="bordered"
       aria-label="Options"
-      classNames={{ base: "pt-10 max-w-xs mx-auto", panel: "pt-6" }}
+      classNames={{
+        base: "pt-10 max-w-xs mx-auto",
+        panel: "pt-6",
+        tabList: "border border-default-300",
+      }}
     >
       <Tab key="teams" title="TEAMS">
         <AllTimeTeamsTable />

@@ -10,14 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/table";
-import Divisions, { Division } from "@/components/divisions";
+import Divisions from "@/components/divisions";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { divisions, heats } from "@/config/races";
-import { Select, SelectItem } from "@heroui/select";
-import { SearchIcon } from "@/components/icons";
-import { Input } from "@heroui/input";
 import { useMemo, useState } from "react";
 import { pages } from "@/config/site";
+import StyledSelect from "./styledSelect";
+import StyledInput from "./styledInput";
 
 const columns = [
   {
@@ -93,45 +92,25 @@ export default function ParticipatingTeamsTable() {
       }
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <Input
-            isClearable
+          <StyledInput
             placeholder="Search by school..."
-            startContent={<SearchIcon className="text-default-400" />}
-            variant="faded"
-            radius="sm"
             value={teamFilter}
-            onClear={() => setTeamFilter("")}
             onValueChange={setTeamFilter}
             className="basis-2/5"
-            classNames={{
-              inputWrapper: "min-h-12 h-12",
-            }}
           />
           <div className="flex basis-3/5 gap-3">
-            <Select
-              selectedKeys={[divisionFilter]}
-              size="sm"
+            <StyledSelect
+              selectedKey={divisionFilter}
               onChange={onDivisionFilterChange}
               label="Division"
-              variant="faded"
-            >
-              {divisionOptions.map((division) => (
-                <SelectItem key={division.name} textValue={division.name}>
-                  <Division division={division} />
-                </SelectItem>
-              ))}
-            </Select>
-            <Select
-              selectedKeys={[varsityHeatFilter]}
-              size="sm"
+              options={divisionOptions.map((division) => division.name)}
+            />
+            <StyledSelect
+              selectedKey={varsityHeatFilter}
               onChange={onVarsityHeatFilterChange}
               label="Varsity Heat"
-              variant="faded"
-            >
-              {heatOptions.map((heat) => (
-                <SelectItem key={heat}>{heat}</SelectItem>
-              ))}
-            </Select>
+              options={heatOptions}
+            />
           </div>
         </div>
       );

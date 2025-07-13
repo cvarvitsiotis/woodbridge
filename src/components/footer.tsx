@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import { Link } from "@heroui/link";
 
-import { AsicsLogo } from "@/components/icons";
 import { urls } from "@/config/data";
-import { siteConfig } from "@/config/site";
+import { pages, siteConfig } from "@/config/site";
+import PresentedByAsics from "./presentedByAsics";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 function FooterLink({ url, name }: { url: string; name: string }) {
   return (
@@ -14,17 +18,19 @@ function FooterLink({ url, name }: { url: string; name: string }) {
 }
 
 export default function Footer() {
-  return (
-    <footer className="z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 p-3 text-sm text-default-600">
-      <div className="flex flex-col items-center justify-between gap-0.5 sm:flex-row sm:gap-1">
-        <span className="sm:mt-1">Presented by</span>
-        <Link isExternal href={urls.sponsors.asics}>
-          <AsicsLogo />
-        </Link>
-        <span className="hidden sm:mt-1 sm:block">AMERICA</span>
-      </div>
+  const pathname = usePathname();
 
-      <div className="space-y-1 text-left sm:text-left">
+  const isHomePage = pathname === pages.home.path;
+
+  return (
+    <footer
+      className={clsx(
+        "z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 p-3",
+        !isHomePage && "pt-20",
+      )}
+    >
+      <PresentedByAsics isFooter />
+      <div className="space-y-1 text-left text-sm text-default-600 sm:text-left">
         <div>
           Hosted by{" "}
           <FooterLink url={urls.schools.woodbridgeHighSchool} name={siteConfig.woodbridge} /> and{" "}

@@ -2,10 +2,8 @@
 
 import { BreadcrumbItem, Breadcrumbs } from "@heroui/breadcrumbs";
 import { usePathname } from "next/navigation";
-import { Link } from "@heroui/link";
-import { urls } from "@/config/data";
-import { AsicsLogo } from "@/components/icons";
 import { pages } from "@/config/site";
+import PresentedByAsics from "./presentedByAsics";
 
 export default function BreadcrumbsAndSponsor() {
   const pathname = usePathname();
@@ -20,13 +18,7 @@ export default function BreadcrumbsAndSponsor() {
         {page?.parent && <BreadcrumbItem>{page?.parent}</BreadcrumbItem>}
         <BreadcrumbItem>{page?.menuLabel}</BreadcrumbItem>
       </Breadcrumbs>
-      <div className="flex flex-col items-center justify-between text-sm text-default-600 sm:flex-row sm:gap-1">
-        <span className="hidden sm:mt-1 sm:block">Presented by</span>
-        <Link isExternal href={urls.sponsors.asics}>
-          <AsicsLogo />
-        </Link>
-        <span className="hidden sm:mt-1 sm:block">AMERICA</span>
-      </div>
+      <PresentedByAsics isBreadcrumb />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Link } from "@heroui/link";
-import { Select, SelectItem } from "@heroui/select";
 
 import { divisions, filteredRaces, levels, resultTypes } from "@/config/races";
 import { DivisionType, RaceType } from "@/types";
 import { data, urls } from "@/config/data";
+import StyledSelect from "./styledSelect";
 
 function getDivisionForDivisionResultLink(division: DivisionType): string {
   return `d${division.num}`;
@@ -228,23 +228,19 @@ function YearSelect({
   handleChangeSelectedYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   return (
-    <Select
-      selectedKeys={[selectedYear]}
+    <StyledSelect
+      selectedKey={selectedYear}
       size="lg"
       onChange={handleChangeSelectedYear}
       label="YEAR"
       labelPlacement="outside-left"
-      placeholder="Select a year"
-      classNames={{ base: "w-52", label: "font-light text-xl" }}
-    >
-      {allYears.map((year) => (
-        <SelectItem key={year}>{year}</SelectItem>
-      ))}
-    </Select>
+      classNames={{ base: "w-48", label: "font-light text-lg" }}
+      options={allYears}
+    />
   );
 }
 
-function Subtitle({ children }: { children: React.ReactNode }) {
+function Subtitle({ children }: { children: ReactNode }) {
   return <h1 className="pt-4 text-xl font-light sm:text-2xl">{children}</h1>;
 }
 

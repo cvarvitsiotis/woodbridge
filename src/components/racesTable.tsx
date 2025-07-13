@@ -18,6 +18,8 @@ import {
 import { RaceType } from "@/types";
 import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
+import { fontSerif } from "@/styles/fonts";
+import clsx from "clsx";
 
 const columns = [
   {
@@ -37,7 +39,11 @@ const columns = [
 const featuredColumns = columns.filter((column) => column.key !== "division");
 
 function FeaturedTableHeader() {
-  return <div className="text-center">Featured Races</div>;
+  return (
+    <div className={clsx("text-center text-2xl font-medium", fontSerif.className)}>
+      Featured Races
+    </div>
+  );
 }
 
 function getDescription(race: RaceType): string {

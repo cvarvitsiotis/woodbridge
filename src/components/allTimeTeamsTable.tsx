@@ -3,12 +3,11 @@
 import { useMemo, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
 import { getKeyValue } from "@heroui/table";
-import { Input } from "@heroui/input";
-import { Select, SelectItem } from "@heroui/select";
-import { SearchIcon } from "@/components/icons";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { pages } from "@/config/site";
 import { allTimeTeams } from "@/config/allTimeTeams";
+import StyledSelect from "./styledSelect";
+import StyledInput from "./styledInput";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -120,45 +119,27 @@ export default function AllTimeTeamsTable() {
 
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <Input
-            isClearable
+          <StyledInput
             placeholder="Search by school..."
-            startContent={<SearchIcon className="text-default-400" />}
-            variant="faded"
-            radius="sm"
             value={teamFilter}
-            onClear={() => setTeamFilter("")}
             onValueChange={setTeamFilter}
             className="basis-2/5"
-            classNames={{
-              inputWrapper: "min-h-12 h-12",
-            }}
           />
           <div className="flex basis-3/5 gap-3">
-            <Select
-              selectedKeys={[genderFilter]}
-              size="sm"
+            <StyledSelect
+              selectedKey={genderFilter}
               onChange={onGenderFilterChange}
               label="Gender"
-              variant="faded"
               className="basis-1/3"
-            >
-              {genderOptions.map((gender) => (
-                <SelectItem key={gender}>{gender}</SelectItem>
-              ))}
-            </Select>
-            <Select
-              selectedKeys={[courseFilter]}
-              size="sm"
+              options={genderOptions}
+            />
+            <StyledSelect
+              selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              variant="faded"
               className="basis-2/3"
-            >
-              {courseOptions.map((course) => (
-                <SelectItem key={course}>{course}</SelectItem>
-              ))}
-            </Select>
+              options={courseOptions}
+            />
           </div>
         </div>
       );

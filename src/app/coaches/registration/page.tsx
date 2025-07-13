@@ -5,6 +5,7 @@ import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: pages.registration.menuLabel,
@@ -15,7 +16,7 @@ function RegistrationSection({
   children,
 }: {
   sectionName: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="flex-1">

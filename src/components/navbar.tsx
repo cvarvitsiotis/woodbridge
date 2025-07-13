@@ -16,7 +16,6 @@ import { usePathname } from "next/navigation";
 import NavbarDropdown from "./navbarDropdown";
 
 import { pages, pageParents, siteConfig } from "@/config/site";
-import ThemeSwitch from "@/components/theme-switch";
 import { XIcon, InstagramIcon } from "@/components/icons";
 import { urls } from "@/config/data";
 
@@ -34,13 +33,13 @@ function Menus({
       <NavbarDropdown
         isMenu={isMenu}
         pageParent={pageParents.coaches}
-        items={[pages.coachesIntro, pages.registration, pages.entryFees, pages.raceDayInfo]}
+        pages={[pages.coachesIntro, pages.registration, pages.entryFees, pages.raceDayInfo]}
         onAction={handleMenuAction}
       />
       <NavbarDropdown
         isMenu={isMenu}
         pageParent={pageParents.racingInfo}
-        items={[
+        pages={[
           pages.schedule,
           pages.courseAndVenueMap,
           pages.courseAerialTour,
@@ -52,7 +51,7 @@ function Menus({
       <NavbarDropdown
         isMenu={isMenu}
         pageParent={pageParents.generalInfo}
-        items={[
+        pages={[
           pages.welcome,
           pages.parkingAndDirections,
           pages.hotels,
@@ -64,7 +63,7 @@ function Menus({
       <NavbarDropdown
         isMenu={isMenu}
         pageParent={pageParents.results}
-        items={[pages.raceResults, pages.allTimeLists]}
+        pages={[pages.raceResults, pages.allTimeLists]}
         onAction={handleMenuAction}
       />
       <NavbarMenuItem>
@@ -104,7 +103,7 @@ export function Navbar() {
       <NavbarBrand as="li" className="max-w-fit gap-3">
         <Link
           href={pages.home.path}
-          className="mb-0.5 text-xl font-bold italic text-default-700 sm:text-2xl"
+          className="mb-0.5 text-2xl font-bold tracking-tighter text-sky-950 sm:text-2xl"
         >
           {siteConfig.woodbridge}
         </Link>
@@ -122,17 +121,11 @@ export function Navbar() {
             <InstagramIcon className="text-default-500" />
           </Link>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <ThemeSwitch handleOnChange={handleMenuAction} />
-        </NavbarItem>
         <NavbarMenuToggle className="basis-1 pl-4 lg:hidden" />
       </NavbarContent>
 
       <NavbarMenu>
         <Menus isMenu={true} pathname={pathname} handleMenuAction={handleMenuAction} />
-        <NavbarMenuItem>
-          <ThemeSwitch className="align-middle" handleOnChange={handleMenuAction} />
-        </NavbarMenuItem>
       </NavbarMenu>
     </HeroUINavbar>
   );
