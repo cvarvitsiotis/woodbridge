@@ -27,9 +27,9 @@ const modalTitles = {
   freewayToPortolaEntrance2: "Freeway to Portola Entrance 2",
   freewayToPortolaEntrance3: "Freeway to Portola Entrance 3",
   freewayToRunnerDropoffAndPickup: "Freeway to runner dropoff and pickup",
-  freewayToBusDropoff: "Freeway to bus dropoff",
-  stagingAreaToBusPickup: "Staging area to bus pickup",
-  busDropoffToStagingArea: "Bus dropoff to staging area",
+  freewayToTeamDropoff: "Freeway to team dropoff",
+  busStagingAreaToTeamPickup: "Bus staging area to team pickup",
+  teamDropoffToBusStagingArea: "Team dropoff to bus staging area",
 };
 
 const instructionSections = {
@@ -267,21 +267,21 @@ function Instructions({ handleOpenModal }: { handleOpenModal: (title: string) =>
             <DescriptionMapModalInDiv
               coordinates={urls.parking.lot1}
               includeWaypoint={true}
-              name={modalTitles.freewayToBusDropoff}
+              name={modalTitles.freewayToTeamDropoff}
               description="Team dropoff (Lot 1)"
               handleOpenModal={handleOpenModal}
             />
             <DescriptionMapModalInDiv
               coordinates={urls.parking.busStaging}
               includeWaypoint={false}
-              name={modalTitles.busDropoffToStagingArea}
+              name={modalTitles.teamDropoffToBusStagingArea}
               description="Bus staging area"
               handleOpenModal={handleOpenModal}
             />
             <DescriptionMapModalInDiv
               coordinates={urls.parking.lot1}
               includeWaypoint={false}
-              name={modalTitles.stagingAreaToBusPickup}
+              name={modalTitles.busStagingAreaToTeamPickup}
               description="Team pickup (Lot 1)"
               handleOpenModal={handleOpenModal}
             />
@@ -328,10 +328,10 @@ function ModalLink({
       className="cursor-pointer text-base text-primary transition-opacity tap-highlight-transparent hover:opacity-hover active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus"
     >
       Turn by turn instructions from{" "}
-      {title === modalTitles.stagingAreaToBusPickup
+      {title === modalTitles.busStagingAreaToTeamPickup
         ? "bus staging area"
-        : title === modalTitles.busDropoffToStagingArea
-          ? "bus dropoff"
+        : title === modalTitles.teamDropoffToBusStagingArea
+          ? "team dropoff"
           : "freeway"}
     </p>
   );
@@ -542,7 +542,7 @@ function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
       <li>Pass Lot 1</li>
       <li>On the right before Corsair</li>
     </ModalBodyList>
-  ) : modalTitle === modalTitles.freewayToBusDropoff ? (
+  ) : modalTitle === modalTitles.freewayToTeamDropoff ? (
     <ModalBodyList>
       <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
       <li>North on Jeffrey</li>
@@ -552,7 +552,7 @@ function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
       <li>Left on Phantom</li>
       <li>Right into lot</li>
     </ModalBodyList>
-  ) : modalTitle === modalTitles.stagingAreaToBusPickup ? (
+  ) : modalTitle === modalTitles.busStagingAreaToTeamPickup ? (
     <ModalBodyList>
       <li>Exit staging area on Valley Oak and turn right</li>
       <li>Right on Irvine Center Drive</li>
@@ -562,7 +562,7 @@ function ModalBodyInternal({ modalTitle }: { modalTitle: string }): ReactNode {
       <li>Right on Phantom</li>
       <li>Right into lot</li>
     </ModalBodyList>
-  ) : modalTitle === modalTitles.busDropoffToStagingArea ? (
+  ) : modalTitle === modalTitles.teamDropoffToBusStagingArea ? (
     <ModalBodyList>
       <li>Exit Lot 1 on Phantom and turn left</li>
       <li>Right on Ridge Valley</li>
