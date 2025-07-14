@@ -53,7 +53,7 @@ export default function Page() {
                 className="saturate-[.75]"
               />
             </div>
-            <div className="px-8">
+            <div className="px-6 sm:px-8">
               <p className="text-lg font-light sm:text-xl">{people.bryan}</p>
               <div>
                 <IconAndLink

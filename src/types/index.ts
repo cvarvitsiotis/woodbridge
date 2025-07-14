@@ -106,3 +106,16 @@ export interface LinkType {
   url: string;
   description: string;
 }
+
+export interface ParkingInstructionType {
+  accordionTitle?: string;
+  description: string;
+  location: string;
+  includeWaypoint: boolean;
+  modalLinkLabel: string;
+  modalTitle: string;
+}
+
+export interface ParkingInstructionTypes {
+  [key: string]: ParkingInstructionType;
+}

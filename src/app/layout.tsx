@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <head />
       <body
         className={clsx(
-          "bg-gradient-to-br from-indigo-200 from-40% to-[#ffd1b9] font-sans antialiased",
+          "bg-gradient-to-br from-indigo-200 from-50% to-[#ffd1b9] font-sans antialiased",
           fontSans.variable,
         )}
       >
