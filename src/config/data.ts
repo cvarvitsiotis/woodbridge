@@ -55,6 +55,7 @@ export const urls = {
     acHotel: "https://www.marriott.com/en-us/hotels/snaai-ac-hotel-irvine/overview/",
     embassySuites:
       "https://www.hilton.com/en/hotels/kolcaes-embassy-suites-irvine-orange-county-airport/",
+    comfortInn: "https://www.choicehotels.com/reservations/groups/NT76E6",
   },
 };
 
