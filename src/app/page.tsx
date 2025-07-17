@@ -10,31 +10,37 @@ import { fontSerif } from "@/styles/fonts";
 import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
 
+function AlertMessage() {
+  return (
+    <div className="mx-auto">
+      <Alert
+        hideIcon
+        color="warning"
+        title={
+          <p>
+            Our website got a facelift. We welcome{" "}
+            <Link href={pages.contact.path} className="text-sm font-semibold text-warning-800">
+              feedback
+            </Link>
+            .
+          </p>
+        }
+        variant="faded"
+        radius="sm"
+        classNames={{
+          base: "p-2",
+          mainWrapper: "ms-0 min-h-0 text-center",
+          title: "font-normal",
+        }}
+      />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
-      <div className="mx-auto">
-        <Alert
-          hideIcon
-          color="warning"
-          title={
-            <p>
-              Our website got a facelift. We welcome{" "}
-              <Link href={pages.contact.path} className="text-sm font-semibold text-warning-800">
-                feedback
-              </Link>
-              .
-            </p>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{
-            base: "p-2",
-            mainWrapper: "ms-0 min-h-0 text-center",
-            title: "font-normal",
-          }}
-        />
-      </div>
+      <AlertMessage />
       <div className="relative flex grow flex-col items-center justify-center">
         <div className="absolute h-full w-full bg-[radial-gradient(#220b592d_1px,transparent_2px)] [background-size:25px_25px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 

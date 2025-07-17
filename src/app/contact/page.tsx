@@ -42,7 +42,7 @@ export default function Page() {
       </div>
       <div className="mx-auto pt-14">
         <Card shadow="lg">
-          <div className="flex items-center bg-indigo-300">
+          <div className="flex items-center">
             <div className="relative aspect-[400/415] h-32 sm:h-36">
               <Image
                 fill

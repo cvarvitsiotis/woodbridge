@@ -1,13 +1,12 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import clsx from "clsx";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/styles/fonts";
 import { Navbar } from "@/components/navbar";
 import Footer from "@/components/footer";
 import BreadcrumbsAndSponsor from "@/components/breadcrumbsAndSponsor";
 import { ReactNode } from "react";
+import Body from "@/components/body";
 
 export const metadata: Metadata = {
   title: {
@@ -31,12 +30,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body
-        className={clsx(
-          "bg-gradient-to-br from-indigo-200 from-50% to-[#ffd1b9] font-sans antialiased",
-          fontSans.variable,
-        )}
-      >
+      <Body>
         <Providers themeProps={{ attribute: "class" }}>
           <div className="relative flex min-h-dvh flex-col items-center space-y-3 sm:space-y-4">
             <Navbar />
@@ -47,7 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Footer />
           </div>
         </Providers>
-      </body>
+      </Body>
     </html>
   );
 }
