@@ -1,8 +1,9 @@
 import { dates } from "@/config/dates";
-import { fontSerif } from "@/styles/fonts";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
+import { getParagraphStyle } from "@/styles/styles";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.entryFees.menuLabel,
@@ -11,10 +12,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Entry <span className="font-bold">Fees</span>
-      </h1>
-      <div className={clsx("space-y-4 pt-10 text-lg font-light sm:text-xl", fontSerif.className)}>
+      </PageHeader>
+      <div className={clsx("space-y-4 pt-10", getParagraphStyle())}>
         <div className="space-y-4">
           <p>Entry fees are as follows:</p>
           <ol className="list-outside list-decimal space-y-4 px-10">

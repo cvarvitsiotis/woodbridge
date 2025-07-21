@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { pages } from "@/config/site";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.courseAerialTour.menuLabel,
@@ -8,9 +9,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Course <span className="font-bold">Aerial Tour</span>
-      </h1>
+      </PageHeader>
       <div className="pt-10">
         <iframe
           allowFullScreen

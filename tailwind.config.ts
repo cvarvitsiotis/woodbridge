@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { heroui } from "@heroui/theme";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
   content: [
@@ -20,8 +21,9 @@ const config: Config = {
       themes: {
         light: {
           colors: {
-            foreground: { DEFAULT: "#1e1b4b" },
-            default: { foreground: "#1e1b4b" },
+            foreground: { DEFAULT: colors.indigo[950] },
+            default: { foreground: colors.indigo[950] },
+            content1: "#fdf7f4",
           },
         },
       },

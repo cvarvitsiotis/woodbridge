@@ -1,11 +1,12 @@
 import { urls } from "@/config/data";
 import { dates } from "@/config/dates";
-import { fontSerif } from "@/styles/fonts";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
 import { ReactNode } from "react";
+import { getParagraphStyle } from "@/styles/styles";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.registration.menuLabel,
@@ -20,15 +21,10 @@ function RegistrationSection({
 }) {
   return (
     <div className="flex-1">
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         <span className="font-bold">{sectionName}</span> Registration
-      </h1>
-      <div
-        className={clsx(
-          "space-y-4 pt-8 text-center text-xl font-light sm:pt-10 sm:text-2xl",
-          fontSerif.className,
-        )}
-      >
+      </PageHeader>
+      <div className={clsx("space-y-4 pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
         {children}
       </div>
     </div>
@@ -37,7 +33,7 @@ function RegistrationSection({
 
 function ParagraphLink({ url, name }: { url: string; name: string }) {
   return (
-    <Link isExternal href={url} className="text-xl sm:text-2xl">
+    <Link isExternal href={url} className={getParagraphStyle(true)}>
       {name}
     </Link>
   );

@@ -66,14 +66,19 @@ export default function Home() {
         </div>
 
         <div className="z-10 mt-10">
-          <div className="text-center text-xl font-light">
-            {dates.meetAge}
-            <sup>{dates.meetAgeOrdinal}</sup> Annual{" "}
-            <span className="text-3xl font-bold tracking-tighter text-sky-950">
-              {siteConfig.woodbridge}
-            </span>{" "}
-            Cross Country Classic
+          <div className="flex flex-col items-center text-xl font-light sm:flex-row sm:items-end">
+            <div>
+              {dates.meetAge}
+              <sup>{dates.meetAgeOrdinal}</sup> Annual{" "}
+              <span className="text-3xl font-bold tracking-tighter text-sky-950">
+                {siteConfig.woodbridge}
+              </span>
+            </div>
+            <div>
+              <span className="hidden sm:inline">&nbsp;</span>Cross Country Classic
+            </div>
           </div>
+
           <div className="mt-3">
             <PresentedByAsics />
           </div>

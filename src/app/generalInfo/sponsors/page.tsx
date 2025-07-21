@@ -1,11 +1,12 @@
 import { AsicsLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import { Link } from "@heroui/link";
-import { fontSerif } from "@/styles/fonts";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import { ReactNode } from "react";
+import { getParagraphStyle } from "@/styles/styles";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.sponsors.menuLabel,
@@ -19,7 +20,14 @@ function Sponsor({ url, motto, children }: { url: string; motto: string; childre
           {children}
         </Link>
       </div>
-      <p className="justify-self-center text-lg font-light md:justify-self-auto">{motto}</p>
+      <p
+        className={clsx(
+          "justify-self-center md:justify-self-auto",
+          getParagraphStyle(false, false),
+        )}
+      >
+        {motto}
+      </p>
     </div>
   );
 }
@@ -27,10 +35,10 @@ function Sponsor({ url, motto, children }: { url: string; motto: string; childre
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Meet <span className="font-bold">Sponsors</span>
-      </h1>
-      <p className={clsx("pt-8 text-center text-2xl font-light sm:pt-10", fontSerif.className)}>
+      </PageHeader>
+      <p className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
         The following are the sponsors that make this great meet possible.
       </p>
       <div className="mx-auto max-w-2xl">

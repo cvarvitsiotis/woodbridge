@@ -1,5 +1,4 @@
 import { people } from "@/config/data";
-import { fontSerif } from "@/styles/fonts";
 import { Card } from "@heroui/card";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
@@ -9,6 +8,8 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import { MailIcon, CallIcon } from "@/components/icons";
 import { ReactNode } from "react";
+import { getParagraphStyle } from "@/styles/styles";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.contact.menuLabel,
@@ -28,15 +29,10 @@ function IconAndLink({ url, name, icon }: { url: string; name: string; icon: Rea
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         <span className="font-bold">Contact</span> Us
-      </h1>
-      <div
-        className={clsx(
-          "space-y-4 pt-8 text-center text-xl font-light sm:pt-10 sm:text-2xl",
-          fontSerif.className,
-        )}
-      >
+      </PageHeader>
+      <div className={clsx("space-y-4 pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
         <p>We would love to hear from you!</p>
         <p>Please contact {people.coachPacheco} and he will get in touch with you shortly.</p>
       </div>
@@ -54,7 +50,7 @@ export default function Page() {
               />
             </div>
             <div className="px-6 sm:px-8">
-              <p className="text-lg font-light sm:text-xl">{people.bryan}</p>
+              <p className={getParagraphStyle(true, false)}>{people.bryan}</p>
               <div>
                 <IconAndLink
                   url={`tel:${people.bryanPhone}`}

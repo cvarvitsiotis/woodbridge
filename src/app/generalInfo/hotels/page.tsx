@@ -1,9 +1,11 @@
 import { urls } from "@/config/data";
-import { fontSerif } from "@/styles/fonts";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
+import PageHeader from "@/components/pageHeader";
+import { ReactNode } from "react";
+import { getSubheaderStyle } from "@/styles/styles";
 
 export const metadata: Metadata = {
   title: pages.hotels.menuLabel,
@@ -25,13 +27,17 @@ function ExternalLink({ url, label }: { url: string; label: string }) {
   );
 }
 
+function Subheader({ children }: { children: ReactNode }) {
+  return <p className={clsx("pt-8 sm:pt-10", getSubheaderStyle())}>{children}</p>;
+}
+
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Recommended <span className="font-bold">Hotels</span>
-      </h1>
-      <p className={clsx("pt-8 text-xl sm:pt-10", fontSerif.className)}>Hotels of the meet</p>
+      </PageHeader>
+      <Subheader>Hotels of the meet</Subheader>
       <div className="flex flex-col gap-x-28 gap-y-10 px-10 sm:flex-row">
         <div className="basis-1/2">
           <ExternalLink url={urls.hotels.embassySuites} label="Embassy Suites Irvine" />
@@ -56,16 +62,14 @@ export default function Page() {
             Reservations must be made by midnight of August 21, 2025, to guarantee the special group
             rate
           </p>
-          <p>
+          <p className="pt-4">
             If you need 10 or more rooms, call the hotel directly and ask for the{" "}
             {siteConfig.woodbridgeCrossCountryClassic} group
           </p>
           <p>Or, use the custom online booking link above</p>
         </div>
       </div>
-      <p className={clsx("pt-8 text-xl sm:pt-10", fontSerif.className)}>
-        Additional hotels with great facilities in a convenient location
-      </p>
+      <Subheader>Additional hotels nearby</Subheader>
       <ul className="list-outside list-disc space-y-4 px-10">
         <LinkListItem url={urls.hotels.hiltonIrvine} label="Hilton Irvine/Orange County Airport" />
         <LinkListItem

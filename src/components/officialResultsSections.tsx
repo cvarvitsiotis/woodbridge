@@ -4,6 +4,8 @@ import { divisions, filteredRaces, levels, resultTypes } from "@/config/races";
 import { DivisionType, RaceType } from "@/types";
 import { urls } from "@/config/data";
 import { Card } from "@heroui/card";
+import { getSubheaderStyle } from "@/styles/styles";
+import clsx from "clsx";
 
 function getDivisionForDivisionResultLink(division: DivisionType): string {
   return `d${division.num}`;
@@ -143,7 +145,7 @@ function getDivisionColor(division: DivisionType): string {
     case divisions.three.num:
       return "bg-danger-300";
     case divisions.four.num:
-      return "bg-white";
+      return "bg-indigo-50";
     default:
       return "";
   }
@@ -223,7 +225,7 @@ function DivisionGrid({
 }
 
 function Subtitle({ children }: { children: ReactNode }) {
-  return <h1 className="pt-4 text-xl font-light sm:text-2xl">{children}</h1>;
+  return <h1 className={clsx("pt-4", getSubheaderStyle())}>{children}</h1>;
 }
 
 export default function OfficialResultsSections({ selectedYear }: { selectedYear: string }) {

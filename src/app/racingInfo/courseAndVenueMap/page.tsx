@@ -3,6 +3,7 @@ import Image from "next/image";
 import woodbridgeCourse from "@/../public/woodbridge-course.png";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.courseAndVenueMap.menuLabel,
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         <span className="font-bold">Course</span> & <span className="font-bold">Venue</span> Map
-      </h1>
+      </PageHeader>
       <div className="pt-10">
         <div className="relative mx-auto aspect-[4196/3246] h-full max-h-[90dvh] max-w-[800px] lg:max-h-[70dvh]">
           <Image

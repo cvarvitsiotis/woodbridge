@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import ParticipatingTeamsTable from "@/components/participatingTeamsTable";
 import { dates } from "@/config/dates";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.participatingTeams.menuLabel,
@@ -30,9 +31,9 @@ function AlertMessage() {
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Participating <span className="font-bold">Teams</span>
-      </h1>
+      </PageHeader>
       <AlertMessage />
       <ParticipatingTeamsTable />
     </>

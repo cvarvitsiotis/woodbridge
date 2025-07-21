@@ -30,7 +30,7 @@ export default function StyledSelect({
       variant="faded"
       className={className}
       classNames={{
-        trigger: "border border-default-300 bg-white",
+        trigger: "border border-default-300",
         ...classNames,
       }}
     >

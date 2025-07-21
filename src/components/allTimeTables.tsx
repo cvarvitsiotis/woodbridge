@@ -10,7 +10,7 @@ export default function AllTimeTables() {
       fullWidth
       size="lg"
       radius="sm"
-      variant="bordered"
+      variant="solid"
       aria-label="Options"
       classNames={{
         base: "pt-10 max-w-xs mx-auto",

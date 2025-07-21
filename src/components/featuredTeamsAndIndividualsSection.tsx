@@ -1,5 +1,6 @@
 "use client";
 
+import { getSubheaderStyle } from "@/styles/styles";
 import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
 import {
   getKeyValue,
@@ -10,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/table";
+import clsx from "clsx";
 
 const teamColumns = [
   {
@@ -133,7 +135,7 @@ export default function FeaturedTeamsAndIndividualsSection({
 }) {
   return (
     <>
-      <h1 className="pt-10 text-xl font-light sm:text-2xl">{sectionDescription}</h1>
+      <h1 className={clsx("pt-10", getSubheaderStyle())}>{sectionDescription}</h1>
       <div className="flex flex-wrap items-start justify-center gap-x-5 gap-y-8">
         <TeamsSection sectionDescription={sectionDescription} teams={teams} />
         <IndividualsSection sectionDescription={sectionDescription} individuals={individuals} />

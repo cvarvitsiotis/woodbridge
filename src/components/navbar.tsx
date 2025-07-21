@@ -103,7 +103,7 @@ export function Navbar() {
       <NavbarBrand as="li" className="max-w-fit gap-3">
         <Link
           href={pages.home.path}
-          className="mb-0.5 text-2xl font-bold tracking-tighter text-sky-950 sm:text-2xl"
+          className="mb-0.5 text-2xl font-bold tracking-tighter text-sky-950"
         >
           {siteConfig.woodbridge}
         </Link>

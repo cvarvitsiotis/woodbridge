@@ -2,10 +2,18 @@ import { LinkType } from "@/types";
 import { Link } from "@heroui/link";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
+import { getParagraphStyle } from "@/styles/styles";
+import clsx from "clsx";
+import { ReactNode } from "react";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.galleries.menuLabel,
 };
+
+function Header({ children }: { children: ReactNode }) {
+  return <div className={clsx("tracking-tighter", getParagraphStyle(true, false))}>{children}</div>;
+}
 
 function Year({ year, links }: { year: string; links: LinkType[] }) {
   return (
@@ -27,12 +35,12 @@ function Year({ year, links }: { year: string; links: LinkType[] }) {
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         Past <span className="font-bold">Galleries</span>
-      </h1>
+      </PageHeader>
       <div className="flex pt-10">
         <div className="basis-1/2 space-y-4">
-          <div className="text-lg font-light tracking-tighter sm:text-xl">VIDEOS</div>
+          <Header>VIDEOS</Header>
           <Year
             year="2022"
             links={[
@@ -136,7 +144,7 @@ export default function Page() {
           />
         </div>
         <div className="basis-1/2 space-y-4">
-          <div className="text-lg font-light tracking-tighter sm:text-xl">PHOTOS</div>
+          <Header>PHOTOS</Header>
           <Year
             year="2018"
             links={[

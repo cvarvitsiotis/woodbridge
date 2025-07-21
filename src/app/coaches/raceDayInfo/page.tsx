@@ -1,8 +1,9 @@
-import { fontSerif } from "@/styles/fonts";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
+import { getParagraphStyle } from "@/styles/styles";
+import PageHeader from "@/components/pageHeader";
 
 export const metadata: Metadata = {
   title: pages.raceDayInfo.menuLabel,
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 function ParagraphLink({ url, name }: { url: string; name: string }) {
   return (
-    <Link href={url} className="text-lg sm:text-xl">
+    <Link href={url} className={getParagraphStyle()}>
       {name}
     </Link>
   );
@@ -19,10 +20,10 @@ function ParagraphLink({ url, name }: { url: string; name: string }) {
 export default function Page() {
   return (
     <>
-      <h1 className="pt-4 text-center text-2xl font-extralight sm:pt-8 sm:text-3xl">
+      <PageHeader>
         <span className="font-bold">Race Day</span> Info
-      </h1>
-      <div className={clsx("space-y-4 pt-10 text-lg font-light sm:text-xl", fontSerif.className)}>
+      </PageHeader>
+      <div className={clsx("space-y-4 pt-10", getParagraphStyle())}>
         <p>
           Thank you for attending our meet. Your support of our meet is appreciated. Here are some
           last-minute notes to make your participation an enjoyable one at our meet:

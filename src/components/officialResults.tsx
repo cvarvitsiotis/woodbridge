@@ -4,6 +4,7 @@ import { useState } from "react";
 import { data } from "@/config/data";
 import StyledSelect from "./styledSelect";
 import OfficialResultsSections from "./officialResultsSections";
+import { getParagraphStyle } from "@/styles/styles";
 
 const allYears = Array.from(
   { length: data.pdfResultEndYear - data.pdfResultStartYear + 1 },
@@ -26,7 +27,7 @@ function YearSelect({
       onChange={handleChangeSelectedYear}
       label="YEAR"
       labelPlacement="outside-left"
-      classNames={{ base: "w-48", label: "font-light text-lg" }}
+      classNames={{ base: "w-48", label: getParagraphStyle(false, false) }}
       options={allYears}
     />
   );

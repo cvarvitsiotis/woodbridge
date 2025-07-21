@@ -1,5 +1,5 @@
 import { data } from "@/config/data";
-import { getOrdinal } from "@/utils/helper";
+import { getOrdinal } from "@/utils/number";
 
 export const dates = getDates();
 

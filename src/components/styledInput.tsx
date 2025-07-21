@@ -24,7 +24,7 @@ export default function StyledInput({
       onValueChange={onValueChange}
       className={className}
       classNames={{
-        inputWrapper: "min-h-12 h-12 border border-default-300 bg-white",
+        inputWrapper: "min-h-12 h-12 border border-default-300",
       }}
     />
   );

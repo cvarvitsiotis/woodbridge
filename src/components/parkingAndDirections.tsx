@@ -12,6 +12,7 @@ import { fontSerif } from "@/styles/fonts";
 import { siteConfig } from "@/config/site";
 import { Alert } from "@heroui/alert";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
+import { getSubheaderStyle } from "@/styles/styles";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -188,6 +189,101 @@ function InstructionModal({
   );
 }
 
+function getMainAccordionItem(instructionSection: string, child: ReactNode) {
+  return (
+    <AccordionItem
+      key={instructionSection}
+      aria-label={instructionSection}
+      title={instructionSection}
+      classNames={{
+        title: clsx("text-xl", fontSerif.className),
+      }}
+    >
+      {child}
+    </AccordionItem>
+  );
+}
+
+function getSpectatorsAccordionItem(
+  handleOpenModal: (instruction: ParkingInstructionType) => void,
+) {
+  return (
+    <>
+      <p>
+        All vehicles (including school vans) will park in Lots 1 through 8 or Portola High School
+        (shuttle service available) with a $20 pass purchased online.
+      </p>
+
+      <Accordion>
+        {getSpectatorLotAccordionItem(instructions.freewayToLot0, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot1, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot2, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot3, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot4, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot5, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot6, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot7, handleOpenModal)}
+        {getSpectatorLotAccordionItem(instructions.freewayToLot8, handleOpenModal)}
+        <AccordionItem
+          key="Portola High School"
+          aria-label="Portola High School"
+          title="Portola High School"
+        >
+          <div className="space-y-4">
+            <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
+            <DescriptionMapModalInDiv
+              instruction={instructions.freewayToPortolaEntrance1}
+              handleOpenModal={handleOpenModal}
+            />
+            <DescriptionMapModalInDiv
+              instruction={instructions.freewayToPortolaEntrance2}
+              handleOpenModal={handleOpenModal}
+            />
+            <DescriptionMapModalInDiv
+              instruction={instructions.freewayToPortolaEntrance3}
+              handleOpenModal={handleOpenModal}
+            />
+          </div>
+        </AccordionItem>
+      </Accordion>
+    </>
+  );
+}
+
+function getRunnerDropoffAndPickupAccordionItem(
+  handleOpenModal: (instruction: ParkingInstructionType) => void,
+) {
+  return (
+    <DescriptionMapModalInDiv
+      instruction={instructions.freewayToRunnerDropoffAndPickup}
+      handleOpenModal={handleOpenModal}
+    />
+  );
+}
+
+function getBusesAccordionItem(handleOpenModal: (instruction: ParkingInstructionType) => void) {
+  return (
+    <div className="space-y-4">
+      <p>
+        Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call when your
+        team is ready to leave.
+      </p>
+      <DescriptionMapModalInDiv
+        instruction={instructions.freewayToTeamDropoff}
+        handleOpenModal={handleOpenModal}
+      />
+      <DescriptionMapModalInDiv
+        instruction={instructions.teamDropoffToBusStagingArea}
+        handleOpenModal={handleOpenModal}
+      />
+      <DescriptionMapModalInDiv
+        instruction={instructions.busStagingAreaToTeamPickup}
+        handleOpenModal={handleOpenModal}
+      />
+    </div>
+  );
+}
+
 function Instructions({
   handleOpenModal,
 }: {
@@ -196,93 +292,16 @@ function Instructions({
   return (
     <div className="w-[768px] max-w-full basis-1/2 px-8">
       <Accordion className="px-0">
-        <AccordionItem
-          key={instructionSections.spectators}
-          aria-label={instructionSections.spectators}
-          title={instructionSections.spectators}
-          classNames={{
-            title: clsx("text-xl", fontSerif.className),
-          }}
-        >
-          <p>
-            All vehicles (including school vans) will park in Lots 1 through 8 or Portola High
-            School (shuttle service available) with a $20 pass purchased online.
-          </p>
-
-          <Accordion>
-            {/* Must call getLot as function rather than nesting JSX component due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
-            {getLot(instructions.freewayToLot0, handleOpenModal)}
-            {getLot(instructions.freewayToLot1, handleOpenModal)}
-            {getLot(instructions.freewayToLot2, handleOpenModal)}
-            {getLot(instructions.freewayToLot3, handleOpenModal)}
-            {getLot(instructions.freewayToLot4, handleOpenModal)}
-            {getLot(instructions.freewayToLot5, handleOpenModal)}
-            {getLot(instructions.freewayToLot6, handleOpenModal)}
-            {getLot(instructions.freewayToLot7, handleOpenModal)}
-            {getLot(instructions.freewayToLot8, handleOpenModal)}
-            <AccordionItem
-              key="Portola High School"
-              aria-label="Portola High School"
-              title="Portola High School"
-            >
-              <div className="space-y-4">
-                <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
-                <DescriptionMapModalInDiv
-                  instruction={instructions.freewayToPortolaEntrance1}
-                  handleOpenModal={handleOpenModal}
-                />
-                <DescriptionMapModalInDiv
-                  instruction={instructions.freewayToPortolaEntrance2}
-                  handleOpenModal={handleOpenModal}
-                />
-                <DescriptionMapModalInDiv
-                  instruction={instructions.freewayToPortolaEntrance3}
-                  handleOpenModal={handleOpenModal}
-                />
-              </div>
-            </AccordionItem>
-          </Accordion>
-        </AccordionItem>
-        <AccordionItem
-          key={instructionSections.runnerDropoffAndPickup}
-          aria-label={instructionSections.runnerDropoffAndPickup}
-          title={instructionSections.runnerDropoffAndPickup}
-          classNames={{
-            title: clsx("text-xl", fontSerif.className),
-          }}
-        >
-          <DescriptionMapModalInDiv
-            instruction={instructions.freewayToRunnerDropoffAndPickup}
-            handleOpenModal={handleOpenModal}
-          />
-        </AccordionItem>
-        <AccordionItem
-          key={instructionSections.buses}
-          aria-label={instructionSections.buses}
-          title={instructionSections.buses}
-          classNames={{
-            title: clsx("text-xl", fontSerif.className),
-          }}
-        >
-          <div className="space-y-4">
-            <p>
-              Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call when
-              your team is ready to leave.
-            </p>
-            <DescriptionMapModalInDiv
-              instruction={instructions.freewayToTeamDropoff}
-              handleOpenModal={handleOpenModal}
-            />
-            <DescriptionMapModalInDiv
-              instruction={instructions.teamDropoffToBusStagingArea}
-              handleOpenModal={handleOpenModal}
-            />
-            <DescriptionMapModalInDiv
-              instruction={instructions.busStagingAreaToTeamPickup}
-              handleOpenModal={handleOpenModal}
-            />
-          </div>
-        </AccordionItem>
+        {/* Must call get*AccordionItem as functions rather than nesting JSX components due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
+        {getMainAccordionItem(
+          instructionSections.spectators,
+          getSpectatorsAccordionItem(handleOpenModal),
+        )}
+        {getMainAccordionItem(
+          instructionSections.runnerDropoffAndPickup,
+          getRunnerDropoffAndPickupAccordionItem(handleOpenModal),
+        )}
+        {getMainAccordionItem(instructionSections.buses, getBusesAccordionItem(handleOpenModal))}
       </Accordion>
     </div>
   );
@@ -338,7 +357,7 @@ function DescriptionMapModalInDiv({
   );
 }
 
-function getLot(
+function getSpectatorLotAccordionItem(
   instruction: ParkingInstructionType,
   handleOpenModal: (instruction: ParkingInstructionType) => void,
 ) {
@@ -572,7 +591,7 @@ function Alerts() {
                   quality={100}
                   placeholder="blur"
                   alt="Gridlock Note"
-                  className="rounded-lg object-contain drop-shadow-xl"
+                  className="rounded-lg border-1 border-slate-300 object-contain drop-shadow-xl"
                 />
               </div>
             </div>
@@ -628,7 +647,7 @@ export default function ParkingAndDirections() {
         <InstructionModal isOpen={isOpen} onOpenChange={onOpenChange} instruction={instruction} />
       )}
       <Alerts />
-      <h1 className="pt-6 text-xl font-light sm:text-2xl">Instructions</h1>
+      <h1 className={clsx("pt-6", getSubheaderStyle())}>Instructions</h1>
       <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
         <Instructions handleOpenModal={handleOpenModal} />
         <GreatParkParkingLots />
