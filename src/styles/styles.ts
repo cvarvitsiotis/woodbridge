@@ -13,7 +13,7 @@ export function getParagraphStyle(
       : "sm:text-xl";
 
   return clsx(
-    "font-light",
+    isSerif ? "font-normal" : "font-light",
     sizeOnSmallerScreen,
     sizeOnLargerScreen,
     isSerif && fontSerif.className,
