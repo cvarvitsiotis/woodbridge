@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <html suppressHydrationWarning lang="en">
       <head />
       <Body>
-        <Providers themeProps={{ attribute: "class" }}>
+        <Providers>
           <div className="relative flex min-h-dvh flex-col items-center space-y-3 sm:space-y-4">
             <Navbar />
             <main className="container flex grow flex-col space-y-3 px-3 sm:px-6">
