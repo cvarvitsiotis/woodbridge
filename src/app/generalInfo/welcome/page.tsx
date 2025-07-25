@@ -48,7 +48,7 @@ export default function Page() {
         </p>
         <p>
           The {dates.meetStartDateParts.year} {siteConfig.woodbridgeCrossCountryClassic} Team
-          Registration IS NOW OPEN!
+          Registration IS NOW CLOSED.
         </p>
         <p>
           The {siteConfig.greatPark} is an excellent venue for our meet. The facility provides the

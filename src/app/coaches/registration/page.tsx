@@ -54,7 +54,11 @@ export default function Page() {
           <p>
             Athlete registration opens on{" "}
             {dates.athleteRegistrationStartDateParts.dayDescriptionMonthDayYearLong} at{" "}
-            <ParagraphLink url={urls.athleticNet.athleticNet} name={siteConfig.athleticNet} />.
+            <ParagraphLink
+              url={urls.athleticNet.athleteRegistration}
+              name={siteConfig.athleticNet}
+            />
+            .
           </p>
           <p>
             You must register your athletes before{" "}

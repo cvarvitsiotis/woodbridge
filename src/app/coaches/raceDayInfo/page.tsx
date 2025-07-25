@@ -41,7 +41,7 @@ export default function Page() {
           <ul className="list-outside list-disc space-y-4 px-10">
             <li>
               If you do not have a bib for a new runner, fill out the ADD ATHLETES SHEET at the
-              checkin table, pay the $15.00, and take the add ticket to the coaches&apos; corner at
+              checkin table, pay the $20.00, and take the add ticket to the coaches&apos; corner at
               the finish line.
             </li>
             <li>
@@ -61,13 +61,14 @@ export default function Page() {
             to the athletes.
           </li>
           <li>
-            Your runners must report to the clerk of the course (parking lot B behind the start
-            line) 15 minutes before the race is scheduled to go off.
+            Your runners must report to the clerk of the course (behind the start line) 15 minutes
+            before the race is scheduled to go off.
           </li>
           <li>
-            NOVICE RACES: Any boy or girl that runs 24:00 minutes or slower should be placed in the
-            NOVICE races. This gives them a better racing experience, it reduces the overcrowding in
-            some of the Frosh and Soph races, and assures them of a finish time for the race.
+            NOVICE RACES: Any boy that runs 23:00 or girl that runs 24:00 or slower should be placed
+            in the NOVICE races. This gives them a better racing experience, it reduces the
+            overcrowding in some of the Frosh and Soph races, and assures them of a finish time for
+            the race.
           </li>
           <li>Make sure that your runners line up in the correct race and the correct division.</li>
           <li>

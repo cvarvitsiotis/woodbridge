@@ -69,7 +69,7 @@ function getMeetEndDate(): Date {
 
 function getEntryFeeMailDate(): Date {
   const entryFeeMailDate = new Date(data.meetStartDate);
-  entryFeeMailDate.setDate(entryFeeMailDate.getDate() - 10);
+  entryFeeMailDate.setDate(entryFeeMailDate.getDate() - 15);
   return entryFeeMailDate;
 }
 

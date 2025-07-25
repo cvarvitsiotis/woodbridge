@@ -20,10 +20,9 @@ export default function Page() {
           <p>Entry fees are as follows:</p>
           <ol className="list-outside list-decimal space-y-4 px-10">
             <li>
-              $20.00 per runner for the first 14 runners registered ($50.00 minimum) PLUS $13.00 per
-              runner for runners 15 through 40 registered. Maximum Fee is $618.00.
+              $20.00 per runner for the first 14 runners registered ($50.00 minimum) PLUS $15.00 per
+              remaining runner for a maximum of $700.
             </li>
-            <li>No additional Fee for registering more than 40 runners. Maximum Fee is $618.00.</li>
             <li>
               $70.00 each for second and third (B and/or C) varsity teams entered in the meet. This
               option is only available to schools that have earned a spot in the Sweepstakes and/or
@@ -38,43 +37,44 @@ export default function Page() {
             <li>You registered 1 runner to the meet… Your Entry Fee is $50.00.</li>
             <li>You registered 12 runners to the meet… Your Entry Fee is $20 x 12 = $240.00.</li>
             <li>
-              You registered a total of 29 runners… Your Entry fee is ($20 x 14) + ($13 x 15) =
-              $475.00.
+              You registered a total of 29 runners… Your Entry fee is ($20 x 14) + ($15 x 15) =
+              $505.00.
             </li>
             <li>
-              You registered a total of 49 runners… Your Entry fee is ($20 x 14) + ($13 x 26) =
-              $618.00.
+              You registered a total of 49 runners… Your Entry fee is ($20 x 14) + ($15 x 35) =
+              $700.00.
             </li>
             <li>
               You registered 55 runners and entered your Varsity team for Boys and/or Girls in
-              either the Sweepstakes or Rated race… Your Entry Fee is $618.00.
+              either the Sweepstakes or Rated race… Your Entry Fee is $700.00.
             </li>
             <li>
-              You registered 55 runners, entered a Boys Varsity team in the Boys Sweepstakes race
-              and a Girls Varsity team in the Girls Rated race… and also entered a Boys Varsity B
-              team in the Boys Rated race ($70), a Boys Varsity C team in the Boys division Varsity
-              race ($70), and a Girls B team in the Girls division Varsity race ($70)… Your Entry
-              Fee is $828.00 ($618 + $70 + $70 +$70).
+              You registered 55 runners ($700), entered a Boys Varsity team in the Boys Sweepstakes
+              race and a Girls Varsity team in the Girls Rated race… and also entered a Boys Varsity
+              B team in the Boys Rated race ($70), a Boys Varsity C team in the Boys division
+              Varsity race ($70), and a Girls B team in the Girls division Varsity race ($70)… Your
+              Entry Fee is $828.00 ($700 + $70 + $70 +$70).
             </li>
           </ul>
         </div>
         <div className="space-y-4">
           <p>Payment options:</p>
           <ol className="list-outside list-decimal space-y-4 px-10">
-            <li>Credit card through {siteConfig.athleticNet}.</li>
+            <li>Credit card through {siteConfig.athleticNet}</li>
             <li>
-              School check or personal check (make the check payable to{" "}
-              {siteConfig.woodbridgeHighSchoolCrossCountry}).
+              Check (school or personal) mailed by {dates.entryFeeMailDateParts.monthDayLong} so
+              that we have it by race day
             </li>
-            <li>Cash or money order.</li>
+            <li>Check (school or personal) brought to the meet on race day</li>
+            <li>Cash or money order</li>
           </ol>
         </div>
         <div className="space-y-4">
           <p>Important notes:</p>
           <ul className="list-outside list-disc space-y-4 px-10">
             <li>
-              Every School needs to register a credit card with {siteConfig.athleticNet} regardless
-              of how the fees will be paid.
+              Every school needs to register a credit card with {siteConfig.athleticNet} regardless
+              of how the fees will be paid
             </li>
             <li>
               The Entry Fee is due by the day of the meet. If payment is not received by then, we
@@ -82,14 +82,10 @@ export default function Page() {
               {dates.entryFeeAutoDebitDateParts.dayDescriptionMonthDayYearLong} at 8:00 AM. No
               refunds on credit card payments.
             </li>
+            <li>Make the check payable to {siteConfig.woodbridgeHighSchoolCrossCountry}</li>
             <li>
-              If you are planning to mail the entry fee:
-              <div className="mt-4 space-y-4 px-10">
-                <p>
-                  Please mail it by {dates.entryFeeMailDateParts.monthDayLong} so that we have it by
-                  race day.
-                </p>
-                <p>Mail to...</p>
+              If you are planning to mail the entry fee, mail to...
+              <div className="mt-4 px-10">
                 <p>
                   Attn: Cross Country Classic
                   <br />
