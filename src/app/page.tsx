@@ -3,7 +3,7 @@ import { button as buttonStyles } from "@heroui/theme";
 import { Button } from "@heroui/button";
 
 import clsx from "clsx";
-import { pageParents, pages, siteConfig } from "@/config/site";
+import { pages, siteConfig } from "@/config/site";
 import { CalendarIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
@@ -93,9 +93,9 @@ export default function Home() {
               variant: "shadow",
               size: "lg",
             })}
-            href={pages.raceResults.path}
+            href={pages.registration.path}
           >
-            {pageParents.results}
+            {pages.registration.menuLabel}
           </Button>
           <Button
             as={Link}
