@@ -18,7 +18,7 @@ function AlertMessage() {
         color="warning"
         title={
           <p>
-            Our website got a facelift. We welcome{" "}
+            Welcome to our new website! Send us your{" "}
             <Link href={pages.contact.path} className="text-sm font-semibold text-warning-800">
               feedback
             </Link>
@@ -95,7 +95,7 @@ export default function Home() {
             })}
             href={pages.registration.path}
           >
-            {pages.registration.menuLabel}
+            Register
           </Button>
           <Button
             as={Link}
