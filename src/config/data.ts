@@ -32,7 +32,6 @@ export const urls = {
     instagram: "https://www.instagram.com/explore/search/keyword/?q=%23woodbridgeclassic",
   },
   athleticNet: {
-    meetInfo: `https://www.athletic.net/CrossCountry/meet/${data.altheticNetMeet}/info`,
     athleteRegistration: `https://www.athletic.net/Help/CrossCountry.aspx?Meet=${data.altheticNetMeet}`,
     irvineTiming,
     irvineTimingMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,
