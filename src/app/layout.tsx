@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import BreadcrumbsAndSponsor from "@/components/breadcrumbsAndSponsor";
 import { ReactNode } from "react";
 import Body from "@/components/body";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -34,6 +35,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Footer />
           </div>
         </Providers>
+        <Analytics />
       </Body>
     </html>
   );
