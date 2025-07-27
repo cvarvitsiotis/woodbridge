@@ -1,7 +1,7 @@
 "use client";
 
-import greatParkParkingLots from "@/../public/great-park-parking-lots.png";
-import directionsGridlock from "@/../public/woodbridge-gridlock.png";
+import greatParkParkingLots from "@/../public/images/great-park-parking-lots.png";
+import directionsGridlock from "@/../public/images/woodbridge-gridlock.png";
 import Image from "next/image";
 import { Link } from "@heroui/link";
 import { Accordion, AccordionItem } from "@heroui/accordion";

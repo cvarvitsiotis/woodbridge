@@ -4,13 +4,21 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import RacesTable from "@/components/racesTable";
 import PageHeader from "@/components/pageHeader";
+import clsx from "clsx";
+import { getParagraphStyle } from "@/styles/styles";
 
 export const metadata: Metadata = {
   title: pages.schedule.menuLabel,
 };
 
 function DayHeader({ date }: { date: string }) {
-  return <div className="text-center text-sm font-light uppercase sm:text-base">{date}</div>;
+  return (
+    <div
+      className={clsx("text-center uppercase tracking-tighter", getParagraphStyle(false, false))}
+    >
+      {date}
+    </div>
+  );
 }
 
 export default function Page() {

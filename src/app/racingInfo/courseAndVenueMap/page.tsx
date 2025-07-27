@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import woodbridgeCourse from "@/../public/woodbridge-course.png";
+import woodbridgeCourse from "@/../public/images/woodbridge-course.png";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";

@@ -3,7 +3,7 @@ import { Card } from "@heroui/card";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 import Image from "next/image";
-import bryanPacheco from "@/../public/bryan-pacheco.jpg";
+import bryanPacheco from "@/../public/images/bryan-pacheco.jpg";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import { MailIcon, CallIcon } from "@/components/icons";

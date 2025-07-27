@@ -7,7 +7,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Apple Valley ",
+    city: "Apple Valley",
     state: "CA",
   },
   {
@@ -23,7 +23,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "San Diego ",
+    city: "San Diego",
     state: "CA",
   },
   {
@@ -31,7 +31,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Agoura Hills ",
+    city: "Agoura Hills",
     state: "CA",
   },
   {
@@ -95,7 +95,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Anaheim ",
+    city: "Anaheim",
     state: "CA",
   },
   {
@@ -115,11 +115,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "AZ",
   },
   {
-    name: "Apple Valley ",
+    name: "Apple Valley",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Apple Valley ",
+    city: "Apple Valley",
     state: "CA",
   },
   {
@@ -127,7 +127,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "las vegas ",
+    city: "las vegas",
     state: "NV",
   },
   {
@@ -147,7 +147,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "AZ",
   },
   {
-    name: "Arizona College  Prep (AZ)",
+    name: "Arizona College Prep (AZ)",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -271,7 +271,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Beaumont ",
+    city: "Beaumont",
     state: "CA",
   },
   {
@@ -291,7 +291,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Belmont ",
+    name: "Belmont",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -403,7 +403,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "AZ",
   },
   {
-    name: "Buchanan ",
+    name: "Buchanan",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -423,7 +423,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Buena Park ",
+    city: "Buena Park",
     state: "CA",
   },
   {
@@ -447,7 +447,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "San Bernardino ",
+    city: "San Bernardino",
     state: "CA",
   },
   {
@@ -491,7 +491,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Camarillo ",
+    name: "Camarillo",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -511,7 +511,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Montebello ",
+    city: "Montebello",
     state: "CA",
   },
   {
@@ -535,15 +535,15 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "San Diego ",
+    city: "San Diego",
     state: "CA",
   },
   {
-    name: "Capistrano Valley ",
+    name: "Capistrano Valley",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Mission Viejo ",
+    city: "Mission Viejo",
     state: "CA",
   },
   {
@@ -555,11 +555,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Carlsbad ",
+    name: "Carlsbad",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "Carlsbad ",
+    city: "Carlsbad",
     state: "CA",
   },
   {
@@ -587,7 +587,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Castaic ",
+    name: "Castaic",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -599,7 +599,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Queen Creek ",
+    city: "Queen Creek",
     state: "AZ",
   },
   {
@@ -611,7 +611,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Cathedral ",
+    name: "Cathedral",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
@@ -631,7 +631,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Cathedral City ",
+    city: "Cathedral City",
     state: "CA",
   },
   {
@@ -755,11 +755,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Chino Hills ",
+    name: "Chino Hills",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Chino Hills ",
+    city: "Chino Hills",
     state: "CA",
   },
   {
@@ -767,7 +767,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Sacramento ",
+    city: "Sacramento",
     state: "CA",
   },
   {
@@ -791,7 +791,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Claremont ",
+    city: "Claremont",
     state: "CA",
   },
   {
@@ -815,7 +815,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Clovis ",
+    city: "Clovis",
     state: "CA",
   },
   {
@@ -839,15 +839,15 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Fresno ",
+    city: "Fresno",
     state: "CA",
   },
   {
-    name: "Coachella Valley ",
+    name: "Coachella Valley",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Thermal ",
+    city: "Thermal",
     state: "CA",
   },
   {
@@ -899,14 +899,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Conifer (CO)",
-    raceDay: "Saturday",
-    division: divisions.two,
-    varsityHeat: heats.a,
-    city: "Conifer",
-    state: "CO",
-  },
-  {
     name: "Convent & Stuart Hall",
     raceDay: "Friday",
     division: divisions.four,
@@ -915,11 +907,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Corcoran ",
+    name: "Corcoran",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Corcoran ",
+    city: "Corcoran",
     state: "CA",
   },
   {
@@ -927,11 +919,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Rancho Cordova ",
+    city: "Rancho Cordova",
     state: "CA",
   },
   {
-    name: "Corona ",
+    name: "Corona",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -983,7 +975,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Covina ",
+    city: "Covina",
     state: "CA",
   },
   {
@@ -1055,7 +1047,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Reno ",
+    city: "Reno",
     state: "NV",
   },
   {
@@ -1087,7 +1079,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Escondido ",
+    city: "Escondido",
     state: "CA",
   },
   {
@@ -1103,7 +1095,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Bakersfield ",
+    city: "Bakersfield",
     state: "CA",
   },
   {
@@ -1175,11 +1167,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "Diamond Bar ",
+    city: "Diamond Bar",
     state: "CA",
   },
   {
-    name: "Dinuba ",
+    name: "Dinuba",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
@@ -1195,11 +1187,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Don Lugo ",
+    name: "Don Lugo",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Chino ",
+    city: "Chino",
     state: "CA",
   },
   {
@@ -1283,7 +1275,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "El Modena ",
+    name: "El Modena",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -1327,7 +1319,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Wildomar ",
+    city: "Wildomar",
     state: "CA",
   },
   {
@@ -1371,11 +1363,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Estancia ",
+    name: "Estancia",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Costa Mesa ",
+    city: "Costa Mesa",
     state: "CA",
   },
   {
@@ -1383,7 +1375,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Las Vegas ",
+    city: "Las Vegas",
     state: "NV",
   },
   {
@@ -1435,7 +1427,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Foothill Technology ",
+    name: "Foothill Technology",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -1447,7 +1439,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Fountain Valley ",
+    city: "Fountain Valley",
     state: "CA",
   },
   {
@@ -1467,11 +1459,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Fullerton ",
+    name: "Fullerton",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Fullerton ",
+    city: "Fullerton",
     state: "CA",
   },
   {
@@ -1507,7 +1499,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "TX",
   },
   {
-    name: "Glendale ",
+    name: "Glendale",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -1531,7 +1523,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Godinez Fundamental ",
+    name: "Godinez Fundamental",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -1571,7 +1563,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Granite Hills ",
+    name: "Granite Hills",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -1631,7 +1623,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Santa Clarita ",
+    city: "Santa Clarita",
     state: "CA",
   },
   {
@@ -1659,7 +1651,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Helix ",
+    name: "Helix",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -1667,7 +1659,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Hemet ",
+    name: "Hemet",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
@@ -1679,7 +1671,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Menifee ",
+    city: "Menifee",
     state: "CA",
   },
   {
@@ -1703,7 +1695,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Bakersfield ",
+    city: "Bakersfield",
     state: "CA",
   },
   {
@@ -1783,7 +1775,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Bakersfield ",
+    city: "Bakersfield",
     state: "CA",
   },
   {
@@ -1809,14 +1801,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     varsityHeat: heats.a,
     city: "Carmichael",
     state: "CA",
-  },
-  {
-    name: "Jesuit (NOLA)",
-    raceDay: "Saturday",
-    division: divisions.two,
-    varsityHeat: heats.a,
-    city: "New Orleans",
-    state: "LA",
   },
   {
     name: "John W. North",
@@ -1887,7 +1871,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Tracy ",
+    city: "Tracy",
     state: "CA",
   },
   {
@@ -1971,11 +1955,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "La Sierra ",
+    name: "La Sierra",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Riverside ",
+    city: "Riverside",
     state: "CA",
   },
   {
@@ -2115,7 +2099,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Lucerne Valley ",
+    name: "Lucerne Valley",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -2127,7 +2111,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Madera ",
+    city: "Madera",
     state: "CA",
   },
   {
@@ -2167,7 +2151,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Huntington Beach ",
+    city: "Huntington Beach",
     state: "CA",
   },
   {
@@ -2183,7 +2167,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "San Pedro ",
+    city: "San Pedro",
     state: "CA",
   },
   {
@@ -2191,7 +2175,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Los Angeles ",
+    city: "Los Angeles",
     state: "CA",
   },
   {
@@ -2215,7 +2199,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Lakewood ",
+    city: "Lakewood",
     state: "CA",
   },
   {
@@ -2283,15 +2267,15 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "AZ",
   },
   {
-    name: "Middle College ",
+    name: "Middle College",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Los Angeles ",
+    city: "Los Angeles",
     state: "CA",
   },
   {
-    name: "Millikan ",
+    name: "Millikan",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
@@ -2303,7 +2287,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "Manhattan Beach ",
+    city: "Manhattan Beach",
     state: "CA",
   },
   {
@@ -2367,7 +2351,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Monrovia ",
+    city: "Monrovia",
     state: "CA",
   },
   {
@@ -2423,7 +2407,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Murrieta ",
+    city: "Murrieta",
     state: "CA",
   },
   {
@@ -2443,7 +2427,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Nogales ",
+    name: "Nogales",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -2459,7 +2443,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Norte Vista ",
+    name: "Norte Vista",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -2467,18 +2451,18 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "North Bakersfield ",
+    name: "North Bakersfield",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Bakersfield ",
+    city: "Bakersfield",
     state: "CA",
   },
   {
     name: "North Eugene ",
-    raceDay: "",
-    division: divisions.four,
-    varsityHeat: heats.b,
+    raceDay: "Friday",
+    division: divisions.three,
+    varsityHeat: heats.a,
     city: "",
     state: "",
   },
@@ -2527,15 +2511,15 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Irvine ",
+    city: "Irvine",
     state: "CA",
   },
   {
-    name: "Norwalk ",
+    name: "Norwalk",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Norwalk ",
+    city: "Norwalk",
     state: "CA",
   },
   {
@@ -2563,7 +2547,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Oak Hills ",
+    name: "Oak Hills",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -2595,12 +2579,20 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Ocean View ",
+    name: "Ocean View",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
     city: "Huntington Beach",
     state: "CA",
+  },
+  {
+    name: "Ogden",
+    raceDay: "Saturday",
+    division: divisions.one,
+    varsityHeat: heats.a,
+    city: "Ogden",
+    state: "UT",
   },
   {
     name: "Olympian",
@@ -2611,11 +2603,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Ontario ",
+    name: "Ontario",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Ontario ",
+    city: "Ontario",
     state: "CA",
   },
   {
@@ -2767,7 +2759,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "San Diego ",
+    city: "San Diego",
     state: "CA",
   },
   {
@@ -2871,7 +2863,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Lancaster ",
+    city: "Lancaster",
     state: "CA",
   },
   {
@@ -2879,7 +2871,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Queen Creek ",
+    city: "Queen Creek",
     state: "AZ",
   },
   {
@@ -2899,7 +2891,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "NV",
   },
   {
-    name: "Rancho Alamitos ",
+    name: "Rancho Alamitos",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
@@ -2907,7 +2899,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Rancho Bernardo ",
+    name: "Rancho Bernardo",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -2915,7 +2907,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Rancho Buena Vista",
+    name: "Rancho Buena Vista - DUP DELETE 1",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -2927,7 +2919,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Moreno Valley ",
+    city: "Moreno Valley",
     state: "CA",
   },
   {
@@ -2971,11 +2963,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Rim of the World ",
+    name: "Rim of the World",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Lake Arrowhead ",
+    city: "Lake Arrowhead",
     state: "CA",
   },
   {
@@ -2987,7 +2979,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Rio Mesa ",
+    name: "Rio Mesa",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -3031,7 +3023,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: "Riverside ",
+    city: "Riverside",
     state: "CA",
   },
   {
@@ -3067,11 +3059,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Royal ",
+    name: "Royal",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Simi Valley ",
+    city: "Simi Valley",
     state: "CA",
   },
   {
@@ -3099,7 +3091,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Saint Monica ",
+    name: "Saint Monica",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -3107,7 +3099,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Salesian ",
+    name: "Salesian",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -3147,11 +3139,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "San Gorgonio ",
+    name: "San Gorgonio",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "San Bernardino ",
+    city: "San Bernardino",
     state: "CA",
   },
   {
@@ -3251,7 +3243,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Santa Fe Christian ",
+    name: "Santa Fe Christian",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -3271,7 +3263,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Santa Monica ",
+    city: "Santa Monica",
     state: "CA",
   },
   {
@@ -3311,7 +3303,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Los Angeles ",
+    city: "Los Angeles",
     state: "CA",
   },
   {
@@ -3335,7 +3327,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Saugus ",
+    city: "Saugus",
     state: "CA",
   },
   {
@@ -3355,11 +3347,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Scripps Ranch ",
+    name: "Scripps Ranch",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "San Diego ",
+    city: "San Diego",
     state: "CA",
   },
   {
@@ -3371,7 +3363,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Serrano ",
+    name: "Serrano",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -3423,7 +3415,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Victorville ",
+    city: "Victorville",
     state: "CA",
   },
   {
@@ -3439,12 +3431,12 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
-    city: "Las Vegas ",
+    city: "Las Vegas",
     state: "NV",
   },
   {
     name: "Sonora Union",
-    raceDay: "Saturday",
+    raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
     city: "Sonora",
@@ -3459,7 +3451,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "South Pasadena ",
+    name: "South Pasadena",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -3473,14 +3465,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     varsityHeat: heats.a,
     city: "Torrance",
     state: "CA",
-  },
-  {
-    name: "Southlake Carroll (TX)",
-    raceDay: "Saturday",
-    division: divisions.one,
-    varsityHeat: heats.b,
-    city: "Southlake",
-    state: "TX",
   },
   {
     name: "St Augustine",
@@ -3543,7 +3527,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "St. Michael ",
+    city: "St. Michael",
     state: "AZ",
   },
   {
@@ -3563,8 +3547,8 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Summerville ",
-    raceDay: "Saturday",
+    name: "Summerville",
+    raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
     city: "Tuolumne",
@@ -3591,7 +3575,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.a,
-    city: " Woodland Hills",
+    city: "Woodland Hills",
     state: "CA",
   },
   {
@@ -3603,11 +3587,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Temecula Preparatory ",
+    name: "Temecula Preparatory",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
-    city: "Winchester ",
+    city: "Winchester",
     state: "CA",
   },
   {
@@ -3691,11 +3675,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "VT",
   },
   {
-    name: "Torrance ",
+    name: "Torrance",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
-    city: "Torrance ",
+    city: "Torrance",
     state: "CA",
   },
   {
@@ -3727,7 +3711,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
-    city: "Fullerton ",
+    city: "Fullerton",
     state: "CA",
   },
   {
@@ -3739,7 +3723,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Tulare Western ",
+    name: "Tulare Western",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -3751,7 +3735,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
-    city: "Turlock ",
+    city: "Turlock",
     state: "CA",
   },
   {
@@ -3803,7 +3787,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "WA",
   },
   {
-    name: "University City ",
+    name: "University City",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -3931,7 +3915,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "NV",
   },
   {
-    name: "Vista Del Lago ",
+    name: "Vista Del Lago",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -3939,7 +3923,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Vista Murrieta ",
+    name: "Vista Murrieta",
     raceDay: "Saturday",
     division: divisions.one,
     varsityHeat: heats.b,
@@ -4027,7 +4011,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Westridge School ",
+    name: "Westridge School",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -4078,7 +4062,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     name: "Wichita Falls Memorial (TX)",
     raceDay: "Saturday",
     division: divisions.two,
-    varsityHeat: heats.a,
+    varsityHeat: heats.b,
     city: "Wichita Falls",
     state: "TX",
   },
@@ -4155,11 +4139,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "WA",
   },
   {
-    name: "Woodlake ",
+    name: "Woodlake",
     raceDay: "Saturday",
     division: divisions.two,
     varsityHeat: heats.a,
-    city: "Woodlake ",
+    city: "Woodlake",
     state: "CA",
   },
   {
