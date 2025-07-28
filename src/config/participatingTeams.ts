@@ -827,14 +827,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Clovis North",
-    raceDay: "Saturday",
-    division: divisions.one,
-    varsityHeat: heats.a,
-    city: "Fresno",
-    state: "CA",
-  },
-  {
     name: "Clovis West",
     raceDay: "Saturday",
     division: divisions.two,

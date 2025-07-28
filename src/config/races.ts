@@ -62,13 +62,13 @@ export const levels: LevelsType = {
   rated: {
     level: "Rated",
     resultLink: "rated",
-    resultOrder: 7,
+    resultOrder: 8,
   },
   sweepstakes: {
     level: "Sweepstakes",
     scheduleFormat: `${scheduleLevelSweepstakesNameToken} ${scheduleLevelGenderToken} Sweepstakes`,
     resultLink: "sweep",
-    resultOrder: 8,
+    resultOrder: 7,
   },
 };
 
