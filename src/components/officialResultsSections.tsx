@@ -1,8 +1,13 @@
 import { ReactNode } from "react";
 import { Link } from "@heroui/link";
-import { divisions, filteredRaces, levels, resultTypes } from "@/config/races";
+import {
+  divisions,
+  genders,
+  getFeaturedRacesForResults,
+  getNonFeaturedRacesForResults,
+  levels,
+} from "@/config/races";
 import { DivisionType, RaceType } from "@/types";
-import { urls } from "@/config/data";
 import { Card } from "@heroui/card";
 import { getSubheaderStyle } from "@/styles/styles";
 import clsx from "clsx";
@@ -37,7 +42,7 @@ function getSweepstakesResultFilename(race: RaceType, isIndiv: boolean): string 
 }
 
 function getResultUrl(filename: string, selectedYear: string): string {
-  return `${urls.gvarvas.resultFileBase}/${selectedYear}/${filename}.pdf`;
+  return `/resultFiles/${selectedYear}/${filename}.pdf`;
 }
 
 function getRaceResultUrl(race: RaceType, isIndiv: boolean, selectedYear: string): string {
@@ -71,7 +76,7 @@ function OverallLink({ isIndiv, selectedYear }: { isIndiv: boolean; selectedYear
 }
 
 function getBaseResultLabel(isIndiv: boolean): string {
-  return isIndiv ? resultTypes.individuals : resultTypes.team;
+  return isIndiv ? "Individuals" : "Teams";
 }
 
 function RaceLink({
@@ -85,42 +90,9 @@ function RaceLink({
   selectedYear: string;
   isMedium: boolean;
 }) {
-  const label =
-    race.level === levels.sweepstakes || race.level === levels.rated
-      ? `${race.gender} ${getBaseResultLabel(isIndiv)}`
-      : getBaseResultLabel(isIndiv);
+  const label = getBaseResultLabel(isIndiv);
   const url = getRaceResultUrl(race, isIndiv, selectedYear);
   return <ResultLink url={url} label={label} isMedium={isMedium} />;
-}
-
-function FeaturedGenderSection({ race, selectedYear }: { race: RaceType; selectedYear: string }) {
-  return (
-    <>
-      <div>
-        <RaceLink race={race} isIndiv={true} selectedYear={selectedYear} isMedium={true} />
-      </div>
-      <div>
-        <RaceLink race={race} isIndiv={false} selectedYear={selectedYear} isMedium={true} />
-      </div>
-    </>
-  );
-}
-
-function FeaturedSection({
-  girlsRace,
-  boysRace,
-  selectedYear,
-}: {
-  girlsRace: RaceType;
-  boysRace: RaceType;
-  selectedYear: string;
-}) {
-  return (
-    <>
-      <FeaturedGenderSection race={girlsRace} selectedYear={selectedYear} />
-      <FeaturedGenderSection race={boysRace} selectedYear={selectedYear} />
-    </>
-  );
 }
 
 function OverallSection({ selectedYear }: { selectedYear: string }) {
@@ -136,7 +108,7 @@ function OverallSection({ selectedYear }: { selectedYear: string }) {
   );
 }
 
-function getDivisionColor(division: DivisionType): string {
+function getDivisionColor(division?: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
       return "bg-primary-300";
@@ -147,78 +119,86 @@ function getDivisionColor(division: DivisionType): string {
     case divisions.four.num:
       return "bg-indigo-50";
     default:
-      return "";
+      return "bg-secondary-300";
   }
 }
 
-function DivisionGenderSection({
+function GenderColumn({
+  division,
   races,
   selectedYear,
-  divisionColor,
 }: {
+  division?: DivisionType;
   races: RaceType[];
   selectedYear: string;
-  divisionColor: string;
 }) {
   return (
     <>
-      <div className={`border-b px-4 py-2 text-center font-semibold ${divisionColor}`}>
+      <div
+        className={clsx("border-b px-4 py-2 text-center font-semibold", getDivisionColor(division))}
+      >
         {races[0].gender}
       </div>
-      {races.map((race) => {
-        const levelAndHeat = race.level.level + (race.heat ? ` - ${race.heat}` : "");
-        return (
-          <div key={levelAndHeat} className={`px-4 py-2 ${race.level.isCombo ? "row-span-2" : ""}`}>
-            <div className="font-semibold">{levelAndHeat}</div>
-            <div>
-              <RaceLink race={race} isIndiv={true} selectedYear={selectedYear} isMedium={false} />
-            </div>
-            {!race.level.isIndivOnly && (
+      {[...races]
+        .sort(
+          (a, b) =>
+            a.level.resultOrder - b.level.resultOrder ||
+            (a.heat && b.heat ? a.heat.localeCompare(b.heat) : 0),
+        )
+        .map((race) => {
+          const levelAndHeat = race.level.level + (race.heat ? ` - ${race.heat}` : "");
+          return (
+            <div
+              key={levelAndHeat}
+              className={`px-4 py-2 ${Number(selectedYear) > 2012 && race.level.resultSpan2 ? "row-span-2" : ""}`}
+            >
+              <div className="font-semibold">{levelAndHeat}</div>
               <div>
-                <RaceLink
-                  race={race}
-                  isIndiv={false}
-                  selectedYear={selectedYear}
-                  isMedium={false}
-                />
+                <RaceLink race={race} isIndiv={true} selectedYear={selectedYear} isMedium={false} />
               </div>
-            )}
-          </div>
-        );
-      })}
+              {!race.level.isIndivOnly && (
+                <div>
+                  <RaceLink
+                    race={race}
+                    isIndiv={false}
+                    selectedYear={selectedYear}
+                    isMedium={false}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
     </>
   );
 }
 
-function DivisionGrid({
-  division,
-  girlsRaces,
-  boysRaces,
-  selectedYear,
-}: {
-  division: DivisionType;
-  girlsRaces: RaceType[];
-  boysRaces: RaceType[];
-  selectedYear: string;
-}) {
-  const divisionColor = getDivisionColor(division);
+function ResultGrid({ division, selectedYear }: { division?: DivisionType; selectedYear: string }) {
+  const girlsRaces = division
+    ? getNonFeaturedRacesForResults(division, genders.girls, Number(selectedYear))
+    : getFeaturedRacesForResults(genders.girls, Number(selectedYear));
+
+  const boysRaces = division
+    ? getNonFeaturedRacesForResults(division, genders.boys, Number(selectedYear))
+    : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
   return (
     <Card shadow="lg" className="w-72">
-      <div className={`border-b p-2 text-center ${divisionColor}`}>
-        {`${division.name} (Div ${division.numRoman})`}
+      <div className={`border-b p-2 text-center ${getDivisionColor(division)}`}>
+        {division ? `${division.name} (Div ${division.numRoman})` : "Featured"}
       </div>
-      <div className="grid grid-flow-col grid-cols-2 grid-rows-[repeat(8,auto)] items-center text-sm">
-        <DivisionGenderSection
-          races={girlsRaces}
-          selectedYear={selectedYear}
-          divisionColor={divisionColor}
-        />
-        <DivisionGenderSection
-          races={boysRaces}
-          selectedYear={selectedYear}
-          divisionColor={divisionColor}
-        />
+      <div
+        className={clsx(
+          "grid grid-flow-col grid-cols-2 items-center text-sm",
+          boysRaces.length === 2
+            ? "grid-rows-[repeat(3,auto)]"
+            : boysRaces.length === 5
+              ? "grid-rows-[repeat(6,auto)]"
+              : "grid-rows-[repeat(8,auto)]",
+        )}
+      >
+        <GenderColumn division={division} races={girlsRaces} selectedYear={selectedYear} />
+        <GenderColumn division={division} races={boysRaces} selectedYear={selectedYear} />
       </div>
     </Card>
   );
@@ -231,54 +211,21 @@ function Subtitle({ children }: { children: ReactNode }) {
 export default function OfficialResultsSections({ selectedYear }: { selectedYear: string }) {
   return (
     <>
-      <Subtitle>{levels.sweepstakes.level}</Subtitle>
-      <div className="flex gap-8">
-        <FeaturedSection
-          girlsRace={filteredRaces.sweepstakesGirlsRace}
-          boysRace={filteredRaces.sweepstakesBoysRace}
-          selectedYear={selectedYear}
-        />
-      </div>
-
-      <Subtitle>{levels.rated.level}</Subtitle>
-      <div className="flex gap-8">
-        <FeaturedSection
-          girlsRace={filteredRaces.ratedGirlsRace}
-          boysRace={filteredRaces.ratedBoysRace}
-          selectedYear={selectedYear}
-        />
+      <Subtitle>Featured</Subtitle>
+      <div className="flex justify-center sm:justify-start sm:pl-5">
+        <ResultGrid selectedYear={selectedYear} />
       </div>
 
       <Subtitle>Divisions</Subtitle>
-      <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <DivisionGrid
-          division={divisions.one}
-          girlsRaces={filteredRaces.div1GirlsRaces}
-          boysRaces={filteredRaces.div1BoysRaces}
-          selectedYear={selectedYear}
-        />
-        <DivisionGrid
-          division={divisions.two}
-          girlsRaces={filteredRaces.div2GirlsRaces}
-          boysRaces={filteredRaces.div2BoysRaces}
-          selectedYear={selectedYear}
-        />
-        <DivisionGrid
-          division={divisions.three}
-          girlsRaces={filteredRaces.div3GirlsRaces}
-          boysRaces={filteredRaces.div3BoysRaces}
-          selectedYear={selectedYear}
-        />
-        <DivisionGrid
-          division={divisions.four}
-          girlsRaces={filteredRaces.div4GirlsRaces}
-          boysRaces={filteredRaces.div4BoysRaces}
-          selectedYear={selectedYear}
-        />
+      <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 sm:justify-items-start sm:pl-5 lg:grid-cols-3 xl:grid-cols-4">
+        <ResultGrid division={divisions.one} selectedYear={selectedYear} />
+        <ResultGrid division={divisions.two} selectedYear={selectedYear} />
+        <ResultGrid division={divisions.three} selectedYear={selectedYear} />
+        <ResultGrid division={divisions.four} selectedYear={selectedYear} />
       </div>
 
       <Subtitle>Boys & Girls Overall</Subtitle>
-      <div className="flex gap-8">
+      <div className="flex gap-8 pl-5">
         <OverallSection selectedYear={selectedYear} />
       </div>
     </>

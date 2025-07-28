@@ -1,22 +1,14 @@
-import { FeaturedTeamType } from "@/types";
-import { filteredRaces } from "./races";
+import { FeaturedTeamType, LevelType } from "@/types";
+import { genders, levels } from "./races";
 
-const internalFeaturedTeams: FeaturedTeamType[] = Array(30)
-  .fill({
-    name: "Glendale",
-    raceDay: "Friday",
+const internalFeaturedTeams: FeaturedTeamType[] = Array(40)
+  .fill({})
+  .map((_, index) => ({
+    name: `Glendale ${index}`,
     city: "Glendale ",
     state: "CA",
-    featuredRaces: [
-      filteredRaces.sweepstakesBoysRace,
-      filteredRaces.sweepstakesGirlsRace,
-      filteredRaces.ratedBoysRace,
-      filteredRaces.ratedGirlsRace,
-    ],
-  })
-  .map((team, index) => ({
-    ...team,
-    name: team.name + ` ${index}`,
+    level: index % 2 === 0 ? levels.sweepstakes : levels.rated,
+    gender: index % 4 === 0 || index % 3 === 0 ? genders.boys : genders.girls,
   }))
   .map((team, index) => ({
     ...team,
@@ -24,17 +16,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = Array(30)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
+function getTeamsByLevelGender(level: LevelType, gender: string) {
+  return internalFeaturedTeams.filter((team) => team.level === level && team.gender === gender);
+}
+
 export const featuredTeams = {
-  sweepstakesBoysTeams: internalFeaturedTeams.filter((team) =>
-    team.featuredRaces?.includes(filteredRaces.sweepstakesBoysRace),
-  ),
-  ratedBoysTeams: internalFeaturedTeams.filter((team) =>
-    team.featuredRaces?.includes(filteredRaces.ratedBoysRace),
-  ),
-  sweepstakesGirlsTeams: internalFeaturedTeams.filter((team) =>
-    team.featuredRaces?.includes(filteredRaces.sweepstakesGirlsRace),
-  ),
-  ratedGirlsTeams: internalFeaturedTeams.filter((team) =>
-    team.featuredRaces?.includes(filteredRaces.ratedGirlsRace),
-  ),
+  sweepstakesBoysTeams: getTeamsByLevelGender(levels.sweepstakes, genders.boys),
+  ratedBoysTeams: getTeamsByLevelGender(levels.rated, genders.boys),
+  sweepstakesGirlsTeams: getTeamsByLevelGender(levels.sweepstakes, genders.girls),
+  ratedGirlsTeams: getTeamsByLevelGender(levels.rated, genders.girls),
 };

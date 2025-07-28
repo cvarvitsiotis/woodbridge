@@ -1,48 +1,16 @@
-import { FeaturedIndividualType } from "@/types";
-import { filteredRaces } from "./races";
+import { FeaturedIndividualType, LevelType } from "@/types";
+import { genders, levels } from "./races";
 
-const internalFeaturedIndividuals: FeaturedIndividualType[] = Array(15)
-  .fill({
-    name: "Chris Varvas",
+const internalFeaturedIndividuals: FeaturedIndividualType[] = Array(40)
+  .fill({})
+  .map((_, index) => ({
+    name: `Chris Varvas ${index}`,
     grade: 11,
     teamName: "Glendale",
     teamCity: "Glendale",
     teamState: "CA",
-    featuredRace: filteredRaces.sweepstakesBoysRace,
-  })
-  .concat(
-    Array(15).fill({
-      name: "Chris Varvas",
-      grade: 11,
-      teamName: "Glendale",
-      teamCity: "Glendale",
-      teamState: "CA",
-      featuredRace: filteredRaces.ratedBoysRace,
-    }),
-  )
-  .concat(
-    Array(15).fill({
-      name: "Chris Varvas",
-      grade: 11,
-      teamName: "Glendale",
-      teamCity: "Glendale",
-      teamState: "CA",
-      featuredRace: filteredRaces.sweepstakesGirlsRace,
-    }),
-  )
-  .concat(
-    Array(15).fill({
-      name: "Chris Varvas",
-      grade: 11,
-      teamName: "Glendale",
-      teamCity: "Glendale",
-      teamState: "CA",
-      featuredRace: filteredRaces.ratedGirlsRace,
-    }),
-  )
-  .map((individual, index) => ({
-    ...individual,
-    name: individual.name + ` ${index}`,
+    level: index % 2 === 0 ? levels.sweepstakes : levels.rated,
+    gender: index % 4 === 0 || index % 3 === 0 ? genders.boys : genders.girls,
   }))
   .map((individual, index) => ({
     ...individual,
@@ -50,17 +18,15 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = Array(15)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
+function getIndividualsByLevelGender(level: LevelType, gender: string) {
+  return internalFeaturedIndividuals.filter(
+    (individual) => individual.level === level && individual.gender === gender,
+  );
+}
+
 export const featuredIndividuals = {
-  sweepstakesBoysIndividuals: internalFeaturedIndividuals.filter(
-    (individual) => individual.featuredRace === filteredRaces.sweepstakesBoysRace,
-  ),
-  ratedBoysIndividuals: internalFeaturedIndividuals.filter(
-    (individual) => individual.featuredRace === filteredRaces.ratedBoysRace,
-  ),
-  sweepstakesGirlsIndividuals: internalFeaturedIndividuals.filter(
-    (individual) => individual.featuredRace === filteredRaces.sweepstakesGirlsRace,
-  ),
-  ratedGirlsIndividuals: internalFeaturedIndividuals.filter(
-    (individual) => individual.featuredRace === filteredRaces.ratedGirlsRace,
-  ),
+  sweepstakesBoysIndividuals: getIndividualsByLevelGender(levels.sweepstakes, genders.boys),
+  ratedBoysIndividuals: getIndividualsByLevelGender(levels.rated, genders.boys),
+  sweepstakesGirlsIndividuals: getIndividualsByLevelGender(levels.sweepstakes, genders.girls),
+  ratedGirlsIndividuals: getIndividualsByLevelGender(levels.rated, genders.girls),
 };

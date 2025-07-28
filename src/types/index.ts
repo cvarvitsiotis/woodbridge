@@ -26,9 +26,10 @@ export interface RaceType {
 export interface LevelType {
   level: string;
   scheduleFormat?: string;
-  isCombo?: boolean;
+  resultSpan2?: boolean;
   isIndivOnly?: boolean;
   resultLink: string;
+  resultOrder: number;
 }
 
 export interface LevelsType {
@@ -61,7 +62,8 @@ export interface FeaturedTeamType {
   name: string;
   city: string;
   state: string;
-  featuredRaces?: (RaceType | undefined)[];
+  level: LevelType;
+  gender: string;
 }
 
 export interface FeaturedIndividualType {
@@ -71,7 +73,8 @@ export interface FeaturedIndividualType {
   teamName: string;
   teamCity: string;
   teamState: string;
-  featuredRace?: RaceType;
+  level: LevelType;
+  gender: string;
 }
 
 export interface AllTimeIndividualType {

@@ -24,9 +24,6 @@ export const urls = {
     woodbridgeHighSchool: "https://woodbridgehigh.iusd.org/",
     northwoodHighSchool: "https://northwoodhigh.iusd.org/",
   },
-  gvarvas: {
-    resultFileBase: "https://gvarvas.com/wp-content/themes/Avada-Child-Theme/pdfs",
-  },
   socials: {
     twitter: "https://x.com/hashtag/WoodbridgeClassic",
     instagram: "https://www.instagram.com/explore/search/keyword/?q=%23woodbridgeclassic",
