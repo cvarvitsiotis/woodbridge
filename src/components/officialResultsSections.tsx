@@ -61,9 +61,23 @@ function getOverallResultUrl(isIndiv: boolean, selectedYear: string): string {
   return getResultUrl(filename, selectedYear);
 }
 
-function ResultLink({ url, label, isMedium }: { url: string; label: string; isMedium: boolean }) {
+function ResultLink({
+  url,
+  isFontLight,
+  label,
+}: {
+  url: string;
+  isFontLight: boolean;
+  label: string;
+}) {
   return (
-    <Link isExternal href={url} underline="hover" size={isMedium ? "md" : "sm"} color="primary">
+    <Link
+      isExternal
+      href={url}
+      underline="hover"
+      color="primary"
+      className={clsx(isFontLight && "font-light")}
+    >
       {label}
     </Link>
   );
@@ -72,7 +86,7 @@ function ResultLink({ url, label, isMedium }: { url: string; label: string; isMe
 function OverallLink({ isIndiv, selectedYear }: { isIndiv: boolean; selectedYear: string }) {
   const url = getOverallResultUrl(isIndiv, selectedYear);
   const label = `Top 100 ${getBaseResultLabel(isIndiv)}`;
-  return <ResultLink url={url} label={label} isMedium={true} />;
+  return <ResultLink url={url} isFontLight={false} label={label} />;
 }
 
 function getBaseResultLabel(isIndiv: boolean): string {
@@ -83,16 +97,14 @@ function RaceLink({
   race,
   isIndiv,
   selectedYear,
-  isMedium,
 }: {
   race: RaceType;
   isIndiv: boolean;
   selectedYear: string;
-  isMedium: boolean;
 }) {
   const label = getBaseResultLabel(isIndiv);
   const url = getRaceResultUrl(race, isIndiv, selectedYear);
-  return <ResultLink url={url} label={label} isMedium={isMedium} />;
+  return <ResultLink url={url} isFontLight={true} label={label} />;
 }
 
 function OverallSection({ selectedYear }: { selectedYear: string }) {
@@ -135,7 +147,7 @@ function GenderColumn({
   return (
     <>
       <div
-        className={clsx("border-b px-4 py-2 text-center font-semibold", getDivisionColor(division))}
+        className={clsx("border-b px-4 py-2 text-center font-medium", getDivisionColor(division))}
       >
         {races[0].gender}
       </div>
@@ -152,18 +164,13 @@ function GenderColumn({
               key={levelAndHeat}
               className={`px-4 py-2 ${Number(selectedYear) > 2012 && race.level.resultSpan2 ? "row-span-2" : ""}`}
             >
-              <div className="font-semibold">{levelAndHeat}</div>
+              <div className="font-medium">{levelAndHeat}</div>
               <div>
-                <RaceLink race={race} isIndiv={true} selectedYear={selectedYear} isMedium={false} />
+                <RaceLink race={race} isIndiv={true} selectedYear={selectedYear} />
               </div>
               {!race.level.isIndivOnly && (
                 <div>
-                  <RaceLink
-                    race={race}
-                    isIndiv={false}
-                    selectedYear={selectedYear}
-                    isMedium={false}
-                  />
+                  <RaceLink race={race} isIndiv={false} selectedYear={selectedYear} />
                 </div>
               )}
             </div>
@@ -183,13 +190,13 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
   return (
-    <Card shadow="lg" className="w-72">
-      <div className={`border-b p-2 text-center ${getDivisionColor(division)}`}>
+    <Card shadow="lg" className="w-80">
+      <div className={clsx("border-b p-2 text-center font-medium", getDivisionColor(division))}>
         {division ? `${division.name} (Div ${division.numRoman})` : "Featured"}
       </div>
       <div
         className={clsx(
-          "grid grid-flow-col grid-cols-2 items-center text-sm",
+          "grid grid-flow-col grid-cols-2 items-center",
           boysRaces.length === 2
             ? "grid-rows-[repeat(3,auto)]"
             : boysRaces.length === 5
@@ -212,12 +219,12 @@ export default function OfficialResultsSections({ selectedYear }: { selectedYear
   return (
     <>
       <Subtitle>Featured</Subtitle>
-      <div className="flex justify-center sm:justify-start sm:pl-5">
+      <div className="flex justify-center md:justify-start md:pl-5">
         <ResultGrid selectedYear={selectedYear} />
       </div>
 
       <Subtitle>Divisions</Subtitle>
-      <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 sm:justify-items-start sm:pl-5 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 md:justify-items-start md:pl-5 xl:grid-cols-3 2xl:grid-cols-4">
         <ResultGrid division={divisions.one} selectedYear={selectedYear} />
         <ResultGrid division={divisions.two} selectedYear={selectedYear} />
         <ResultGrid division={divisions.three} selectedYear={selectedYear} />
