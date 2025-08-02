@@ -8,6 +8,7 @@ import BreadcrumbsAndSponsor from "@/components/breadcrumbsAndSponsor";
 import { ReactNode } from "react";
 import Body from "@/components/body";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -36,6 +37,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </Body>
     </html>
   );
