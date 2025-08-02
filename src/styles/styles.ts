@@ -21,5 +21,5 @@ export function getParagraphStyle(
 }
 
 export function getSubheaderStyle() {
-  return "text-xl font-light sm:text-2xl";
+  return "text-xl sm:text-2xl";
 }

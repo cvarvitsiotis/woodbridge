@@ -7,6 +7,7 @@ import { pages, siteConfig } from "@/config/site";
 import { Metadata } from "next";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
+import List from "@/components/list";
 
 export const metadata: Metadata = {
   title: pages.welcome.menuLabel,
@@ -42,13 +43,7 @@ export default function Page() {
           {filteredRaces.fridayRaces[0]?.time}) and{" "}
           {dates.meetEndDateParts.dayDescriptionMonthDayYearLong} (first race at{" "}
           {filteredRaces.saturdayRaces[0]?.time}) at the {siteConfig.greatPark} in Irvine,
-          California. This website has all the information you might need about the meet
-          (registration forms/information, schedule of races, race photos and videos, all-time
-          performance lists, etc.).
-        </p>
-        <p>
-          The {dates.meetStartDateParts.year} {siteConfig.woodbridgeCrossCountryClassic} Team
-          Registration IS NOW CLOSED.
+          California.
         </p>
         <p>
           The {siteConfig.greatPark} is an excellent venue for our meet. The facility provides the
@@ -73,7 +68,7 @@ export default function Page() {
           in order to provide an enjoyable and positive experience for the coaches, athletes and
           families. Here is a summary of the meet features:
         </p>
-        <ul className="list-outside list-disc space-y-4 px-10">
+        <List isOrdered={false}>
           <li>
             The meet is staged under ideal weather conditions and under the lights. The late
             afternoon cool breeze and evening temperatures will give your athletes a
@@ -106,7 +101,7 @@ export default function Page() {
             The meet will distribute 4,800 individual medals and 2,016 team patches (6 sets of
             patches per race, 7 patches per set).
           </li>
-        </ul>
+        </List>
         <p>
           Please check back regularly to this website for all the latest news and announcements
           relating to the meet.
@@ -118,13 +113,13 @@ export default function Page() {
         </p>
         <p>
           For more information on how your participation in our meet can be made most enjoyable,
-          please reach out using our{" "}
+          please{" "}
           <ParagraphLink
             url={pages.contact.path}
             name={pages.contact.menuLabel}
             isExternal={false}
           />{" "}
-          page.
+          us.
         </p>
         <div>
           <p>{people.bryan}</p>

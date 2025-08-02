@@ -61,7 +61,7 @@ function TeamsSection({
   const header = "TEAMS";
   return (
     <div className="min-w-[40%] space-y-3">
-      <div className="text-center text-sm font-light sm:text-base">{header}</div>
+      <div className="text-center font-light">{header}</div>
       <Table
         isCompact
         classNames={{ wrapper: "p-2", td: "px-1" }}
@@ -96,7 +96,7 @@ function IndividualsSection({
   const header = "INDIVIDUALS";
   return (
     <div className="min-w-[55%] space-y-3">
-      <div className="text-center text-sm font-light sm:text-base">INDIVIDUALS</div>
+      <div className="text-center font-light">INDIVIDUALS</div>
       <Table
         isCompact
         classNames={{ wrapper: "p-2", td: "px-1" }}

@@ -6,6 +6,7 @@ import { pages, siteConfig } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
 import { ReactNode } from "react";
 import { getSubheaderStyle } from "@/styles/styles";
+import List from "@/components/list";
 
 export const metadata: Metadata = {
   title: pages.hotels.menuLabel,
@@ -38,7 +39,7 @@ export default function Page() {
         Recommended <span className="font-bold">Hotels</span>
       </PageHeader>
       <Subheader>Hotels of the meet</Subheader>
-      <div className="flex flex-col gap-x-28 gap-y-10 px-10 sm:flex-row">
+      <div className="flex flex-col gap-x-28 gap-y-10 pl-10 sm:flex-row">
         <div className="basis-1/2">
           <ExternalLink url={urls.hotels.embassySuites} label="Embassy Suites Irvine" />
           <p>2120 Main St., Irvine, 92614</p>
@@ -70,7 +71,7 @@ export default function Page() {
         </div>
       </div>
       <Subheader>Additional hotels nearby</Subheader>
-      <ul className="list-outside list-disc space-y-4 px-10">
+      <List isOrdered={false}>
         <LinkListItem url={urls.hotels.hiltonIrvine} label="Hilton Irvine/Orange County Airport" />
         <LinkListItem
           url={urls.hotels.hiltonGardenInn}
@@ -94,7 +95,7 @@ export default function Page() {
           label="DoubleTree by Hilton Hotel Irvine - Spectrum"
         />
         <LinkListItem url={urls.hotels.acHotel} label="AC Hotel Irvine" />
-      </ul>
+      </List>
     </>
   );
 }

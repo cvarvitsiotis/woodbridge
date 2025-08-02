@@ -15,7 +15,7 @@ export default function Page() {
       <div className="pt-10">
         <iframe
           allowFullScreen
-          className="mx-auto aspect-video max-h-[90dvh] w-full max-w-5xl rounded-lg drop-shadow-xl lg:max-h-[70dvh]"
+          className="mx-auto aspect-video max-h-[90dvh] w-full max-w-5xl rounded-lg shadow-lg lg:max-h-[70dvh]"
           src="https://www.youtube.com/embed/Vw3-lWR7GEA?si=AJhVQtPuvWFJLej4"
           title="YouTube video player"
           frameBorder="0"

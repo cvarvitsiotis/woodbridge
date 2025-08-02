@@ -1,9 +1,11 @@
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
-import { pages } from "@/config/site";
+import { pages, siteConfig } from "@/config/site";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
+import List from "@/components/list";
+import { people } from "@/config/data";
 
 export const metadata: Metadata = {
   title: pages.raceDayInfo.menuLabel,
@@ -28,7 +30,7 @@ export default function Page() {
           Thank you for attending our meet. Your support of our meet is appreciated. Here are some
           last-minute notes to make your participation an enjoyable one at our meet:
         </p>
-        <ol className="list-outside list-decimal space-y-4 px-10">
+        <List isOrdered={true}>
           <li>
             Results (live streaming, live results of the 1-mile split, 2-mile split, and finish
             line, and verified final results) can be accessed on our{" "}
@@ -38,7 +40,7 @@ export default function Page() {
             If you need to make any adjustments (add or change info) to your roster, they must be
             made before the meet starts at the checkin area.
           </li>
-          <ul className="list-outside list-disc space-y-4 px-10">
+          <List isOrdered={false}>
             <li>
               If you do not have a bib for a new runner, fill out the ADD ATHLETES SHEET at the
               checkin table, pay the $20.00, and take the add ticket to the coaches&apos; corner at
@@ -49,7 +51,7 @@ export default function Page() {
               CHANGE OF INFORMATION SHEET on that athlete at the checkin table. Follow the steps
               listed.
             </li>
-          </ul>
+          </List>
           <li>
             Have each athlete check his/her bib number and name tag. They need to match. No name
             changes in the results after the race(s) if an athlete wears the wrong bib.
@@ -65,10 +67,10 @@ export default function Page() {
             before the race is scheduled to go off.
           </li>
           <li>
-            NOVICE RACES: Any boy that runs 23:00 or girl that runs 24:00 or slower should be placed
-            in the NOVICE races. This gives them a better racing experience, it reduces the
-            overcrowding in some of the Frosh and Soph races, and assures them of a finish time for
-            the race.
+            Any boy that runs 23:00 or girl that runs 24:00 or slower should be placed in a NOVICE
+            race. It gives them a more meaningful experience by competing against those with similar
+            abilities. It also serves to reduce congestion in the regular races. And, we keep the
+            clocks running longer than regular races, so every athlete gets their time recorded.
           </li>
           <li>Make sure that your runners line up in the correct race and the correct division.</li>
           <li>
@@ -84,8 +86,13 @@ export default function Page() {
             The medical staff should be the only ones to initiate a 911 call. The primary First Aid
             station is located at the finish line. Please caution your parents not to call 911.
           </li>
-        </ol>
+        </List>
         <p>Good luck to your team in our meet!</p>
+        <div>
+          <p>{people.bryan}</p>
+          <p>{people.louie}</p>
+          <p>{siteConfig.woodbridgeHighSchoolCrossCountry}</p>
+        </div>
       </div>
     </>
   );

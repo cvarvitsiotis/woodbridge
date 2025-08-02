@@ -290,8 +290,8 @@ function Instructions({
   handleOpenModal: (instruction: ParkingInstructionType) => void;
 }) {
   return (
-    <div className="w-[768px] max-w-full basis-1/2 px-8">
-      <Accordion className="px-0">
+    <div className="w-[768px] max-w-full basis-1/2 pl-6">
+      <Accordion>
         {/* Must call get*AccordionItem as functions rather than nesting JSX components due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
         {getMainAccordionItem(
           instructionSections.spectators,
@@ -374,7 +374,7 @@ function getSpectatorLotAccordionItem(
 
 function ModalBodyList({ start, children }: { start?: number; children: ReactNode }) {
   return (
-    <ol start={start ?? 1} className="list-outside list-decimal space-y-4 px-4">
+    <ol start={start ?? 1} className="list-outside list-decimal space-y-4 pl-4">
       {children}
     </ol>
   );
@@ -590,8 +590,8 @@ function Alerts() {
                   src={directionsGridlock}
                   quality={100}
                   placeholder="blur"
-                  alt="Gridlock Note"
-                  className="rounded-lg border-1 border-slate-300 object-contain drop-shadow-xl"
+                  alt="Directions Gridlock"
+                  className="rounded-lg border-1 border-slate-300 object-contain shadow-lg"
                 />
               </div>
             </div>
@@ -625,7 +625,7 @@ function GreatParkParkingLots() {
           quality={100}
           placeholder="blur"
           alt="Great Park Parking Lots"
-          className="rounded-lg object-contain drop-shadow-xl"
+          className="rounded-lg object-contain shadow-lg"
         />
       </div>
     </div>

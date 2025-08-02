@@ -6,6 +6,8 @@ import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
+import List from "@/components/list";
+import { people } from "@/config/data";
 
 export const metadata: Metadata = {
   title: pages.coachesIntro.menuLabel,
@@ -39,18 +41,21 @@ export default function Page() {
           {filteredRaces.saturdayRaces[0]?.time} (Blue and Gold divisions).
         </p>
         <p>
+          TEAM registration is now FULL for the {dates.meetStartDateParts.year}{" "}
+          {siteConfig.woodbridgeCrossCountryClassic}.
+        </p>
+        <p>
           Please note and share the following information with the other coaches in your school:
         </p>
-        <ol className="list-outside list-decimal space-y-4 px-10">
-          <li>Most of the information you will need about our meet is posted on this website.</li>
+        <List isOrdered={true}>
           <li>
             Your team is assigned a division per the{" "}
             <ParagraphLink
               url={pages.participatingTeams.path}
               name={pages.participatingTeams.menuLabel}
             />{" "}
-            page. Please find your division&apos;s race schedule for your athletes and parents on
-            the <ParagraphLink url={pages.schedule.path} name={pages.schedule.menuLabel} /> page.
+            page. Please find your division&apos;s races on the{" "}
+            <ParagraphLink url={pages.schedule.path} name={pages.schedule.menuLabel} /> page.
           </li>
           <li>
             If you have changed your mind about attending the meet, please let us know of this
@@ -67,35 +72,39 @@ export default function Page() {
           <li>
             Please register those athletes that have a chance to be in our meet. It would be helpful
             if you drop those that will not compete from your class roster. Bib numbers are
-            expensive and preparing bib numbers for athletes that will not compete but are on your
-            roster is time-consuming. You can always make adjustments to your roster up to the
-            registration deadline and you also can add new runners at the day of the meet.
+            expensive and preparing them for athletes that will not compete but are on your roster
+            is time-consuming. You can always make adjustments to your roster up to the registration
+            deadline and you also can add new runners at the meet on race day.
           </li>
           <li>
-            The NOVICE race does require a fee like all other races. It is designed to give boys
-            that run 24:00 or slower and girls that run 24:00 or slower a more meaningful experience
-            for their race by competing against those with similar abilities. Also, this race
-            reduces congestion in the regular races and we can record the time all of these
-            athletes.
+            The NOVICE races require a fee like all other races. They are designed to give boys that
+            run 23:00 or slower and girls that run 24:00 or slower a more meaningful experience by
+            competing against those with similar abilities. They also serve to reduce congestion in
+            the regular races. And, we keep the clocks running longer than regular races, so every
+            athlete gets their time recorded.
           </li>
           <li>
-            Bring the ENTRY FEE to the check-in table at our meet. If mailing it, it needs to be
-            mailed early enough (by {dates.entryFeeMailDateParts.monthDayLong}) for us to have it in
-            time for the meet. Refer to{" "}
+            Bring the ENTRY FEE to the checkin table at our meet. If mailing it, do so by{" "}
+            {dates.entryFeeMailDateParts.monthDayLong} so that we have it by race day. Refer to{" "}
             <ParagraphLink url={pages.entryFees.path} name={pages.entryFees.menuLabel} /> for more
-            details. Personal payment will be required if a school check is not brought to the meet
-            otherwise.
+            details.
           </li>
           <li>
-            The Sweepstakes (Top 25 teams) and Rated (Teams 26-55) selections will be announced by
-            Rich Gonzalez after September 1st. If you have a team that you would like for Rich to
-            consider, send an email request (with needed information) by contacting us.
+            The Sweepstakes (top 25 teams) and Rated (teams 26-55) selections will be announced by
+            Rich Gonzalez on {dates.featuredEntriesUpdateDateParts.monthDayLong}. If you have a team
+            that you would like for Rich to consider, please{" "}
+            <ParagraphLink url={pages.contact.path} name={pages.contact.menuLabel} /> us.
           </li>
-        </ol>
+        </List>
         <p>
           Best wishes for a successful track and field season next year. We hope that your athletes
           will enjoy our meet!
         </p>
+        <div>
+          <p>{people.bryan}</p>
+          <p>{people.louie}</p>
+          <p>{siteConfig.woodbridgeHighSchoolCrossCountry}</p>
+        </div>
       </div>
     </>
   );

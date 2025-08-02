@@ -23,7 +23,7 @@ export default async function Page() {
             quality={100}
             placeholder="blur"
             alt="Course & Venue Map"
-            className="rounded-lg object-contain drop-shadow-xl"
+            className="rounded-lg object-contain shadow-lg"
           />
         </div>
       </div>
