@@ -12,6 +12,7 @@ import { siteConfig } from "@/config/site";
 import { Alert } from "@heroui/alert";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
+import { dates } from "@/config/dates";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -604,7 +605,18 @@ function Alerts() {
         <Alert
           hideIconWrapper
           color="primary"
-          title={`All parking passes must be purchased online prior to arriving at the ${siteConfig.greatPark}. No parking passes will be sold onsite.`}
+          title={
+            <div>
+              <p>
+                All parking passes must be purchased online prior to arriving at the{" "}
+                {siteConfig.greatPark}. No parking passes will be sold onsite.
+              </p>
+              <p>
+                Passes will be available for purchase on this page starting{" "}
+                <span className="font-semibold">{dates.parkingPassPurchaseDate.monthDayLong}</span>.
+              </p>
+            </div>
+          }
           variant="faded"
           radius="sm"
           classNames={{ title: "text-medium font-normal" }}

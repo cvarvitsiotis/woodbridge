@@ -33,7 +33,13 @@ function Menus({
       <NavbarDropdown
         isMenu={isMenu}
         pageParent={pageParents.coaches}
-        pages={[pages.coachesIntro, pages.registration, pages.entryFees, pages.raceDayInfo]}
+        pages={[
+          pages.coachesIntro,
+          pages.registration,
+          pages.entryFees,
+          pages.raceDayInfo,
+          pages.preOrderTShirts,
+        ]}
         onAction={handleMenuAction}
       />
       <NavbarDropdown

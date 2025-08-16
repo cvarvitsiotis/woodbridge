@@ -8,6 +8,7 @@ export const data = {
   athleteRegistrationEndDate: new Date(2025, 8, 4, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2025, 7, 1, 0, 0, 0),
   featuredEntriesUpdateDate: new Date(2025, 8, 1, 0, 0, 0),
+  parkingPassPurchaseDate: new Date(2025, 8, 1, 0, 0, 0),
   altheticNetMeet: 257920,
   altheticLIVEMeet: 40009,
   runnerSpaceEvent: 361,
@@ -19,6 +20,8 @@ const irvineTiming = "https://irvinetiming.anet.live";
 export const urls = {
   other: {
     teamRegistration: `https://forms.gle/${data.teamRegistrationGoogleForm}`,
+    preOrderTShirts:
+      "https://forms.office.com/Pages/ResponsePage.aspx?id=Z2gZHYB4SkOiqb-NDwFoASbL1oGS-MZAkXJv-Y1ydi5UQ1FHQzEzVlVJOUpDRVVFVTVLQUI3MU9RNS4u",
   },
   schools: {
     woodbridgeHighSchool: "https://woodbridgehigh.iusd.org/",

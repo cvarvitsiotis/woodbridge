@@ -45,6 +45,11 @@ export const pages: PagesType = {
     path: "/coaches/raceDayInfo",
     parent: pageParents.coaches,
   },
+  preOrderTShirts: {
+    menuLabel: "Pre-Order T-Shirts",
+    path: "/coaches/preOrderTShirts",
+    parent: pageParents.coaches,
+  },
   schedule: {
     menuLabel: "Schedule",
     path: "/racingInfo/schedule",

@@ -24,6 +24,7 @@ import {
   LocalAtmIcon,
   ChatInfoIcon,
   HowToRegIcon,
+  ApparelIcon,
 } from "./icons";
 
 import { PageType } from "@/types";
@@ -39,6 +40,8 @@ function DropdownItemIcon({ page }: { page: PageType }) {
     <LocalAtmIcon />
   ) : page === pages.raceDayInfo ? (
     <ChatInfoIcon />
+  ) : page === pages.preOrderTShirts ? (
+    <ApparelIcon />
   ) : page === pages.schedule ? (
     <OverviewIcon />
   ) : page === pages.courseAndVenueMap ? (
