@@ -59,7 +59,10 @@ export default function Home() {
             </h1>
           </div>
           <div
-            className={clsx("text-4xl font-light tracking-tight md:text-5xl", fontSerif.className)}
+            className={clsx(
+              "pt-2 text-4xl font-light tracking-tight md:text-5xl",
+              fontSerif.className,
+            )}
           >
             The road to championships
           </div>

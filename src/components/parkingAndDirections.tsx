@@ -8,11 +8,10 @@ import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
 import { ReactNode, useState } from "react";
 import clsx from "clsx";
-import { fontSerif } from "@/styles/fonts";
 import { siteConfig } from "@/config/site";
 import { Alert } from "@heroui/alert";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
-import { getSubheaderStyle } from "@/styles/styles";
+import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -196,7 +195,7 @@ function getMainAccordionItem(instructionSection: string, child: ReactNode) {
       aria-label={instructionSection}
       title={instructionSection}
       classNames={{
-        title: clsx("text-xl", fontSerif.className),
+        title: getParagraphStyle(true),
       }}
     >
       {child}
