@@ -37,8 +37,8 @@ function Menus({
           pages.coachesIntro,
           pages.registration,
           pages.entryFees,
-          pages.raceDayInfo,
           pages.preOrderTShirts,
+          pages.raceDayInfo,
         ]}
         onAction={handleMenuAction}
       />

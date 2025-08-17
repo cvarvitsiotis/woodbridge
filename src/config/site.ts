@@ -40,14 +40,14 @@ export const pages: PagesType = {
     path: "/coaches/entryFees",
     parent: pageParents.coaches,
   },
-  raceDayInfo: {
-    menuLabel: "Race Day Info",
-    path: "/coaches/raceDayInfo",
-    parent: pageParents.coaches,
-  },
   preOrderTShirts: {
     menuLabel: "Pre-Order T-Shirts",
     path: "/coaches/preOrderTShirts",
+    parent: pageParents.coaches,
+  },
+  raceDayInfo: {
+    menuLabel: "Race Day Info",
+    path: "/coaches/raceDayInfo",
     parent: pageParents.coaches,
   },
   schedule: {

@@ -46,7 +46,7 @@ export default function Page() {
         </List>
       </div>
       <div className="pt-10">
-        <div className="relative mx-auto aspect-[1920/2560] w-96 max-w-full">
+        <div className="relative mx-auto aspect-[1920/2560] w-64 max-w-full sm:w-96">
           <Image
             fill
             src={woodbridgeTShirt}

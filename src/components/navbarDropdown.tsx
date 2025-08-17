@@ -38,10 +38,10 @@ function DropdownItemIcon({ page }: { page: PageType }) {
     <HowToRegIcon />
   ) : page === pages.entryFees ? (
     <LocalAtmIcon />
-  ) : page === pages.raceDayInfo ? (
-    <ChatInfoIcon />
   ) : page === pages.preOrderTShirts ? (
     <ApparelIcon />
+  ) : page === pages.raceDayInfo ? (
+    <ChatInfoIcon />
   ) : page === pages.schedule ? (
     <OverviewIcon />
   ) : page === pages.courseAndVenueMap ? (
