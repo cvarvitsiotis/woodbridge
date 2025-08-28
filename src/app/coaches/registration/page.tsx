@@ -52,8 +52,11 @@ export default function Page() {
         </RegistrationSection>
         <RegistrationSection sectionName="Athlete">
           <p>
-            Athlete registration opens on{" "}
-            {dates.athleteRegistrationStartDateParts.dayDescriptionMonthDayYearLong} at{" "}
+            Athlete registration{" "}
+            {new Date() < dates.athleteRegistrationStartDateParts.date
+              ? `opens on ${dates.athleteRegistrationStartDateParts.dayDescriptionMonthDayYearLong}`
+              : "is now open"}{" "}
+            at{" "}
             <ParagraphLink
               url={urls.athleticNet.athleteRegistration}
               name={siteConfig.athleticNet}

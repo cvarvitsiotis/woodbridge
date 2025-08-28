@@ -606,7 +606,7 @@ function Alerts() {
           hideIconWrapper
           color="primary"
           title={
-            <div>
+            <div className="space-y-2">
               <p>
                 All parking passes must be purchased online prior to arriving at the{" "}
                 {siteConfig.greatPark}. No parking passes will be sold onsite.

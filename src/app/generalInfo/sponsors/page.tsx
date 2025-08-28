@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 function Sponsor({ url, motto, children }: { url: string; motto: string; children: ReactNode }) {
   return (
-    <div className="md:justify-auto grid items-center justify-center justify-items-start gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
+    <div className="grid items-center justify-center gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
       <div className="justify-self-center md:justify-self-auto">
         <Link isExternal href={url}>
           {children}

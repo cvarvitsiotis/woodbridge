@@ -7,13 +7,62 @@ import { urls } from "@/config/data";
 import { pages, siteConfig } from "@/config/site";
 import PresentedByAsics from "./presentedByAsics";
 import { usePathname } from "next/navigation";
+import Image, { StaticImageData } from "next/image";
+import woodbridgeHigh from "@/../public/images/woodbridge-high-solo.png";
+import northwoodHigh from "@/../public/images/northwood-high-solo.png";
+import { IrvineTimingLogo } from "./icons";
 import clsx from "clsx";
 
-function FooterLink({ url, name }: { url: string; name: string }) {
+function FooterLink({ url, children }: { url: string; children: React.ReactNode }) {
   return (
     <Link isExternal href={url} className="text-sm">
-      {name}
+      {children}
     </Link>
+  );
+}
+
+function HostSchool({
+  isFirst,
+  url,
+  name,
+  imageWrapperClassName,
+  imageSrc,
+  imageClassName,
+}: {
+  isFirst: boolean;
+  url: string;
+  name: string;
+  imageWrapperClassName: string;
+  imageSrc: StaticImageData;
+  imageClassName?: string;
+}) {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-0">
+      <p
+        className={clsx(
+          isFirst ? "basis-full sm:basis-auto" : "hidden",
+          "sm:inline",
+          "text-center sm:pr-1",
+        )}
+      >
+        {isFirst ? "Hosted by" : "and"}
+      </p>
+      <FooterLink url={url}>
+        <div className={clsx("min-w-20 sm:min-w-0", !isFirst && "pr-1")}>
+          <div className={clsx("relative justify-self-end", imageWrapperClassName)}>
+            <Image
+              fill
+              src={imageSrc}
+              quality={100}
+              placeholder="blur"
+              alt={name}
+              className={imageClassName}
+            />
+          </div>
+        </div>
+        <p className="min-w-[5.5rem] sm:min-w-0">{name}</p>
+      </FooterLink>
+    </div>
   );
 }
 
@@ -25,21 +74,36 @@ export default function Footer() {
   return (
     <footer
       className={clsx(
-        "z-10 flex w-full max-w-screen-2xl items-start justify-between gap-24 p-3",
+        "z-10 flex w-full max-w-screen-2xl items-start justify-between p-3 sm:items-end",
         !isHomePage && "pt-20",
       )}
     >
-      <PresentedByAsics isFooter />
-      <div className="space-y-1 text-left text-sm text-default-600 sm:text-left">
-        <div>
-          Hosted by{" "}
-          <FooterLink url={urls.schools.woodbridgeHighSchool} name={siteConfig.woodbridge} /> and{" "}
-          <FooterLink url={urls.schools.northwoodHighSchool} name={siteConfig.northwood} /> High
-          Schools
+      <div className="flex justify-start sm:basis-1/3">
+        <PresentedByAsics isFooter />
+      </div>
+      <div className="text-sm text-default-600 sm:basis-1/3">
+        <div className="flex flex-col items-center">
+          <HostSchool
+            isFirst={true}
+            url={urls.schools.woodbridgeHighSchool}
+            name={siteConfig.woodbridge}
+            imageWrapperClassName="aspect-[1143/419] h-7"
+            imageSrc={woodbridgeHigh}
+          />
+          <HostSchool
+            isFirst={false}
+            url={urls.schools.northwoodHighSchool}
+            name={siteConfig.northwood}
+            imageWrapperClassName="aspect-[582/365] h-8"
+            imageSrc={northwoodHigh}
+            imageClassName="invert-[85%]"
+          />
         </div>
-        <div>
-          Results by <FooterLink url={urls.athleticNet.irvineTiming} name="Irvine Timing" />
-        </div>
+      </div>
+      <div className="flex justify-end self-center sm:basis-1/3">
+        <FooterLink url={urls.athleticNet.irvineTiming}>
+          <IrvineTimingLogo />
+        </FooterLink>
       </div>
     </footer>
   );
