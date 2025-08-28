@@ -87,7 +87,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="z-10 mt-20 flex gap-3">
+        <div className="z-10 mt-16 flex gap-3 sm:mt-20">
           <Button
             as={Link}
             className={buttonStyles({

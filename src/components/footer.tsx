@@ -34,10 +34,10 @@ function HostSchool({
   name: string;
   imageWrapperClassName: string;
   imageSrc: StaticImageData;
-  imageClassName?: string;
+  imageClassName: string;
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-0">
+    <div className="flex flex-wrap items-center justify-center gap-0.5 sm:gap-0">
       <p
         className={clsx(
           isFirst ? "basis-full sm:basis-auto" : "hidden",
@@ -50,14 +50,7 @@ function HostSchool({
       <FooterLink url={url}>
         <div className={clsx("min-w-20 sm:min-w-0", !isFirst && "pr-1")}>
           <div className={clsx("relative justify-self-end", imageWrapperClassName)}>
-            <Image
-              fill
-              src={imageSrc}
-              quality={100}
-              placeholder="blur"
-              alt={name}
-              className={imageClassName}
-            />
+            <Image fill src={imageSrc} quality={100} alt={name} className={imageClassName} />
           </div>
         </div>
         <p className="min-w-[5.5rem] sm:min-w-0">{name}</p>
@@ -82,19 +75,20 @@ export default function Footer() {
         <PresentedByAsics isFooter />
       </div>
       <div className="text-sm text-default-600 sm:basis-1/3">
-        <div className="flex flex-col items-center">
-          <HostSchool
-            isFirst={true}
-            url={urls.schools.woodbridgeHighSchool}
-            name={siteConfig.woodbridge}
-            imageWrapperClassName="aspect-[1143/419] h-7"
-            imageSrc={woodbridgeHigh}
-          />
+        <HostSchool
+          isFirst={true}
+          url={urls.schools.woodbridgeHighSchool}
+          name={siteConfig.woodbridge}
+          imageWrapperClassName="aspect-[1143/419] h-6"
+          imageSrc={woodbridgeHigh}
+          imageClassName="brightness-90"
+        />
+        <div className="-mt-0.5 sm:mt-0">
           <HostSchool
             isFirst={false}
             url={urls.schools.northwoodHighSchool}
             name={siteConfig.northwood}
-            imageWrapperClassName="aspect-[582/365] h-8"
+            imageWrapperClassName="aspect-[582/365] h-7"
             imageSrc={northwoodHigh}
             imageClassName="invert-[85%]"
           />
