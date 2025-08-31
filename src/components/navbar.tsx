@@ -118,16 +118,16 @@ export function Navbar() {
         <Menus isMenu={false} pathname={pathname} handleMenuAction={handleMenuAction} />
       </NavbarContent>
 
-      <NavbarContent className="flex basis-full" justify="end">
-        <NavbarItem className="flex gap-2">
-          <Link isExternal aria-label="Twitter" href={urls.socials.twitter}>
+      <NavbarContent className="flex basis-full gap-10" justify="end">
+        <NavbarItem className="flex gap-6">
+          <Link isExternal href={urls.socials.twitter}>
             <XIcon className="text-default-500" />
           </Link>
-          <Link isExternal aria-label="Instagram" href={urls.socials.instagram}>
+          <Link isExternal href={urls.socials.instagram}>
             <InstagramIcon className="text-default-500" />
           </Link>
         </NavbarItem>
-        <NavbarMenuToggle className="basis-1 pl-4 lg:hidden" />
+        <NavbarMenuToggle className="lg:hidden" />
       </NavbarContent>
 
       <NavbarMenu>

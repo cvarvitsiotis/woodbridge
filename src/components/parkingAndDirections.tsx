@@ -13,6 +13,29 @@ import { Alert } from "@heroui/alert";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { dates } from "@/config/dates";
+import { urls } from "@/config/data";
+import { Button } from "@heroui/button";
+import { button as buttonStyles } from "@heroui/theme";
+
+function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
+  return (
+    <Button
+      isExternal
+      as={Link}
+      className={buttonStyles({
+        color: isStartDate ? "primary" : "secondary",
+        radius: "full",
+        variant: "ghost",
+      })}
+      href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
+    >
+      Purchase{" "}
+      {isStartDate
+        ? dates.meetStartDateParts.dayDescriptionLong
+        : dates.meetEndDateParts.dayDescriptionLong}
+    </Button>
+  );
+}
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -27,7 +50,6 @@ const locations = {
   portolaChinon: "33.67424716551163%2C-117.71482275547011",
   portolaCadence: "33.67257862990563%2C-117.71576210656995",
   portolaMerit: "33.670865494647906%2C-117.71242756986437",
-  runnerDropoffPickup: "33.67462515265455%2C-117.74650695673266",
   busStaging: "33.66811163961207%2C-117.76805627347623",
   waypoint: "33.69166722737075%2C-117.76647333982905",
 };
@@ -127,18 +149,18 @@ const instructions: ParkingInstructionTypes = {
     modalTitle: "Freeway to Portola Entrance 3",
   },
   freewayToRunnerDropoffAndPickup: {
-    description: "On Phantom next to Lot 1 between Ridge Valley and Corsair",
-    location: locations.runnerDropoffPickup,
+    description: "Runner dropoff and pickup (Lot 4)",
+    location: locations.lot4,
     includeWaypoint: true,
     modalLinkLabel: "freeway",
-    modalTitle: "Freeway to runner dropoff and pickup",
+    modalTitle: "Freeway to runner dropoff and pickup (Lot 4)",
   },
   freewayToTeamDropoff: {
     description: "Team dropoff (Lot 1)",
     location: locations.lot1,
     includeWaypoint: true,
     modalLinkLabel: "freeway",
-    modalTitle: "Freeway to team dropoff",
+    modalTitle: "Freeway to team dropoff (Lot 1)",
   },
   teamDropoffToBusStagingArea: {
     description: "Bus staging area",
@@ -152,7 +174,7 @@ const instructions: ParkingInstructionTypes = {
     location: locations.lot1,
     includeWaypoint: false,
     modalLinkLabel: "bus staging area",
-    modalTitle: "Bus staging area to team pickup",
+    modalTitle: "Bus staging area to team pickup (Lot 1)",
   },
 };
 
@@ -229,8 +251,12 @@ function getSpectatorsAccordionItem(
           aria-label="Portola High School"
           title="Portola High School"
         >
-          <div className="space-y-4">
-            <p>Shuttles leave every 10 minutes. 3 entrance options:</p>
+          <div className="space-y-4 pl-6">
+            <p>
+              Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great
+              Park in Lot 4.
+            </p>
+            <p>There are 3 parking entrance options:</p>{" "}
             <DescriptionMapModalInDiv
               instruction={instructions.freewayToPortolaEntrance1}
               handleOpenModal={handleOpenModal}
@@ -309,7 +335,7 @@ function Instructions({
 
 function MapLink({ location, includeWaypoint }: { location: string; includeWaypoint: boolean }) {
   return (
-    <>
+    <div>
       <Link
         isExternal
         aria-label="Google Maps"
@@ -320,7 +346,14 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
       >
         Google Maps
       </Link>
-    </>
+      {includeWaypoint && (
+        <p className="inline">
+          {" "}
+          (when getting to the intermediate waypoint on Jeffrey, click CONTINUE to proceed to the
+          Great Park, as explained above in red)
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -349,7 +382,7 @@ function DescriptionMapModalInDiv({
   handleOpenModal: (instruction: ParkingInstructionType) => void;
 }) {
   return (
-    <div>
+    <div className="space-y-1">
       <p>{instruction.description}</p>
       <MapLink location={instruction.location} includeWaypoint={instruction.includeWaypoint} />
       <ModalLink instruction={instruction} handleOpenModal={handleOpenModal} />
@@ -391,7 +424,8 @@ function ModalBodyInternal({ instruction }: { instruction: ParkingInstructionTyp
       <li>Left on Phantom</li>
       <li>Left into lot</li>
     </ModalBodyList>
-  ) : instruction === instructions.freewayToLot1 ? (
+  ) : instruction === instructions.freewayToLot1 ||
+    instruction === instructions.freewayToTeamDropoff ? (
     <ModalBodyList>
       <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
       <li>North on Jeffrey</li>
@@ -435,7 +469,8 @@ function ModalBodyInternal({ instruction }: { instruction: ParkingInstructionTyp
       <li>Pass Hornet</li>
       <li>Follow signs to Lot 3 and soccer stadium</li>
     </ModalBodyList>
-  ) : instruction === instructions.freewayToLot4 ? (
+  ) : instruction === instructions.freewayToLot4 ||
+    instruction === instructions.freewayToRunnerDropoffAndPickup ? (
     <ModalBodyList>
       <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
       <li>North on Jeffrey</li>
@@ -523,27 +558,6 @@ function ModalBodyInternal({ instruction }: { instruction: ParkingInstructionTyp
       <li>Left on Merit</li>
       <li>Left into lot</li>
     </ModalBodyList>
-  ) : instruction === instructions.freewayToRunnerDropoffAndPickup ? (
-    <ModalBodyList>
-      <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
-      <li>North on Jeffrey</li>
-      <li>Right on Trabuco</li>
-      <li>Pass Sand Canyon where it turns into Great Park Blvd</li>
-      <li>Right on Ridge Valley</li>
-      <li>Left on Phantom</li>
-      <li>Pass Lot 1</li>
-      <li>On the right before Corsair</li>
-    </ModalBodyList>
-  ) : instruction === instructions.freewayToTeamDropoff ? (
-    <ModalBodyList>
-      <li>Exit Interstate 5 or 405 at Jeffrey (not Sand Canyon!)</li>
-      <li>North on Jeffrey</li>
-      <li>Right on Trabuco</li>
-      <li>Pass Sand Canyon where it turns into Great Park Blvd</li>
-      <li>Right on Ridge Valley</li>
-      <li>Left on Phantom</li>
-      <li>Right into lot</li>
-    </ModalBodyList>
   ) : instruction === instructions.busStagingAreaToTeamPickup ? (
     <ModalBodyList>
       <li>Exit staging area on Valley Oak and turn right</li>
@@ -577,14 +591,18 @@ function Alerts() {
           color="danger"
           title={
             <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
-              <div className="space-y-2">
+              <div className="space-y-2 lg:basis-3/5">
                 <p>
                   <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
                   Canyon. You will hit gridlock. You must exit Jeffrey, instead.
                 </p>
-                <p>Use the Google Maps links below. They guide you through Jeffrey.</p>
+                <p>
+                  Use the Google Maps links below. They force you through Jeffrey by including an{" "}
+                  <span className="font-bold">intermediate waypoint</span>. When getting to the
+                  waypoint, click CONTINUE in Google Maps to proceed to the Great Park.
+                </p>
               </div>
-              <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56">
+              <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56 lg:basis-2/5">
                 <Image
                   fill
                   src={directionsGridlock}
@@ -608,13 +626,18 @@ function Alerts() {
           title={
             <div className="space-y-2">
               <p>
-                All parking passes must be purchased online prior to arriving at the{" "}
-                {siteConfig.greatPark}. No parking passes will be sold onsite.
+                Parking passes <span className="font-bold">must be purchased online</span> prior to
+                arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
               </p>
-              <p>
-                Passes will be available for purchase on this page starting{" "}
-                <span className="font-semibold">{dates.parkingPassPurchaseDate.monthDayLong}</span>.
-              </p>
+              {new Date() < dates.parkingPassPurchaseDate.date && (
+                <p>
+                  Passes will be available for purchase on this page starting{" "}
+                  <span className="font-semibold">
+                    {dates.parkingPassPurchaseDate.monthDayLong}
+                  </span>
+                  .
+                </p>
+              )}
             </div>
           }
           variant="faded"
@@ -658,7 +681,12 @@ export default function ParkingAndDirections() {
         <InstructionModal isOpen={isOpen} onOpenChange={onOpenChange} instruction={instruction} />
       )}
       <Alerts />
-      <h1 className={clsx("pt-6", getSubheaderStyle())}>Instructions</h1>
+      <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
+      <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-10">
+        <ParkingLink isStartDate={true} />
+        <ParkingLink isStartDate={false} />
+      </div>
+      <h1 className={clsx("pt-6", getSubheaderStyle())}>Directions</h1>
       <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
         <Instructions handleOpenModal={handleOpenModal} />
         <GreatParkParkingLots />

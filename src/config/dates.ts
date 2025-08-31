@@ -57,6 +57,7 @@ function getDateParts(date: Date) {
     dayDescriptionShort,
     dayDescriptionLong,
     year,
+    dayDescriptionMonthDayShort: `${dayDescriptionShort}, ${monthShort} ${day}`,
     dayDescriptionMonthDayYearShort: `${dayDescriptionShort}, ${monthShort} ${day}, ${year}`,
     dayDescriptionMonthDayYearLong: `${dayDescriptionLong}, ${monthLong} ${day}, ${year}`,
     monthDayLong: `${monthLong} ${day}`,

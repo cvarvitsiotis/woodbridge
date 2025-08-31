@@ -4,26 +4,42 @@ import { Button } from "@heroui/button";
 
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
-import { CalendarIcon } from "@/components/icons";
+import { CalendarIcon, HowToRegIcon, OverviewIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
 
-function AlertMessage() {
+function AlertMessages() {
   return (
     <div className="mx-auto">
       <Alert
         hideIcon
         color="warning"
         title={
-          <p>
-            Welcome to our new website! Send us your{" "}
-            <Link href={pages.contact.path} className="text-sm font-semibold text-warning-800">
-              feedback
-            </Link>
-            .
-          </p>
+          <div className="space-y-1">
+            <p>
+              <span className="font-semibold">Coaches</span>, you must{" "}
+              <Link
+                href={pages.registration.path}
+                className="text-sm font-semibold text-warning-800"
+              >
+                register
+              </Link>{" "}
+              <span className="hidden sm:inline">your </span>athletes by{" "}
+              {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayShort}.
+            </p>
+            <p>
+              Also, you can now{" "}
+              <Link
+                href={pages.preOrderTShirts.path}
+                className="text-sm font-semibold text-warning-800"
+              >
+                pre-order T-Shirts
+              </Link>{" "}
+              for your team.
+            </p>
+          </div>
         }
         variant="faded"
         radius="sm"
@@ -37,11 +53,17 @@ function AlertMessage() {
   );
 }
 
+function SpacerforAlertMessage() {
+  return <div className="sm:min-h-[5dvh]" />;
+}
+
 export default function Home() {
   return (
     <>
-      <AlertMessage />
+      <AlertMessages />
       <div className="relative flex grow flex-col items-center justify-center">
+        <SpacerforAlertMessage />
+
         <div className="absolute h-full w-full bg-[radial-gradient(#220b592d_1px,transparent_2px)] [background-size:25px_25px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
         <div className="z-10 text-center">
@@ -97,6 +119,7 @@ export default function Home() {
               size: "lg",
             })}
             href={pages.registration.path}
+            startContent={<HowToRegIcon />}
           >
             Register
           </Button>
@@ -109,6 +132,7 @@ export default function Home() {
               size: "lg",
             })}
             href={pages.schedule.path}
+            startContent={<OverviewIcon />}
           >
             {pages.schedule.menuLabel}
           </Button>

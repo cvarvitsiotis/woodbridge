@@ -158,6 +158,7 @@ export default function AllTimeIndividualsTable() {
   const [gradeFilter, setGradeFilter] = useState("All");
   const [courseFilter, setCourseFilter] = useState("All");
   const [nameFilter, setNameFilter] = useState("");
+  const [teamFilter, setTeamFilter] = useState("");
 
   const windowDimensions = useWindowDimensions();
   const maxTableHeight =
@@ -208,9 +209,15 @@ export default function AllTimeIndividualsTable() {
         );
       }
 
+      if (teamFilter) {
+        filteredIndividuals = filteredIndividuals.filter((individual) =>
+          individual.team.toLowerCase().includes(teamFilter.toLowerCase()),
+        );
+      }
+
       return filteredIndividuals;
     },
-    [genderFilter, gradeFilter, courseFilter, nameFilter, tableKey],
+    [genderFilter, gradeFilter, courseFilter, nameFilter, teamFilter, tableKey],
   );
 
   const topContent = useMemo(
@@ -229,39 +236,49 @@ export default function AllTimeIndividualsTable() {
 
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <StyledInput
-            placeholder="Search by name..."
-            value={nameFilter}
-            onValueChange={setNameFilter}
-            className="basis-2/5"
-          />
-          <div className="flex basis-3/5 gap-3">
-            <StyledSelect
-              selectedKey={genderFilter}
-              onChange={onGenderFilterChange}
-              label="Gender"
-              className="basis-1/4"
-              options={genderOptions}
+          <div className="flex basis-1/2 gap-3">
+            <StyledInput
+              placeholder="Search by name..."
+              value={nameFilter}
+              onValueChange={setNameFilter}
+              className="basis-1/2"
             />
-            <StyledSelect
-              selectedKey={gradeFilter}
-              onChange={onGradeFilterChange}
-              label="Grade"
-              className="basis-1/4"
-              options={gradeOptions}
+            <StyledInput
+              placeholder="Search by school..."
+              value={teamFilter}
+              onValueChange={setTeamFilter}
+              className="basis-1/2"
             />
+          </div>
+          <div className="flex basis-1/2 gap-3">
+            <div className="flex basis-1/2 gap-3">
+              <StyledSelect
+                selectedKey={genderFilter}
+                onChange={onGenderFilterChange}
+                label="Gender"
+                className="basis-1/2"
+                options={genderOptions}
+              />
+              <StyledSelect
+                selectedKey={gradeFilter}
+                onChange={onGradeFilterChange}
+                label="Grade"
+                className="basis-1/2"
+                options={gradeOptions}
+              />
+            </div>
             <StyledSelect
               selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              className="basis-2/4"
+              className="basis-1/2"
               options={courseOptions}
             />
           </div>
         </div>
       );
     },
-    [genderFilter, gradeFilter, courseFilter, nameFilter],
+    [genderFilter, gradeFilter, courseFilter, nameFilter, teamFilter],
   );
 
   return (

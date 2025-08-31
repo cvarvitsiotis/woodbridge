@@ -8,7 +8,9 @@ export const data = {
   athleteRegistrationEndDate: new Date(2025, 8, 4, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2025, 7, 1, 0, 0, 0),
   featuredEntriesUpdateDate: new Date(2025, 8, 1, 0, 0, 0),
-  parkingPassPurchaseDate: new Date(2025, 8, 1, 0, 0, 0),
+  parkingPassPurchaseDate: new Date(2025, 7, 30, 0, 0, 0),
+  parkingGoFanStartDateEventId: "3902189",
+  parkingGoFanEndDateEventId: "3902192",
   altheticNetMeet: 257920,
   altheticLIVEMeet: 40009,
   runnerSpaceEvent: 361,
@@ -36,6 +38,10 @@ export const urls = {
     irvineTiming,
     irvineTimingMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,
     runnerSpaceMeet: `https://cross-country-classic.runnerspace.com/eprofile.php?event_id=${data.runnerSpaceEvent}&do=videos`,
+  },
+  parkingPasses: {
+    startDate: `https://gofan.co/event/${data.parkingGoFanStartDateEventId}`,
+    endDate: `https://gofan.co/event/${data.parkingGoFanEndDateEventId}`,
   },
   sponsors: {
     asics: "https://www.asics.com",
