@@ -238,13 +238,13 @@ export default function AllTimeIndividualsTable() {
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
           <div className="flex basis-1/2 gap-3">
             <StyledInput
-              placeholder="Search by name..."
+              placeholder="Filter name..."
               value={nameFilter}
               onValueChange={setNameFilter}
               className="basis-1/2"
             />
             <StyledInput
-              placeholder="Search by school..."
+              placeholder="Filter school..."
               value={teamFilter}
               onValueChange={setTeamFilter}
               className="basis-1/2"

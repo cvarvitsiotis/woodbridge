@@ -17,26 +17,6 @@ import { urls } from "@/config/data";
 import { Button } from "@heroui/button";
 import { button as buttonStyles } from "@heroui/theme";
 
-function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
-  return (
-    <Button
-      isExternal
-      as={Link}
-      className={buttonStyles({
-        color: isStartDate ? "primary" : "secondary",
-        radius: "full",
-        variant: "ghost",
-      })}
-      href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
-    >
-      Purchase{" "}
-      {isStartDate
-        ? dates.meetStartDateParts.dayDescriptionLong
-        : dates.meetEndDateParts.dayDescriptionLong}
-    </Button>
-  );
-}
-
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
   lot1: "33.67415547083599%2C-117.74815275109665",
@@ -232,20 +212,20 @@ function getSpectatorsAccordionItem(
   return (
     <>
       <p>
-        All vehicles (including school vans) will park in Lots 1 through 8 or Portola High School
-        (shuttle service available) with a $20 pass purchased online.
+        All vehicles (including school vans) will park in Lots 0, 2 through 7, or Portola High
+        School (shuttle service available).
       </p>
 
       <Accordion>
         {getSpectatorLotAccordionItem(instructions.freewayToLot0, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot1, handleOpenModal)}
+        {/*getSpectatorLotAccordionItem(instructions.freewayToLot1, handleOpenModal)*/}
         {getSpectatorLotAccordionItem(instructions.freewayToLot2, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot3, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot4, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot5, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot6, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot7, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot8, handleOpenModal)}
+        {/*getSpectatorLotAccordionItem(instructions.freewayToLot8, handleOpenModal)*/}
         <AccordionItem
           key="Portola High School"
           aria-label="Portola High School"
@@ -333,6 +313,22 @@ function Instructions({
   );
 }
 
+function InstructionsSection({
+  handleOpenModal,
+}: {
+  handleOpenModal: (instruction: ParkingInstructionType) => void;
+}) {
+  return (
+    <>
+      <h1 className={clsx("pt-6", getSubheaderStyle())}>Directions</h1>
+      <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
+        <Instructions handleOpenModal={handleOpenModal} />
+        <GreatParkParkingLots />
+      </div>
+    </>
+  );
+}
+
 function MapLink({ location, includeWaypoint }: { location: string; includeWaypoint: boolean }) {
   return (
     <div>
@@ -349,7 +345,7 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
       {includeWaypoint && (
         <p className="inline">
           {" "}
-          (when getting to the intermediate waypoint on Jeffrey, click CONTINUE to proceed to the
+          (when getting to the intermediate waypoint on Jeffrey, click CONTINUE to continue to the
           Great Park, as explained above in red)
         </p>
       )}
@@ -599,7 +595,7 @@ function Alerts() {
                 <p>
                   Use the Google Maps links below. They force you through Jeffrey by including an{" "}
                   <span className="font-bold">intermediate waypoint</span>. When getting to the
-                  waypoint, click CONTINUE in Google Maps to proceed to the Great Park.
+                  waypoint, click CONTINUE in Google Maps to continue to the Great Park.
                 </p>
               </div>
               <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56 lg:basis-2/5">
@@ -666,6 +662,41 @@ function GreatParkParkingLots() {
   );
 }
 
+function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
+  return (
+    <Button
+      isExternal
+      as={Link}
+      className={buttonStyles({
+        color: isStartDate ? "primary" : "secondary",
+        radius: "full",
+        variant: "ghost",
+      })}
+      href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
+    >
+      Purchase{" "}
+      {isStartDate
+        ? dates.meetStartDateParts.dayDescriptionLong
+        : dates.meetEndDateParts.dayDescriptionLong}
+    </Button>
+  );
+}
+
+function ParkingPasses() {
+  return (
+    <>
+      <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
+      <div className="pl-6">
+        <p>All vehicles (including school vans) must purchase a $22 parking pass online.</p>
+        <div className="flex justify-center gap-6 pt-6 sm:justify-start">
+          <ParkingLink isStartDate={true} />
+          <ParkingLink isStartDate={false} />
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function ParkingAndDirections() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [instruction, setInstruction] = useState<ParkingInstructionType | undefined>();
@@ -681,16 +712,8 @@ export default function ParkingAndDirections() {
         <InstructionModal isOpen={isOpen} onOpenChange={onOpenChange} instruction={instruction} />
       )}
       <Alerts />
-      <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
-      <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-10">
-        <ParkingLink isStartDate={true} />
-        <ParkingLink isStartDate={false} />
-      </div>
-      <h1 className={clsx("pt-6", getSubheaderStyle())}>Directions</h1>
-      <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
-        <Instructions handleOpenModal={handleOpenModal} />
-        <GreatParkParkingLots />
-      </div>
+      <ParkingPasses />
+      <InstructionsSection handleOpenModal={handleOpenModal} />
     </>
   );
 }
