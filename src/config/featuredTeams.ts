@@ -202,13 +202,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   {
-    name: "Vacaville",
-    city: "Vacaville",
-    state: "CA",
-    level: levels.sweepstakes,
-    gender: genders.boys,
-  },
-  {
     name: "Valencia (Valencia)",
     city: "Valencia",
     state: "CA",
@@ -379,6 +372,7 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     level: levels.rated,
     gender: genders.boys,
   },
+  { name: "Vacaville", city: "Vacaville", state: "CA", level: levels.rated, gender: genders.boys },
   {
     name: "Valley View",
     city: "Moreno Valley",
