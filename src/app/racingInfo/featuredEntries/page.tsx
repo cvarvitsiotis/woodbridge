@@ -19,11 +19,11 @@ export default function Page() {
         <span className="font-bold">Sweepstakes</span> & <span className="font-bold">Rated</span>{" "}
         Entries
       </PageHeader>
-      <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
-        <p>Entries will be posted on {dates.featuredEntriesUpdateDateParts.monthDayLong}.</p>
-      </div>
-
-      {false && (
+      {new Date() < dates.featuredEntriesUpdateDateParts.date ? (
+        <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
+          <p>Entries will be posted on {dates.featuredEntriesUpdateDateParts.monthDayLong}.</p>
+        </div>
+      ) : (
         <>
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Boys Sweepstakes"
@@ -38,12 +38,10 @@ export default function Page() {
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Boys Rated"
             teams={featuredTeams.ratedBoysTeams}
-            individuals={featuredIndividuals.ratedBoysIndividuals}
           />
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Girls Rated"
             teams={featuredTeams.ratedGirlsTeams}
-            individuals={featuredIndividuals.ratedGirlsIndividuals}
           />
         </>
       )}

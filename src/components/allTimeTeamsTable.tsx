@@ -120,7 +120,7 @@ export default function AllTimeTeamsTable() {
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">
           <StyledInput
-            placeholder="Search school..."
+            placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
             className="basis-2/5"

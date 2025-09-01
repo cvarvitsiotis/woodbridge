@@ -1,6 +1,6 @@
 "use client";
 
-import { getSubheaderStyle } from "@/styles/styles";
+import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
 import {
   getKeyValue,
@@ -32,10 +32,6 @@ const individualColumns = [
   {
     key: "name",
     label: "Name",
-  },
-  {
-    key: "grade",
-    label: "Grade",
   },
   {
     key: "teamName",
@@ -104,10 +100,7 @@ function IndividualsSection({
       >
         <TableHeader columns={individualColumns}>
           {(column) => (
-            <TableColumn
-              key={column.key}
-              align={column.key === "grade" || column.key === "schoolState" ? "center" : "start"}
-            >
+            <TableColumn key={column.key} align={column.key === "teamState" ? "center" : "start"}>
               {column.label}
             </TableColumn>
           )}
@@ -131,15 +124,27 @@ export default function FeaturedTeamsAndIndividualsSection({
 }: {
   sectionDescription: string;
   teams: FeaturedTeamType[];
-  individuals: FeaturedIndividualType[];
+  individuals?: FeaturedIndividualType[];
 }) {
   return (
     <>
       <h1 className={clsx("pt-10", getSubheaderStyle())}>{sectionDescription}</h1>
-      <div className="flex flex-wrap items-start justify-center gap-x-5 gap-y-8">
-        <TeamsSection sectionDescription={sectionDescription} teams={teams} />
-        <IndividualsSection sectionDescription={sectionDescription} individuals={individuals} />
-      </div>
+      {teams?.length ? (
+        <div
+          className={clsx(
+            "flex flex-wrap items-start justify-center gap-x-5 gap-y-8 sm:justify-start sm:pl-8",
+          )}
+        >
+          <TeamsSection sectionDescription={sectionDescription} teams={teams} />
+          {individuals && (
+            <IndividualsSection sectionDescription={sectionDescription} individuals={individuals} />
+          )}
+        </div>
+      ) : (
+        <div className={clsx("pl-8", getParagraphStyle(true))}>
+          <p>Entries will be posted tonight</p>
+        </div>
+      )}
     </>
   );
 }
