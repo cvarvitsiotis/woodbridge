@@ -142,7 +142,7 @@ export default function FeaturedTeamsAndIndividualsSection({
         </div>
       ) : (
         <div className={clsx("pl-8", getParagraphStyle(true))}>
-          <p>Entries will be posted tonight</p>
+          <p>Entries coming soon. Check back on Tuesday, September 2.</p>
         </div>
       )}
     </>
