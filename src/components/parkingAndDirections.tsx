@@ -687,7 +687,7 @@ function ParkingPasses() {
     <>
       <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
       <p className="pl-6">
-        All vehicles (including school vans) must purchase a $22 parking pass online.
+        All vehicles (including school vans) must purchase a $20 parking pass online.
       </p>
       <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-6">
         <ParkingLink isStartDate={true} />
