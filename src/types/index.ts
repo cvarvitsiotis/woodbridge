@@ -69,6 +69,8 @@ export interface FeaturedTeamType {
 export interface FeaturedIndividualType {
   id: number;
   name: string;
+  firstName: string;
+  lastName: string;
   teamName: string;
   teamCity: string;
   teamState: string;

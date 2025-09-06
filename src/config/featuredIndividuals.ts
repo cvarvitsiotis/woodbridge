@@ -3,7 +3,8 @@ import { genders, levels } from "./races";
 
 const internalFeaturedIndividuals: FeaturedIndividualType[] = [
   {
-    name: "Silas Aberer",
+    firstName: "Silas",
+    lastName: "Aberer",
     teamName: "Burroughs (Ridgecrest)",
     teamCity: "Ridgecrest",
     teamState: "CA",
@@ -11,7 +12,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Brady Anderson",
+    firstName: "Brady",
+    lastName: "Anderson",
     teamName: "Faith Lutheran (NV)",
     teamCity: "Las Vegas",
     teamState: "NV",
@@ -19,7 +21,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Blake Bay",
+    firstName: "Blake",
+    lastName: "Bay",
     teamName: "Fresno Christian",
     teamCity: "Fresno",
     teamState: "CA",
@@ -27,7 +30,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Carson Buergey",
+    firstName: "Carson",
+    lastName: "Buergey",
     teamName: "Thurston (OR)",
     teamCity: "Springfield",
     teamState: "OR",
@@ -35,7 +39,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Mateo Cafaro",
+    firstName: "Mateo",
+    lastName: "Cafaro",
     teamName: "Monte Vista",
     teamCity: "Danville",
     teamState: "CA",
@@ -43,7 +48,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Cooper Castleberry",
+    firstName: "Cooper",
+    lastName: "Castleberry",
     teamName: "Poway",
     teamCity: "Poway",
     teamState: "CA",
@@ -51,7 +57,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Jace DeLeDonne",
+    firstName: "Jace",
+    lastName: "DeLeDonne",
     teamName: "Riverside Polytechnic",
     teamCity: "Riverside",
     teamState: "CA",
@@ -59,7 +66,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Tate Grabow",
+    firstName: "Tate",
+    lastName: "Grabow",
     teamName: "Hill City",
     teamCity: "Hill City",
     teamState: "SD",
@@ -67,7 +75,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Noel Huato",
+    firstName: "Noel",
+    lastName: "Huato",
     teamName: "Del Oro (Bakersfield)",
     teamCity: "Bakersfield",
     teamState: "CA",
@@ -75,7 +84,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "OIlver Hunter",
+    firstName: "Oliver",
+    lastName: "Hunter",
     teamName: "Dana Hills",
     teamCity: "Dana Point",
     teamState: "CA",
@@ -83,7 +93,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Aiden LeRoux",
+    firstName: "Aiden",
+    lastName: "LeRoux",
     teamName: "Cheyenne Mountain, CO",
     teamCity: "Colorado Springs",
     teamState: "CO",
@@ -91,7 +102,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Andres Lomeli",
+    firstName: "Andres",
+    lastName: "Lomeli",
     teamName: "Kimball",
     teamCity: "Tracy",
     teamState: "CA",
@@ -99,7 +111,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Chase Manning",
+    firstName: "Chase",
+    lastName: "Manning",
     teamName: "Tesoro",
     teamCity: "Las Flores",
     teamState: "CA",
@@ -107,7 +120,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Symond Martin",
+    firstName: "Symond",
+    lastName: "Martin",
     teamName: "Page (AZ)",
     teamCity: "Page",
     teamState: "AZ",
@@ -115,7 +129,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Ashenafi McKinnis",
+    firstName: "Ashenafi",
+    lastName: "McKinnis",
     teamName: "North Eugene",
     teamCity: "Eugene",
     teamState: "OR",
@@ -123,7 +138,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Mason Morical",
+    firstName: "Mason",
+    lastName: "Morical",
     teamName: "Caldera (OR)",
     teamCity: "Bend",
     teamState: "OR",
@@ -131,7 +147,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Zarian Rodriguez",
+    firstName: "Zarian",
+    lastName: "Rodriguez",
     teamName: "Hamilton (AZ)",
     teamCity: "Chandler",
     teamState: "AZ",
@@ -139,7 +156,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Marcus Salinas",
+    firstName: "Marcus",
+    lastName: "Salinas",
     teamName: "Clovis East",
     teamCity: "Clovis",
     teamState: "CA",
@@ -147,7 +165,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Noah Strohman",
+    firstName: "Noah",
+    lastName: "Strohman",
     teamName: "Holliday (TX)",
     teamCity: "Holliday",
     teamState: "TX",
@@ -155,7 +174,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Kiefer Wilcox",
+    firstName: "Kiefer",
+    lastName: "Wilcox",
     teamName: "Tahoe-Truckee",
     teamCity: "Truckee",
     teamState: "CA",
@@ -163,7 +183,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    name: "Lily Alder",
+    firstName: "Lily",
+    lastName: "Alder",
     teamName: "Timpview (UT)",
     teamCity: "Provo",
     teamState: "UT",
@@ -171,7 +192,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Ananya Balaraman",
+    firstName: "Ananya",
+    lastName: "Balaraman",
     teamName: "North Hollywood",
     teamCity: "North Hollywood",
     teamState: "CA",
@@ -179,7 +201,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Amaya Bharadwaj",
+    firstName: "Amaya",
+    lastName: "Bharadwaj",
     teamName: "Palo Alto",
     teamCity: "Palo Alto",
     teamState: "CA",
@@ -187,7 +210,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Avery Barton",
+    firstName: "Avery",
+    lastName: "Barton",
     teamName: "Ogden",
     teamCity: "Ogden",
     teamState: "UT",
@@ -195,7 +219,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Maddie Carney",
+    firstName: "Maddie",
+    lastName: "Carney",
     teamName: "Caldera (OR)",
     teamCity: "Bend",
     teamState: "OR",
@@ -203,7 +228,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Chiara Dailey",
+    firstName: "Chiara",
+    lastName: "Dailey",
     teamName: "La Jolla",
     teamCity: "La Jolla",
     teamState: "CA",
@@ -211,7 +237,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Harper Diaz",
+    firstName: "Harper",
+    lastName: "Diaz",
     teamName: "Santana (San Diego)",
     teamCity: "Santee",
     teamState: "CA",
@@ -219,7 +246,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Taylor Drewry",
+    firstName: "Taylor",
+    lastName: "Drewry",
     teamName: "Basha (AZ)",
     teamCity: "Chandler",
     teamState: "AZ",
@@ -227,7 +255,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Sophia Grant",
+    firstName: "Sophia",
+    lastName: "Grant",
     teamName: "Newbury Park",
     teamCity: "Newbury Park",
     teamState: "CA",
@@ -235,7 +264,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Adria Favero",
+    firstName: "Adria",
+    lastName: "Favero",
     teamName: "Olympus, UT",
     teamCity: "Holladay",
     teamState: "UT",
@@ -243,7 +273,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Audrey Heath",
+    firstName: "Audrey",
+    lastName: "Heath",
     teamName: "Capistrano Valley",
     teamCity: "Mission Viejo",
     teamState: "CA",
@@ -251,7 +282,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Ayanna Hickey",
+    firstName: "Ayanna",
+    lastName: "Hickey",
     teamName: "The Bishop's School",
     teamCity: "La Jolla",
     teamState: "CA",
@@ -259,7 +291,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Charlotte Hopkins",
+    firstName: "Charlotte",
+    lastName: "Hopkins",
     teamName: "Arcadia",
     teamCity: "Arcadia",
     teamState: "CA",
@@ -267,7 +300,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Ashlin Mallon",
+    firstName: "Ashlin",
+    lastName: "Mallon",
     teamName: "Cardinal Newman",
     teamCity: "Santa Rosa",
     teamState: "CA",
@@ -275,7 +309,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Payton Meineke",
+    firstName: "Payton",
+    lastName: "Meineke",
     teamName: "Riverdale Ridge (CO)",
     teamCity: "Thornton",
     teamState: "CO",
@@ -283,7 +318,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Carina Nottingham",
+    firstName: "Carina",
+    lastName: "Nottingham",
     teamName: "Berkeley",
     teamCity: "Berkeley",
     teamState: "CA",
@@ -291,7 +327,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Becky Osorio",
+    firstName: "Becky",
+    lastName: "Osorio",
     teamName: "West Covina",
     teamCity: "West Covina",
     teamState: "CA",
@@ -299,7 +336,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Isabella Ramirez",
+    firstName: "Isabella",
+    lastName: "Ramirez",
     teamName: "Bullard",
     teamCity: "Fresno",
     teamState: "CA",
@@ -307,7 +345,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Giselle Fernandez",
+    firstName: "Giselle",
+    lastName: "Fernandez",
     teamName: "Riverbank",
     teamCity: "Riverbank",
     teamState: "CA",
@@ -315,7 +354,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Amelia Sarkisian",
+    firstName: "Amelia",
+    lastName: "Sarkisian",
     teamName: "Brentwood School",
     teamCity: "Los Angeles",
     teamState: "CA",
@@ -323,7 +363,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Jaelyn Williams",
+    firstName: "Jaelyn",
+    lastName: "Williams",
     teamName: "Eastlake",
     teamCity: "Chula Vista",
     teamState: "CA",
@@ -331,7 +372,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Summer Wilson",
+    firstName: "Summer",
+    lastName: "Wilson",
     teamName: "Irvine",
     teamCity: "Irvine",
     teamState: "CA",
@@ -339,7 +381,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.girls,
   },
   {
-    name: "Macy Wingard",
+    firstName: "Macy",
+    lastName: "Wingard",
     teamName: "Denton Braswell",
     teamCity: "Aubrey",
     teamState: "TX",
@@ -350,8 +393,9 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
   .map((individual, index) => ({
     ...individual,
     id: index,
+    name: `${individual.firstName} ${individual.lastName}`,
   }))
-  .sort((a, b) => a.name.localeCompare(b.name));
+  .sort((a, b) => a.lastName.localeCompare(b.lastName) || a.firstName.localeCompare(b.firstName));
 
 function getIndividualsByLevelGender(level: LevelType, gender: string) {
   return internalFeaturedIndividuals.filter(
