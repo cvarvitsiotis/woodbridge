@@ -36,7 +36,7 @@ export default function Page() {
         <span className="font-bold">Live</span> Results
       </PageHeader>
       <div className="mx-auto max-w-fit space-x-8 pt-4 sm:pt-8">
-        <LiveLink url={urls.athleticNet.irvineTimingMeet} label="Live Results" isPrimary={true} />
+        <LiveLink url={urls.athleticNet.altheticLIVEMeet} label="Live Results" isPrimary={true} />
         <LiveLink
           url={urls.athleticNet.runnerSpaceMeet}
           label="Live Video Stream"

@@ -51,22 +51,34 @@ export default function Page() {
           </p>
         </RegistrationSection>
         <RegistrationSection sectionName="Athlete">
-          <p>
-            Athlete registration{" "}
-            {new Date() < dates.athleteRegistrationStartDateParts.date
-              ? `opens on ${dates.athleteRegistrationStartDateParts.dayDescriptionMonthDayYearLong}`
-              : "is now open"}{" "}
-            at{" "}
-            <ParagraphLink
-              url={urls.athleticNet.athleteRegistration}
-              name={siteConfig.athleticNet}
-            />
-            .
-          </p>
-          <p>
-            You must register your athletes by{" "}
-            {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayYearLong}.
-          </p>
+          {new Date() > dates.athleteRegistrationEndDateParts.date ? (
+            <>
+              <p>
+                Athlete registration closed on{" "}
+                {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayYearLong}.
+              </p>
+              <p>Additional changes can be made at the meet.</p>
+            </>
+          ) : (
+            <>
+              <p>
+                Athlete registration{" "}
+                {new Date() < dates.athleteRegistrationStartDateParts.date
+                  ? `opens on ${dates.athleteRegistrationStartDateParts.dayDescriptionMonthDayYearLong}`
+                  : "is now open"}{" "}
+                at{" "}
+                <ParagraphLink
+                  url={urls.athleticNet.athleteRegistration}
+                  name={siteConfig.athleticNet}
+                />
+                .
+              </p>
+              <p>
+                You must register your athletes by{" "}
+                {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayYearLong}.
+              </p>
+            </>
+          )}
         </RegistrationSection>
       </div>
     </>

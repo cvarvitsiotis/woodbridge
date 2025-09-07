@@ -36,7 +36,7 @@ export const urls = {
   athleticNet: {
     athleteRegistration: `https://www.athletic.net/Help/CrossCountry.aspx?Meet=${data.altheticNetMeet}`,
     irvineTiming,
-    irvineTimingMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,
+    altheticLIVEMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,
     runnerSpaceMeet: `https://cross-country-classic.runnerspace.com/eprofile.php?event_id=${data.runnerSpaceEvent}&do=videos&folder_id=11828`,
   },
   parkingPasses: {

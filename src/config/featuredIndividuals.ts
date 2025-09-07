@@ -138,15 +138,6 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    firstName: "Mason",
-    lastName: "Morical",
-    teamName: "Caldera (OR)",
-    teamCity: "Bend",
-    teamState: "OR",
-    level: levels.sweepstakes,
-    gender: genders.boys,
-  },
-  {
     firstName: "Zarian",
     lastName: "Rodriguez",
     teamName: "Hamilton (AZ)",

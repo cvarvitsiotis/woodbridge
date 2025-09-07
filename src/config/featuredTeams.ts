@@ -736,13 +736,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
   },
   { name: "La Jolla", city: "La Jolla", state: "CA", level: levels.rated, gender: genders.girls },
   {
-    name: "Laguna Beach",
-    city: "Laguna Beach",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.girls,
-  },
-  {
     name: "Liberty (Winchester)",
     city: "Winchester",
     state: "CA",

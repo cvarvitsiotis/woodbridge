@@ -86,7 +86,7 @@ export default function Page() {
           </li>
           <li>
             The meet will have real-time results at{" "}
-            <ParagraphLink url={urls.athleticNet.irvineTimingMeet} name={siteConfig.athleticLIVE} />{" "}
+            <ParagraphLink url={urls.athleticNet.altheticLIVEMeet} name={siteConfig.athleticLIVE} />{" "}
             for teams and individuals at the 1-mile, 2-mile, and end of race marks.
           </li>
           <li>

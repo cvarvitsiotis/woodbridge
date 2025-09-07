@@ -3,8 +3,8 @@ import { button as buttonStyles } from "@heroui/theme";
 import { Button } from "@heroui/button";
 
 import clsx from "clsx";
-import { pages, siteConfig } from "@/config/site";
-import { CalendarIcon, HowToRegIcon, OverviewIcon } from "@/components/icons";
+import { pageParents, pages, siteConfig } from "@/config/site";
+import { CalendarIcon, FormatListBulletedIcon, OverviewIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import { Alert } from "@heroui/alert";
@@ -17,29 +17,16 @@ function AlertMessages() {
         hideIcon
         color="warning"
         title={
-          <div className="space-y-1">
-            <p>
-              <span className="font-semibold">Coaches</span>, you must{" "}
-              <Link
-                href={pages.registration.path}
-                className="text-sm font-semibold text-warning-800"
-              >
-                register
-              </Link>{" "}
-              <span className="hidden sm:inline">your </span>athletes by{" "}
-              {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayShort}.
-            </p>
-            <p>
-              Also, you can now{" "}
-              <Link
-                href={pages.preOrderTShirts.path}
-                className="text-sm font-semibold text-warning-800"
-              >
-                pre-order T-Shirts
-              </Link>{" "}
-              for your team.
-            </p>
-          </div>
+          <p>
+            <span className="font-semibold">Coaches</span>, you can now{" "}
+            <Link
+              href={pages.preOrderTShirts.path}
+              className="text-sm font-semibold text-warning-800"
+            >
+              pre-order T-Shirts
+            </Link>{" "}
+            for your team.
+          </p>
         }
         variant="faded"
         radius="sm"
@@ -118,10 +105,10 @@ export default function Home() {
               variant: "shadow",
               size: "lg",
             })}
-            href={pages.registration.path}
-            startContent={<HowToRegIcon />}
+            href={pages.raceResults.path}
+            startContent={<FormatListBulletedIcon />}
           >
-            Register
+            {pageParents.results}
           </Button>
           <Button
             as={Link}
