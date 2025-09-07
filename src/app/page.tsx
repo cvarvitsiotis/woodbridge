@@ -18,7 +18,7 @@ function AlertMessages() {
         color="warning"
         title={
           <p>
-            <span className="font-semibold">Coaches</span>, you can now{" "}
+            <span className="font-semibold">Coaches</span>, you can{" "}
             <Link
               href={pages.preOrderTShirts.path}
               className="text-sm font-semibold text-warning-800"
