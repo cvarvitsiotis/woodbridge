@@ -240,13 +240,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   {
-    name: "Casteel (AZ)",
-    city: "Queen Creek",
-    state: "AZ",
-    level: levels.rated,
-    gender: genders.boys,
-  },
-  {
     name: "Cathedral Catholic",
     city: "San Diego",
     state: "CA",
