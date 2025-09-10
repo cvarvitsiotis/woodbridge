@@ -25,7 +25,7 @@ function AlertMessages() {
             >
               pre-order T-Shirts
             </Link>{" "}
-            for your team.
+            for your team until {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}.
           </p>
         }
         variant="faded"
