@@ -14,6 +14,7 @@ function getDates() {
   const athleteRegistrationEndDateParts = getDateParts(data.athleteRegistrationEndDate);
   const participatingTeamsUpdateDateParts = getDateParts(data.participatingTeamsUpdateDate);
   const featuredEntriesUpdateDateParts = getDateParts(data.featuredEntriesUpdateDate);
+  const preOrderTShirtsEndDateParts = getDateParts(data.preOrderTShirtsEndDate);
   const parkingPassPurchaseDate = getDateParts(data.parkingPassPurchaseDate);
   const entryFeeMailDateParts = getDateParts(getEntryFeeMailDate());
   const entryFeeAutoDebitDateParts = getDateParts(getEntryFeeAutoDebitDate());
@@ -32,6 +33,7 @@ function getDates() {
     athleteRegistrationEndDateParts,
     participatingTeamsUpdateDateParts,
     featuredEntriesUpdateDateParts,
+    preOrderTShirtsEndDateParts,
     parkingPassPurchaseDate,
     entryFeeMailDateParts,
     entryFeeAutoDebitDateParts,

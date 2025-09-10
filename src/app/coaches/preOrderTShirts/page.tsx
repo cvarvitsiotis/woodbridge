@@ -8,6 +8,7 @@ import Image from "next/image";
 import woodbridgeTShirt from "@/../public/images/woodbridge-tshirt-2025.jpg";
 import clsx from "clsx";
 import List from "@/components/list";
+import { dates } from "@/config/dates";
 
 export const metadata: Metadata = {
   title: pages.preOrderTShirts.menuLabel,
@@ -36,7 +37,8 @@ export default function Page() {
         <List isOrdered={false}>
           <li>
             Have someone enter the count of each size that your team needs using the{" "}
-            <ParagraphLink url={urls.other.preOrderTShirts} name="T-Shirt Pre-Order Form" />
+            <ParagraphLink url={urls.other.preOrderTShirts} name="T-Shirt Pre-Order Form" /> by{" "}
+            {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}
           </li>
           <li>Collect $25 from each athlete</li>
           <li>

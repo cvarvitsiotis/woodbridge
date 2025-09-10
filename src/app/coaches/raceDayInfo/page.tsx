@@ -47,9 +47,9 @@ export default function Page() {
               the finish line.
             </li>
             <li>
-              If you need to make a change to the information for one of your runners, fill out a
-              CHANGE OF INFORMATION SHEET on that athlete at the checkin table. Follow the steps
-              listed.
+              If you need to make a change to the information for one of your runners, fill out the
+              CHANGE OF INFORMATION SHEET at the checkin table, pay the $5.00, and take the change
+              ticket to the coaches&apos; corner at the finish line.
             </li>
           </List>
           <li>
