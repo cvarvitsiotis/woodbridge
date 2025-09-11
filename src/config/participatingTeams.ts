@@ -3229,7 +3229,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
   {
     name: "Santa Ynez",
     raceDay: "Friday",
-    division: divisions.four,
+    division: divisions.three,
     varsityHeat: heats.b,
     city: "Solvang",
     state: "CA",
