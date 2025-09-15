@@ -9,7 +9,7 @@ export default function AlertMessageFirefox() {
         title={
           <div className="space-y-1">
             <p>Page has not been configured for this browser.</p>
-            <p>Please switch to Safari, Chrome, Edge, etc.</p>
+            <p>Please try Safari, Chrome, Edge, etc.</p>
           </div>
         }
         variant="faded"
