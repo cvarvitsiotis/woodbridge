@@ -17,6 +17,9 @@ import { useMemo, useState } from "react";
 import { pages } from "@/config/site";
 import StyledSelect from "./styledSelect";
 import StyledInput from "./styledInput";
+import { useUserAgent } from "@/hooks/useUserAgent";
+import { isFirefox } from "@/utils/userAgent";
+import AlertMessageFirefox from "./alertMessageFirefox";
 
 const columns = [
   {
@@ -117,6 +120,10 @@ export default function ParticipatingTeamsTable() {
     },
     [teamFilter, divisionFilter, varsityHeatFilter],
   );
+
+  const userAgent = useUserAgent();
+
+  if (isFirefox(userAgent)) return <AlertMessageFirefox />;
 
   return (
     <Table

@@ -3,8 +3,15 @@
 import AllTimeIndividualsTable from "@/components/allTimeIndividualsTable";
 import AllTimeTeamsTable from "@/components/allTimeTeamsTable";
 import { Tab, Tabs } from "@heroui/tabs";
+import { useUserAgent } from "@/hooks/useUserAgent";
+import { isFirefox } from "@/utils/userAgent";
+import AlertMessageFirefox from "./alertMessageFirefox";
 
 export default function AllTimeTables() {
+  const userAgent = useUserAgent();
+
+  if (isFirefox(userAgent)) return <AlertMessageFirefox />;
+
   return (
     <Tabs
       fullWidth
