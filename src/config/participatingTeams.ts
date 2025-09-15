@@ -2037,7 +2037,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
   {
     name: "Los Osos",
     raceDay: "Friday",
-    division: divisions.two,
+    division: divisions.three,
     varsityHeat: heats.b,
     city: "Rancho Cucamonga",
     state: "CA",
@@ -3640,7 +3640,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.two,
     varsityHeat: heats.b,
     city: "Provo",
-    state: "VT",
+    state: "UT",
   },
   {
     name: "Torrance",
