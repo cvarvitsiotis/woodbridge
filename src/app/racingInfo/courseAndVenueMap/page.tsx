@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
 import { Link } from "@heroui/link";
+import { PrintIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: pages.courseAndVenueMap.menuLabel,
@@ -16,10 +17,13 @@ export default async function Page() {
       <PageHeader>
         <span className="font-bold">Course</span> & <span className="font-bold">Venue</span> Map
       </PageHeader>
-      <div className="space-y-3 pt-7">
-        <div className="mx-auto max-w-[800px] text-right">
-          <Link isExternal href="/images/woodbridge-course.png" className="font-semibold">
-            [ PRINT ]
+      <div className="pt-7">
+        <div className="max-w-[800px] text-right">
+          <Link isExternal href="/images/woodbridge-course.png">
+            <div className="flex items-center gap-0.5 text-default-600">
+              <PrintIcon size={30} />
+              <p>PRINT</p>
+            </div>
           </Link>
         </div>
         <div className="relative mx-auto aspect-[4196/3246] h-full max-h-[90dvh] max-w-[800px] lg:max-h-[70dvh]">
