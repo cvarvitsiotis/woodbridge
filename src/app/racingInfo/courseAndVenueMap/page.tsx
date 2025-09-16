@@ -19,7 +19,7 @@ export default async function Page() {
       </PageHeader>
       <div className="pt-7">
         <div className="max-w-[800px] text-right">
-          <Link isExternal href="/images/woodbridge-course.png">
+          <Link isExternal href="/images/woodbridge-course.pdf">
             <div className="flex items-center gap-0.5 text-default-600">
               <PrintIcon size={30} />
               <p>PRINT</p>
