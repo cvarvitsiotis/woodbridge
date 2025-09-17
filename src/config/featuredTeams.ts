@@ -373,6 +373,7 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   { name: "Tesoro", city: "Las Flores", state: "CA", level: levels.rated, gender: genders.boys },
+  { name: "Timpview", city: "Provo", state: "UT", level: levels.rated, gender: genders.boys },
   {
     name: "Trabuco Hills",
     city: "Mission Viejo",
