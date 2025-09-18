@@ -34,7 +34,7 @@ export default function Page() {
           By pre-ordering T-Shirts for your team, you ensure that everyone gets the size they want
           without the hassle of waiting in long lines.
         </p>
-        {new Date() < dates.preOrderTShirtsEndDateParts.date ? (
+        {new Date() > dates.preOrderTShirtsEndDateParts.date ? (
           <p>
             The deadline to pre-order T-Shirts has passed. Head to the ASICS booth to purchase them
             in-person.
