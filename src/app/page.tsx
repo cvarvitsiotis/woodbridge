@@ -25,7 +25,8 @@ function AlertMessages() {
             >
               {pages.parkingAndDirections.menuLabel}
             </Link>{" "}
-            to avoid <span className="font-semibold">30-min gridlock</span>.
+            to avoid <span className="font-semibold">30-min gridlock</span> and buy your parking
+            pass.
           </p>
         }
         variant="faded"
