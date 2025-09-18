@@ -590,7 +590,7 @@ function Alerts() {
               <div className="space-y-2 lg:basis-3/5">
                 <p>
                   <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
-                  Canyon. You will hit gridlock. You must exit Jeffrey, instead.
+                  Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
                 </p>
                 <p>
                   Use the Google Maps links below. They force you through Jeffrey by including an{" "}

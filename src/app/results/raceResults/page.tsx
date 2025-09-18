@@ -33,7 +33,7 @@ export default function Page() {
   return (
     <>
       <PageHeader>
-        <span className="font-bold">Live</span> Results
+        <span className="font-bold">2025</span> Results
       </PageHeader>
       <div className="mx-auto max-w-fit space-x-8 pt-4 sm:pt-8">
         <LiveLink url={urls.athleticNet.altheticLIVEMeet} label="Live Results" isPrimary={true} />
@@ -46,7 +46,7 @@ export default function Page() {
 
       <div className="pt-2 sm:pt-6">
         <PageHeader>
-          <span className="font-bold">Official</span> Results
+          <span className="font-bold">Past</span> Results
         </PageHeader>
       </div>
 

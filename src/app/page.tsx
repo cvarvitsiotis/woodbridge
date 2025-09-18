@@ -18,14 +18,14 @@ function AlertMessages() {
         color="warning"
         title={
           <p>
-            <span className="font-semibold">Coaches</span>, you can{" "}
+            Read our{" "}
             <Link
-              href={pages.preOrderTShirts.path}
+              href={pages.parkingAndDirections.path}
               className="text-sm font-semibold text-warning-800"
             >
-              pre-order T-Shirts
+              {pages.parkingAndDirections.menuLabel}
             </Link>{" "}
-            for your team until {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}.
+            to avoid <span className="font-semibold">30-min gridlock</span>.
           </p>
         }
         variant="faded"

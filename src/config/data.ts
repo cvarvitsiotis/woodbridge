@@ -8,7 +8,7 @@ export const data = {
   athleteRegistrationEndDate: new Date(2025, 8, 4, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2025, 7, 1, 0, 0, 0),
   featuredEntriesUpdateDate: new Date(2025, 8, 1, 0, 0, 0),
-  preOrderTShirtsEndDate: new Date(2025, 8, 16, 0, 0, 0),
+  preOrderTShirtsEndDate: new Date(2025, 8, 16, 23, 59, 59),
   parkingPassPurchaseDate: new Date(2025, 7, 30, 0, 0, 0),
   parkingGoFanStartDateEventId: "3902189",
   parkingGoFanEndDateEventId: "3902192",

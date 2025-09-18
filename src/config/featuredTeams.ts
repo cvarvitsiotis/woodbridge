@@ -717,7 +717,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     level: levels.rated,
     gender: genders.girls,
   },
-  { name: "Holliday", city: "Holliday", state: "TX", level: levels.rated, gender: genders.girls },
   {
     name: "Huntington Beach",
     city: "Huntington Beach",
