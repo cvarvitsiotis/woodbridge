@@ -18,7 +18,7 @@ function AlertMessages() {
         color="warning"
         title={
           <p>
-            Read our{" "}
+            Read about{" "}
             <Link
               href={pages.parkingAndDirections.path}
               className="text-sm font-semibold text-warning-800"
