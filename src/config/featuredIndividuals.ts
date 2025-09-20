@@ -12,8 +12,8 @@ const internalFeaturedIndividuals: FeaturedIndividualType[] = [
     gender: genders.boys,
   },
   {
-    firstName: "Charler",
-    lastName: "Albemayor",
+    firstName: "Charles",
+    lastName: "Abemayor",
     teamName: "Harvard-Westlake",
     teamCity: "Studio City",
     teamState: "CA",
