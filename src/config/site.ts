@@ -114,4 +114,8 @@ export const pages: PagesType = {
     menuLabel: "Contact",
     path: "/contact",
   },
+  timing: {
+    menuLabel: "Timing",
+    path: "/timing",
+  },
 };
