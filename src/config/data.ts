@@ -1,7 +1,7 @@
 export const data = {
   firstMeetYear: 1981,
   pdfResultStartYear: 2007,
-  pdfResultEndYear: 2024,
+  pdfResultEndYear: 2025,
   meetStartDate: new Date(2025, 8, 19, 17, 0, 0),
   teamRegistrationStartDate: new Date(2025, 0, 1, 0, 0, 0),
   athleteRegistrationStartDate: new Date(2025, 7, 1, 0, 0, 0),
