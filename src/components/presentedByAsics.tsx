@@ -18,13 +18,10 @@ export default function PresentedByAsics({
           "flex-col gap-0.5 text-sm text-default-600 sm:flex-row sm:gap-1",
       )}
     >
-      <span className={clsx("sm:mt-1", isBreadcrumb && "hidden sm:block")}>Presented by</span>
+      <span className={clsx(isBreadcrumb && "hidden sm:block")}>Presented by</span>
       <Link isExternal href={urls.sponsors.asics}>
         <AsicsLogo />
       </Link>
-      <span className={clsx("sm:mt-1", (isBreadcrumb || isFooter) && "hidden sm:block")}>
-        AMERICA
-      </span>
     </div>
   );
 }

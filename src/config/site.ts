@@ -5,7 +5,7 @@ export const siteConfig = {
   woodbridgeHighSchoolCrossCountry: "Woodbridge High School Cross Country",
   woodbridgeClassic: "Woodbridge Classic",
   woodbridgeCrossCountryClassic: "Woodbridge Cross Country Classic",
-  presentedByAsics: "presented by ASICS America",
+  presentedByAsics: "presented by ASICS",
   northwood: "Northwood",
   greatPark: "Great Park",
   athleticNet: "Athletic.net",

@@ -16,19 +16,7 @@ function AlertMessages() {
       <Alert
         hideIcon
         color="warning"
-        title={
-          <p>
-            Read about{" "}
-            <Link
-              href={pages.parkingAndDirections.path}
-              className="text-sm font-semibold text-warning-800"
-            >
-              {pages.parkingAndDirections.menuLabel}
-            </Link>{" "}
-            to avoid <span className="font-semibold">30-min gridlock</span> and buy your parking
-            pass.
-          </p>
-        }
+        title="Thank you, runners, spectators, and coaches for a great meet! Good luck this season."
         variant="faded"
         radius="sm"
         classNames={{
