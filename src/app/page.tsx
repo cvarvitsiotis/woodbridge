@@ -16,7 +16,13 @@ function AlertMessages() {
       <Alert
         hideIcon
         color="warning"
-        title="Thank you, runners, spectators, and coaches for a great meet! Good luck this season."
+        title={
+          <p>
+            Thank you, <span className="font-semibold">runners</span>,{" "}
+            <span className="font-semibold">spectators</span>, and{" "}
+            <span className="font-semibold">coaches</span> for a great meet! Good luck this season.
+          </p>
+        }
         variant="faded"
         radius="sm"
         classNames={{
