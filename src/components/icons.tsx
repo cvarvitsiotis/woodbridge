@@ -87,7 +87,7 @@ export function AsicsLogo({ height = undefined, ...props }: IconSvgProps) {
       fill="currentColor"
       className={clsx(
         height ?? "h-[35px] sm:h-[40px]",
-        "text-[#001E62] dark:text-[color:hsl(var(--heroui-foreground))]",
+        "text-[#001E62] dark:text-[hsl(var(--heroui-foreground))]",
       )}
       aria-label="ASICS"
       {...props}
@@ -116,7 +116,7 @@ export function IrvineTimingLogo() {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       zoomAndPan="magnify"
       viewBox="20 20 335 335"
-      className="h-[4.5rem] contrast-75 sm:h-20"
+      className="h-18 contrast-75 sm:h-20"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
       aria-label="Irvine Timing"

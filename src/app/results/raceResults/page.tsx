@@ -1,6 +1,5 @@
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
-import { button as buttonStyles } from "@heroui/theme";
 
 import { urls } from "@/config/data";
 import { Metadata } from "next";
@@ -17,11 +16,9 @@ function LiveLink({ url, label, isPrimary }: { url: string; label: string; isPri
     <Button
       isExternal
       as={Link}
-      className={buttonStyles({
-        color: isPrimary ? "primary" : "secondary",
-        radius: "full",
-        variant: "ghost",
-      })}
+      color={isPrimary ? "primary" : "secondary"}
+      radius="full"
+      variant="ghost"
       href={url}
     >
       {label}

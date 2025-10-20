@@ -1,5 +1,4 @@
 import { Link } from "@heroui/link";
-import { button as buttonStyles } from "@heroui/theme";
 import { Button } from "@heroui/button";
 
 import clsx from "clsx";
@@ -46,7 +45,7 @@ export default function Home() {
       <div className="relative flex grow flex-col items-center justify-center">
         <SpacerforAlertMessage />
 
-        <div className="absolute h-full w-full bg-[radial-gradient(#220b592d_1px,transparent_2px)] [background-size:25px_25px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute h-full w-full bg-[radial-gradient(#220b592d_1px,transparent_2px)] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] bg-size-[25px_25px]" />
 
         <div className="z-10 text-center">
           <div
@@ -55,10 +54,10 @@ export default function Home() {
             Kick off the season
           </div>
           <div className="flex w-full items-center justify-center">
-            <span className="absolute mx-auto box-content flex w-fit select-none border bg-gradient-to-r from-pink-500 via-indigo-500 to-green-500 bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent blur-xl md:text-7xl">
+            <span className="absolute mx-auto box-content flex w-fit border bg-linear-to-r from-pink-500 via-indigo-500 to-green-500 bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent blur-xl select-none md:text-7xl">
               Under the Lights
             </span>
-            <h1 className="relative top-0 flex h-auto w-fit select-auto items-center justify-center bg-gradient-to-r from-pink-500 via-indigo-500 to-green-500 bg-clip-text py-2 text-center text-5xl font-extrabold tracking-tight text-transparent md:text-7xl">
+            <h1 className="relative top-0 flex h-auto w-fit items-center justify-center bg-linear-to-r from-pink-500 via-indigo-500 to-green-500 bg-clip-text py-2 text-center text-5xl font-extrabold tracking-tight text-transparent select-auto md:text-7xl">
               Under the Lights
             </h1>
           </div>
@@ -94,12 +93,10 @@ export default function Home() {
         <div className="z-10 mt-16 flex gap-3 sm:mt-20">
           <Button
             as={Link}
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-              size: "lg",
-            })}
+            color="primary"
+            radius="full"
+            variant="shadow"
+            size="lg"
             href={pages.raceResults.path}
             startContent={<FormatListBulletedIcon />}
           >
@@ -107,12 +104,10 @@ export default function Home() {
           </Button>
           <Button
             as={Link}
-            className={buttonStyles({
-              color: "secondary",
-              radius: "full",
-              variant: "bordered",
-              size: "lg",
-            })}
+            color="secondary"
+            radius="full"
+            variant="bordered"
+            size="lg"
             href={pages.schedule.path}
             startContent={<OverviewIcon />}
           >

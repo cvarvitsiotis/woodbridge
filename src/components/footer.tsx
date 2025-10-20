@@ -53,7 +53,7 @@ function HostSchool({
             <Image fill src={imageSrc} quality={100} alt={name} className={imageClassName} />
           </div>
         </div>
-        <p className="min-w-[5.5rem] sm:min-w-0">{name}</p>
+        <p className="min-w-22 sm:min-w-0">{name}</p>
       </FooterLink>
     </div>
   );
@@ -67,7 +67,7 @@ export default function Footer() {
   return (
     <footer
       className={clsx(
-        "z-10 flex w-full max-w-screen-2xl items-start justify-between p-3 sm:items-end",
+        "z-10 flex w-full max-w-(--breakpoint-2xl) items-start justify-between p-3 sm:items-end",
         !isHomePage && "pt-20",
       )}
     >
@@ -79,7 +79,7 @@ export default function Footer() {
           isFirst={true}
           url={urls.schools.woodbridgeHighSchool}
           name={siteConfig.woodbridge}
-          imageWrapperClassName="aspect-[1143/419] h-6"
+          imageWrapperClassName="aspect-1143/419 h-6"
           imageSrc={woodbridgeHigh}
           imageClassName="brightness-90"
         />
@@ -88,9 +88,9 @@ export default function Footer() {
             isFirst={false}
             url={urls.schools.northwoodHighSchool}
             name={siteConfig.northwood}
-            imageWrapperClassName="aspect-[582/365] h-7"
+            imageWrapperClassName="aspect-582/365 h-7"
             imageSrc={northwoodHigh}
-            imageClassName="invert-[85%]"
+            imageClassName="invert-85"
           />
         </div>
       </div>

@@ -26,7 +26,7 @@ export default async function Page() {
             </div>
           </Link>
         </div>
-        <div className="relative mx-auto aspect-[4196/3246] h-full max-h-[90dvh] max-w-[800px] lg:max-h-[70dvh]">
+        <div className="relative mx-auto aspect-4196/3246 h-full max-h-[90dvh] max-w-[800px] lg:max-h-[70dvh]">
           <Image
             fill
             src={woodbridgeCourse}

@@ -14,9 +14,10 @@ export default function Body({ children }: { children: ReactNode }) {
   return (
     <body
       className={clsx(
-        "bg-gradient-to-br from-indigo-200 to-[#ffd1b9] font-sans antialiased",
+        "bg-linear-to-br from-indigo-200 to-[#ffd1b9]",
         isHomePage ? "from-65%" : "from-50%",
-        fontSans.variable,
+        fontSans.className,
+        "antialiased",
       )}
     >
       {children}

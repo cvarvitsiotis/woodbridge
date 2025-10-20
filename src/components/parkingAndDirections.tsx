@@ -15,7 +15,6 @@ import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { dates } from "@/config/dates";
 import { urls } from "@/config/data";
 import { Button } from "@heroui/button";
-import { button as buttonStyles } from "@heroui/theme";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -598,14 +597,14 @@ function Alerts() {
                   waypoint, click CONTINUE in Google Maps to continue to the Great Park.
                 </p>
               </div>
-              <div className="relative aspect-[3741/3614] max-h-56 w-full max-w-56 lg:basis-2/5">
+              <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
                 <Image
                   fill
                   src={directionsGridlock}
                   quality={100}
                   placeholder="blur"
                   alt="Directions Gridlock"
-                  className="rounded-lg border-1 border-slate-300 object-contain shadow-lg"
+                  className="rounded-lg border border-slate-300 object-contain shadow-lg"
                 />
               </div>
             </div>
@@ -648,7 +647,7 @@ function Alerts() {
 function GreatParkParkingLots() {
   return (
     <div className="w-full basis-1/2">
-      <div className="max-h-2xl relative mx-auto aspect-[1357/957] w-full max-w-2xl lg:mx-0">
+      <div className="max-h-2xl relative mx-auto aspect-1357/957 w-full max-w-2xl lg:mx-0">
         <Image
           fill
           src={greatParkParkingLots}
@@ -667,11 +666,9 @@ function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
     <Button
       isExternal
       as={Link}
-      className={buttonStyles({
-        color: isStartDate ? "primary" : "secondary",
-        radius: "full",
-        variant: "ghost",
-      })}
+      color={isStartDate ? "primary" : "secondary"}
+      radius="full"
+      variant="ghost"
       href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
     >
       Purchase{" "}

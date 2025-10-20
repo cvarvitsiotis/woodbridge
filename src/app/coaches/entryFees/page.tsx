@@ -79,7 +79,7 @@ function TD({
   return (
     <td
       className={clsx(
-        "border-x pr-2 font-light sm:pr-4",
+        "border-x border-gray-200 pr-2 font-light sm:pr-4",
         border_y,
         padding_y,
         isFee && "text-right",
@@ -94,7 +94,10 @@ function TD({
 function TH({ isFee, children }: { isFee?: boolean; children: ReactNode }) {
   return (
     <th
-      className={clsx("border px-2 py-2 text-left font-normal sm:px-4", isFee && "w-2/5 sm:w-fit")}
+      className={clsx(
+        "border border-gray-200 px-2 py-2 text-left font-normal sm:px-4",
+        isFee && "w-2/5 sm:w-fit",
+      )}
     >
       {children}
     </th>

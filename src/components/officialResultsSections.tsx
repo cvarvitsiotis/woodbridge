@@ -147,7 +147,10 @@ function GenderColumn({
   return (
     <>
       <div
-        className={clsx("border-b px-4 py-2 text-center font-medium", getDivisionColor(division))}
+        className={clsx(
+          "border-b border-gray-200 px-4 py-2 text-center font-medium",
+          getDivisionColor(division),
+        )}
       >
         {races[0].gender}
       </div>
@@ -191,7 +194,12 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
 
   return (
     <Card shadow="lg" className="w-80">
-      <div className={clsx("border-b p-2 text-center font-medium", getDivisionColor(division))}>
+      <div
+        className={clsx(
+          "border-b border-gray-200 p-2 text-center font-medium",
+          getDivisionColor(division),
+        )}
+      >
         {division ? `${division.name} (Div ${division.numRoman})` : "Featured"}
       </div>
       <div
