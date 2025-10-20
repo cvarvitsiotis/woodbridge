@@ -16,11 +16,24 @@ function AlertMessages() {
         hideIcon
         color="warning"
         title={
-          <p>
-            Thank you, <span className="font-semibold">runners</span>,{" "}
-            <span className="font-semibold">spectators</span>, and{" "}
-            <span className="font-semibold">coaches</span> for a great meet! Good luck this season.
-          </p>
+          <div className="space-y-2">
+            <p>
+              <span className="font-semibold">Thank you</span> all for a great meet! Good luck this
+              season.
+            </p>
+            <div className="flex flex-col sm:flex-row">
+              <p>
+                We&apos;ll see you <span className="font-semibold">next year</span> on Sep 18-19,
+                2026.
+              </p>
+              <div className="hidden sm:block">&nbsp;</div>
+              <p>
+                <span className="font-semibold">Register early</span> (starting Jan 1) because space
+                is limited.
+              </p>
+              <p></p>
+            </div>
+          </div>
         }
         variant="faded"
         radius="sm"
