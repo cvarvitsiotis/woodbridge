@@ -17,10 +17,6 @@ function AlertMessages() {
         color="warning"
         title={
           <div className="space-y-2">
-            <p>
-              <span className="font-semibold">Thank you</span> all for a great meet! Good luck this
-              season.
-            </p>
             <div className="flex flex-col sm:flex-row">
               <p>
                 We&apos;ll see you <span className="font-semibold">next year</span> on Sep 18-19,
@@ -31,8 +27,10 @@ function AlertMessages() {
                 <span className="font-semibold">Register early</span> (starting Jan 1) because space
                 is limited.
               </p>
-              <p></p>
             </div>
+            <p>
+              <span className="font-semibold">Good luck</span> with the rest of the season!
+            </p>
           </div>
         }
         variant="faded"
