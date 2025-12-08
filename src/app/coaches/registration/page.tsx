@@ -42,7 +42,7 @@ function ParagraphLink({ url, name }: { url: string; name: string }) {
 export default function Page() {
   return (
     <>
-      <div className="justify-center-safe flex flex-col gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
+      <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
         <RegistrationSection sectionName="Team">
           <p>Team registration is now full.</p>
           <p>
@@ -57,7 +57,7 @@ export default function Page() {
                 Athlete registration closed on{" "}
                 {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayYearLong}.
               </p>
-              <p>Additional changes can be made at the meet.</p>
+              <p>Additional changes can be made at the meet for a fee.</p>
             </>
           ) : (
             <>

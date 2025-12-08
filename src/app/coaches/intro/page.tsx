@@ -74,7 +74,7 @@ export default function Page() {
             if you drop those that will not compete from your class roster. Bib numbers are
             expensive and preparing them for athletes that will not compete but are on your roster
             is time-consuming. You can always make adjustments to your roster up to the registration
-            deadline and you also can add new runners at the meet on race day.
+            deadline and you also can add new runners at the meet on race day for a fee.
           </li>
           <li>
             The NOVICE races require a fee like all other races. They are designed to give boys that
