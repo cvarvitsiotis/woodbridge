@@ -2,27 +2,31 @@ export const data = {
   firstMeetYear: 1981,
   pdfResultStartYear: 2007,
   pdfResultEndYear: 2025,
-  meetStartDate: new Date(2025, 8, 19, 17, 0, 0),
-  teamRegistrationStartDate: new Date(2025, 0, 1, 0, 0, 0),
-  athleteRegistrationStartDate: new Date(2025, 7, 1, 0, 0, 0),
-  athleteRegistrationEndDate: new Date(2025, 8, 4, 0, 0, 0),
-  participatingTeamsUpdateDate: new Date(2025, 7, 1, 0, 0, 0),
-  featuredEntriesUpdateDate: new Date(2025, 8, 1, 0, 0, 0),
-  preOrderTShirtsEndDate: new Date(2025, 8, 16, 23, 59, 59),
-  parkingPassPurchaseDate: new Date(2025, 7, 30, 0, 0, 0),
+  meetStartDate: new Date(2026, 8, 18, 17, 0, 0),
+  teamRegistrationStartDate: new Date(2026, 0, 1, 0, 0, 0),
+  teamRegistrationEndDate: new Date(2026, 6, 1, 0, 0, 0),
+  athleteRegistrationStartDate: new Date(2026, 7, 1, 0, 0, 0),
+  athleteRegistrationEndDate: new Date(2026, 8, 4, 0, 0, 0),
+  participatingTeamsPublishDate: new Date(2026, 6, 1, 0, 0, 0),
+  participatingTeamsUpdateDate: new Date(2026, 7, 1, 0, 0, 0),
+  featuredEntriesPublishDate: new Date(2026, 8, 1, 0, 0, 0),
+  preOrderTShirtsStartDate: new Date(2026, 7, 0, 0, 0, 0),
+  preOrderTShirtsEndDate: new Date(2026, 8, 16, 23, 59, 59),
+  hotelReservationEndDate: new Date(2026, 7, 21, 0, 0, 0),
+  parkingPassPurchaseDate: new Date(2026, 7, 30, 0, 0, 0),
   parkingGoFanStartDateEventId: "3902189",
   parkingGoFanEndDateEventId: "3902192",
   altheticNetMeet: 257920,
   altheticLIVEMeet: 56371,
   runnerSpaceEvent: 361,
-  teamRegistrationGoogleForm: "1sx2vBqrc5fyqSg68",
+  teamRegistrationGoogleForm: "1UI7reo22JBHe126TFSjwKTd_4dSdi0VJJuwMafSnST4",
 };
 
 const irvineTiming = "https://irvinetiming.anet.live";
 
 export const urls = {
   other: {
-    teamRegistration: `https://forms.gle/${data.teamRegistrationGoogleForm}`,
+    teamRegistration: `https://docs.google.com/forms/d/${data.teamRegistrationGoogleForm}`,
     preOrderTShirts:
       "https://forms.office.com/Pages/ResponsePage.aspx?id=Z2gZHYB4SkOiqb-NDwFoASbL1oGS-MZAkXJv-Y1ydi5UQ1FHQzEzVlVJOUpDRVVFVTVLQUI3MU9RNS4u",
   },
@@ -35,6 +39,7 @@ export const urls = {
     instagram: "https://www.instagram.com/explore/search/keyword/?q=%23woodbridgeclassic",
   },
   athleticNet: {
+    home: "https://www.athletic.net",
     athleteRegistration: `https://www.athletic.net/Help/CrossCountry.aspx?Meet=${data.altheticNetMeet}`,
     irvineTiming,
     altheticLIVEMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,

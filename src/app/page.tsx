@@ -2,8 +2,8 @@ import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
 
 import clsx from "clsx";
-import { pageParents, pages, siteConfig } from "@/config/site";
-import { CalendarIcon, FormatListBulletedIcon, OverviewIcon } from "@/components/icons";
+import { pages, siteConfig } from "@/config/site";
+import { CalendarIcon, HelpClinicIcon, HowToRegIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import { Alert } from "@heroui/alert";
@@ -17,19 +17,19 @@ function AlertMessages() {
         color="warning"
         title={
           <div className="space-y-2">
-            <div className="flex flex-col sm:flex-row">
-              <p>
-                We&apos;ll see you <span className="font-semibold">next year</span> on Sep 18-19,
-                2026.
-              </p>
-              <div className="hidden sm:block">&nbsp;</div>
-              <p>
-                <span className="font-semibold">Register early</span> (starting Jan 1) because space
-                is limited.
-              </p>
-            </div>
             <p>
-              <span className="font-semibold">Good luck</span> with the rest of the season!
+              We&apos;ll see you <span className="font-semibold">next year</span> on Sep 18-19,
+              2026.
+            </p>
+            <p>
+              <Link
+                href={pages.registration.path}
+                className="text-sm font-semibold text-warning-800"
+              >
+                Register
+              </Link>{" "}
+              <span className="font-semibold">early</span> (starting{" "}
+              {dates.teamRegistrationStartDateParts.monthDayShort}) because space is limited.
             </p>
           </div>
         }
@@ -108,10 +108,10 @@ export default function Home() {
             radius="full"
             variant="shadow"
             size="lg"
-            href={pages.raceResults.path}
-            startContent={<FormatListBulletedIcon />}
+            href={pages.about.path}
+            startContent={<HelpClinicIcon />}
           >
-            {pageParents.results}
+            About the Meet
           </Button>
           <Button
             as={Link}
@@ -119,10 +119,10 @@ export default function Home() {
             radius="full"
             variant="bordered"
             size="lg"
-            href={pages.schedule.path}
-            startContent={<OverviewIcon />}
+            href={pages.registration.path}
+            startContent={<HowToRegIcon />}
           >
-            {pages.schedule.menuLabel}
+            Register
           </Button>
         </div>
 

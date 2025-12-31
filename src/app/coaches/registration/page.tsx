@@ -39,16 +39,39 @@ function ParagraphLink({ url, name }: { url: string; name: string }) {
   );
 }
 
+function TeamEntryFormLink() {
+  return <ParagraphLink url={urls.other.teamRegistration} name="Team Entry Form" />;
+}
+
 export default function Page() {
   return (
     <>
       <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
         <RegistrationSection sectionName="Team">
-          <p>Team registration is now full.</p>
-          <p>
-            If you wish to be placed on the waiting list, please fill out the{" "}
-            <ParagraphLink url={urls.other.teamRegistration} name="Team Entry Form" />.
-          </p>
+          {new Date() > dates.athleteRegistrationEndDateParts.date ? (
+            <>
+              <p>Team registration is now full.</p>
+              <p>
+                If you wish to be placed on the waiting list, please fill out the{" "}
+                <TeamEntryFormLink />.
+              </p>
+            </>
+          ) : new Date() < dates.teamRegistrationStartDateParts.date ? (
+            <>
+              <p>
+                Team registration opens on{" "}
+                {dates.teamRegistrationStartDateParts.dayDescriptionMonthDayYearLong}.
+              </p>
+              <p>Return here for the link.</p>
+            </>
+          ) : (
+            <>
+              <p>Team registration is now open.</p>
+              <p>
+                To register, please fill out the <TeamEntryFormLink />.
+              </p>
+            </>
+          )}
         </RegistrationSection>
         <RegistrationSection sectionName="Athlete">
           {new Date() > dates.athleteRegistrationEndDateParts.date ? (
@@ -68,7 +91,11 @@ export default function Page() {
                   : "is now open"}{" "}
                 at{" "}
                 <ParagraphLink
-                  url={urls.athleticNet.athleteRegistration}
+                  url={
+                    new Date() < dates.athleteRegistrationStartDateParts.date
+                      ? urls.athleticNet.home
+                      : urls.athleticNet.athleteRegistration
+                  }
                   name={siteConfig.athleticNet}
                 />
                 .

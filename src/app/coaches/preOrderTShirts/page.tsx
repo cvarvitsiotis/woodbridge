@@ -39,6 +39,8 @@ export default function Page() {
             The deadline to pre-order T-Shirts has passed. Head to the ASICS booth to purchase them
             in-person.
           </p>
+        ) : new Date() < dates.preOrderTShirtsStartDateParts.date ? (
+          <p>We will publish the pre-order link here closer to the meet.</p>
         ) : (
           <>
             <p>To pre-order...</p>
@@ -57,18 +59,20 @@ export default function Page() {
           </>
         )}
       </div>
-      <div className="pt-10">
-        <div className="relative mx-auto aspect-1920/2560 w-64 max-w-full sm:w-96">
-          <Image
-            fill
-            src={woodbridgeTShirt}
-            quality={100}
-            placeholder="blur"
-            alt="Woodbridge T-Shirt"
-            className="rounded-lg object-contain shadow-lg"
-          />
+      {new Date() >= dates.preOrderTShirtsStartDateParts.date && (
+        <div className="pt-10">
+          <div className="relative mx-auto aspect-1920/2560 w-64 max-w-full sm:w-96">
+            <Image
+              fill
+              src={woodbridgeTShirt}
+              quality={100}
+              placeholder="blur"
+              alt="Woodbridge T-Shirt"
+              className="rounded-lg object-contain shadow-lg"
+            />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

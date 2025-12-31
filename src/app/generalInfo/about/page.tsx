@@ -10,7 +10,7 @@ import PageHeader from "@/components/pageHeader";
 import List from "@/components/list";
 
 export const metadata: Metadata = {
-  title: pages.welcome.menuLabel,
+  title: pages.about.menuLabel,
 };
 
 function ParagraphLink({

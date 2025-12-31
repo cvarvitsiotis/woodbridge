@@ -7,6 +7,7 @@ import PageHeader from "@/components/pageHeader";
 import { ReactNode } from "react";
 import { getSubheaderStyle } from "@/styles/styles";
 import List from "@/components/list";
+import { dates } from "@/config/dates";
 
 export const metadata: Metadata = {
   title: pages.hotels.menuLabel,
@@ -47,7 +48,7 @@ export default function Page() {
           <p>King Bed Suite + Queen Size Sofa Bed Rate: $199.00</p>
           <p>
             Includes complimentary cooked to order breakfast buffet, complimentary evening
-            reception, complimentary Wi-Fi, parking $15.00
+            reception, complimentary Wi-Fi, parking $15.00.
           </p>
           <p className="pt-4">Please contact Corina De la Isla</p>
           <p>949.705.5149</p>
@@ -60,14 +61,14 @@ export default function Page() {
             $164.00 plus tax, per night and inclusive of a hot buffet breakfast
           </p>
           <p>
-            Reservations must be made by midnight of August 21, 2025, to guarantee the special group
-            rate
+            Reservations must be made by midnight of{" "}
+            {dates.hotelReservationEndDateParts.monthDayLong}, to guarantee the special group rate.
           </p>
           <p className="pt-4">
             If you need 10 or more rooms, call the hotel directly and ask for the{" "}
-            {siteConfig.woodbridgeCrossCountryClassic} group
+            {siteConfig.woodbridgeCrossCountryClassic} group.
           </p>
-          <p>Or, use the custom online booking link above</p>
+          <p>Or, use the custom online booking link above.</p>
         </div>
       </div>
       <Subheader>Additional hotels nearby</Subheader>

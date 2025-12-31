@@ -14,7 +14,7 @@ import {
   HotelIcon,
   MapIcon,
   VideoLibraryIcon,
-  WavingHandIcon,
+  HelpClinicIcon,
   OverviewIcon,
   RouteIcon,
   LiveTvIcon,
@@ -52,8 +52,8 @@ function DropdownItemIcon({ page }: { page: PageType }) {
     <GroupIcon />
   ) : page === pages.featuredEntries ? (
     <VerifiedIcon />
-  ) : page === pages.welcome ? (
-    <WavingHandIcon />
+  ) : page === pages.about ? (
+    <HelpClinicIcon />
   ) : page === pages.sponsors ? (
     <HandshakeIcon />
   ) : page === pages.galleries ? (

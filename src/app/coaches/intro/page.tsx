@@ -40,10 +40,17 @@ export default function Page() {
           {dates.meetEndDateParts.dayDescriptionMonthDayYearLong} starting at{" "}
           {filteredRaces.saturdayRaces[0]?.time} (Blue and Gold divisions).
         </p>
-        <p>
-          TEAM registration is now FULL for the {dates.meetStartDateParts.year}{" "}
-          {siteConfig.woodbridgeCrossCountryClassic}.
-        </p>
+        {new Date() > dates.athleteRegistrationEndDateParts.date ? (
+          <p>
+            TEAM registration is now FULL for the {dates.meetStartDateParts.year}{" "}
+            {siteConfig.woodbridgeCrossCountryClassic}.
+          </p>
+        ) : (
+          <p>
+            TEAM registration opens on{" "}
+            {dates.teamRegistrationStartDateParts.dayDescriptionMonthDayYearLong}.
+          </p>
+        )}
         <p>
           Please note and share the following information with the other coaches in your school:
         </p>
@@ -91,8 +98,8 @@ export default function Page() {
           </li>
           <li>
             The Sweepstakes (top 25 teams) and Rated (teams 26-55) selections will be announced by
-            Rich Gonzalez on {dates.featuredEntriesUpdateDateParts.monthDayLong}. If you have a team
-            that you would like for Rich to consider, please{" "}
+            Rich Gonzalez on {dates.featuredEntriesPublishDateParts.monthDayLong}. If you have a
+            team that you would like for Rich to consider, please{" "}
             <ParagraphLink url={pages.contact.path} name={pages.contact.menuLabel} /> us.
           </li>
         </List>

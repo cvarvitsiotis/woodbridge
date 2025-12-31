@@ -624,11 +624,11 @@ function Alerts() {
                 Parking passes <span className="font-bold">must be purchased online</span> prior to
                 arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
               </p>
-              {new Date() < dates.parkingPassPurchaseDate.date && (
+              {new Date() < dates.parkingPassPurchaseDateParts.date && (
                 <p>
                   Passes will be available for purchase on this page starting{" "}
                   <span className="font-semibold">
-                    {dates.parkingPassPurchaseDate.monthDayLong}
+                    {dates.parkingPassPurchaseDateParts.monthDayLong}
                   </span>
                   .
                 </p>
@@ -683,13 +683,20 @@ function ParkingPasses() {
   return (
     <>
       <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
-      <p className="pl-6">
-        All vehicles (including school vans) must purchase a $20 parking pass online.
-      </p>
-      <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-6">
-        <ParkingLink isStartDate={true} />
-        <ParkingLink isStartDate={false} />
+      <div className="space-y-4 pl-6">
+        <p>All vehicles (including school vans) must purchase a $20 parking pass online.</p>
+        {new Date() < dates.parkingPassPurchaseDateParts.date && (
+          <p>
+            Return here for the link starting {dates.parkingPassPurchaseDateParts.monthDayLong}.
+          </p>
+        )}
       </div>
+      {new Date() >= dates.parkingPassPurchaseDateParts.date && (
+        <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-6">
+          <ParkingLink isStartDate={true} />
+          <ParkingLink isStartDate={false} />
+        </div>
+      )}
     </>
   );
 }

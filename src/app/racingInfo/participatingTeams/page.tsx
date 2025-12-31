@@ -5,6 +5,8 @@ import ParticipatingTeamsTable from "@/components/participatingTeamsTable";
 import PageHeader from "@/components/pageHeader";
 import { dates } from "@/config/dates";
 import { participatingTeams } from "@/config/participatingTeams";
+import { getParagraphStyle } from "@/styles/styles";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
   title: pages.participatingTeams.menuLabel,
@@ -35,8 +37,16 @@ export default function Page() {
       <PageHeader>
         Participating <span className="font-bold">Teams</span>
       </PageHeader>
-      {!participatingTeams[0].division && <AlertMessage />}
-      <ParticipatingTeamsTable />
+      {new Date() < dates.participatingTeamsPublishDateParts.date ? (
+        <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
+          <p>Teams will be posted on {dates.participatingTeamsPublishDateParts.monthDayLong}.</p>
+        </div>
+      ) : (
+        <>
+          {!participatingTeams[0].division && <AlertMessage />}
+          <ParticipatingTeamsTable />
+        </>
+      )}
     </>
   );
 }

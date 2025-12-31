@@ -10,12 +10,16 @@ function getDates() {
   const meetAge = meetStartDateParts.year - data.firstMeetYear;
   const meetAgeOrdinal = getOrdinal(meetAge);
   const teamRegistrationStartDateParts = getDateParts(data.teamRegistrationStartDate);
+  const teamRegistrationEndDateParts = getDateParts(data.teamRegistrationEndDate);
   const athleteRegistrationStartDateParts = getDateParts(data.athleteRegistrationStartDate);
   const athleteRegistrationEndDateParts = getDateParts(data.athleteRegistrationEndDate);
+  const participatingTeamsPublishDateParts = getDateParts(data.participatingTeamsPublishDate);
   const participatingTeamsUpdateDateParts = getDateParts(data.participatingTeamsUpdateDate);
-  const featuredEntriesUpdateDateParts = getDateParts(data.featuredEntriesUpdateDate);
+  const featuredEntriesPublishDateParts = getDateParts(data.featuredEntriesPublishDate);
+  const preOrderTShirtsStartDateParts = getDateParts(data.preOrderTShirtsEndDate);
   const preOrderTShirtsEndDateParts = getDateParts(data.preOrderTShirtsEndDate);
-  const parkingPassPurchaseDate = getDateParts(data.parkingPassPurchaseDate);
+  const hotelReservationEndDateParts = getDateParts(data.hotelReservationEndDate);
+  const parkingPassPurchaseDateParts = getDateParts(data.parkingPassPurchaseDate);
   const entryFeeMailDateParts = getDateParts(getEntryFeeMailDate());
   const entryFeeAutoDebitDateParts = getDateParts(getEntryFeeAutoDebitDate());
   const teamRegistrationCancellationDeadlineDateParts = getDateParts(
@@ -29,12 +33,16 @@ function getDates() {
     meetAge,
     meetAgeOrdinal,
     teamRegistrationStartDateParts,
+    teamRegistrationEndDateParts,
     athleteRegistrationStartDateParts,
     athleteRegistrationEndDateParts,
+    participatingTeamsPublishDateParts,
     participatingTeamsUpdateDateParts,
-    featuredEntriesUpdateDateParts,
+    featuredEntriesPublishDateParts,
+    preOrderTShirtsStartDateParts,
     preOrderTShirtsEndDateParts,
-    parkingPassPurchaseDate,
+    hotelReservationEndDateParts,
+    parkingPassPurchaseDateParts,
     entryFeeMailDateParts,
     entryFeeAutoDebitDateParts,
     teamRegistrationCancellationDeadlineDateParts,
@@ -62,6 +70,7 @@ function getDateParts(date: Date) {
     dayDescriptionMonthDayShort: `${dayDescriptionShort}, ${monthShort} ${day}`,
     dayDescriptionMonthDayYearShort: `${dayDescriptionShort}, ${monthShort} ${day}, ${year}`,
     dayDescriptionMonthDayYearLong: `${dayDescriptionLong}, ${monthLong} ${day}, ${year}`,
+    monthDayShort: `${monthShort} ${day}`,
     monthDayLong: `${monthLong} ${day}`,
   };
 }

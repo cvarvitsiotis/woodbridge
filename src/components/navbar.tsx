@@ -58,7 +58,7 @@ function Menus({
         isMenu={isMenu}
         pageParent={pageParents.generalInfo}
         pages={[
-          pages.welcome,
+          pages.about,
           pages.parkingAndDirections,
           pages.hotels,
           pages.sponsors,

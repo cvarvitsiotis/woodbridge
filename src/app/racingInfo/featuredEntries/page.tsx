@@ -19,9 +19,9 @@ export default function Page() {
         <span className="font-bold">Sweepstakes</span> & <span className="font-bold">Rated</span>{" "}
         Entries
       </PageHeader>
-      {new Date() < dates.featuredEntriesUpdateDateParts.date ? (
+      {new Date() < dates.featuredEntriesPublishDateParts.date ? (
         <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
-          <p>Entries will be posted on {dates.featuredEntriesUpdateDateParts.monthDayLong}.</p>
+          <p>Entries will be posted on {dates.featuredEntriesPublishDateParts.monthDayLong}.</p>
         </div>
       ) : (
         <>

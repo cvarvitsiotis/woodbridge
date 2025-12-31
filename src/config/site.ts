@@ -75,9 +75,9 @@ export const pages: PagesType = {
     path: "/racingInfo/featuredEntries",
     parent: pageParents.racingInfo,
   },
-  welcome: {
-    menuLabel: "Welcome",
-    path: "/generalInfo/welcome",
+  about: {
+    menuLabel: "About",
+    path: "/generalInfo/about",
     parent: pageParents.generalInfo,
   },
   parkingAndDirections: {
