@@ -19,14 +19,14 @@ export const data = {
   altheticNetMeet: 257920,
   altheticLIVEMeet: 56371,
   runnerSpaceEvent: 361,
-  teamRegistrationGoogleForm: "1UI7reo22JBHe126TFSjwKTd_4dSdi0VJJuwMafSnST4",
+  teamRegistrationGoogleForm: "MAh4FtBGYtyrhVWs9",
 };
 
 const irvineTiming = "https://irvinetiming.anet.live";
 
 export const urls = {
   other: {
-    teamRegistration: `https://docs.google.com/forms/d/${data.teamRegistrationGoogleForm}`,
+    teamRegistration: `https://forms.gle/${data.teamRegistrationGoogleForm}`,
     preOrderTShirts:
       "https://forms.office.com/Pages/ResponsePage.aspx?id=Z2gZHYB4SkOiqb-NDwFoASbL1oGS-MZAkXJv-Y1ydi5UQ1FHQzEzVlVJOUpDRVVFVTVLQUI3MU9RNS4u",
   },
