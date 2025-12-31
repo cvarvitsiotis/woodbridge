@@ -108,10 +108,10 @@ export default function Home() {
             radius="full"
             variant="shadow"
             size="lg"
-            href={pages.about.path}
-            startContent={<HelpClinicIcon />}
+            href={pages.registration.path}
+            startContent={<HowToRegIcon />}
           >
-            {pages.about.menuLabel}
+            Register
           </Button>
           <Button
             as={Link}
@@ -119,10 +119,10 @@ export default function Home() {
             radius="full"
             variant="bordered"
             size="lg"
-            href={pages.registration.path}
-            startContent={<HowToRegIcon />}
+            href={pages.about.path}
+            startContent={<HelpClinicIcon />}
           >
-            Register
+            {pages.about.menuLabel}
           </Button>
         </div>
 
