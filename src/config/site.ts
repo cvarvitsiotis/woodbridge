@@ -76,7 +76,7 @@ export const pages: PagesType = {
     parent: pageParents.racingInfo,
   },
   about: {
-    menuLabel: "About",
+    menuLabel: "About the Meet",
     path: "/generalInfo/about",
     parent: pageParents.generalInfo,
   },

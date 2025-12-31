@@ -111,7 +111,7 @@ export default function Home() {
             href={pages.about.path}
             startContent={<HelpClinicIcon />}
           >
-            About the Meet
+            {pages.about.menuLabel}
           </Button>
           <Button
             as={Link}
