@@ -18,7 +18,7 @@ function AlertMessages() {
         title={
           <div className="space-y-2">
             <p>
-              We&apos;ll see you <span className="font-semibold">next year</span> on Sep 18-19,
+              We&apos;ll see you <span className="font-semibold">next Fall</span> on Sep 18-19,
               2026.
             </p>
             <p>
