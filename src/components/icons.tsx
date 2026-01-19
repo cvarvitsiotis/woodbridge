@@ -78,7 +78,7 @@ export function InstagramIcon(props: IconSvgProps) {
   );
 }
 
-export function AsicsLogo({ height = undefined, ...props }: IconSvgProps) {
+export function AsicsLogo({ height = undefined, color = undefined, ...props }: IconSvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ export function AsicsLogo({ height = undefined, ...props }: IconSvgProps) {
       fill="currentColor"
       className={clsx(
         height ?? "h-[35px] sm:h-[40px]",
-        "text-[#001E62] dark:text-[hsl(var(--heroui-foreground))]",
+        color ?? "text-[#001E62] dark:text-[hsl(var(--heroui-foreground))]",
       )}
       aria-label="ASICS"
       {...props}

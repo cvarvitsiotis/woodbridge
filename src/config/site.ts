@@ -11,6 +11,7 @@ export const siteConfig = {
   athleticNet: "Athletic.net",
   athleticLIVE: "AthleticLIVE",
   runnerSpace: "RunnerSpace",
+  showAmbientVideo: true,
 };
 
 export const pageParents = {

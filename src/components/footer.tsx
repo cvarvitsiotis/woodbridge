@@ -64,6 +64,8 @@ export default function Footer() {
 
   const isHomePage = pathname === pages.home.path;
 
+  if (isHomePage && siteConfig.showAmbientVideo) return null;
+
   return (
     <footer
       className={clsx(
