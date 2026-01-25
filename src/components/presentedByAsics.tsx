@@ -18,14 +18,14 @@ export default function PresentedByAsics({
         "flex items-center justify-center gap-1",
         (isBreadcrumb || isFooter) &&
           "flex-col gap-0.5 text-sm text-default-600 sm:flex-row sm:gap-1",
-        isContrast && "text-xl font-semibold text-white",
+        isContrast && "text-xl tracking-tighter text-white md:text-2xl",
       )}
     >
       <span className={clsx(isBreadcrumb && "hidden sm:block")}>Presented by</span>
       <Link isExternal href={urls.sponsors.asics}>
         <AsicsLogo
           color={isContrast ? "text-white" : undefined}
-          height={isContrast ? "h-12 sm:h-14" : undefined}
+          height={isContrast ? "h-12 md:h-14" : undefined}
         />
       </Link>
     </div>

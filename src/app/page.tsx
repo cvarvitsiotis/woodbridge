@@ -11,12 +11,12 @@ import PresentedByAsics from "@/components/presentedByAsics";
 
 function RegisterEarlyAlertMessage() {
   return (
-    <p className={clsx(siteConfig.showAmbientVideo && "text-base text-white")}>
+    <p className={clsx(siteConfig.showAmbientVideo && "text-white md:text-lg")}>
       <Link
         href={pages.registration.path}
         className={clsx(
           "font-semibold",
-          siteConfig.showAmbientVideo ? "text-lg text-white" : "text-sm text-warning-800",
+          siteConfig.showAmbientVideo ? "text-white md:text-lg" : "text-sm text-warning-800",
         )}
       >
         Register
@@ -61,7 +61,7 @@ function SpacerforAlertMessage() {
 
 function AmbientVideo() {
   return (
-    <div className="absolute inset-0 h-dvh w-full bg-gray-800">
+    <div className="absolute inset-0 h-full w-full bg-gray-800">
       <video
         playsInline
         autoPlay
@@ -74,6 +74,21 @@ function AmbientVideo() {
         Browser does not support video
       </video>
     </div>
+  );
+}
+
+function CamelCapClassic({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className={clsx(
+        "inline-block",
+        siteConfig.showAmbientVideo
+          ? "text-2xl font-semibold tracking-tighter text-white first-letter:text-3xl md:text-3xl md:first-letter:text-4xl"
+          : "text-xl font-light first-letter:text-2xl",
+      )}
+    >
+      {children}
+    </span>
   );
 }
 
@@ -114,51 +129,50 @@ export default function Home() {
           )}
           <div
             className={clsx(
-              "pt-2",
               fontSerif.className,
               siteConfig.showAmbientVideo
-                ? "text-6xl/13 font-medium tracking-tighter text-yellow-100 md:text-7xl"
-                : "text-4xl font-light tracking-tight md:text-5xl",
+                ? "text-6xl/12 font-medium tracking-tighter text-yellow-100 md:text-7xl/14"
+                : "pt-2 text-4xl font-light tracking-tight md:text-5xl",
             )}
           >
             The road to championships
           </div>
         </div>
 
-        <div className={clsx("z-10 mt-10", siteConfig.showAmbientVideo && "sm:mt-7")}>
-          <div
-            className={clsx(
-              "flex flex-col items-center sm:flex-row sm:items-baseline",
-              siteConfig.showAmbientVideo
-                ? "text-2xl/9 font-medium tracking-tight text-white"
-                : "text-xl font-light",
-            )}
-          >
-            <div>
-              {dates.meetAge}
-              <sup>{dates.meetAgeOrdinal}</sup> Annual{" "}
-              <span
-                className={clsx(
-                  "tracking-tighter",
-                  siteConfig.showAmbientVideo
-                    ? "text-[2.8rem] font-extrabold text-rose-300"
-                    : "text-3xl font-bold text-sky-950",
-                )}
-              >
-                {siteConfig.woodbridge}
-              </span>
+        <div
+          className={clsx(
+            "z-10",
+            siteConfig.showAmbientVideo ? "mt-20 sm:mt-30" : "mt-10 space-y-1",
+          )}
+        >
+          <div className="flex flex-col items-center -space-y-1 lg:flex-row lg:items-baseline">
+            <div
+              className={clsx(
+                siteConfig.showAmbientVideo
+                  ? "text-5xl font-black tracking-tight text-rose-300 md:text-6xl"
+                  : "text-3xl font-bold tracking-tighter text-sky-950",
+              )}
+            >
+              {siteConfig.woodbridge}
             </div>
             <div>
-              <span className="hidden sm:inline">&nbsp;</span>Cross Country Classic
+              <span className="hidden sm:inline">&nbsp;</span>
+              <CamelCapClassic>CROSS</CamelCapClassic> <CamelCapClassic>COUNTRY</CamelCapClassic>{" "}
+              <CamelCapClassic>CLASSIC</CamelCapClassic>
             </div>
           </div>
 
-          <div className={siteConfig.showAmbientVideo ? "mt-10" : "mt-3"}>
+          <div className={siteConfig.showAmbientVideo ? "mt-0" : "mt-3"}>
             <PresentedByAsics isContrast={siteConfig.showAmbientVideo} />
           </div>
         </div>
 
-        <div className="z-10 mt-16 flex gap-3 sm:mt-20">
+        <div
+          className={clsx(
+            "z-10 flex gap-3",
+            siteConfig.showAmbientVideo ? "mt-30" : "mt-16 sm:mt-20",
+          )}
+        >
           <Button
             as={Link}
             color="primary"
@@ -187,12 +201,17 @@ export default function Home() {
 
         <div
           className={clsx(
-            "z-10",
-            siteConfig.showAmbientVideo ? "mt-20 md:mt-20" : "mt-12 md:mt-20",
-            siteConfig.showAmbientVideo ? "text-lg font-semibold text-white" : "text-default-600",
+            "flex flex-col items-center",
+            siteConfig.showAmbientVideo
+              ? "mt-8 text-lg font-semibold text-white md:text-xl"
+              : "mt-12 text-default-600 md:mt-20",
           )}
         >
-          <div className="flex items-center justify-center gap-1">
+          <p>
+            {dates.meetAge}
+            <sup>{dates.meetAgeOrdinal}</sup> Annual{" "}
+          </p>
+          <div className="-mt-2 flex items-center justify-center gap-1">
             <CalendarIcon />
             <div>{dates.meetStartToEndDateShort}</div>
           </div>
