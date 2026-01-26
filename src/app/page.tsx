@@ -210,7 +210,7 @@ export default function Page() {
             color="primary"
             radius="full"
             variant={siteConfig.showAmbientVideo ? "solid" : "shadow"}
-            size={isScreenShort ? "md" : "lg"}
+            size="lg"
             href={pages.registration.path}
             startContent={<HowToRegIcon />}
             className={clsx(siteConfig.showAmbientVideo && "bg-primary-400")}
@@ -222,7 +222,7 @@ export default function Page() {
             color={siteConfig.showAmbientVideo ? "default" : "secondary"}
             radius="full"
             variant={siteConfig.showAmbientVideo ? "solid" : "bordered"}
-            size={isScreenShort ? "md" : "lg"}
+            size="lg"
             href={pages.about.path}
             startContent={<HelpClinicIcon />}
             className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
