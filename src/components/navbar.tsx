@@ -110,7 +110,7 @@ export function Navbar() {
     <HeroUINavbar
       isMenuOpen={isMenuOpen}
       maxWidth="2xl"
-      shouldHideOnScroll={!isHomePage}
+      shouldHideOnScroll={!isHomePage || siteConfig.showAmbientVideo}
       isBordered={!isHomePage || siteConfig.showAmbientVideo}
       isBlurred={!isHomePage || (siteConfig.showAmbientVideo && isMenuOpen)}
       onMenuOpenChange={setIsMenuOpen}

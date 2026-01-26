@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
 
@@ -8,15 +10,22 @@ import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 
-function RegisterEarlyAlertMessage() {
+function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
-    <p className={clsx(siteConfig.showAmbientVideo && "text-white md:text-lg")}>
+    <p
+      className={clsx(
+        siteConfig.showAmbientVideo && "text-white",
+        siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
+      )}
+    >
       <Link
         href={pages.registration.path}
         className={clsx(
           "font-semibold",
-          siteConfig.showAmbientVideo ? "text-white md:text-lg" : "text-sm text-warning-800",
+          siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning-800",
+          siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
         )}
       >
         Register
@@ -26,12 +35,12 @@ function RegisterEarlyAlertMessage() {
   );
 }
 
-function AlertMessages() {
+function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <div className="z-10 mx-auto">
       {siteConfig.showAmbientVideo ? (
         <div className="mt-2 space-y-2">
-          <RegisterEarlyAlertMessage />
+          <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
         </div>
       ) : (
         <Alert
@@ -39,7 +48,7 @@ function AlertMessages() {
           color="warning"
           title={
             <div className="space-y-2">
-              <RegisterEarlyAlertMessage />
+              <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
             </div>
           }
           variant="faded"
@@ -61,7 +70,7 @@ function SpacerforAlertMessage() {
 
 function AmbientVideo() {
   return (
-    <div className="absolute inset-0 h-full w-full bg-gray-800">
+    <div className="absolute inset-0 h-full w-full bg-gray-700">
       <video
         playsInline
         autoPlay
@@ -77,14 +86,21 @@ function AmbientVideo() {
   );
 }
 
-function CamelCapClassic({ children }: { children: React.ReactNode }) {
+function CamelCapClassic({
+  isScreenShort,
+  children,
+}: {
+  isScreenShort: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <span
       className={clsx(
         "inline-block",
         siteConfig.showAmbientVideo
-          ? "text-2xl font-semibold tracking-tighter text-white first-letter:text-3xl md:text-3xl md:first-letter:text-4xl"
+          ? "text-2xl font-semibold tracking-tighter text-white first-letter:text-3xl"
           : "text-xl font-light first-letter:text-2xl",
+        siteConfig.showAmbientVideo && !isScreenShort && "md:text-3xl md:first-letter:text-4xl",
       )}
     >
       {children}
@@ -92,10 +108,13 @@ function CamelCapClassic({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function Home() {
+export default function Page() {
+  const windowDimensions = useWindowDimensions();
+  const isScreenShort = windowDimensions.height !== undefined && windowDimensions.height <= 768;
+
   return (
     <>
-      <AlertMessages />
+      <AlertMessages isScreenShort={isScreenShort} />
 
       {siteConfig.showAmbientVideo && <AmbientVideo />}
 
@@ -131,8 +150,9 @@ export default function Home() {
             className={clsx(
               fontSerif.className,
               siteConfig.showAmbientVideo
-                ? "text-6xl/12 font-medium tracking-tighter text-yellow-100 md:text-7xl/14"
+                ? "text-6xl/12 font-medium tracking-tighter text-yellow-100"
                 : "pt-2 text-4xl font-light tracking-tight md:text-5xl",
+              siteConfig.showAmbientVideo && !isScreenShort && "md:text-7xl/14",
             )}
           >
             The road to championships
@@ -142,35 +162,47 @@ export default function Home() {
         <div
           className={clsx(
             "z-10",
-            siteConfig.showAmbientVideo ? "mt-20 sm:mt-30" : "mt-10 space-y-1",
+            siteConfig.showAmbientVideo ? "mt-20" : "mt-10 space-y-1",
+            siteConfig.showAmbientVideo && !isScreenShort && "sm:mt-30",
           )}
         >
-          <div className="flex flex-col items-center -space-y-1 lg:flex-row lg:items-baseline">
+          <div
+            className={clsx(
+              "flex flex-col items-center -space-y-1",
+              siteConfig.showAmbientVideo &&
+                (isScreenShort ? "md:flex-row md:items-baseline" : "lg:flex-row lg:items-baseline"),
+            )}
+          >
             <div
               className={clsx(
                 siteConfig.showAmbientVideo
-                  ? "text-5xl font-black tracking-tight text-rose-300 md:text-6xl"
+                  ? "text-5xl font-black tracking-tight text-rose-300"
                   : "text-3xl font-bold tracking-tighter text-sky-950",
+                siteConfig.showAmbientVideo && !isScreenShort && "md:text-6xl",
               )}
             >
               {siteConfig.woodbridge}
             </div>
             <div>
               <span className="hidden sm:inline">&nbsp;</span>
-              <CamelCapClassic>CROSS</CamelCapClassic> <CamelCapClassic>COUNTRY</CamelCapClassic>{" "}
-              <CamelCapClassic>CLASSIC</CamelCapClassic>
+              <CamelCapClassic isScreenShort={isScreenShort}>CROSS</CamelCapClassic>{" "}
+              <CamelCapClassic isScreenShort={isScreenShort}>COUNTRY</CamelCapClassic>{" "}
+              <CamelCapClassic isScreenShort={isScreenShort}>CLASSIC</CamelCapClassic>
             </div>
           </div>
 
-          <div className={siteConfig.showAmbientVideo ? "mt-0" : "mt-3"}>
-            <PresentedByAsics isContrast={siteConfig.showAmbientVideo} />
+          <div className={clsx(!siteConfig.showAmbientVideo && "mt-3")}>
+            <PresentedByAsics
+              isHomePage={siteConfig.showAmbientVideo}
+              isScreenShort={isScreenShort}
+            />
           </div>
         </div>
 
         <div
           className={clsx(
             "z-10 flex gap-3",
-            siteConfig.showAmbientVideo ? "mt-30" : "mt-16 sm:mt-20",
+            siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
           )}
         >
           <Button
@@ -178,7 +210,7 @@ export default function Home() {
             color="primary"
             radius="full"
             variant={siteConfig.showAmbientVideo ? "solid" : "shadow"}
-            size="lg"
+            size={isScreenShort ? "md" : "lg"}
             href={pages.registration.path}
             startContent={<HowToRegIcon />}
             className={clsx(siteConfig.showAmbientVideo && "bg-primary-400")}
@@ -190,7 +222,7 @@ export default function Home() {
             color={siteConfig.showAmbientVideo ? "default" : "secondary"}
             radius="full"
             variant={siteConfig.showAmbientVideo ? "solid" : "bordered"}
-            size="lg"
+            size={isScreenShort ? "md" : "lg"}
             href={pages.about.path}
             startContent={<HelpClinicIcon />}
             className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
@@ -203,8 +235,10 @@ export default function Home() {
           className={clsx(
             "flex flex-col items-center",
             siteConfig.showAmbientVideo
-              ? "mt-8 text-lg font-semibold text-white md:text-xl"
+              ? "mt-8 text-lg font-semibold text-white"
               : "mt-12 text-default-600 md:mt-20",
+            siteConfig.showAmbientVideo && !isScreenShort && "md:text-xl",
+            siteConfig.showAmbientVideo && isScreenShort && "mb-8",
           )}
         >
           <p>
