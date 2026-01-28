@@ -28,7 +28,7 @@ import {
 } from "./icons";
 
 import { PageType } from "@/types";
-import { pages } from "@/config/site";
+import { pages, siteConfig } from "@/config/site";
 import clsx from "clsx";
 
 function DropdownItemIcon({ page }: { page: PageType }) {
@@ -69,12 +69,23 @@ function DropdownItemIcon({ page }: { page: PageType }) {
   ) : null;
 }
 
-function NavbarDropdownTrigger({ pageParent }: { pageParent: string }) {
+function NavbarDropdownTrigger({
+  isMenu,
+  pageParent,
+  isHomePage,
+}: {
+  isMenu: boolean;
+  pageParent: string;
+  isHomePage: boolean;
+}) {
   return (
     <DropdownTrigger>
       <Button
         disableRipple
-        className="bg-transparent p-0 text-lg data-[hover=true]:bg-transparent"
+        className={clsx(
+          "bg-transparent p-0 text-lg data-[hover=true]:bg-transparent",
+          isHomePage && !isMenu && siteConfig.showAmbientVideo && "text-white",
+        )}
         endContent={<ChevronDown fill="currentColor" size={16} />}
         radius="sm"
         variant="light"
@@ -88,29 +99,31 @@ function NavbarDropdownTrigger({ pageParent }: { pageParent: string }) {
 export default function NavbarDropdown({
   isMenu,
   pageParent,
-  pages,
+  pageItems,
   onAction,
 }: {
-  isMenu?: boolean;
+  isMenu: boolean;
   pageParent: string;
-  pages: PageType[];
+  pageItems: PageType[];
   onAction: () => void;
 }) {
   const pathname = usePathname();
+
+  const isHomePage = pathname === pages.home.path;
 
   return (
     <Dropdown>
       {isMenu ? (
         <NavbarMenuItem>
-          <NavbarDropdownTrigger pageParent={pageParent} />
+          <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
         </NavbarMenuItem>
       ) : (
         <NavbarItem>
-          <NavbarDropdownTrigger pageParent={pageParent} />
+          <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
         </NavbarItem>
       )}
       <DropdownMenu onAction={onAction}>
-        {pages.map((page) => (
+        {pageItems.map((page) => (
           <DropdownItem
             key={page.path}
             href={page.path}

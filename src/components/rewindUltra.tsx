@@ -79,7 +79,6 @@ function getStartTimeFromRunnerResultTime(
   runnerBib: string,
   bibResults: Map<string, BibResult>,
 ): number {
-  console.log({ runnerResultTime, runnerBib, bibResults });
   const resultTime = parseTime(runnerResultTime);
   const result = bibResults.get(runnerBib);
   if (!result) throw new Error("Bib not found");
