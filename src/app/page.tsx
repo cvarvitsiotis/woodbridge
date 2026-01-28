@@ -78,7 +78,7 @@ function AmbientVideo() {
         loop
         poster="/images/woodbridge-ambient-thumbnail.jpg"
         src="/videos/woodbridge-ambient.mp4"
-        className="h-full w-full object-cover opacity-70 portrait:object-[30%_center] landscape:object-center"
+        className="h-full w-full object-cover opacity-90 portrait:object-[30%_center] landscape:object-center"
       >
         Browser does not support video
       </video>
