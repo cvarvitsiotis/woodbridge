@@ -54,7 +54,7 @@ function DropdownItemIcon({ page }: { page: PageType }) {
     <VerifiedIcon />
   ) : page === pages.about ? (
     <HelpClinicIcon />
-  ) : page === pages.sponsors ? (
+  ) : page === pages.partners ? (
     <HandshakeIcon />
   ) : page === pages.galleries ? (
     <VideoLibraryIcon />

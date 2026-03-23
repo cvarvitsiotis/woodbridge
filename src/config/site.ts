@@ -91,9 +91,9 @@ export const pages: PagesType = {
     path: "/generalInfo/hotels",
     parent: pageParents.generalInfo,
   },
-  sponsors: {
-    menuLabel: "Sponsors",
-    path: "/generalInfo/sponsors",
+  partners: {
+    menuLabel: "Partners",
+    path: "/generalInfo/partners",
     parent: pageParents.generalInfo,
   },
   galleries: {

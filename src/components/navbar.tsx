@@ -64,7 +64,7 @@ function Menus({
           pages.about,
           pages.parkingAndDirections,
           pages.hotels,
-          pages.sponsors,
+          pages.partners,
           pages.galleries,
         ]}
         onAction={handleMenuAction}

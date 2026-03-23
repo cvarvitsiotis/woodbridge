@@ -49,8 +49,9 @@ export const urls = {
     startDate: `https://gofan.co/event/${data.parkingGoFanStartDateEventId}`,
     endDate: `https://gofan.co/event/${data.parkingGoFanEndDateEventId}`,
   },
-  sponsors: {
+  partners: {
     asics: "https://www.asics.com",
+    athletic: "https://www.athletic.net",
   },
   hotels: {
     hiltonIrvine: "https://www.hilton.com/en/hotels/snaochf-hilton-irvine-orange-county-airport/",
