@@ -714,8 +714,8 @@ export default function GreatParkLogo() {
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="25 60 200 140"
-      className="h-28 rounded-md"
+      viewBox="25 32 200 170"
+      className="h-32 rounded-3xl"
       aria-label="Great Park"
     >
       <defs>

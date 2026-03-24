@@ -48,7 +48,7 @@ export default function Page() {
           <AsicsLogo height="h-16" />
         </Sponsor>
         <Sponsor url={urls.partners.athletic} motto="The digital hub for the running community">
-          <div className="relative aspect-8977/2235 h-16">
+          <div className="relative aspect-8977/2235 h-15">
             <Image
               fill
               src={athletic}
