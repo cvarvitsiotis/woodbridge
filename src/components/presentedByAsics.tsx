@@ -25,7 +25,7 @@ export default function PresentedByAsics({
       )}
     >
       <span className={clsx(isBreadcrumb && "hidden sm:block")}>Presented by</span>
-      <Link isExternal href={urls.sponsors.asics}>
+      <Link isExternal href={urls.partners.asics}>
         <AsicsLogo
           color={isHomePage ? "text-white" : undefined}
           height={isHomePage ? clsx("h-12", isHomePage && !isScreenShort && "md:h-14") : undefined}
