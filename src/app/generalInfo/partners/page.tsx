@@ -58,8 +58,8 @@ export default function Page() {
             />
           </div>
         </Sponsor>
-        <Sponsor url={urls.athleticNet.irvineTiming} motto="Timing So Cal since 1978">
-          <IrvineTimingLogo height="h-30" />
+        <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">
+          <IrvineTimingLogo height="h-32" />
         </Sponsor>
         <Sponsor url={urls.partners.asics} motto="Grounded in history, driven by community">
           <GreatParkLogo />
