@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { NavbarItem, NavbarMenuItem } from "@heroui/navbar";
 import { Dropdown, Button, Label } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
@@ -106,10 +105,8 @@ export default function NavbarDropdown({
 
   const isHomePage = pathname === pages.home.path;
 
-  const Wrapper = isMenu ? NavbarMenuItem : NavbarItem;
-
   return (
-    <Wrapper>
+    <li>
       <Dropdown>
         <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
         <Dropdown.Popover>
@@ -131,6 +128,6 @@ export default function NavbarDropdown({
           </Dropdown.Menu>
         </Dropdown.Popover>
       </Dropdown>
-    </Wrapper>
+    </li>
   );
 }

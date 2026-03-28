@@ -1,15 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Navbar as HeroUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@heroui/navbar";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -75,7 +66,7 @@ function Menus({
         pageItems={[pages.raceResults, pages.allTimeLists]}
         onAction={handleMenuAction}
       />
-      <NavbarMenuItem>
+      <li>
         <Link
           href={pages.contact.path}
           size="lg"
@@ -91,7 +82,7 @@ function Menus({
         >
           {pages.contact.menuLabel}
         </Link>
-      </NavbarMenuItem>
+      </li>
     </>
   );
 }
@@ -99,77 +90,130 @@ function Menus({
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const lastScrollY = useRef(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   function handleMenuAction() {
     setIsMenuOpen(() => false);
   }
 
   const isHomePage = pathname === pages.home.path;
+  const shouldHideOnScroll = !isHomePage || siteConfig.showAmbientVideo;
+  const isBordered = !isHomePage || siteConfig.showAmbientVideo;
+  const isBlurred = !isHomePage || (siteConfig.showAmbientVideo && isMenuOpen);
+
+  useEffect(() => {
+    if (!shouldHideOnScroll) {
+      setIsVisible(true);
+      return;
+    }
+
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      setIsVisible(currentScrollY <= lastScrollY.current || currentScrollY < 10);
+      lastScrollY.current = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [shouldHideOnScroll]);
 
   return (
-    <HeroUINavbar
-      isMenuOpen={isMenuOpen}
-      maxWidth="2xl"
-      shouldHideOnScroll={!isHomePage || siteConfig.showAmbientVideo}
-      isBordered={!isHomePage || siteConfig.showAmbientVideo}
-      isBlurred={!isHomePage || (siteConfig.showAmbientVideo && isMenuOpen)}
-      onMenuOpenChange={setIsMenuOpen}
-      classNames={{
-        base: clsx(
-          "bg-transparent",
-          isHomePage && siteConfig.showAmbientVideo && "border-white/30",
-        ),
-        toggle: clsx(isHomePage && siteConfig.showAmbientVideo && "text-white"),
-      }}
+    <nav
+      className={clsx(
+        "sticky top-0 z-40 w-full bg-transparent transition-transform duration-300",
+        shouldHideOnScroll && !isVisible && "-translate-y-full",
+        isBlurred && "backdrop-blur-lg",
+        isBordered &&
+          (isHomePage && siteConfig.showAmbientVideo
+            ? "border-b border-white/30"
+            : "border-b border-separator"),
+      )}
     >
-      <NavbarBrand as="li" className="max-w-fit gap-3">
-        <Link
-          href={pages.home.path}
-          className={clsx(
-            "mb-0.5 text-2xl font-bold tracking-tighter",
-            isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-sky-950",
-          )}
-        >
-          {siteConfig.woodbridge}
-        </Link>
-      </NavbarBrand>
-      <NavbarContent className="ml-2 hidden basis-1/5 lg:flex lg:basis-full" justify="start">
-        <Menus
-          isMenu={false}
-          pathname={pathname}
-          isHomePage={isHomePage}
-          handleMenuAction={handleMenuAction}
-        />
-      </NavbarContent>
-
-      <NavbarContent className="flex basis-full gap-10" justify="end">
-        <NavbarItem className="flex gap-6">
-          <Link isExternal href={urls.socials.twitter}>
-            <XIcon
-              className={
-                isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
-              }
-            />
+      <header className="mx-auto flex h-16 max-w-[1536px] items-center justify-between px-6">
+        <div className="max-w-fit gap-3">
+          <Link
+            href={pages.home.path}
+            className={clsx(
+              "mb-0.5 text-2xl font-bold tracking-tighter",
+              isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-sky-950",
+            )}
+          >
+            {siteConfig.woodbridge}
           </Link>
-          <Link isExternal href={urls.socials.instagram}>
-            <InstagramIcon
-              className={
-                isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
-              }
+        </div>
+        <ul className="ml-2 hidden basis-1/5 items-center lg:flex lg:basis-full">
+          <Menus
+            isMenu={false}
+            pathname={pathname}
+            isHomePage={isHomePage}
+            handleMenuAction={handleMenuAction}
+          />
+        </ul>
+        <div className="flex basis-full items-center justify-end gap-10">
+          <div className="flex gap-6">
+            <Link isExternal href={urls.socials.twitter}>
+              <XIcon
+                className={
+                  isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
+                }
+              />
+            </Link>
+            <Link isExternal href={urls.socials.instagram}>
+              <InstagramIcon
+                className={
+                  isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
+                }
+              />
+            </Link>
+          </div>
+          <button
+            className={clsx(
+              "lg:hidden",
+              isHomePage && siteConfig.showAmbientVideo && "text-white",
+            )}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <span className="sr-only">Menu</span>
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </header>
+      {isMenuOpen && (
+        <div className="border-t border-separator lg:hidden">
+          <ul className="flex flex-col gap-2 p-4">
+            <Menus
+              isMenu={true}
+              pathname={pathname}
+              isHomePage={isHomePage}
+              handleMenuAction={handleMenuAction}
             />
-          </Link>
-        </NavbarItem>
-        <NavbarMenuToggle className="lg:hidden" />
-      </NavbarContent>
-
-      <NavbarMenu>
-        <Menus
-          isMenu={true}
-          pathname={pathname}
-          isHomePage={isHomePage}
-          handleMenuAction={handleMenuAction}
-        />
-      </NavbarMenu>
-    </HeroUINavbar>
+          </ul>
+        </div>
+      )}
+    </nav>
   );
 }
