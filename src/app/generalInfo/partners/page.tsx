@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function Sponsor({ url, motto, children }: { url: string; motto: string; children: ReactNode }) {
   return (
-    <div className="grid items-center justify-center gap-x-10 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
+    <div className="grid items-center justify-center gap-x-2 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
       <div className="justify-self-center rounded-4xl md:justify-self-auto">
         <Link isExternal href={url}>
           {children}
@@ -43,19 +43,13 @@ export default function Page() {
       <p className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
         Our partners make this great meet possible.
       </p>
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-xl">
         <Sponsor url={urls.partners.asics} motto="sound mind, sound body">
           <AsicsLogo height="h-16" />
         </Sponsor>
         <Sponsor url={urls.partners.athletic} motto="The digital hub for the running community">
           <div className="relative aspect-8977/2235 h-15">
-            <Image
-              fill
-              src={athletic}
-              quality={100}
-              placeholder="blur"
-              alt={siteConfig.athleticNet}
-            />
+            <Image fill src={athletic} quality={100} alt={siteConfig.athleticNet} />
           </div>
         </Sponsor>
         <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">
