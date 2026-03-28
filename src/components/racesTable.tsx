@@ -1,6 +1,7 @@
 "use client";
 
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
+import { getKeyValue } from "@/utils/table";
 
 import {
   scheduleLevelGenderToken,
@@ -76,9 +77,9 @@ export default function RacesTable({
               <Table.Row key={item.num}>
                 {(columnKey) => (
                   <Table.Cell>
-                    {columnKey === "division" ? (
+                    {String(columnKey) === "division" ? (
                       <Divisions divisions={item.divisions} />
-                    ) : columnKey === "description" ? (
+                    ) : String(columnKey) === "description" ? (
                       getDescription(item)
                     ) : (
                       getKeyValue(item, columnKey)

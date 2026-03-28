@@ -1,4 +1,4 @@
-import { Link, Button } from "@heroui/react";
+import { Button } from "@heroui/react";
 
 import { urls } from "@/config/data";
 import { Metadata } from "next";
@@ -12,16 +12,14 @@ export const metadata: Metadata = {
 
 function LiveLink({ url, label, isPrimary }: { url: string; label: string; isPrimary: boolean }) {
   return (
-    <Button
-      as={Link}
-      variant={isPrimary ? "ghost" : "ghost"}
-      className="rounded-full"
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {label}
-    </Button>
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <Button
+        variant={isPrimary ? "ghost" : "ghost"}
+        className="rounded-full"
+      >
+        {label}
+      </Button>
+    </a>
   );
 }
 

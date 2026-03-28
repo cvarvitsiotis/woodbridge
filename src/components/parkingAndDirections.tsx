@@ -256,7 +256,6 @@ function getSpectatorsAccordionItem(
               instruction={instructions.freewayToPortolaEntrance3}
               handleOpenModal={handleOpenModal}
             />
-          </div>
             </Accordion.Body>
           </Accordion.Panel>
         </Accordion.Item>
@@ -373,7 +372,7 @@ function ModalLink({
   return (
     <p
       onClick={() => handleOpenModal(instruction)}
-      className="cursor-pointer text-base text-primary transition-opacity tap-highlight-transparent hover:opacity-hover active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus"
+      className="cursor-pointer text-base text-accent transition-opacity [-webkit-tap-highlight-color:transparent] hover:opacity-hover active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus"
     >
       Turn by turn instructions from {instruction.modalLinkLabel}
     </p>
@@ -603,7 +602,7 @@ function Alerts() {
       <div>
         <Alert status="danger" className="rounded-sm">
           <Alert.Content>
-            <Alert.Title className="text-medium font-normal">
+            <Alert.Title className="text-base font-normal">
               <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
                 <div className="space-y-2 lg:basis-3/5">
                   <p>
@@ -634,7 +633,7 @@ function Alerts() {
       <div>
         <Alert status="accent" className="rounded-sm">
           <Alert.Content>
-            <Alert.Title className="text-medium font-normal">
+            <Alert.Title className="text-base font-normal">
               <div className="space-y-2">
                 <p>
                   Parking passes <span className="font-bold">must be purchased online</span> prior to
@@ -677,19 +676,21 @@ function GreatParkParkingLots() {
 
 function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
   return (
-    <Button
-      as={Link}
-      variant="ghost"
-      className="rounded-full"
+    <a
       href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Purchase{" "}
-      {isStartDate
-        ? dates.meetStartDateParts.dayDescriptionLong
-        : dates.meetEndDateParts.dayDescriptionLong}
-    </Button>
+      <Button
+        variant="ghost"
+        className="rounded-full"
+      >
+        Purchase{" "}
+        {isStartDate
+          ? dates.meetStartDateParts.dayDescriptionLong
+          : dates.meetEndDateParts.dayDescriptionLong}
+      </Button>
+    </a>
   );
 }
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
 import { allTimeIndividuals } from "@/config/allTimeIndividuals";
+import { getKeyValue } from "@/utils/table";
 import { pages } from "@/config/site";
 import StyledSelect from "./styledSelect";
 import StyledInput from "./styledInput";
@@ -284,7 +285,7 @@ export default function AllTimeIndividualsTable() {
             {(column) => (
               <Table.Column
                 key={column.key}
-                align={column.key === "grade" || column.key === "year" ? "center" : "start"}
+                className={column.key === "grade" || column.key === "year" ? "text-center" : "text-start"}
               >
                 {column.label}
               </Table.Column>

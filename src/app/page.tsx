@@ -22,7 +22,7 @@ function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }
         href={pages.registration.path}
         className={clsx(
           "font-semibold",
-          siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning-800",
+          siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning",
           siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
         )}
       >
@@ -196,26 +196,26 @@ export default function Page() {
             siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
           )}
         >
-          <Button
-            as={Link}
-            variant={siteConfig.showAmbientVideo ? "primary" : "primary"}
-            size="lg"
-            href={pages.registration.path}
-            className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-primary-400")}
-          >
-            <HowToRegIcon />
-            Register
-          </Button>
-          <Button
-            as={Link}
-            variant={siteConfig.showAmbientVideo ? "secondary" : "secondary"}
-            size="lg"
-            href={pages.about.path}
-            className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
-          >
-            <HelpClinicIcon />
-            {pages.about.menuLabel}
-          </Button>
+          <a href={pages.registration.path}>
+            <Button
+              variant="primary"
+              size="lg"
+              className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-accent")}
+            >
+              <HowToRegIcon />
+              Register
+            </Button>
+          </a>
+          <a href={pages.about.path}>
+            <Button
+              variant="secondary"
+              size="lg"
+              className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
+            >
+              <HelpClinicIcon />
+              {pages.about.menuLabel}
+            </Button>
+          </a>
         </div>
 
         <div

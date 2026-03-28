@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
+import { getKeyValue } from "@/utils/table";
 import { allTimeTeams } from "@/config/allTimeTeams";
 import StyledSelect from "./styledSelect";
 import StyledInput from "./styledInput";
@@ -148,7 +149,7 @@ export default function AllTimeTeamsTable() {
         <Table.Content aria-label={`${pages.allTimeLists.menuLabel} - Teams`}>
           <Table.Header columns={columns}>
             {(column) => (
-              <Table.Column key={column.key} align={column.key === "year" ? "center" : "start"}>
+              <Table.Column key={column.key} className={column.key === "year" ? "text-center" : "text-start"}>
                 {column.label}
               </Table.Column>
             )}

@@ -5,7 +5,7 @@ export default function AlertMessageFirefox() {
     <div className="mx-auto pt-6">
       <Alert className="rounded-sm p-3">
         <Alert.Content>
-          <Alert.Title className="text-medium font-normal">
+          <Alert.Title className="text-base font-normal">
             <div className="space-y-1">
               <p>Page has not been configured for this browser.</p>
               <p>Please try Safari, Chrome, Edge, etc.</p>

@@ -1,7 +1,8 @@
 "use client";
 
 import { participatingTeams } from "@/config/participatingTeams";
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
+import { getKeyValue } from "@/utils/table";
 import Divisions from "@/components/divisions";
 import { divisions, heats } from "@/config/races";
 import { useMemo, useState } from "react";
@@ -121,7 +122,7 @@ export default function ParticipatingTeamsTable() {
             {(column) => (
               <Table.Column
                 key={column.key}
-                align={column.key === "varsityHeat" || column.key === "state" ? "center" : "start"}
+                className={column.key === "varsityHeat" || column.key === "state" ? "text-center" : "text-start"}
               >
                 {column.label}
               </Table.Column>
@@ -132,7 +133,7 @@ export default function ParticipatingTeamsTable() {
               <Table.Row key={item.id}>
                 {(columnKey) => (
                   <Table.Cell>
-                    {columnKey === "division" ? (
+                    {String(columnKey) === "division" ? (
                       <Divisions divisions={item.division ? [item.division] : []} />
                     ) : (
                       getKeyValue(item, columnKey)

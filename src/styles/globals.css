@@ -1,10 +1,9 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
 @theme inline {
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
+  --color-foreground: #1e1a4d;
+  --color-surface: #fdf7f4;
 }
-
-@plugin "../../hero.ts";
-
-@source "../../node_modules/@heroui/theme/dist/components/*.js";

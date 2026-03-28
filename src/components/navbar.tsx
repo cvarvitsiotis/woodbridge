@@ -69,13 +69,13 @@ function Menus({
       <li>
         <Link
           href={pages.contact.path}
-          size="lg"
           className={clsx(
+            "text-lg",
             isMenu && "h-10",
             isHomePage && !isMenu && siteConfig.showAmbientVideo
               ? "text-white"
               : pathname === pages.contact.path
-                ? "text-primary"
+                ? "text-accent"
                 : "text-foreground",
           )}
           onClick={handleMenuAction}
@@ -152,14 +152,14 @@ export function Navbar() {
         </ul>
         <div className="flex basis-full items-center justify-end gap-10">
           <div className="flex gap-6">
-            <Link isExternal href={urls.socials.twitter}>
+            <Link href={urls.socials.twitter} target="_blank" rel="noopener noreferrer">
               <XIcon
                 className={
                   isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
                 }
               />
             </Link>
-            <Link isExternal href={urls.socials.instagram}>
+            <Link href={urls.socials.instagram} target="_blank" rel="noopener noreferrer">
               <InstagramIcon
                 className={
                   isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"

@@ -4,7 +4,8 @@ import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import { Input, Label, TextField } from "@heroui/react";
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
+import { getKeyValue } from "@/utils/table";
 import { pages } from "@/config/site";
 
 const AnchorTypes = {
@@ -280,7 +281,7 @@ function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
                 <Table.Row key={item[1].originalOrder}>
                   {(columnKey) => (
                     <Table.Cell>
-                      {columnKey === "bib" ? item[0] : getKeyValue(item[1], columnKey)}
+                      {String(columnKey) === "bib" ? item[0] : getKeyValue(item[1], columnKey)}
                     </Table.Cell>
                   )}
                 </Table.Row>

@@ -122,15 +122,15 @@ function OverallSection({ selectedYear }: { selectedYear: string }) {
 function getDivisionColor(division?: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
-      return "bg-primary-300";
+      return "bg-accent-soft";
     case divisions.two.num:
-      return "bg-warning-300";
+      return "bg-warning";
     case divisions.three.num:
-      return "bg-danger-300";
+      return "bg-danger";
     case divisions.four.num:
       return "bg-indigo-50";
     default:
-      return "bg-secondary-300";
+      return "bg-default-300";
   }
 }
 

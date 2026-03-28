@@ -82,10 +82,10 @@ function NavbarDropdownTrigger({
         "bg-transparent p-0 text-lg data-[hover=true]:bg-transparent",
         isHomePage && !isMenu && siteConfig.showAmbientVideo && "text-white",
       )}
-      endContent={<ChevronDown fill="currentColor" size={16} />}
-      variant="light"
+      variant="ghost"
     >
       {pageParent}
+      <ChevronDown fill="currentColor" size={16} />
     </Button>
   );
 }
@@ -117,9 +117,9 @@ export default function NavbarDropdown({
                 id={page.path}
                 href={page.path}
                 textValue={page.menuLabel}
-                className={clsx("text-lg font-normal", pathname === page.path && "text-primary")}
+                className={clsx("text-lg font-normal", pathname === page.path && "text-accent")}
               >
-                <div className={clsx(pathname === page.path && "text-primary")}>
+                <div className={clsx(pathname === page.path && "text-accent")}>
                   <DropdownItemIcon page={page} />
                 </div>
                 <Label>{page.menuLabel}</Label>

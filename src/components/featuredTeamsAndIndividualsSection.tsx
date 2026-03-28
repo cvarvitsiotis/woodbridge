@@ -2,7 +2,8 @@
 
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
-import { getKeyValue, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
+import { getKeyValue } from "@/utils/table";
 import clsx from "clsx";
 
 const teamColumns = [
@@ -55,7 +56,7 @@ function TeamsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={teamColumns}>
               {(column) => (
-                <Table.Column key={column.key} align={column.key === "state" ? "center" : "start"}>
+                <Table.Column key={column.key} className={column.key === "state" ? "text-center" : "text-start"}>
                   {column.label}
                 </Table.Column>
               )}
@@ -90,7 +91,7 @@ function IndividualsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={individualColumns}>
               {(column) => (
-                <Table.Column key={column.key} align={column.key === "teamState" ? "center" : "start"}>
+                <Table.Column key={column.key} className={column.key === "teamState" ? "text-center" : "text-start"}>
                   {column.label}
                 </Table.Column>
               )}
