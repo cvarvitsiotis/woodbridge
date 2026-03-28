@@ -1,4 +1,4 @@
-import { Input } from "@heroui/input";
+import { CloseButton, InputGroup } from "@heroui/react";
 import { SearchIcon } from "./icons";
 
 export default function StyledInput({
@@ -13,19 +13,20 @@ export default function StyledInput({
   onValueChange: (value: string) => void;
 }) {
   return (
-    <Input
-      isClearable
-      placeholder={placeholder}
-      startContent={<SearchIcon className="text-default-400" />}
-      variant="faded"
-      radius="sm"
-      value={value}
-      onClear={() => onValueChange("")}
-      onValueChange={onValueChange}
-      className={className}
-      classNames={{
-        inputWrapper: "min-h-12 h-12 border border-default-300",
-      }}
-    />
+    <InputGroup className={className}>
+      <InputGroup.Prefix>
+        <SearchIcon className="text-default-400" />
+      </InputGroup.Prefix>
+      <InputGroup.Input
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onValueChange(e.target.value)}
+      />
+      {value && (
+        <InputGroup.Suffix>
+          <CloseButton aria-label="Clear" onPress={() => onValueChange("")} />
+        </InputGroup.Suffix>
+      )}
+    </InputGroup>
   );
 }

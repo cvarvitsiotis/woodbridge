@@ -1,42 +1,40 @@
-import { Select, SelectItem } from "@heroui/select";
-import { SelectSlots, SlotsToClasses } from "@heroui/theme";
+import { Label, ListBox, Select } from "@heroui/react";
+import type { Key } from "@heroui/react";
 
 export default function StyledSelect({
   options,
   onChange,
   selectedKey,
   label,
-  labelPlacement,
-  size,
   className,
-  classNames,
 }: {
   options: string[];
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
   selectedKey: string;
   label: string;
-  labelPlacement?: "outside" | "outside-left" | "inside" | undefined;
-  size?: "sm" | "md" | "lg" | undefined;
   className?: string;
-  classNames?: SlotsToClasses<SelectSlots>;
 }) {
   return (
     <Select
-      selectedKeys={[selectedKey]}
-      size={size ?? "sm"}
-      onChange={onChange}
-      label={label}
-      labelPlacement={labelPlacement ?? "inside"}
-      variant="faded"
+      value={selectedKey}
+      onChange={(value: Key | null) => onChange(String(value ?? ""))}
       className={className}
-      classNames={{
-        trigger: "border border-default-300",
-        ...classNames,
-      }}
     >
-      {options.map((option) => (
-        <SelectItem key={option}>{option}</SelectItem>
-      ))}
+      <Label>{label}</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          {options.map((option) => (
+            <ListBox.Item key={option} id={option} textValue={option}>
+              {option}
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          ))}
+        </ListBox>
+      </Select.Popover>
     </Select>
   );
 }

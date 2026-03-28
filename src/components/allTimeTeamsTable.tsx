@@ -109,12 +109,12 @@ export default function AllTimeTeamsTable() {
 
   const topContent = useMemo(
     function () {
-      function onGenderFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setGenderFilter(() => event.target.value);
+      function onGenderFilterChange(value: string): void {
+        setGenderFilter(value);
       }
 
-      function onCourseFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setCourseFilter(() => event.target.value);
+      function onCourseFilterChange(value: string): void {
+        setCourseFilter(value);
       }
 
       return (

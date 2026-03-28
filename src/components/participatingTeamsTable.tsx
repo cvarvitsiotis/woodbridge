@@ -87,11 +87,11 @@ export default function ParticipatingTeamsTable() {
 
   const getTopContent = useMemo(
     function () {
-      function onDivisionFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setDivisionFilter(() => event.target.value);
+      function onDivisionFilterChange(value: string): void {
+        setDivisionFilter(value);
       }
-      function onVarsityHeatFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setVarsityHeatFilter(() => event.target.value);
+      function onVarsityHeatFilterChange(value: string): void {
+        setVarsityHeatFilter(value);
       }
       return (
         <div className="flex flex-col justify-between gap-3 sm:flex-row">

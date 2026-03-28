@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
-import { Input } from "@heroui/input";
+import { Input, Label, TextField } from "@heroui/react";
 import {
   getKeyValue,
   Table,
@@ -209,53 +209,38 @@ export default function RewindUltra() {
         </div>
         <div className="space-y-2 pt-2">
           {anchorType === AnchorTypes.RaceStartTime && (
-            <Input
-              label="Start Time (HH:mm:ss.fff)"
-              variant="faded"
-              radius="sm"
-              value={raceStartTime}
-              onValueChange={setRaceStartTime}
-              className="w-max"
-              classNames={{
-                inputWrapper: "border border-default-300",
-              }}
-            />
+            <TextField className="w-max">
+              <Label>Start Time (HH:mm:ss.fff)</Label>
+              <Input
+                value={raceStartTime}
+                onChange={(e) => setRaceStartTime(e.target.value)}
+              />
+            </TextField>
           )}
           {anchorType === AnchorTypes.RunnerResultTime && (
             <>
-              <Input
-                label="Result Time (HH:mm:ss.fff)"
-                variant="faded"
-                radius="sm"
-                value={runnerResultTime}
-                onValueChange={setRunnerResultTime}
-                className="w-max"
-                classNames={{
-                  inputWrapper: "border border-default-300",
-                }}
-              />
-              <Input
-                label="Bib Number"
-                variant="faded"
-                radius="sm"
-                value={runnerBib}
-                onValueChange={setRunnerBib}
-                className="w-max"
-                classNames={{
-                  inputWrapper: "border border-default-300",
-                }}
-              />
+              <TextField className="w-max">
+                <Label>Result Time (HH:mm:ss.fff)</Label>
+                <Input
+                  value={runnerResultTime}
+                  onChange={(e) => setRunnerResultTime(e.target.value)}
+                />
+              </TextField>
+              <TextField className="w-max">
+                <Label>Bib Number</Label>
+                <Input
+                  value={runnerBib}
+                  onChange={(e) => setRunnerBib(e.target.value)}
+                />
+              </TextField>
             </>
           )}
         </div>
         {anchorType && (raceStartTime || (runnerResultTime && runnerBib)) && (
           <Input
             type="file"
-            radius="sm"
             accept=".txt"
-            variant="faded"
             className="pt-4"
-            classNames={{ mainWrapper: "w-max" }}
             onChange={handleFileChange}
           />
         )}

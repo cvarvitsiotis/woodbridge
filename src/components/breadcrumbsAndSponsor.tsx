@@ -1,6 +1,6 @@
 "use client";
 
-import { BreadcrumbItem, Breadcrumbs } from "@heroui/breadcrumbs";
+import { Breadcrumbs, BreadcrumbsItem } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { pages } from "@/config/site";
 import PresentedByAsics from "./presentedByAsics";
@@ -15,8 +15,8 @@ export default function BreadcrumbsAndSponsor() {
   return (
     <div className="flex w-full items-center justify-between">
       <Breadcrumbs isDisabled>
-        {page?.parent && <BreadcrumbItem>{page?.parent}</BreadcrumbItem>}
-        <BreadcrumbItem>{page?.menuLabel}</BreadcrumbItem>
+        {page?.parent && <BreadcrumbsItem>{page?.parent}</BreadcrumbsItem>}
+        <BreadcrumbsItem>{page?.menuLabel}</BreadcrumbsItem>
       </Breadcrumbs>
       <PresentedByAsics isBreadcrumb />
     </div>
