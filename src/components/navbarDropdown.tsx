@@ -3,7 +3,7 @@
 import React from "react";
 import { NavbarItem, NavbarMenuItem } from "@heroui/navbar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
 import {

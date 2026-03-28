@@ -1,6 +1,6 @@
 import GreatParkLogo, { AsicsLogo, IrvineTimingLogo } from "@/components/icons";
 import { urls } from "@/config/data";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -18,7 +18,7 @@ function Sponsor({ url, motto, children }: { url: string; motto: string; childre
   return (
     <div className="grid items-center justify-center gap-x-2 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
       <div className="justify-self-center rounded-4xl md:justify-self-auto">
-        <Link isExternal href={url}>
+        <Link href={url} target="_blank" rel="noopener noreferrer">
           {children}
         </Link>
       </div>

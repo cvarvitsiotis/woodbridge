@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
 import { getParagraphStyle } from "@/styles/styles";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function ParagraphLink({ url, name }: { url: string; name: string }) {
   return (
-    <Link isExternal href={url} className={getParagraphStyle(false)}>
+    <Link href={url} target="_blank" rel="noopener noreferrer" className={getParagraphStyle(false)}>
       {name}
     </Link>
   );

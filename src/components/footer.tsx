@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 
 import { urls } from "@/config/data";
 import { pages, siteConfig } from "@/config/site";
@@ -15,7 +15,7 @@ import clsx from "clsx";
 
 function FooterLink({ url, children }: { url: string; children: React.ReactNode }) {
   return (
-    <Link isExternal href={url} className="text-sm">
+    <Link href={url} target="_blank" rel="noopener noreferrer" className="text-sm">
       {children}
     </Link>
   );

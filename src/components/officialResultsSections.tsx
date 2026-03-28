@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import {
   divisions,
   genders,
@@ -8,7 +8,7 @@ import {
   levels,
 } from "@/config/races";
 import { DivisionType, RaceType } from "@/types";
-import { Card } from "@heroui/card";
+import { Card } from "@heroui/react";
 import { getSubheaderStyle } from "@/styles/styles";
 import clsx from "clsx";
 
@@ -72,11 +72,10 @@ function ResultLink({
 }) {
   return (
     <Link
-      isExternal
       href={url}
-      underline="hover"
-      color="primary"
-      className={clsx(isFontLight && "font-light")}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={clsx("hover:underline", isFontLight && "font-light")}
     >
       {label}
     </Link>
@@ -193,7 +192,7 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
   return (
-    <Card shadow="lg" className="w-80">
+    <Card className="shadow-lg w-80">
       <div
         className={clsx(
           "border-b border-gray-200 p-2 text-center font-medium",

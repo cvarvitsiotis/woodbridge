@@ -1,5 +1,5 @@
 import { urls } from "@/config/data";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -23,7 +23,7 @@ function LinkListItem({ url, label }: { url: string; label: string }) {
 
 function ExternalLink({ url, label }: { url: string; label: string }) {
   return (
-    <Link isExternal href={url}>
+    <Link href={url} target="_blank" rel="noopener noreferrer">
       {label}
     </Link>
   );

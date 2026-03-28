@@ -1,6 +1,6 @@
 import { urls } from "@/config/data";
 import { dates } from "@/config/dates";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -33,7 +33,7 @@ function RegistrationSection({
 
 function ParagraphLink({ url, name }: { url: string; name: string }) {
   return (
-    <Link isExternal href={url} className={getParagraphStyle(true)}>
+    <Link href={url} target="_blank" rel="noopener noreferrer" className={getParagraphStyle(true)}>
       {name}
     </Link>
   );

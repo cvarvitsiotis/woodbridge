@@ -1,7 +1,7 @@
 import { people, urls } from "@/config/data";
 import { filteredRaces } from "@/config/races";
 import { dates } from "@/config/dates";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
 import { Metadata } from "next";
@@ -23,7 +23,11 @@ function ParagraphLink({
   isExternal?: boolean;
 }) {
   return (
-    <Link isExternal={isExternal} href={url} className={getParagraphStyle()}>
+    <Link
+      href={url}
+      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className={getParagraphStyle()}
+    >
       {name}
     </Link>
   );

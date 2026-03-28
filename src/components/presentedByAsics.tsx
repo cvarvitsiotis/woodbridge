@@ -1,4 +1,4 @@
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { AsicsLogo } from "./icons";
 import { urls } from "@/config/data";
 import clsx from "clsx";
@@ -25,7 +25,7 @@ export default function PresentedByAsics({
       )}
     >
       <span className={clsx(isBreadcrumb && "hidden sm:block")}>Presented by</span>
-      <Link isExternal href={urls.partners.asics}>
+      <Link href={urls.partners.asics} target="_blank" rel="noopener noreferrer">
         <AsicsLogo
           color={isHomePage ? "text-white" : undefined}
           height={isHomePage ? clsx("h-12", isHomePage && !isScreenShort && "md:h-14") : undefined}

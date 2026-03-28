@@ -1,14 +1,12 @@
 "use client";
 
-import { Link } from "@heroui/link";
-import { Button } from "@heroui/button";
+import { Link, Button, Alert } from "@heroui/react";
 
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
 import { CalendarIcon, HelpClinicIcon, HowToRegIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
-import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 
@@ -43,22 +41,15 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
           <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
         </div>
       ) : (
-        <Alert
-          hideIcon
-          color="warning"
-          title={
-            <div className="space-y-2">
-              <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
-            </div>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{
-            base: "p-2",
-            mainWrapper: "ms-0 min-h-0 text-center",
-            title: "font-normal",
-          }}
-        />
+        <Alert className="rounded-sm p-2">
+          <Alert.Content className="ms-0 min-h-0 text-center">
+            <Alert.Title className="font-normal">
+              <div className="space-y-2">
+                <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
+              </div>
+            </Alert.Title>
+          </Alert.Content>
+        </Alert>
       )}
     </div>
   );
@@ -207,26 +198,22 @@ export default function Page() {
         >
           <Button
             as={Link}
-            color="primary"
-            radius="full"
-            variant={siteConfig.showAmbientVideo ? "solid" : "shadow"}
+            variant={siteConfig.showAmbientVideo ? "primary" : "primary"}
             size="lg"
             href={pages.registration.path}
-            startContent={<HowToRegIcon />}
-            className={clsx(siteConfig.showAmbientVideo && "bg-primary-400")}
+            className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-primary-400")}
           >
+            <HowToRegIcon />
             Register
           </Button>
           <Button
             as={Link}
-            color={siteConfig.showAmbientVideo ? "default" : "secondary"}
-            radius="full"
-            variant={siteConfig.showAmbientVideo ? "solid" : "bordered"}
+            variant={siteConfig.showAmbientVideo ? "secondary" : "secondary"}
             size="lg"
             href={pages.about.path}
-            startContent={<HelpClinicIcon />}
-            className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
+            className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
           >
+            <HelpClinicIcon />
             {pages.about.menuLabel}
           </Button>
         </div>

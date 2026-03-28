@@ -4,7 +4,7 @@ import woodbridgeCourse from "@/../public/images/woodbridge-course.png";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { PrintIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default async function Page() {
       </PageHeader>
       <div className="pt-7">
         <div className="max-w-[800px] text-right">
-          <Link isExternal href="/images/woodbridge-course.pdf">
+          <Link href="/images/woodbridge-course.pdf" target="_blank" rel="noopener noreferrer">
             <div className="flex items-center gap-0.5 text-default-600">
               <PrintIcon size={30} />
               <p>PRINT</p>

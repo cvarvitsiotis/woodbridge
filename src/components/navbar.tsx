@@ -10,7 +10,7 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@heroui/navbar";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 

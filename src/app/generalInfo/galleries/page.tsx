@@ -1,5 +1,5 @@
 import { LinkType } from "@/types";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import { getParagraphStyle } from "@/styles/styles";
@@ -22,7 +22,7 @@ function Year({ year, links }: { year: string; links: LinkType[] }) {
       <div className="ml-4">
         {links.map((link) => (
           <div key={link.url}>
-            <Link isExternal href={link.url}>
+            <Link href={link.url} target="_blank" rel="noopener noreferrer">
               {link.description}
             </Link>
           </div>

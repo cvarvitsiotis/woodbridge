@@ -3,18 +3,18 @@
 import greatParkParkingLots from "@/../public/images/great-park-parking-lots.png";
 import directionsGridlock from "@/../public/images/woodbridge-gridlock.png";
 import Image from "next/image";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
 import { ReactNode, useState } from "react";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
-import { Alert } from "@heroui/alert";
+import { Alert } from "@heroui/react";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { dates } from "@/config/dates";
 import { urls } from "@/config/data";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -332,12 +332,13 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
   return (
     <div>
       <Link
-        isExternal
         aria-label="Google Maps"
         href={
           `https://www.google.com/maps/dir/?api=1&destination=${location}` +
           (includeWaypoint ? `&waypoints=${locations.waypoint}` : "")
         }
+        target="_blank"
+        rel="noopener noreferrer"
       >
         Google Maps
       </Link>
@@ -581,64 +582,58 @@ function Alerts() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 pt-6">
       <div>
-        <Alert
-          hideIconWrapper
-          color="danger"
-          title={
-            <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
-              <div className="space-y-2 lg:basis-3/5">
-                <p>
-                  <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
-                  Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
-                </p>
-                <p>
-                  Use the Google Maps links below. They force you through Jeffrey by including an{" "}
-                  <span className="font-bold">intermediate waypoint</span>. When getting to the
-                  waypoint, click CONTINUE in Google Maps to continue to the Great Park.
-                </p>
+        <Alert status="danger" className="rounded-sm">
+          <Alert.Content>
+            <Alert.Title className="text-medium font-normal">
+              <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
+                <div className="space-y-2 lg:basis-3/5">
+                  <p>
+                    <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                    Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
+                  </p>
+                  <p>
+                    Use the Google Maps links below. They force you through Jeffrey by including an{" "}
+                    <span className="font-bold">intermediate waypoint</span>. When getting to the
+                    waypoint, click CONTINUE in Google Maps to continue to the Great Park.
+                  </p>
+                </div>
+                <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
+                  <Image
+                    fill
+                    src={directionsGridlock}
+                    quality={100}
+                    placeholder="blur"
+                    alt="Directions Gridlock"
+                    className="rounded-lg border border-slate-300 object-contain shadow-lg"
+                  />
+                </div>
               </div>
-              <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
-                <Image
-                  fill
-                  src={directionsGridlock}
-                  quality={100}
-                  placeholder="blur"
-                  alt="Directions Gridlock"
-                  className="rounded-lg border border-slate-300 object-contain shadow-lg"
-                />
-              </div>
-            </div>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{ title: "text-medium font-normal" }}
-        />
+            </Alert.Title>
+          </Alert.Content>
+        </Alert>
       </div>
       <div>
-        <Alert
-          hideIconWrapper
-          color="primary"
-          title={
-            <div className="space-y-2">
-              <p>
-                Parking passes <span className="font-bold">must be purchased online</span> prior to
-                arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
-              </p>
-              {new Date() < dates.parkingPassPurchaseDateParts.date && (
+        <Alert status="accent" className="rounded-sm">
+          <Alert.Content>
+            <Alert.Title className="text-medium font-normal">
+              <div className="space-y-2">
                 <p>
-                  Passes will be available for purchase on this page starting{" "}
-                  <span className="font-semibold">
-                    {dates.parkingPassPurchaseDateParts.monthDayLong}
-                  </span>
-                  .
+                  Parking passes <span className="font-bold">must be purchased online</span> prior to
+                  arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
                 </p>
-              )}
-            </div>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{ title: "text-medium font-normal" }}
-        />
+                {new Date() < dates.parkingPassPurchaseDateParts.date && (
+                  <p>
+                    Passes will be available for purchase on this page starting{" "}
+                    <span className="font-semibold">
+                      {dates.parkingPassPurchaseDateParts.monthDayLong}
+                    </span>
+                    .
+                  </p>
+                )}
+              </div>
+            </Alert.Title>
+          </Alert.Content>
+        </Alert>
       </div>
     </div>
   );
@@ -664,12 +659,12 @@ function GreatParkParkingLots() {
 function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
   return (
     <Button
-      isExternal
       as={Link}
-      color={isStartDate ? "primary" : "secondary"}
-      radius="full"
       variant="ghost"
+      className="rounded-full"
       href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       Purchase{" "}
       {isStartDate

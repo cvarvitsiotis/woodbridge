@@ -1,5 +1,4 @@
-import { Link } from "@heroui/link";
-import { Button } from "@heroui/button";
+import { Link, Button } from "@heroui/react";
 
 import { urls } from "@/config/data";
 import { Metadata } from "next";
@@ -14,12 +13,12 @@ export const metadata: Metadata = {
 function LiveLink({ url, label, isPrimary }: { url: string; label: string; isPrimary: boolean }) {
   return (
     <Button
-      isExternal
       as={Link}
-      color={isPrimary ? "primary" : "secondary"}
-      radius="full"
-      variant="ghost"
+      variant={isPrimary ? "ghost" : "ghost"}
+      className="rounded-full"
       href={url}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       {label}
     </Button>
