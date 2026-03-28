@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
-import { getKeyValue } from "@heroui/table";
+import { getKeyValue, Table } from "@heroui/react";
 import { allTimeIndividuals } from "@/config/allTimeIndividuals";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { pages } from "@/config/site";
 import StyledSelect from "./styledSelect";
 import StyledInput from "./styledInput";
@@ -160,10 +158,6 @@ export default function AllTimeIndividualsTable() {
   const [nameFilter, setNameFilter] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
 
-  const windowDimensions = useWindowDimensions();
-  const maxTableHeight =
-    windowDimensions.height !== undefined ? windowDimensions.height * 0.7 : 300;
-
   const tableKey = `${genderFilter}_${gradeFilter}_${courseFilter}`;
 
   const filteredItems = useMemo(
@@ -282,34 +276,29 @@ export default function AllTimeIndividualsTable() {
   );
 
   return (
-    <Table
-      isCompact
-      isHeaderSticky
-      isVirtualized
-      maxTableHeight={maxTableHeight}
-      aria-label={`${pages.allTimeLists.menuLabel} - Individuals`}
-      topContent={topContent}
-      topContentPlacement="outside"
-      classNames={{ wrapper: "p-2", td: "px-1" }}
-      key={tableKey} //to force rerender - bug was preventing
-    >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn
-            key={column.key}
-            align={column.key === "grade" || column.key === "year" ? "center" : "start"}
-          >
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={filteredItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
+    <Table key={tableKey}>
+      {topContent}
+      <Table.ScrollContainer>
+        <Table.Content aria-label={`${pages.allTimeLists.menuLabel} - Individuals`}>
+          <Table.Header columns={columns}>
+            {(column) => (
+              <Table.Column
+                key={column.key}
+                align={column.key === "grade" || column.key === "year" ? "center" : "start"}
+              >
+                {column.label}
+              </Table.Column>
+            )}
+          </Table.Header>
+          <Table.Body items={filteredItems}>
+            {(item) => (
+              <Table.Row key={item.id}>
+                {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
     </Table>
   );
 }

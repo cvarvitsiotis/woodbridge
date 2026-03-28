@@ -2,15 +2,7 @@
 
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
-import {
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { getKeyValue, Table } from "@heroui/react";
 import clsx from "clsx";
 
 const teamColumns = [
@@ -58,25 +50,25 @@ function TeamsSection({
   return (
     <div className="min-w-[40%] space-y-3">
       <div className="text-center">{header}</div>
-      <Table
-        isCompact
-        classNames={{ wrapper: "p-2", td: "px-1" }}
-        aria-label={`${sectionDescription} ${header}`}
-      >
-        <TableHeader columns={teamColumns}>
-          {(column) => (
-            <TableColumn key={column.key} align={column.key === "state" ? "center" : "start"}>
-              {column.label}
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody items={teams}>
-          {(item) => (
-            <TableRow key={item.id}>
-              {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-            </TableRow>
-          )}
-        </TableBody>
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={`${sectionDescription} ${header}`}>
+            <Table.Header columns={teamColumns}>
+              {(column) => (
+                <Table.Column key={column.key} align={column.key === "state" ? "center" : "start"}>
+                  {column.label}
+                </Table.Column>
+              )}
+            </Table.Header>
+            <Table.Body items={teams}>
+              {(item) => (
+                <Table.Row key={item.id}>
+                  {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
       </Table>
     </div>
   );
@@ -93,25 +85,25 @@ function IndividualsSection({
   return (
     <div className="min-w-[55%] space-y-3">
       <div className="text-center">INDIVIDUALS</div>
-      <Table
-        isCompact
-        classNames={{ wrapper: "p-2", td: "px-1" }}
-        aria-label={`${sectionDescription} ${header}`}
-      >
-        <TableHeader columns={individualColumns}>
-          {(column) => (
-            <TableColumn key={column.key} align={column.key === "teamState" ? "center" : "start"}>
-              {column.label}
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody items={individuals}>
-          {(item) => (
-            <TableRow key={item.id}>
-              {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-            </TableRow>
-          )}
-        </TableBody>
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={`${sectionDescription} ${header}`}>
+            <Table.Header columns={individualColumns}>
+              {(column) => (
+                <Table.Column key={column.key} align={column.key === "teamState" ? "center" : "start"}>
+                  {column.label}
+                </Table.Column>
+              )}
+            </Table.Header>
+            <Table.Body items={individuals}>
+              {(item) => (
+                <Table.Row key={item.id}>
+                  {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
       </Table>
     </div>
   );

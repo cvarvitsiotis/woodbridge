@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  getKeyValue,
-} from "@heroui/table";
+import { getKeyValue, Table } from "@heroui/react";
 
 import {
   scheduleLevelGenderToken,
@@ -65,33 +57,39 @@ export default function RacesTable({
   isFeatured?: boolean;
 }) {
   return (
-    <Table
-      isCompact
-      hideHeader={isFeatured}
-      topContent={isFeatured && <FeaturedTableHeader />}
-      topContentPlacement={isFeatured ? "inside" : "outside"}
-      aria-label={pages.schedule.menuLabel}
-    >
-      <TableHeader columns={isFeatured ? featuredColumns : columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-      </TableHeader>
-      <TableBody items={races}>
-        {(item) => (
-          <TableRow key={item.num}>
-            {(columnKey) => (
-              <TableCell>
-                {columnKey === "division" ? (
-                  <Divisions divisions={item.divisions} />
-                ) : columnKey === "description" ? (
-                  getDescription(item)
-                ) : (
-                  getKeyValue(item, columnKey)
+    <Table>
+      {isFeatured && <FeaturedTableHeader />}
+      <Table.ScrollContainer>
+        <Table.Content aria-label={pages.schedule.menuLabel}>
+          {!isFeatured && (
+            <Table.Header columns={columns}>
+              {(column) => <Table.Column key={column.key}>{column.label}</Table.Column>}
+            </Table.Header>
+          )}
+          {isFeatured && (
+            <Table.Header columns={featuredColumns}>
+              {(column) => <Table.Column key={column.key}>{column.label}</Table.Column>}
+            </Table.Header>
+          )}
+          <Table.Body items={races}>
+            {(item) => (
+              <Table.Row key={item.num}>
+                {(columnKey) => (
+                  <Table.Cell>
+                    {columnKey === "division" ? (
+                      <Divisions divisions={item.divisions} />
+                    ) : columnKey === "description" ? (
+                      getDescription(item)
+                    ) : (
+                      getKeyValue(item, columnKey)
+                    )}
+                  </Table.Cell>
                 )}
-              </TableCell>
+              </Table.Row>
             )}
-          </TableRow>
-        )}
-      </TableBody>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
     </Table>
   );
 }

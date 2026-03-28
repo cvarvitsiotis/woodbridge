@@ -1,17 +1,8 @@
 "use client";
 
 import { participatingTeams } from "@/config/participatingTeams";
-import {
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { getKeyValue, Table } from "@heroui/react";
 import Divisions from "@/components/divisions";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { divisions, heats } from "@/config/races";
 import { useMemo, useState } from "react";
 import { pages } from "@/config/site";
@@ -55,10 +46,6 @@ export default function ParticipatingTeamsTable() {
   const [divisionFilter, setDivisionFilter] = useState("All");
   const [varsityHeatFilter, setVarsityHeatFilter] = useState("All");
   const [teamFilter, setTeamFilter] = useState("");
-
-  const windowDimensions = useWindowDimensions();
-  const maxTableHeight =
-    windowDimensions.height !== undefined ? windowDimensions.height * 0.7 : 300;
 
   const tableKey = `${divisionFilter}_${varsityHeatFilter}`;
 
@@ -126,42 +113,37 @@ export default function ParticipatingTeamsTable() {
   if (isFirefox(userAgent)) return <AlertMessageFirefox />;
 
   return (
-    <Table
-      isCompact
-      isHeaderSticky
-      isVirtualized
-      maxTableHeight={maxTableHeight}
-      aria-label={pages.participatingTeams.menuLabel}
-      topContent={getTopContent}
-      topContentPlacement="outside"
-      classNames={{ base: "pt-10", wrapper: "p-2", td: "px-1" }}
-      key={tableKey} //to force rerender - bug was preventing
-    >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn
-            key={column.key}
-            align={column.key === "varsityHeat" || column.key === "state" ? "center" : "start"}
-          >
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={filteredItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                {columnKey === "division" ? (
-                  <Divisions divisions={item.division ? [item.division] : []} />
-                ) : (
-                  getKeyValue(item, columnKey)
-                )}
-              </TableCell>
+    <Table className="pt-10" key={tableKey}>
+      {getTopContent}
+      <Table.ScrollContainer>
+        <Table.Content aria-label={pages.participatingTeams.menuLabel}>
+          <Table.Header columns={columns}>
+            {(column) => (
+              <Table.Column
+                key={column.key}
+                align={column.key === "varsityHeat" || column.key === "state" ? "center" : "start"}
+              >
+                {column.label}
+              </Table.Column>
             )}
-          </TableRow>
-        )}
-      </TableBody>
+          </Table.Header>
+          <Table.Body items={filteredItems}>
+            {(item) => (
+              <Table.Row key={item.id}>
+                {(columnKey) => (
+                  <Table.Cell>
+                    {columnKey === "division" ? (
+                      <Divisions divisions={item.division ? [item.division] : []} />
+                    ) : (
+                      getKeyValue(item, columnKey)
+                    )}
+                  </Table.Cell>
+                )}
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
     </Table>
   );
 }

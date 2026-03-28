@@ -4,15 +4,7 @@ import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import { Input, Label, TextField } from "@heroui/react";
-import {
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { getKeyValue, Table } from "@heroui/react";
 import { pages } from "@/config/site";
 
 const AnchorTypes = {
@@ -277,21 +269,25 @@ const columns = [
 function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
   return (
     <div className="max-w-80">
-      <Table isCompact aria-label={pages.timing.menuLabel}>
-        <TableHeader columns={columns}>
-          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-        </TableHeader>
-        <TableBody items={results}>
-          {(item) => (
-            <TableRow key={item[1].originalOrder}>
-              {(columnKey) => (
-                <TableCell>
-                  {columnKey === "bib" ? item[0] : getKeyValue(item[1], columnKey)}
-                </TableCell>
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={pages.timing.menuLabel}>
+            <Table.Header columns={columns}>
+              {(column) => <Table.Column key={column.key}>{column.label}</Table.Column>}
+            </Table.Header>
+            <Table.Body items={results}>
+              {(item) => (
+                <Table.Row key={item[1].originalOrder}>
+                  {(columnKey) => (
+                    <Table.Cell>
+                      {columnKey === "bib" ? item[0] : getKeyValue(item[1], columnKey)}
+                    </Table.Cell>
+                  )}
+                </Table.Row>
               )}
-            </TableRow>
-          )}
-        </TableBody>
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
       </Table>
     </div>
   );
