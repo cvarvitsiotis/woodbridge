@@ -49,13 +49,7 @@ export default function Page() {
         </Sponsor>
         <Sponsor url={urls.partners.athletic} motto="The digital hub for the running community">
           <div className="relative aspect-8977/2235 h-15">
-            <Image
-              fill
-              src={athletic}
-              quality={100}
-              placeholder="blur"
-              alt={siteConfig.athleticNet}
-            />
+            <Image fill src={athletic} quality={100} alt={siteConfig.athleticNet} />
           </div>
         </Sponsor>
         <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">
