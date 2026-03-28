@@ -4,8 +4,7 @@ import greatParkParkingLots from "@/../public/images/great-park-parking-lots.png
 import directionsGridlock from "@/../public/images/woodbridge-gridlock.png";
 import Image from "next/image";
 import { Link } from "@heroui/react";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
+import { Accordion, Modal, useOverlayState } from "@heroui/react";
 import { ReactNode, useState } from "react";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
@@ -164,44 +163,47 @@ const instructionSections = {
 };
 
 function InstructionModal({
-  isOpen,
-  onOpenChange,
+  state,
   instruction,
 }: {
-  isOpen: boolean;
-  onOpenChange: () => void;
+  state: ReturnType<typeof useOverlayState>;
   instruction: ParkingInstructionType;
 }) {
   return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      size="xl"
-      placement="top"
-      scrollBehavior="inside"
-    >
-      <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{instruction.modalTitle}</ModalHeader>
-        <ModalBody>
-          <ModalBodyInternal instruction={instruction} />
-        </ModalBody>
-      </ModalContent>
+    <Modal state={state}>
+      <Modal.Backdrop>
+        <Modal.Container size="lg" placement="top" scroll="inside">
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>{instruction.modalTitle}</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <ModalBodyInternal instruction={instruction} />
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 }
 
 function getMainAccordionItem(instructionSection: string, child: ReactNode) {
   return (
-    <AccordionItem
+    <Accordion.Item
       key={instructionSection}
-      aria-label={instructionSection}
-      title={instructionSection}
-      classNames={{
-        title: getParagraphStyle(true),
-      }}
+      id={instructionSection}
     >
-      {child}
-    </AccordionItem>
+      <Accordion.Heading>
+        <Accordion.Trigger className={getParagraphStyle(true)}>
+          {instructionSection}
+          <Accordion.Indicator />
+        </Accordion.Trigger>
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <Accordion.Body>{child}</Accordion.Body>
+      </Accordion.Panel>
+    </Accordion.Item>
   );
 }
 
@@ -225,12 +227,18 @@ function getSpectatorsAccordionItem(
         {getSpectatorLotAccordionItem(instructions.freewayToLot6, handleOpenModal)}
         {getSpectatorLotAccordionItem(instructions.freewayToLot7, handleOpenModal)}
         {/*getSpectatorLotAccordionItem(instructions.freewayToLot8, handleOpenModal)*/}
-        <AccordionItem
+        <Accordion.Item
           key="Portola High School"
-          aria-label="Portola High School"
-          title="Portola High School"
+          id="Portola High School"
         >
-          <div className="space-y-4 pl-6">
+          <Accordion.Heading>
+            <Accordion.Trigger>
+              Portola High School
+              <Accordion.Indicator />
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>
             <p>
               Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great
               Park in Lot 4.
@@ -249,7 +257,9 @@ function getSpectatorsAccordionItem(
               handleOpenModal={handleOpenModal}
             />
           </div>
-        </AccordionItem>
+            </Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
       </Accordion>
     </>
   );
@@ -391,13 +401,22 @@ function getSpectatorLotAccordionItem(
   handleOpenModal: (instruction: ParkingInstructionType) => void,
 ) {
   return (
-    <AccordionItem
+    <Accordion.Item
       key={instruction.accordionTitle}
-      aria-label={instruction.accordionTitle}
-      title={instruction.accordionTitle}
+      id={instruction.accordionTitle!}
     >
-      <DescriptionMapModalInDiv instruction={instruction} handleOpenModal={handleOpenModal} />
-    </AccordionItem>
+      <Accordion.Heading>
+        <Accordion.Trigger>
+          {instruction.accordionTitle}
+          <Accordion.Indicator />
+        </Accordion.Trigger>
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <Accordion.Body>
+          <DescriptionMapModalInDiv instruction={instruction} handleOpenModal={handleOpenModal} />
+        </Accordion.Body>
+      </Accordion.Panel>
+    </Accordion.Item>
   );
 }
 
@@ -697,18 +716,18 @@ function ParkingPasses() {
 }
 
 export default function ParkingAndDirections() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const state = useOverlayState();
   const [instruction, setInstruction] = useState<ParkingInstructionType | undefined>();
 
   function handleOpenModal(instruction: ParkingInstructionType) {
     setInstruction(() => instruction);
-    onOpen();
+    state.open();
   }
 
   return (
     <>
       {instruction && (
-        <InstructionModal isOpen={isOpen} onOpenChange={onOpenChange} instruction={instruction} />
+        <InstructionModal state={state} instruction={instruction} />
       )}
       <Alerts />
       <ParkingPasses />

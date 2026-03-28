@@ -2,8 +2,7 @@
 
 import React from "react";
 import { NavbarItem, NavbarMenuItem } from "@heroui/navbar";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
-import { Button } from "@heroui/react";
+import { Dropdown, Button, Label } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
 import {
@@ -79,20 +78,16 @@ function NavbarDropdownTrigger({
   isHomePage: boolean;
 }) {
   return (
-    <DropdownTrigger>
-      <Button
-        disableRipple
-        className={clsx(
-          "bg-transparent p-0 text-lg data-[hover=true]:bg-transparent",
-          isHomePage && !isMenu && siteConfig.showAmbientVideo && "text-white",
-        )}
-        endContent={<ChevronDown fill="currentColor" size={16} />}
-        radius="sm"
-        variant="light"
-      >
-        {pageParent}
-      </Button>
-    </DropdownTrigger>
+    <Button
+      className={clsx(
+        "bg-transparent p-0 text-lg data-[hover=true]:bg-transparent",
+        isHomePage && !isMenu && siteConfig.showAmbientVideo && "text-white",
+      )}
+      endContent={<ChevronDown fill="currentColor" size={16} />}
+      variant="light"
+    >
+      {pageParent}
+    </Button>
   );
 }
 
@@ -111,35 +106,31 @@ export default function NavbarDropdown({
 
   const isHomePage = pathname === pages.home.path;
 
+  const Wrapper = isMenu ? NavbarMenuItem : NavbarItem;
+
   return (
-    <Dropdown>
-      {isMenu ? (
-        <NavbarMenuItem>
-          <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
-        </NavbarMenuItem>
-      ) : (
-        <NavbarItem>
-          <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
-        </NavbarItem>
-      )}
-      <DropdownMenu onAction={onAction}>
-        {pageItems.map((page) => (
-          <DropdownItem
-            key={page.path}
-            href={page.path}
-            startContent={
-              <div className={clsx(pathname === page.path && "text-primary")}>
-                <DropdownItemIcon page={page} />
-              </div>
-            }
-            classNames={{
-              title: clsx("text-lg font-normal", pathname === page.path && "text-primary"),
-            }}
-          >
-            {page.menuLabel}
-          </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
+    <Wrapper>
+      <Dropdown>
+        <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
+        <Dropdown.Popover>
+          <Dropdown.Menu onAction={onAction}>
+            {pageItems.map((page) => (
+              <Dropdown.Item
+                key={page.path}
+                id={page.path}
+                href={page.path}
+                textValue={page.menuLabel}
+                className={clsx("text-lg font-normal", pathname === page.path && "text-primary")}
+              >
+                <div className={clsx(pathname === page.path && "text-primary")}>
+                  <DropdownItemIcon page={page} />
+                </div>
+                <Label>{page.menuLabel}</Label>
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+    </Wrapper>
   );
 }
