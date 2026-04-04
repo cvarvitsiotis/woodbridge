@@ -10,6 +10,9 @@ function getDates() {
   const meetAge = meetStartDateParts.year - data.firstMeetYear;
   const meetAgeOrdinal = getOrdinal(meetAge);
   const teamRegistrationStartDateParts = getDateParts(data.teamRegistrationStartDate);
+  const teamRegistrationSaturdayMorningOnlyStartDateParts = getDateParts(
+    data.teamRegistrationSaturdayMorningOnlyStartDate,
+  );
   const teamRegistrationEndDateParts = getDateParts(data.teamRegistrationEndDate);
   const athleteRegistrationStartDateParts = getDateParts(data.athleteRegistrationStartDate);
   const athleteRegistrationEndDateParts = getDateParts(data.athleteRegistrationEndDate);
@@ -33,6 +36,7 @@ function getDates() {
     meetAge,
     meetAgeOrdinal,
     teamRegistrationStartDateParts,
+    teamRegistrationSaturdayMorningOnlyStartDateParts,
     teamRegistrationEndDateParts,
     athleteRegistrationStartDateParts,
     athleteRegistrationEndDateParts,

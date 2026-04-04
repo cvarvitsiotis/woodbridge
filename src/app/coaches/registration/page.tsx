@@ -48,12 +48,23 @@ export default function Page() {
     <>
       <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
         <RegistrationSection sectionName="Team">
-          {new Date() > dates.athleteRegistrationEndDateParts.date ? (
+          {new Date() > dates.teamRegistrationEndDateParts.date ? (
             <>
               <p>Team registration is now full.</p>
               <p>
                 If you wish to be placed on the waiting list, please fill out the{" "}
                 <TeamEntryFormLink />.
+              </p>
+            </>
+          ) : new Date() < dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
+            <>
+              <p>Team registration for the Saturday morning session is still open.</p>
+              <p>
+                Friday and Saturday night are now full, but you can request to be placed on the
+                waiting list.
+              </p>
+              <p>
+                To proceed, please fill out the <TeamEntryFormLink />.
               </p>
             </>
           ) : new Date() < dates.teamRegistrationStartDateParts.date ? (
