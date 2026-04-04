@@ -59,10 +59,7 @@ export default function Page() {
           ) : new Date() >= dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
             <>
               <p>Team registration for the Saturday morning session is still open.</p>
-              <p>
-                Friday and Saturday night are now full, but you can request to be placed on the
-                waiting list.
-              </p>
+              <p>Friday and Saturday night are now full, but you can join their waiting lists.</p>
               <p>
                 To proceed, please fill out the <TeamEntryFormLink />.
               </p>
