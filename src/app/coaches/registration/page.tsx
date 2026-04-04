@@ -48,7 +48,7 @@ export default function Page() {
     <>
       <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
         <RegistrationSection sectionName="Team">
-          {new Date() > dates.teamRegistrationEndDateParts.date ? (
+          {new Date() >= dates.teamRegistrationEndDateParts.date ? (
             <>
               <p>Team registration is now full.</p>
               <p>
@@ -56,7 +56,7 @@ export default function Page() {
                 <TeamEntryFormLink />.
               </p>
             </>
-          ) : new Date() < dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
+          ) : new Date() >= dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
             <>
               <p>Team registration for the Saturday morning session is still open.</p>
               <p>
