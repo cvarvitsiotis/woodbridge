@@ -1,4 +1,4 @@
-import GreatParkLogo, { AsicsLogo, IrvineTimingLogo } from "@/components/icons";
+import { AsicsLogo, IrvineTimingLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import Image from "next/image";
 import athletic from "@/../public/images/athletic.png";
+import greatPark from "@/../public/images/great-park.png";
 
 export const metadata: Metadata = {
   title: pages.partners.menuLabel,
@@ -56,7 +57,9 @@ export default function Page() {
           <IrvineTimingLogo height="h-32" />
         </Sponsor>
         <Sponsor url={urls.partners.asics} motto="Grounded in history, driven by community">
-          <GreatParkLogo />
+          <div className="relative aspect-3600/3600 h-32">
+            <Image fill src={greatPark} quality={100} alt={siteConfig.greatPark} />
+          </div>
         </Sponsor>
       </div>
     </>

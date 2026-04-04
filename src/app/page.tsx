@@ -12,6 +12,18 @@ import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 
+function RegisterEarlyAlertMessageWrapper({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <>
+      {new Date() < dates.teamRegistrationEndDateParts.date && (
+        <div className={clsx("space-y-2", !siteConfig.showAmbientVideo && "mt-2")}>
+          <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
+        </div>
+      )}
+    </>
+  );
+}
+
 function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <p
@@ -20,18 +32,33 @@ function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
-      <Link
-        href={pages.registration.path}
-        className={clsx(
-          "font-semibold",
-          siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning-800",
-          siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
-        )}
-      >
-        Register
-      </Link>{" "}
-      early (starting {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
+      {new Date() >= dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
+        <>
+          Registration is almost full.{" "}
+          <RegisterEarlyLink isScreenShort={isScreenShort} text="Enter" /> your team soon.
+        </>
+      ) : (
+        <>
+          <RegisterEarlyLink isScreenShort={isScreenShort} text="Register" /> early (starting{" "}
+          {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
+        </>
+      )}
     </p>
+  );
+}
+
+function RegisterEarlyLink({ isScreenShort, text }: { isScreenShort: boolean; text: string }) {
+  return (
+    <Link
+      href={pages.registration.path}
+      className={clsx(
+        "font-semibold",
+        siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning-800",
+        siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
+      )}
+    >
+      {text}
+    </Link>
   );
 }
 
@@ -39,18 +66,12 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <div className="z-10 mx-auto">
       {siteConfig.showAmbientVideo ? (
-        <div className="mt-2 space-y-2">
-          <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
-        </div>
+        <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
       ) : (
         <Alert
           hideIcon
           color="warning"
-          title={
-            <div className="space-y-2">
-              <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
-            </div>
-          }
+          title={<RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />}
           variant="faded"
           radius="sm"
           classNames={{
