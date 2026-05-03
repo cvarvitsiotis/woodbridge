@@ -13,7 +13,8 @@ export const data = {
   featuredEntriesPublishDate: new Date(2026, 8, 1, 0, 0, 0),
   preOrderTShirtsStartDate: new Date(2026, 7, 0, 0, 0, 0),
   preOrderTShirtsEndDate: new Date(2026, 8, 16, 23, 59, 59),
-  hotelReservationEndDate: new Date(2026, 7, 21, 0, 0, 0),
+  hotelReservationEndDateComfortInn: new Date(2026, 7, 21, 0, 0, 0),
+  hotelReservationEndDateHiltonGardenInn: new Date(2026, 8, 1, 0, 0, 0),
   parkingPassPurchaseDate: new Date(2026, 7, 30, 0, 0, 0),
   parkingGoFanStartDateEventId: "3902189",
   parkingGoFanEndDateEventId: "3902192",
@@ -57,7 +58,7 @@ export const urls = {
   hotels: {
     hiltonIrvine: "https://www.hilton.com/en/hotels/snaochf-hilton-irvine-orange-county-airport/",
     hiltonGardenInn:
-      "https://www.hilton.com/en/hotels/snaijgi-hilton-garden-inn-irvine-orange-county-airport/",
+      "https://www.hilton.com/en/attend-my-event/snaijgi-91r-6d458d7b-e007-4907-a738-4374bb4fdc89/",
     springHillSuites:
       "https://www.marriott.com/en-us/hotels/snaap-springhill-suites-irvine-john-wayne-airport-orange-county/overview/",
     staybridgeSuites: "https://www.ihg.com/staybridge/hotels/us/en/irvine/irvbp/hoteldetail",
