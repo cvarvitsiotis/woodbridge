@@ -21,6 +21,9 @@ function getDates() {
   const featuredEntriesPublishDateParts = getDateParts(data.featuredEntriesPublishDate);
   const preOrderTShirtsStartDateParts = getDateParts(data.preOrderTShirtsEndDate);
   const preOrderTShirtsEndDateParts = getDateParts(data.preOrderTShirtsEndDate);
+  const hotelReservationEndDateEmbassySuites = getDateParts(
+    data.hotelReservationEndDateEmbassySuites,
+  );
   const hotelReservationEndDateComfortInn = getDateParts(data.hotelReservationEndDateComfortInn);
   const hotelReservationEndDateHiltonGardenInn = getDateParts(
     data.hotelReservationEndDateHiltonGardenInn,
@@ -48,6 +51,7 @@ function getDates() {
     featuredEntriesPublishDateParts,
     preOrderTShirtsStartDateParts,
     preOrderTShirtsEndDateParts,
+    hotelReservationEndDateEmbassySuites,
     hotelReservationEndDateComfortInn,
     hotelReservationEndDateHiltonGardenInn,
     parkingPassPurchaseDateParts,

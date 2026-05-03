@@ -45,6 +45,7 @@ function EmbassySuites() {
         Includes complimentary cooked to order breakfast buffet, complimentary evening reception,
         complimentary Wi-Fi, Parking $15.00.
       </p>
+      <p>Book by {dates.hotelReservationEndDateEmbassySuites.monthDayLong}.</p>
       <p className="pt-4">Please contact Corina De la Isla</p>
       <p>949.705.5149</p>
     </div>
