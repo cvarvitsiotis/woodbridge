@@ -20,6 +20,8 @@ import StyledInput from "./styledInput";
 import { useUserAgent } from "@/hooks/useUserAgent";
 import { isFirefox } from "@/utils/userAgent";
 import AlertMessageFirefox from "./alertMessageFirefox";
+import clsx from "clsx";
+import { dates } from "@/config/dates";
 
 const columns = [
   {
@@ -99,22 +101,26 @@ export default function ParticipatingTeamsTable() {
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            className="basis-2/5"
+            className={clsx(
+              new Date() >= dates.participatingTeamsUpdateDateParts.date && "basis-2/5",
+            )}
           />
-          <div className="flex basis-3/5 gap-3">
-            <StyledSelect
-              selectedKey={divisionFilter}
-              onChange={onDivisionFilterChange}
-              label="Division"
-              options={divisionOptions.map((division) => division.name)}
-            />
-            <StyledSelect
-              selectedKey={varsityHeatFilter}
-              onChange={onVarsityHeatFilterChange}
-              label="Varsity Heat"
-              options={heatOptions}
-            />
-          </div>
+          {new Date() >= dates.participatingTeamsUpdateDateParts.date && (
+            <div className="flex basis-3/5 gap-3">
+              <StyledSelect
+                selectedKey={divisionFilter}
+                onChange={onDivisionFilterChange}
+                label="Division"
+                options={divisionOptions.map((division) => division.name)}
+              />
+              <StyledSelect
+                selectedKey={varsityHeatFilter}
+                onChange={onVarsityHeatFilterChange}
+                label="Varsity Heat"
+                options={heatOptions}
+              />
+            </div>
+          )}
         </div>
       );
     },
@@ -137,7 +143,13 @@ export default function ParticipatingTeamsTable() {
       classNames={{ base: "pt-10", wrapper: "p-2", td: "px-1" }}
       key={tableKey} //to force rerender - bug was preventing
     >
-      <TableHeader columns={columns}>
+      <TableHeader
+        columns={columns.filter(
+          (column) =>
+            new Date() >= dates.participatingTeamsUpdateDateParts.date ||
+            (column.key !== "division" && column.key !== "varsityHeat"),
+        )}
+      >
         {(column) => (
           <TableColumn
             key={column.key}
