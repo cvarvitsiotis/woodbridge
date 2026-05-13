@@ -43,7 +43,7 @@ export default function Page() {
         </div>
       ) : (
         <>
-          {!participatingTeams[0].division && <AlertMessage />}
+          {new Date() < dates.participatingTeamsUpdateDateParts.date && <AlertMessage />}
           <ParticipatingTeamsTable />
         </>
       )}
