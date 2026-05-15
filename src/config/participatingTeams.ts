@@ -136,7 +136,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
   { name: "Don Bosco Tech", raceDay: "Friday", city: "Rosemead", state: "CA" },
   { name: "Dos Pueblos", raceDay: "Saturday Night", city: "Goleta", state: "CA" },
   { name: "Dougherty Valley", raceDay: "Saturday Night", city: "San Ramon", state: "CA" },
-  { name: "Eagle (ID)", raceDay: "Saturday Night", city: "Eagle", state: "ID" },
   { name: "Eagle Rock", raceDay: "Saturday Night", city: "Los Angeles", state: "CA" },
   { name: "Eastlake", raceDay: "Saturday Night", city: "Chula Vista", state: "CA" },
   { name: "Eastside", raceDay: "Friday", city: "Lancaster", state: "CA" },
