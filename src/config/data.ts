@@ -55,6 +55,7 @@ export const urls = {
   partners: {
     asics: "https://www.asics.com",
     athletic: "https://www.athletic.net",
+    greatPark: "https://cityofirvine.gov/great-park",
   },
   hotels: {
     hiltonIrvine: "https://www.hilton.com/en/hotels/snaochf-hilton-irvine-orange-county-airport/",

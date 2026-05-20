@@ -56,7 +56,7 @@ export default function Page() {
         <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">
           <IrvineTimingLogo height="h-32" />
         </Sponsor>
-        <Sponsor url={urls.partners.asics} motto="Grounded in history, driven by community">
+        <Sponsor url={urls.partners.greatPark} motto="Grounded in history, driven by community">
           <div className="relative aspect-3600/3600 h-32">
             <Image fill src={greatPark} quality={100} alt={siteConfig.greatPark} />
           </div>
