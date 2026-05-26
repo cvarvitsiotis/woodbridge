@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
-import { getKeyValue } from "@heroui/table";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
 import { allTimeTeams } from "@/config/allTimeTeams";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "@/components/styledTableCell";
+import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -64,10 +64,6 @@ export default function AllTimeTeamsTable() {
   const [courseFilter, setCourseFilter] = useState("All");
   const [teamFilter, setTeamFilter] = useState("");
 
-  const windowDimensions = useWindowDimensions();
-  const maxTableHeight =
-    windowDimensions.height !== undefined ? windowDimensions.height * 0.7 : 300;
-
   const tableKey = `${genderFilter}_${courseFilter}`;
 
   const filteredItems = useMemo(
@@ -109,36 +105,40 @@ export default function AllTimeTeamsTable() {
 
   const topContent = useMemo(
     function () {
-      function onGenderFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setGenderFilter(() => event.target.value);
+      function onGenderFilterChange(value: string): void {
+        setGenderFilter(value);
       }
 
-      function onCourseFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setCourseFilter(() => event.target.value);
+      function onCourseFilterChange(value: string): void {
+        setCourseFilter(value);
       }
 
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row">
           <StyledInput
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            className="basis-2/5"
+            textFieldClassName="basis-2/5"
+            fillVertically={true}
+            isPrimary={false}
           />
-          <div className="flex basis-3/5 gap-3">
+          <div className="flex basis-3/5 gap-2">
             <StyledSelect
               selectedKey={genderFilter}
               onChange={onGenderFilterChange}
               label="Gender"
-              className="basis-1/3"
+              selectClassName="basis-1/3"
               options={genderOptions}
+              isPrimary={false}
             />
             <StyledSelect
               selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              className="basis-2/3"
+              selectClassName="basis-2/3"
               options={courseOptions}
+              isPrimary={false}
             />
           </div>
         </div>
@@ -148,31 +148,24 @@ export default function AllTimeTeamsTable() {
   );
 
   return (
-    <Table
-      isCompact
-      isHeaderSticky
-      isVirtualized
-      maxTableHeight={maxTableHeight}
-      aria-label={`${pages.allTimeLists.menuLabel} - Teams`}
+    <DynamicTable
+      tableKey={tableKey}
       topContent={topContent}
-      topContentPlacement="outside"
-      classNames={{ wrapper: "p-2", td: "px-1" }}
-      key={tableKey} //to force rerender - bug was preventing
+      columns={columns}
+      isRowHeaderColumn="place"
+      ariaLabel={`${pages.allTimeLists.menuLabel} - Teams`}
     >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.key} align={column.key === "year" ? "center" : "start"}>
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={filteredItems}>
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
         {(item) => (
-          <TableRow key={item.key}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-          </TableRow>
+          <Table.Row id={item.key}>
+            <StyledTableCell>{item.place}</StyledTableCell>
+            <StyledTableCell>{item.team}</StyledTableCell>
+            <StyledTableCell>{item.time}</StyledTableCell>
+            <StyledTableCell>{item.year}</StyledTableCell>
+            <StyledTableCell>{item.course}</StyledTableCell>
+          </Table.Row>
         )}
-      </TableBody>
-    </Table>
+      </Table.Body>
+    </DynamicTable>
   );
 }

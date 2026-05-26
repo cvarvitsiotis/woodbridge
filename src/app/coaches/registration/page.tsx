@@ -1,12 +1,12 @@
 import { urls } from "@/config/data";
 import { dates } from "@/config/dates";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
 import { ReactNode } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
+import ParagraphLink from "@/components/paragraphLink";
 
 export const metadata: Metadata = {
   title: pages.registration.menuLabel,
@@ -31,16 +31,12 @@ function RegistrationSection({
   );
 }
 
-function ParagraphLink({ url, name }: { url: string; name: string }) {
-  return (
-    <Link isExternal href={url} className={getParagraphStyle(true)}>
-      {name}
-    </Link>
-  );
-}
-
 function TeamEntryFormLink() {
-  return <ParagraphLink url={urls.other.teamRegistration} name="Team Entry Form" />;
+  return (
+    <ParagraphLink href={urls.other.teamRegistration} isLargerOnLargerScreen isExternal>
+      Team Entry Form
+    </ParagraphLink>
+  );
 }
 
 export default function Page() {
@@ -99,13 +95,16 @@ export default function Page() {
                   : "is now open"}{" "}
                 at{" "}
                 <ParagraphLink
-                  url={
+                  href={
                     new Date() < dates.athleteRegistrationStartDateParts.date
                       ? urls.athleticNet.home
                       : urls.athleticNet.athleteRegistration
                   }
-                  name={siteConfig.athleticNet}
-                />
+                  isLargerOnLargerScreen
+                  isExternal
+                >
+                  {siteConfig.athleticNet}
+                </ParagraphLink>
                 .
               </p>
               <p>

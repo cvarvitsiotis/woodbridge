@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { fontSerif } from "./fonts";
+import { fontSerif } from "@/styles/fonts";
+import { linkVariants } from "@heroui/styles";
 
 export function getParagraphStyle(
   isLargerOnLargerScreen: boolean = false,
@@ -22,4 +23,10 @@ export function getParagraphStyle(
 
 export function getSubheaderStyle() {
   return "text-xl sm:text-2xl";
+}
+
+export function getBaseLinkStyle(accentColor: boolean = true) {
+  const linkSlots = linkVariants();
+
+  return clsx(linkSlots.base(), "no-underline hover:opacity-80", accentColor && "text-accent");
 }

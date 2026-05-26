@@ -6,6 +6,7 @@ import RacesTable from "@/components/racesTable";
 import PageHeader from "@/components/pageHeader";
 import clsx from "clsx";
 import { getParagraphStyle } from "@/styles/styles";
+import { fontSerif } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: pages.schedule.menuLabel,
@@ -14,9 +15,17 @@ export const metadata: Metadata = {
 function DayHeader({ date }: { date: string }) {
   return (
     <div
-      className={clsx("text-center uppercase tracking-tighter", getParagraphStyle(false, false))}
+      className={clsx("text-center tracking-tighter uppercase", getParagraphStyle(false, false))}
     >
       {date}
+    </div>
+  );
+}
+
+function FeaturedTableHeader() {
+  return (
+    <div className={clsx("text-center text-2xl font-medium", fontSerif.className)}>
+      Featured Races
     </div>
   );
 }
@@ -28,14 +37,21 @@ export default function Page() {
         Race <span className="font-bold">Schedule</span>
       </PageHeader>
       <div className="flex flex-wrap items-start justify-evenly gap-x-5 gap-y-8 pt-10">
-        <div className="space-y-3">
-          <DayHeader date={dates.meetStartDateParts.dayDescriptionMonthDayYearLong} />
-          <RacesTable races={filteredRaces.fridayRaces} />
+        <div>
+          <div className="space-y-3">
+            <DayHeader date={dates.meetStartDateParts.dayDescriptionMonthDayYearLong} />
+            <RacesTable races={filteredRaces.fridayRaces} />
+          </div>
         </div>
-        <div className="space-y-3">
-          <DayHeader date={dates.meetEndDateParts.dayDescriptionMonthDayYearLong} />
-          <RacesTable races={filteredRaces.saturdayNonFeaturedRaces} />
-          <RacesTable races={filteredRaces.saturdayFeaturedRaces} isFeatured={true} />
+        <div className="space-y-5">
+          <div className="space-y-3">
+            <DayHeader date={dates.meetEndDateParts.dayDescriptionMonthDayYearLong} />
+            <RacesTable races={filteredRaces.saturdayNonFeaturedRaces} />
+          </div>
+          <div className="space-y-2">
+            <FeaturedTableHeader />
+            <RacesTable races={filteredRaces.saturdayFeaturedRaces} isFeatured={true} />
+          </div>
         </div>
       </div>
     </>

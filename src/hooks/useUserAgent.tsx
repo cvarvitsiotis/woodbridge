@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+function getSnapshot() {
+  return typeof navigator === "undefined" ? undefined : navigator.userAgent;
+}
+
+function getServerSnapshot() {
+  return undefined;
+}
+
+function subscribe() {
+  return function () {};
+}
 
 export function useUserAgent() {
-  const [userAgent, setUserAgent] = useState<string>("");
-
-  useEffect(function () {
-    if (navigator === undefined) return;
-    setUserAgent(navigator.userAgent);
-  }, []);
-
-  return userAgent;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

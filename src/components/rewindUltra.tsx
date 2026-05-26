@@ -3,17 +3,22 @@
 import clsx from "clsx";
 import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
-import { Input } from "@heroui/input";
-import {
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { Input, Label, Radio, RadioGroup, TextField } from "@heroui/react";
+import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
+import StyledTableCell from "./styledTableCell";
+import StyledInput from "./styledInput";
+
+const columns = [
+  {
+    key: "bib",
+    label: "Bib",
+  },
+  {
+    key: "resultTime",
+    label: "Result Time",
+  },
+];
 
 const AnchorTypes = {
   RaceStartTime: "1",
@@ -134,6 +139,64 @@ function getResults(
   setResultTime(orderedBibResults, startTime);
   return orderedBibResults;
 }
+function AnchorTypeRadio({ value, label }: { value: string; label: string }) {
+  return (
+    <Radio value={value} className="mt-0">
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
+      <Radio.Content>
+        <Label className="text-lg font-light">{label}</Label>
+      </Radio.Content>
+    </Radio>
+  );
+}
+
+function AnchorTypeRadioGroup({
+  anchorType,
+  handleAnchorTypeChange,
+}: {
+  anchorType: string;
+  handleAnchorTypeChange: (value: string) => void;
+}) {
+  return (
+    <RadioGroup value={anchorType} onChange={handleAnchorTypeChange} className="pl-4">
+      <AnchorTypeRadio value={AnchorTypes.RaceStartTime} label="Race start time" />
+      <AnchorTypeRadio
+        value={AnchorTypes.RunnerResultTime}
+        label="Particular athlete's result time"
+      />
+    </RadioGroup>
+  );
+}
+
+function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
+  return (
+    <div className="max-w-80">
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={pages.timing.menuLabel}>
+            <Table.Header columns={columns}>
+              {(column) => (
+                <Table.Column id={column.key} isRowHeader={column.key === "bib"}>
+                  {column.label}
+                </Table.Column>
+              )}
+            </Table.Header>
+            <Table.Body items={results}>
+              {(item) => (
+                <Table.Row id={item[1].originalOrder}>
+                  <StyledTableCell>{item[0]}</StyledTableCell>
+                  <StyledTableCell>{item[1].resultTime}</StyledTableCell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
+    </div>
+  );
+}
 
 export default function RewindUltra() {
   const [anchorType, setAnchorType] = useState("");
@@ -142,21 +205,24 @@ export default function RewindUltra() {
   const [runnerBib, setRunnerBib] = useState("");
   const [fileContent, setFileContent] = useState<string | ArrayBuffer | null>();
   const [fileReadError, setFileReadError] = useState<DOMException | null>();
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  function handleAnchorTypeChange(event: ChangeEvent<HTMLInputElement>) {
-    setAnchorType(event.target.value);
-    if (event.target.value === AnchorTypes.RaceStartTime) {
+  function handleAnchorTypeChange(value: string) {
+    setAnchorType(value);
+    if (value === AnchorTypes.RaceStartTime) {
       setRunnerResultTime("");
       setRunnerBib("");
     } else {
       setRaceStartTime("");
     }
     setFileContent("");
+    setIsDisabled(false);
   }
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     function handleFileLoad(event: ProgressEvent<FileReader>) {
       setFileContent(event.target?.result);
+      setIsDisabled(true);
     }
 
     function handleFileError(event: ProgressEvent<FileReader>) {
@@ -185,80 +251,55 @@ export default function RewindUltra() {
           anchor point.
         </p>
         <p>Pick the one that you know most-accurately:</p>
-        <div className="pl-4">
-          <div>
-            <input
-              type="radio"
-              name="anchorType"
-              value={AnchorTypes.RaceStartTime}
-              checked={anchorType === AnchorTypes.RaceStartTime}
-              onChange={handleAnchorTypeChange}
-            />
-            <label className="pl-2">Race start time</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="anchorType"
-              value={AnchorTypes.RunnerResultTime}
-              checked={anchorType === AnchorTypes.RunnerResultTime}
-              onChange={handleAnchorTypeChange}
-            />
-            <label className="pl-2">Particular athlete&apos;s result time</label>
-          </div>
-        </div>
-        <div className="space-y-2 pt-2">
-          {anchorType === AnchorTypes.RaceStartTime && (
-            <Input
-              label="Start Time (HH:mm:ss.fff)"
-              variant="faded"
-              radius="sm"
-              value={raceStartTime}
-              onValueChange={setRaceStartTime}
-              className="w-max"
-              classNames={{
-                inputWrapper: "border border-default-300",
-              }}
-            />
-          )}
-          {anchorType === AnchorTypes.RunnerResultTime && (
-            <>
-              <Input
-                label="Result Time (HH:mm:ss.fff)"
-                variant="faded"
-                radius="sm"
-                value={runnerResultTime}
-                onValueChange={setRunnerResultTime}
-                className="w-max"
-                classNames={{
-                  inputWrapper: "border border-default-300",
-                }}
+        <AnchorTypeRadioGroup
+          anchorType={anchorType}
+          handleAnchorTypeChange={handleAnchorTypeChange}
+        />
+        <div className="w-xs space-y-2 pt-2">
+          <div className="space-y-2">
+            {anchorType === AnchorTypes.RaceStartTime && (
+              <StyledInput
+                label="Start Time (HH:mm:ss.fff)"
+                value={raceStartTime}
+                onValueChange={setRaceStartTime}
+                includeSearchIcon={false}
+                isPrimary={false}
+                isDisabled={isDisabled}
               />
+            )}
+            {anchorType === AnchorTypes.RunnerResultTime && (
+              <div className="space-y-2">
+                <StyledInput
+                  label="Result Time (HH:mm:ss.fff)"
+                  value={runnerResultTime}
+                  onValueChange={setRunnerResultTime}
+                  includeSearchIcon={false}
+                  isPrimary={false}
+                  isDisabled={isDisabled}
+                />
+                <StyledInput
+                  label="Bib Number"
+                  value={runnerBib}
+                  onValueChange={setRunnerBib}
+                  includeSearchIcon={false}
+                  isPrimary={false}
+                  isDisabled={isDisabled}
+                />
+              </div>
+            )}
+          </div>
+          {anchorType && (raceStartTime || (runnerResultTime && runnerBib)) && (
+            <div className="pt-2">
               <Input
-                label="Bib Number"
-                variant="faded"
-                radius="sm"
-                value={runnerBib}
-                onValueChange={setRunnerBib}
-                className="w-max"
-                classNames={{
-                  inputWrapper: "border border-default-300",
-                }}
+                type="file"
+                accept=".txt"
+                onChange={handleFileChange}
+                className="w-full"
+                variant="secondary"
               />
-            </>
+            </div>
           )}
         </div>
-        {anchorType && (raceStartTime || (runnerResultTime && runnerBib)) && (
-          <Input
-            type="file"
-            radius="sm"
-            accept=".txt"
-            variant="faded"
-            className="pt-4"
-            classNames={{ mainWrapper: "w-max" }}
-            onChange={handleFileChange}
-          />
-        )}
       </div>
       {fileReadError && (
         <>
@@ -274,40 +315,6 @@ export default function RewindUltra() {
           <ResultsTable results={results} />
         </div>
       )}
-    </div>
-  );
-}
-
-const columns = [
-  {
-    key: "bib",
-    label: "Bib",
-  },
-  {
-    key: "resultTime",
-    label: "Result Time",
-  },
-];
-
-function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
-  return (
-    <div className="max-w-80">
-      <Table isCompact aria-label={pages.timing.menuLabel}>
-        <TableHeader columns={columns}>
-          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-        </TableHeader>
-        <TableBody items={results}>
-          {(item) => (
-            <TableRow key={item[1].originalOrder}>
-              {(columnKey) => (
-                <TableCell>
-                  {columnKey === "bib" ? item[0] : getKeyValue(item[1], columnKey)}
-                </TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
     </div>
   );
 }

@@ -127,7 +127,7 @@ export default function Page() {
           </List>
         </div>
         <div className="py-4 sm:pl-5">
-          <table className="table-fixed overflow-hidden rounded-xl bg-content1 shadow-lg">
+          <table className="table-fixed overflow-hidden rounded-xl bg-surface shadow-lg">
             <thead>
               <tr>
                 <TH>Example</TH>

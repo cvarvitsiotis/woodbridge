@@ -1,23 +1,22 @@
 "use client";
 
 import React from "react";
-import { Link } from "@heroui/link";
-
 import { urls } from "@/config/data";
 import { pages, siteConfig } from "@/config/site";
-import PresentedByAsics from "./presentedByAsics";
+import PresentedByAsics from "@/components/presentedByAsics";
 import { usePathname } from "next/navigation";
 import Image, { StaticImageData } from "next/image";
 import woodbridgeHigh from "@/../public/images/woodbridge-high-solo.png";
 import northwoodHigh from "@/../public/images/northwood-high-solo.png";
-import { IrvineTimingLogo } from "./icons";
+import { IrvineTimingLogo } from "@/components/icons";
 import clsx from "clsx";
+import BaseLink from "@/components/baseLink";
 
 function FooterLink({ url, children }: { url: string; children: React.ReactNode }) {
   return (
-    <Link isExternal href={url} className="text-sm">
+    <BaseLink isExternal href={url} className="text-sm">
       {children}
-    </Link>
+    </BaseLink>
   );
 }
 
@@ -76,7 +75,7 @@ export default function Footer() {
       <div className="flex justify-start sm:basis-1/3">
         <PresentedByAsics isFooter />
       </div>
-      <div className="text-sm text-default-600 sm:basis-1/3">
+      <div className="text-sm text-zinc-600 sm:basis-1/3">
         <HostSchool
           isFirst={true}
           url={urls.schools.woodbridgeHighSchool}

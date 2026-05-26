@@ -4,11 +4,11 @@ import { DivisionType } from "@/types";
 function getDivisionColor(division: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
-      return "text-primary-600";
+      return "text-accent";
     case divisions.two.num:
-      return "text-warning-600";
+      return "text-warning";
     case divisions.three.num:
-      return "text-danger-600";
+      return "text-danger";
     case divisions.four.num:
       return "";
     default:

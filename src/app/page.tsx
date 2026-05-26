@@ -1,22 +1,23 @@
 "use client";
 
-import { Link } from "@heroui/link";
-import { Button } from "@heroui/button";
+import { useState, useEffect } from "react";
+import { Alert } from "@heroui/react";
 
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
 import { CalendarIcon, HelpClinicIcon, HowToRegIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
-import { Alert } from "@heroui/alert";
 import PresentedByAsics from "@/components/presentedByAsics";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import BaseLink from "@/components/baseLink";
+import ButtonLink from "@/components/buttonLink";
 
 function RegisterEarlyAlertMessageWrapper({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <>
       {new Date() < dates.teamRegistrationEndDateParts.date && (
-        <div className={clsx("space-y-2", !siteConfig.showAmbientVideo && "mt-2")}>
+        <div className="space-y-2">
           <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
         </div>
       )}
@@ -49,16 +50,16 @@ function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }
 
 function RegisterEarlyLink({ isScreenShort, text }: { isScreenShort: boolean; text: string }) {
   return (
-    <Link
+    <BaseLink
       href={pages.registration.path}
       className={clsx(
         "font-semibold",
-        siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning-800",
+        siteConfig.showAmbientVideo ? "text-white" : "text-warning",
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
       {text}
-    </Link>
+    </BaseLink>
   );
 }
 
@@ -68,18 +69,13 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
       {siteConfig.showAmbientVideo ? (
         <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
       ) : (
-        <Alert
-          hideIcon
-          color="warning"
-          title={<RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />}
-          variant="faded"
-          radius="sm"
-          classNames={{
-            base: "p-2",
-            mainWrapper: "ms-0 min-h-0 text-center",
-            title: "font-normal",
-          }}
-        />
+        <Alert status="warning" className="mt-2 py-2">
+          <Alert.Content className="text-center">
+            <Alert.Description className="font-normal">
+              <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
+            </Alert.Description>
+          </Alert.Content>
+        </Alert>
       )}
     </div>
   );
@@ -129,9 +125,14 @@ function CamelCapClassic({
   );
 }
 
-export default function Page() {
+export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const windowDimensions = useWindowDimensions();
-  const isScreenShort = windowDimensions.height !== undefined && windowDimensions.height <= 768;
+  // eslint-disable-next-line
+  useEffect(() => setMounted(true), []);
+
+  const isScreenShort =
+    mounted && windowDimensions.height !== undefined && windowDimensions.height <= 768;
 
   return (
     <>
@@ -226,30 +227,23 @@ export default function Page() {
             siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
           )}
         >
-          <Button
-            as={Link}
-            color="primary"
-            radius="full"
-            variant={siteConfig.showAmbientVideo ? "solid" : "shadow"}
-            size="lg"
-            href={pages.registration.path}
-            startContent={<HowToRegIcon />}
-            className={clsx(siteConfig.showAmbientVideo && "bg-primary-400")}
-          >
+          <ButtonLink href={pages.registration.path} variant="primary" size="lg">
+            <HowToRegIcon />
             Register
-          </Button>
-          <Button
-            as={Link}
-            color={siteConfig.showAmbientVideo ? "default" : "secondary"}
-            radius="full"
-            variant={siteConfig.showAmbientVideo ? "solid" : "bordered"}
-            size="lg"
+          </ButtonLink>
+          <ButtonLink
             href={pages.about.path}
-            startContent={<HelpClinicIcon />}
-            className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
+            variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
+            size="lg"
+            className={clsx(
+              siteConfig.showAmbientVideo
+                ? "bg-yellow-100 text-zinc-600"
+                : "border-violet-500 text-violet-500",
+            )}
           >
+            <HelpClinicIcon />
             {pages.about.menuLabel}
-          </Button>
+          </ButtonLink>
         </div>
 
         <div
@@ -257,7 +251,7 @@ export default function Page() {
             "flex flex-col items-center",
             siteConfig.showAmbientVideo
               ? "mt-8 text-lg font-semibold text-white"
-              : "mt-12 text-default-600 md:mt-20",
+              : "mt-12 text-zinc-600 md:mt-20",
             siteConfig.showAmbientVideo && !isScreenShort && "md:text-xl",
             siteConfig.showAmbientVideo && isScreenShort && "mb-8",
           )}

@@ -1,5 +1,5 @@
 import { ParticipatingTeamType } from "@/types";
-import { divisions, heats } from "./races";
+import { divisions, heats } from "@/config/races";
 
 export const participatingTeams: ParticipatingTeamType[] = [
   { name: "Academy of Careers and Exploration", raceDay: "Friday", city: "Helendale", state: "CA" },

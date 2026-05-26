@@ -1,9 +1,12 @@
-import { Spinner } from "@heroui/spinner";
+import { Spinner } from "@heroui/react";
 
 export default function Loading() {
   return (
     <div className="flex flex-1 justify-center">
-      <Spinner label="Loading..." variant="simple" size="lg" />
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Spinner size="xl" />
+        <span>Loading...</span>
+      </div>
     </div>
   );
 }

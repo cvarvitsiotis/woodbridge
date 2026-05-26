@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
-import { getKeyValue } from "@heroui/table";
+import { Table } from "@heroui/react";
 import { allTimeIndividuals } from "@/config/allTimeIndividuals";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { pages } from "@/config/site";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "@/components/styledTableCell";
+import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -160,10 +160,6 @@ export default function AllTimeIndividualsTable() {
   const [nameFilter, setNameFilter] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
 
-  const windowDimensions = useWindowDimensions();
-  const maxTableHeight =
-    windowDimensions.height !== undefined ? windowDimensions.height * 0.7 : 300;
-
   const tableKey = `${genderFilter}_${gradeFilter}_${courseFilter}`;
 
   const filteredItems = useMemo(
@@ -222,57 +218,64 @@ export default function AllTimeIndividualsTable() {
 
   const topContent = useMemo(
     function () {
-      function onGenderFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setGenderFilter(() => event.target.value);
+      function onGenderFilterChange(value: string): void {
+        setGenderFilter(value);
       }
 
-      function onGradeFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setGradeFilter(() => event.target.value);
+      function onGradeFilterChange(value: string): void {
+        setGradeFilter(value);
       }
 
-      function onCourseFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setCourseFilter(() => event.target.value);
+      function onCourseFilterChange(value: string): void {
+        setCourseFilter(value);
       }
 
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <div className="flex basis-1/2 gap-3">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row">
+          <div className="flex min-w-0 shrink basis-1/2 gap-2">
             <StyledInput
               placeholder="Filter name..."
               value={nameFilter}
               onValueChange={setNameFilter}
-              className="basis-1/2"
+              textFieldClassName="basis-1/2 min-w-0"
+              fillVertically={true}
+              isPrimary={false}
             />
             <StyledInput
               placeholder="Filter school..."
               value={teamFilter}
               onValueChange={setTeamFilter}
-              className="basis-1/2"
+              textFieldClassName="basis-1/2 min-w-0"
+              fillVertically={true}
+              isPrimary={false}
             />
           </div>
-          <div className="flex basis-1/2 gap-3">
-            <div className="flex basis-1/2 gap-3">
+          <div className="flex basis-1/2 gap-2">
+            <div className="flex basis-1/2 gap-2">
               <StyledSelect
                 selectedKey={genderFilter}
                 onChange={onGenderFilterChange}
                 label="Gender"
-                className="basis-1/2"
+                selectClassName="basis-1/2"
                 options={genderOptions}
+                isPrimary={false}
               />
               <StyledSelect
                 selectedKey={gradeFilter}
                 onChange={onGradeFilterChange}
                 label="Grade"
-                className="basis-1/2"
+                selectClassName="basis-1/2"
                 options={gradeOptions}
+                isPrimary={false}
               />
             </div>
             <StyledSelect
               selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              className="basis-1/2"
+              selectClassName="basis-1/2"
               options={courseOptions}
+              isPrimary={false}
             />
           </div>
         </div>
@@ -282,34 +285,26 @@ export default function AllTimeIndividualsTable() {
   );
 
   return (
-    <Table
-      isCompact
-      isHeaderSticky
-      isVirtualized
-      maxTableHeight={maxTableHeight}
-      aria-label={`${pages.allTimeLists.menuLabel} - Individuals`}
+    <DynamicTable
+      tableKey={tableKey}
       topContent={topContent}
-      topContentPlacement="outside"
-      classNames={{ wrapper: "p-2", td: "px-1" }}
-      key={tableKey} //to force rerender - bug was preventing
+      columns={columns}
+      isRowHeaderColumn="place"
+      ariaLabel={`${pages.allTimeLists.menuLabel} - Individuals`}
     >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn
-            key={column.key}
-            align={column.key === "grade" || column.key === "year" ? "center" : "start"}
-          >
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={filteredItems}>
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
         {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-          </TableRow>
+          <Table.Row id={item.id}>
+            <StyledTableCell>{item.place}</StyledTableCell>
+            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell>{item.team}</StyledTableCell>
+            <StyledTableCell>{item.time}</StyledTableCell>
+            <StyledTableCell>{item.grade}</StyledTableCell>
+            <StyledTableCell>{item.year}</StyledTableCell>
+            <StyledTableCell>{item.course}</StyledTableCell>
+          </Table.Row>
         )}
-      </TableBody>
-    </Table>
+      </Table.Body>
+    </DynamicTable>
   );
 }
