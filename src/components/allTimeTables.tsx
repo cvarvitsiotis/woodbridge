@@ -1,29 +1,28 @@
-"use client";
-
 import AllTimeIndividualsTable from "@/components/allTimeIndividualsTable";
 import AllTimeTeamsTable from "@/components/allTimeTeamsTable";
-import { Tabs } from "@heroui/react";
-import { useUserAgent } from "@/hooks/useUserAgent";
-import { isFirefox } from "@/utils/userAgent";
-import AlertMessageFirefox from "./alertMessageFirefox";
+import { TabProps, Tabs } from "@heroui/react";
+
+function Tab({ id, children }: TabProps) {
+  return (
+    <Tabs.Tab id={id} className="h-10 text-base">
+      {children}
+    </Tabs.Tab>
+  );
+}
 
 export default function AllTimeTables() {
-  const userAgent = useUserAgent();
-
-  if (isFirefox(userAgent)) return <AlertMessageFirefox />;
-
   return (
-    <Tabs className="pt-10 max-w-xs mx-auto">
-      <Tabs.ListContainer>
-        <Tabs.List aria-label="Options">
-          <Tabs.Tab id="teams">
+    <Tabs className="pt-6">
+      <Tabs.ListContainer className="mx-auto w-full max-w-xs">
+        <Tabs.List className="max-w-xs" aria-label="Options">
+          <Tab id="teams">
             TEAMS
             <Tabs.Indicator />
-          </Tabs.Tab>
-          <Tabs.Tab id="individuals">
+          </Tab>
+          <Tab id="individuals">
             INDIVIDUALS
             <Tabs.Indicator />
-          </Tabs.Tab>
+          </Tab>
         </Tabs.List>
       </Tabs.ListContainer>
       <Tabs.Panel id="teams" className="pt-6">

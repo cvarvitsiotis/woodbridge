@@ -1,5 +1,5 @@
 import { FeaturedTeamType, LevelType } from "@/types";
-import { genders, levels } from "./races";
+import { genders, levels } from "@/config/races";
 
 const internalFeaturedTeams: FeaturedTeamType[] = [
   {

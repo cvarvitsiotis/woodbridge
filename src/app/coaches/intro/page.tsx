@@ -1,6 +1,5 @@
 import { dates } from "@/config/dates";
 import { filteredRaces } from "@/config/races";
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -8,18 +7,11 @@ import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import List from "@/components/list";
 import { people } from "@/config/data";
+import ParagraphLink from "@/components/paragraphLink";
 
 export const metadata: Metadata = {
   title: pages.coachesIntro.menuLabel,
 };
-
-function ParagraphLink({ url, name }: { url: string; name: string }) {
-  return (
-    <Link href={url} className={getParagraphStyle()}>
-      {name}
-    </Link>
-  );
-}
 
 export default function Page() {
   return (
@@ -57,12 +49,12 @@ export default function Page() {
         <List isOrdered={true}>
           <li>
             Your team is assigned a division per the{" "}
-            <ParagraphLink
-              url={pages.participatingTeams.path}
-              name={pages.participatingTeams.menuLabel}
-            />{" "}
+            <ParagraphLink href={pages.participatingTeams.path}>
+              {pages.participatingTeams.menuLabel}
+            </ParagraphLink>{" "}
             page. Please find your division&apos;s races on the{" "}
-            <ParagraphLink url={pages.schedule.path} name={pages.schedule.menuLabel} /> page.
+            <ParagraphLink href={pages.schedule.path}>{pages.schedule.menuLabel}</ParagraphLink>{" "}
+            page.
           </li>
           <li>
             If you have changed your mind about attending the meet, please let us know of this
@@ -72,7 +64,9 @@ export default function Page() {
           <li>
             ATHLETE registration will be through {siteConfig.athleticNet}. For more information, go
             to the{" "}
-            <ParagraphLink url={pages.registration.path} name={pages.registration.menuLabel} />{" "}
+            <ParagraphLink href={pages.registration.path}>
+              {pages.registration.menuLabel}
+            </ParagraphLink>{" "}
             page. The athletes need to be registered by{" "}
             {dates.athleteRegistrationEndDateParts.dayDescriptionMonthDayYearLong}.
           </li>
@@ -93,14 +87,14 @@ export default function Page() {
           <li>
             Bring the ENTRY FEE to the checkin table at our meet. If mailing it, do so by{" "}
             {dates.entryFeeMailDateParts.monthDayLong} so that we have it by race day. Refer to{" "}
-            <ParagraphLink url={pages.entryFees.path} name={pages.entryFees.menuLabel} /> for more
-            details.
+            <ParagraphLink href={pages.entryFees.path}>{pages.entryFees.menuLabel}</ParagraphLink>{" "}
+            for more details.
           </li>
           <li>
             The Sweepstakes (top 25 teams) and Rated (teams 26-55) selections will be announced by
             Rich Gonzalez on {dates.featuredEntriesPublishDateParts.monthDayLong}. If you have a
             team that you would like for Rich to consider, please{" "}
-            <ParagraphLink url={pages.contact.path} name={pages.contact.menuLabel} /> us.
+            <ParagraphLink href={pages.contact.path}>{pages.contact.menuLabel}</ParagraphLink> us.
           </li>
         </List>
         <p>

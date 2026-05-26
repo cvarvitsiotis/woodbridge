@@ -1,7 +1,6 @@
 "use client";
 
 import { Table } from "@heroui/react";
-import { getKeyValue } from "@/utils/table";
 
 import {
   scheduleLevelGenderToken,
@@ -11,8 +10,7 @@ import {
 import { RaceType } from "@/types";
 import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
-import { fontSerif } from "@/styles/fonts";
-import clsx from "clsx";
+import StyledTableCell from "./styledTableCell";
 
 const columns = [
   {
@@ -30,14 +28,6 @@ const columns = [
 ];
 
 const featuredColumns = columns.filter((column) => column.key !== "division");
-
-function FeaturedTableHeader() {
-  return (
-    <div className={clsx("text-center text-2xl font-medium", fontSerif.className)}>
-      Featured Races
-    </div>
-  );
-}
 
 function getDescription(race: RaceType): string {
   if (race.level.scheduleFormat) {
@@ -57,40 +47,34 @@ export default function RacesTable({
   races: RaceType[];
   isFeatured?: boolean;
 }) {
-  return (
-    <Table>
-      {isFeatured && <FeaturedTableHeader />}
-      <Table.ScrollContainer>
-        <Table.Content aria-label={pages.schedule.menuLabel}>
-          {!isFeatured && (
-            <Table.Header columns={columns}>
-              {(column) => <Table.Column key={column.key}>{column.label}</Table.Column>}
+  {
+    return (
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={pages.schedule.menuLabel}>
+            <Table.Header columns={isFeatured ? featuredColumns : columns}>
+              {(column) => (
+                <Table.Column id={column.key} isRowHeader={column.key === "time"}>
+                  {column.label}
+                </Table.Column>
+              )}
             </Table.Header>
-          )}
-          {isFeatured && (
-            <Table.Header columns={featuredColumns}>
-              {(column) => <Table.Column key={column.key}>{column.label}</Table.Column>}
-            </Table.Header>
-          )}
-          <Table.Body items={races}>
-            {(item) => (
-              <Table.Row key={item.num}>
-                {(columnKey) => (
-                  <Table.Cell>
-                    {String(columnKey) === "division" ? (
+            <Table.Body items={races}>
+              {(item) => (
+                <Table.Row id={item.num}>
+                  <StyledTableCell>{item.time}</StyledTableCell>
+                  {!isFeatured && (
+                    <StyledTableCell>
                       <Divisions divisions={item.divisions} />
-                    ) : String(columnKey) === "description" ? (
-                      getDescription(item)
-                    ) : (
-                      getKeyValue(item, columnKey)
-                    )}
-                  </Table.Cell>
-                )}
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
-  );
+                    </StyledTableCell>
+                  )}
+                  <StyledTableCell>{getDescription(item)}</StyledTableCell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
+    );
+  }
 }

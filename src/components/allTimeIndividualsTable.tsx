@@ -3,10 +3,11 @@
 import { useMemo, useState } from "react";
 import { Table } from "@heroui/react";
 import { allTimeIndividuals } from "@/config/allTimeIndividuals";
-import { getKeyValue } from "@/utils/table";
 import { pages } from "@/config/site";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "@/components/styledTableCell";
+import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -230,44 +231,51 @@ export default function AllTimeIndividualsTable() {
       }
 
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
-          <div className="flex basis-1/2 gap-3">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row">
+          <div className="flex min-w-0 shrink basis-1/2 gap-2">
             <StyledInput
               placeholder="Filter name..."
               value={nameFilter}
               onValueChange={setNameFilter}
-              className="basis-1/2"
+              textFieldClassName="basis-1/2 min-w-0"
+              fillVertically={true}
+              isPrimary={false}
             />
             <StyledInput
               placeholder="Filter school..."
               value={teamFilter}
               onValueChange={setTeamFilter}
-              className="basis-1/2"
+              textFieldClassName="basis-1/2 min-w-0"
+              fillVertically={true}
+              isPrimary={false}
             />
           </div>
-          <div className="flex basis-1/2 gap-3">
-            <div className="flex basis-1/2 gap-3">
+          <div className="flex basis-1/2 gap-2">
+            <div className="flex basis-1/2 gap-2">
               <StyledSelect
                 selectedKey={genderFilter}
                 onChange={onGenderFilterChange}
                 label="Gender"
-                className="basis-1/2"
+                selectClassName="basis-1/2"
                 options={genderOptions}
+                isPrimary={false}
               />
               <StyledSelect
                 selectedKey={gradeFilter}
                 onChange={onGradeFilterChange}
                 label="Grade"
-                className="basis-1/2"
+                selectClassName="basis-1/2"
                 options={gradeOptions}
+                isPrimary={false}
               />
             </div>
             <StyledSelect
               selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              className="basis-1/2"
+              selectClassName="basis-1/2"
               options={courseOptions}
+              isPrimary={false}
             />
           </div>
         </div>
@@ -277,29 +285,26 @@ export default function AllTimeIndividualsTable() {
   );
 
   return (
-    <Table key={tableKey}>
-      {topContent}
-      <Table.ScrollContainer>
-        <Table.Content aria-label={`${pages.allTimeLists.menuLabel} - Individuals`}>
-          <Table.Header columns={columns}>
-            {(column) => (
-              <Table.Column
-                key={column.key}
-                className={column.key === "grade" || column.key === "year" ? "text-center" : "text-start"}
-              >
-                {column.label}
-              </Table.Column>
-            )}
-          </Table.Header>
-          <Table.Body items={filteredItems}>
-            {(item) => (
-              <Table.Row key={item.id}>
-                {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
+    <DynamicTable
+      tableKey={tableKey}
+      topContent={topContent}
+      columns={columns}
+      isRowHeaderColumn="place"
+      ariaLabel={`${pages.allTimeLists.menuLabel} - Individuals`}
+    >
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
+        {(item) => (
+          <Table.Row id={item.id}>
+            <StyledTableCell>{item.place}</StyledTableCell>
+            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell>{item.team}</StyledTableCell>
+            <StyledTableCell>{item.time}</StyledTableCell>
+            <StyledTableCell>{item.grade}</StyledTableCell>
+            <StyledTableCell>{item.year}</StyledTableCell>
+            <StyledTableCell>{item.course}</StyledTableCell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </DynamicTable>
   );
 }

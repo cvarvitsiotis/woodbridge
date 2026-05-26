@@ -14,7 +14,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
   return (
     <div className="flex flex-1 flex-col items-center justify-center space-y-4">
       <p>Something went wrong!</p>
-      <Button variant="primary" className="rounded-full" onPress={() => reset()}>
+      <Button variant="primary" onPress={() => reset()}>
         Try again
       </Button>
     </div>

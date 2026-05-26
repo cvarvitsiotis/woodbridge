@@ -1,6 +1,5 @@
 import GreatParkLogo, { AsicsLogo, IrvineTimingLogo } from "@/components/icons";
 import { urls } from "@/config/data";
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -9,6 +8,7 @@ import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import Image from "next/image";
 import athletic from "@/../public/images/athletic.png";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.partners.menuLabel,
@@ -18,9 +18,9 @@ function Sponsor({ url, motto, children }: { url: string; motto: string; childre
   return (
     <div className="grid items-center justify-center gap-x-2 gap-y-2 pt-12 md:auto-cols-fr md:grid-flow-col">
       <div className="justify-self-center rounded-4xl md:justify-self-auto">
-        <Link href={url} target="_blank" rel="noopener noreferrer">
+        <BaseLink isExternal href={url}>
           {children}
-        </Link>
+        </BaseLink>
       </div>
       <p
         className={clsx(

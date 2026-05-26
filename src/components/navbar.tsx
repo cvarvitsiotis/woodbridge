@@ -1,15 +1,39 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Link } from "@heroui/react";
+import { useState, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import NavbarDropdown from "./navbarDropdown";
+import NavbarDropdown from "@/components/navbarDropdown";
 
 import { pages, pageParents, siteConfig } from "@/config/site";
-import { XIcon, InstagramIcon } from "@/components/icons";
+import { XIcon, InstagramIcon, MenuLogo } from "@/components/icons";
 import { urls } from "@/config/data";
+import BaseLink from "@/components/baseLink";
+import { useWindowScrollPositions } from "@/hooks/useWindowScrollPositions";
+import { getBaseLinkStyle } from "@/styles/styles";
+import { Drawer } from "@heroui/react";
+import PresentedByAsics from "@/components/presentedByAsics";
+
+function BrandLink({ isHomePage, isMenu }: { isHomePage: boolean; isMenu: boolean }) {
+  return (
+    <BaseLink href={pages.home.path}>
+      <Brand isHomePage={isHomePage} isMenu={isMenu} />
+    </BaseLink>
+  );
+}
+function Brand({ isHomePage, isMenu }: { isHomePage: boolean; isMenu: boolean }) {
+  return (
+    <div
+      className={clsx(
+        "mb-0.5 text-2xl font-bold tracking-tighter",
+        isHomePage && siteConfig.showAmbientVideo && !isMenu ? "text-white" : "text-sky-950",
+      )}
+    >
+      {siteConfig.woodbridge}
+    </div>
+  );
+}
 
 function Menus({
   isMenu,
@@ -67,10 +91,10 @@ function Menus({
         onAction={handleMenuAction}
       />
       <li>
-        <Link
+        <BaseLink
           href={pages.contact.path}
           className={clsx(
-            "text-lg",
+            "text-lg font-normal",
             isMenu && "h-10",
             isHomePage && !isMenu && siteConfig.showAmbientVideo
               ? "text-white"
@@ -78,20 +102,102 @@ function Menus({
                 ? "text-accent"
                 : "text-foreground",
           )}
+          accentColor={false}
           onClick={handleMenuAction}
         >
           {pages.contact.menuLabel}
-        </Link>
+        </BaseLink>
       </li>
     </>
   );
 }
 
+function SocialsLinks({ isHomePage }: { isHomePage: boolean }) {
+  return (
+    <div className="flex gap-6">
+      <BaseLink isExternal href={urls.socials.twitter}>
+        <XIcon
+          className={isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-zinc-500"}
+        />
+      </BaseLink>
+      <BaseLink isExternal href={urls.socials.instagram}>
+        <InstagramIcon
+          className={isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-zinc-500"}
+        />
+      </BaseLink>
+    </div>
+  );
+}
+
+function MenuToggleButton({ isHomePage, onClick }: { isHomePage: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={clsx(
+        "lg:hidden",
+        isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-sky-950",
+        getBaseLinkStyle(false),
+      )}
+    >
+      <MenuLogo isWeight600={true} />
+    </button>
+  );
+}
+
+function Menu({
+  pathname,
+  isMenuOpen,
+  isHomePage,
+  handleMenuAction,
+}: {
+  pathname: string;
+  isMenuOpen: boolean;
+  isHomePage: boolean;
+  handleMenuAction: () => void;
+}) {
+  return (
+    <Drawer>
+      <Drawer.Backdrop
+        isOpen={isMenuOpen}
+        onOpenChange={handleMenuAction}
+        variant="blur"
+        className="lg:hidden"
+      >
+        <Drawer.Content placement="right">
+          <Drawer.Dialog className="bg-linear-to-br from-indigo-200 from-65% to-[#ffd1b9]">
+            <Drawer.CloseTrigger className="size-7" />
+            <Drawer.Header>
+              <Drawer.Heading className="border-b border-neutral-900/15 pb-4">
+                <Brand isHomePage={isHomePage} isMenu={true} />
+              </Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>
+              <ul className="flex flex-col gap-2">
+                <Menus
+                  isMenu={true}
+                  pathname={pathname}
+                  isHomePage={isHomePage}
+                  handleMenuAction={handleMenuAction}
+                />
+              </ul>
+            </Drawer.Body>
+            <Drawer.Footer className="justify-start">
+              <PresentedByAsics isFooter isMenu />
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+  );
+}
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const lastScrollY = useRef(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const windowScrollPositions = useWindowScrollPositions();
+  // eslint-disable-next-line
+  useLayoutEffect(() => setMounted(true), []);
 
   function handleMenuAction() {
     setIsMenuOpen(() => false);
@@ -101,48 +207,33 @@ export function Navbar() {
   const shouldHideOnScroll = !isHomePage || siteConfig.showAmbientVideo;
   const isBordered = !isHomePage || siteConfig.showAmbientVideo;
   const isBlurred = !isHomePage || (siteConfig.showAmbientVideo && isMenuOpen);
-
-  useEffect(() => {
-    if (!shouldHideOnScroll) {
-      setIsVisible(true);
-      return;
-    }
-
-    function handleScroll() {
-      const currentScrollY = window.scrollY;
-      setIsVisible(currentScrollY <= lastScrollY.current || currentScrollY < 10);
-      lastScrollY.current = currentScrollY;
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [shouldHideOnScroll]);
+  const isVisible =
+    !mounted ||
+    !shouldHideOnScroll ||
+    windowScrollPositions?.currentScrollY === undefined ||
+    windowScrollPositions?.previousScrollY === undefined ||
+    windowScrollPositions.currentScrollY <= windowScrollPositions.previousScrollY ||
+    windowScrollPositions.currentScrollY < 10;
 
   return (
     <nav
       className={clsx(
-        "sticky top-0 z-40 w-full bg-transparent transition-transform duration-300",
+        "sticky top-0 z-40 w-full bg-transparent transition-transform duration-500",
         shouldHideOnScroll && !isVisible && "-translate-y-full",
-        isBlurred && "backdrop-blur-lg",
         isBordered &&
           (isHomePage && siteConfig.showAmbientVideo
             ? "border-b border-white/30"
-            : "border-b border-separator"),
+            : "border-b border-neutral-900/15"),
       )}
     >
-      <header className="mx-auto flex h-16 max-w-[1536px] items-center justify-between px-6">
-        <div className="max-w-fit gap-3">
-          <Link
-            href={pages.home.path}
-            className={clsx(
-              "mb-0.5 text-2xl font-bold tracking-tighter",
-              isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-sky-950",
-            )}
-          >
-            {siteConfig.woodbridge}
-          </Link>
-        </div>
-        <ul className="ml-2 hidden basis-1/5 items-center lg:flex lg:basis-full">
+      <header
+        className={clsx(
+          "mx-auto flex h-16 max-w-384 items-center justify-between gap-4 px-6",
+          isBlurred && "backdrop-blur-lg",
+        )}
+      >
+        <BrandLink isHomePage={isHomePage} isMenu={false} />
+        <ul className="ml-2 hidden basis-1/5 items-center gap-4 lg:flex lg:basis-full">
           <Menus
             isMenu={false}
             pathname={pathname}
@@ -151,69 +242,16 @@ export function Navbar() {
           />
         </ul>
         <div className="flex basis-full items-center justify-end gap-10">
-          <div className="flex gap-6">
-            <Link href={urls.socials.twitter} target="_blank" rel="noopener noreferrer">
-              <XIcon
-                className={
-                  isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
-                }
-              />
-            </Link>
-            <Link href={urls.socials.instagram} target="_blank" rel="noopener noreferrer">
-              <InstagramIcon
-                className={
-                  isHomePage && siteConfig.showAmbientVideo ? "text-white" : "text-default-500"
-                }
-              />
-            </Link>
-          </div>
-          <button
-            className={clsx(
-              "lg:hidden",
-              isHomePage && siteConfig.showAmbientVideo && "text-white",
-            )}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="sr-only">Menu</span>
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+          <SocialsLinks isHomePage={isHomePage} />
+          <MenuToggleButton isHomePage={isHomePage} onClick={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
       </header>
-      {isMenuOpen && (
-        <div className="border-t border-separator lg:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-            <Menus
-              isMenu={true}
-              pathname={pathname}
-              isHomePage={isHomePage}
-              handleMenuAction={handleMenuAction}
-            />
-          </ul>
-        </div>
-      )}
+      <Menu
+        pathname={pathname}
+        isMenuOpen={isMenuOpen}
+        isHomePage={isHomePage}
+        handleMenuAction={handleMenuAction}
+      />
     </nav>
   );
 }

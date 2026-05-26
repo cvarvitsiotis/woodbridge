@@ -3,10 +3,11 @@
 import { useMemo, useState } from "react";
 import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
-import { getKeyValue } from "@/utils/table";
 import { allTimeTeams } from "@/config/allTimeTeams";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "@/components/styledTableCell";
+import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
 
 const columns = [
   { key: "place", label: "Place" },
@@ -113,27 +114,31 @@ export default function AllTimeTeamsTable() {
       }
 
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row">
           <StyledInput
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            className="basis-2/5"
+            textFieldClassName="basis-2/5"
+            fillVertically={true}
+            isPrimary={false}
           />
-          <div className="flex basis-3/5 gap-3">
+          <div className="flex basis-3/5 gap-2">
             <StyledSelect
               selectedKey={genderFilter}
               onChange={onGenderFilterChange}
               label="Gender"
-              className="basis-1/3"
+              selectClassName="basis-1/3"
               options={genderOptions}
+              isPrimary={false}
             />
             <StyledSelect
               selectedKey={courseFilter}
               onChange={onCourseFilterChange}
               label="Course"
-              className="basis-2/3"
+              selectClassName="basis-2/3"
               options={courseOptions}
+              isPrimary={false}
             />
           </div>
         </div>
@@ -143,26 +148,24 @@ export default function AllTimeTeamsTable() {
   );
 
   return (
-    <Table key={tableKey}>
-      {topContent}
-      <Table.ScrollContainer>
-        <Table.Content aria-label={`${pages.allTimeLists.menuLabel} - Teams`}>
-          <Table.Header columns={columns}>
-            {(column) => (
-              <Table.Column key={column.key} className={column.key === "year" ? "text-center" : "text-start"}>
-                {column.label}
-              </Table.Column>
-            )}
-          </Table.Header>
-          <Table.Body items={filteredItems}>
-            {(item) => (
-              <Table.Row key={item.key}>
-                {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
+    <DynamicTable
+      tableKey={tableKey}
+      topContent={topContent}
+      columns={columns}
+      isRowHeaderColumn="place"
+      ariaLabel={`${pages.allTimeLists.menuLabel} - Teams`}
+    >
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
+        {(item) => (
+          <Table.Row id={item.key}>
+            <StyledTableCell>{item.place}</StyledTableCell>
+            <StyledTableCell>{item.team}</StyledTableCell>
+            <StyledTableCell>{item.time}</StyledTableCell>
+            <StyledTableCell>{item.year}</StyledTableCell>
+            <StyledTableCell>{item.course}</StyledTableCell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </DynamicTable>
   );
 }

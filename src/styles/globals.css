@@ -4,6 +4,10 @@
 @theme inline {
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
-  --color-foreground: #1e1a4d;
-  --color-surface: #fdf7f4;
+  --color-foreground: oklch(0.2571 0.0908 281.44);
+  --color-surface: oklch(0.9799 0.0076 48.66);
+}
+
+:root {
+  color: var(--color-foreground);
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { Link, Button, Alert } from "@heroui/react";
+import { useState, useEffect } from "react";
+import { Alert } from "@heroui/react";
 
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
@@ -9,6 +10,8 @@ import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import PresentedByAsics from "@/components/presentedByAsics";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import BaseLink from "@/components/baseLink";
+import ButtonLink from "@/components/buttonLink";
 
 function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
@@ -18,16 +21,16 @@ function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
-      <Link
+      <BaseLink
         href={pages.registration.path}
         className={clsx(
           "font-semibold",
-          siteConfig.showAmbientVideo ? "text-white" : "text-sm text-warning",
+          siteConfig.showAmbientVideo ? "text-white" : "text-warning",
           siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
         )}
       >
         Register
-      </Link>{" "}
+      </BaseLink>{" "}
       early (starting {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
     </p>
   );
@@ -41,13 +44,13 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
           <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
         </div>
       ) : (
-        <Alert className="rounded-sm p-2">
-          <Alert.Content className="ms-0 min-h-0 text-center">
-            <Alert.Title className="font-normal">
+        <Alert status="warning" className="py-2">
+          <Alert.Content className="text-center">
+            <Alert.Description className="font-normal">
               <div className="space-y-2">
                 <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
               </div>
-            </Alert.Title>
+            </Alert.Description>
           </Alert.Content>
         </Alert>
       )}
@@ -99,9 +102,14 @@ function CamelCapClassic({
   );
 }
 
-export default function Page() {
+export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const windowDimensions = useWindowDimensions();
-  const isScreenShort = windowDimensions.height !== undefined && windowDimensions.height <= 768;
+  // eslint-disable-next-line
+  useEffect(() => setMounted(true), []);
+
+  const isScreenShort =
+    mounted && windowDimensions.height !== undefined && windowDimensions.height <= 768;
 
   return (
     <>
@@ -196,26 +204,23 @@ export default function Page() {
             siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
           )}
         >
-          <a href={pages.registration.path}>
-            <Button
-              variant="primary"
-              size="lg"
-              className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-accent")}
-            >
-              <HowToRegIcon />
-              Register
-            </Button>
-          </a>
-          <a href={pages.about.path}>
-            <Button
-              variant="secondary"
-              size="lg"
-              className={clsx("rounded-full", siteConfig.showAmbientVideo && "bg-yellow-100 text-default-600")}
-            >
-              <HelpClinicIcon />
-              {pages.about.menuLabel}
-            </Button>
-          </a>
+          <ButtonLink href={pages.registration.path} variant="primary" size="lg">
+            <HowToRegIcon />
+            Register
+          </ButtonLink>
+          <ButtonLink
+            href={pages.about.path}
+            variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
+            size="lg"
+            className={clsx(
+              siteConfig.showAmbientVideo
+                ? "bg-yellow-100 text-zinc-600"
+                : "border-violet-500 text-violet-500",
+            )}
+          >
+            <HelpClinicIcon />
+            {pages.about.menuLabel}
+          </ButtonLink>
         </div>
 
         <div
@@ -223,7 +228,7 @@ export default function Page() {
             "flex flex-col items-center",
             siteConfig.showAmbientVideo
               ? "mt-8 text-lg font-semibold text-white"
-              : "mt-12 text-default-600 md:mt-20",
+              : "mt-12 text-zinc-600 md:mt-20",
             siteConfig.showAmbientVideo && !isScreenShort && "md:text-xl",
             siteConfig.showAmbientVideo && isScreenShort && "mb-8",
           )}

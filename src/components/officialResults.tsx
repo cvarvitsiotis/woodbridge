@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { data } from "@/config/data";
-import StyledSelect from "./styledSelect";
-import OfficialResultsSections from "./officialResultsSections";
+import StyledSelect from "@/components/styledSelect";
+import OfficialResultsSections from "@/components/officialResultsSections";
 
 const allYears = Array.from(
   { length: data.pdfResultEndYear - data.pdfResultStartYear + 1 },
@@ -23,8 +23,8 @@ function YearSelect({
     <StyledSelect
       selectedKey={selectedYear}
       onChange={handleChangeSelectedYear}
-      label="YEAR"
-      className="w-48"
+      selectClassName="w-32"
+      valueClassName="text-base"
       options={allYears}
     />
   );
@@ -39,7 +39,8 @@ export default function OfficialResults() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex items-center justify-center gap-3">
+        <div className="text-lg font-light">YEAR</div>
         <YearSelect
           selectedYear={selectedYear}
           handleChangeSelectedYear={handleChangeSelectedYear}

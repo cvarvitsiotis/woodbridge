@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 function AlertMessage() {
   return (
     <div className="mx-auto pt-6">
-      <Alert status="accent" className="rounded-sm p-3">
-        <Alert.Content className="ms-0 min-h-0 text-center">
-          <Alert.Title className="font-normal">
+      <Alert status="accent">
+        <Alert.Content>
+          <Alert.Title>
             {`Division and Varsity Heat will be added ${dates.participatingTeamsUpdateDateParts.monthDayLong}`}
           </Alert.Title>
         </Alert.Content>

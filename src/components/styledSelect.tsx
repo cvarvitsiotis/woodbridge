@@ -1,4 +1,4 @@
-import { Label, ListBox, Select } from "@heroui/react";
+import { ListBox, Select } from "@heroui/react";
 import type { Key } from "@heroui/react";
 
 export default function StyledSelect({
@@ -6,23 +6,31 @@ export default function StyledSelect({
   onChange,
   selectedKey,
   label,
-  className,
+  selectClassName,
+  valueClassName,
+  isPrimary = true,
 }: {
   options: string[];
   onChange: (value: string) => void;
   selectedKey: string;
-  label: string;
-  className?: string;
+  label?: string;
+  selectClassName?: string;
+  valueClassName?: string;
+  isPrimary?: boolean;
 }) {
   return (
     <Select
+      fullWidth
       value={selectedKey}
       onChange={(value: Key | null) => onChange(String(value ?? ""))}
-      className={className}
+      className={selectClassName}
+      variant={isPrimary ? "primary" : "secondary"}
     >
-      <Label>{label}</Label>
-      <Select.Trigger>
-        <Select.Value />
+      <Select.Trigger className="py-1.5">
+        <div className="flex flex-col">
+          {label && <div className="text-xs font-medium text-zinc-500">{label}</div>}
+          <Select.Value className={valueClassName} />
+        </div>
         <Select.Indicator />
       </Select.Trigger>
       <Select.Popover>

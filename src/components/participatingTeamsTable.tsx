@@ -2,16 +2,14 @@
 
 import { participatingTeams } from "@/config/participatingTeams";
 import { Table } from "@heroui/react";
-import { getKeyValue } from "@/utils/table";
 import Divisions from "@/components/divisions";
 import { divisions, heats } from "@/config/races";
 import { useMemo, useState } from "react";
 import { pages } from "@/config/site";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
-import { useUserAgent } from "@/hooks/useUserAgent";
-import { isFirefox } from "@/utils/userAgent";
-import AlertMessageFirefox from "./alertMessageFirefox";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "./styledTableCell";
+import DynamicTable, { TableEmptyState } from "./dynamicTable";
 
 const columns = [
   {
@@ -73,7 +71,7 @@ export default function ParticipatingTeamsTable() {
     [divisionFilter, varsityHeatFilter, teamFilter],
   );
 
-  const getTopContent = useMemo(
+  const topContent = useMemo(
     function () {
       function onDivisionFilterChange(value: string): void {
         setDivisionFilter(value);
@@ -82,25 +80,29 @@ export default function ParticipatingTeamsTable() {
         setVarsityHeatFilter(value);
       }
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
+        <div className="flex flex-col justify-between gap-2 pt-3 sm:flex-row">
           <StyledInput
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            className="basis-2/5"
+            textFieldClassName="basis-2/5"
+            fillVertically={true}
+            isPrimary={false}
           />
-          <div className="flex basis-3/5 gap-3">
+          <div className="flex basis-3/5 gap-2">
             <StyledSelect
               selectedKey={divisionFilter}
               onChange={onDivisionFilterChange}
               label="Division"
               options={divisionOptions.map((division) => division.name)}
+              isPrimary={false}
             />
             <StyledSelect
               selectedKey={varsityHeatFilter}
               onChange={onVarsityHeatFilterChange}
               label="Varsity Heat"
               options={heatOptions}
+              isPrimary={false}
             />
           </div>
         </div>
@@ -109,42 +111,28 @@ export default function ParticipatingTeamsTable() {
     [teamFilter, divisionFilter, varsityHeatFilter],
   );
 
-  const userAgent = useUserAgent();
-
-  if (isFirefox(userAgent)) return <AlertMessageFirefox />;
-
   return (
-    <Table className="pt-10" key={tableKey}>
-      {getTopContent}
-      <Table.ScrollContainer>
-        <Table.Content aria-label={pages.participatingTeams.menuLabel}>
-          <Table.Header columns={columns}>
-            {(column) => (
-              <Table.Column
-                key={column.key}
-                className={column.key === "varsityHeat" || column.key === "state" ? "text-center" : "text-start"}
-              >
-                {column.label}
-              </Table.Column>
-            )}
-          </Table.Header>
-          <Table.Body items={filteredItems}>
-            {(item) => (
-              <Table.Row key={item.id}>
-                {(columnKey) => (
-                  <Table.Cell>
-                    {String(columnKey) === "division" ? (
-                      <Divisions divisions={item.division ? [item.division] : []} />
-                    ) : (
-                      getKeyValue(item, columnKey)
-                    )}
-                  </Table.Cell>
-                )}
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
+    <DynamicTable
+      tableKey={tableKey}
+      topContent={topContent}
+      columns={columns}
+      isRowHeaderColumn="name"
+      ariaLabel={pages.participatingTeams.menuLabel}
+    >
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
+        {(item) => (
+          <Table.Row id={item.id}>
+            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell>{item.raceDay}</StyledTableCell>
+            <StyledTableCell>
+              <Divisions divisions={item.division ? [item.division] : []} />
+            </StyledTableCell>
+            <StyledTableCell>{item.varsityHeat}</StyledTableCell>
+            <StyledTableCell>{item.city}</StyledTableCell>
+            <StyledTableCell>{item.state}</StyledTableCell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </DynamicTable>
   );
 }

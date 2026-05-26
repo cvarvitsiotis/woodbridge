@@ -3,8 +3,8 @@
 import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
 import { Table } from "@heroui/react";
-import { getKeyValue } from "@/utils/table";
 import clsx from "clsx";
+import StyledTableCell from "./styledTableCell";
 
 const teamColumns = [
   {
@@ -56,15 +56,17 @@ function TeamsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={teamColumns}>
               {(column) => (
-                <Table.Column key={column.key} className={column.key === "state" ? "text-center" : "text-start"}>
+                <Table.Column id={column.key} isRowHeader={column.key === "name"}>
                   {column.label}
                 </Table.Column>
               )}
             </Table.Header>
             <Table.Body items={teams}>
               {(item) => (
-                <Table.Row key={item.id}>
-                  {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
+                <Table.Row id={item.id}>
+                  <StyledTableCell>{item.name}</StyledTableCell>
+                  <StyledTableCell>{item.city}</StyledTableCell>
+                  <StyledTableCell>{item.state}</StyledTableCell>
                 </Table.Row>
               )}
             </Table.Body>
@@ -91,15 +93,18 @@ function IndividualsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={individualColumns}>
               {(column) => (
-                <Table.Column key={column.key} className={column.key === "teamState" ? "text-center" : "text-start"}>
+                <Table.Column id={column.key} isRowHeader={column.key === "name"}>
                   {column.label}
                 </Table.Column>
               )}
             </Table.Header>
             <Table.Body items={individuals}>
               {(item) => (
-                <Table.Row key={item.id}>
-                  {(columnKey) => <Table.Cell>{getKeyValue(item, columnKey)}</Table.Cell>}
+                <Table.Row id={item.id}>
+                  <StyledTableCell>{item.name}</StyledTableCell>
+                  <StyledTableCell>{item.teamName}</StyledTableCell>
+                  <StyledTableCell>{item.teamCity}</StyledTableCell>
+                  <StyledTableCell>{item.teamState}</StyledTableCell>
                 </Table.Row>
               )}
             </Table.Body>
@@ -135,7 +140,7 @@ export default function FeaturedTeamsAndIndividualsSection({
         </div>
       ) : (
         <div className={clsx("pl-8", getParagraphStyle(true))}>
-          <p>Entries coming soon. Check back on Tuesday, September 2.</p>
+          <p>Entries coming soon</p>
         </div>
       )}
     </>

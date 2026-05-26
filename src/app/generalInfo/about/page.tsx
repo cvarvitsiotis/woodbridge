@@ -1,37 +1,17 @@
 import { people, urls } from "@/config/data";
 import { filteredRaces } from "@/config/races";
 import { dates } from "@/config/dates";
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
 import { Metadata } from "next";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import List from "@/components/list";
+import ParagraphLink from "@/components/paragraphLink";
 
 export const metadata: Metadata = {
   title: pages.about.menuLabel,
 };
-
-function ParagraphLink({
-  url,
-  name,
-  isExternal = true,
-}: {
-  url: string;
-  name: string;
-  isExternal?: boolean;
-}) {
-  return (
-    <Link
-      href={url}
-      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={getParagraphStyle()}
-    >
-      {name}
-    </Link>
-  );
-}
 
 export default function Page() {
   return (
@@ -90,11 +70,15 @@ export default function Page() {
           </li>
           <li>
             The meet will have real-time results at{" "}
-            <ParagraphLink url={urls.athleticNet.altheticLIVEMeet} name={siteConfig.athleticLIVE} />{" "}
+            <ParagraphLink isExternal href={urls.athleticNet.altheticLIVEMeet}>
+              {siteConfig.athleticLIVE}
+            </ParagraphLink>{" "}
             for teams and individuals at the 1-mile, 2-mile, and end of race marks.
           </li>
           <li>
-            <ParagraphLink url={urls.athleticNet.runnerSpaceMeet} name={siteConfig.runnerSpace} />{" "}
+            <ParagraphLink isExternal href={urls.athleticNet.runnerSpaceMeet}>
+              {siteConfig.runnerSpace}
+            </ParagraphLink>{" "}
             will live-stream (entirely) each race.
           </li>
           <li>
@@ -117,12 +101,7 @@ export default function Page() {
         </p>
         <p>
           For more information on how your participation in our meet can be made most enjoyable,
-          please{" "}
-          <ParagraphLink
-            url={pages.contact.path}
-            name={pages.contact.menuLabel}
-            isExternal={false}
-          />{" "}
+          please <ParagraphLink href={pages.contact.path}>{pages.contact.menuLabel}</ParagraphLink>{" "}
           us.
         </p>
         <div>

@@ -1,5 +1,4 @@
 import { urls } from "@/config/data";
-import { Link } from "@heroui/react";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -8,24 +7,25 @@ import { ReactNode } from "react";
 import { getSubheaderStyle } from "@/styles/styles";
 import List from "@/components/list";
 import { dates } from "@/config/dates";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.hotels.menuLabel,
 };
 
-function LinkListItem({ url, label }: { url: string; label: string }) {
+function Link({ url, label }: { url: string; label: string }) {
   return (
-    <li>
-      <ExternalLink url={url} label={label} />
-    </li>
+    <BaseLink isExternal href={url} className="text-base">
+      {label}
+    </BaseLink>
   );
 }
 
-function ExternalLink({ url, label }: { url: string; label: string }) {
+function LinkListItem({ url, label }: { url: string; label: string }) {
   return (
-    <Link href={url} target="_blank" rel="noopener noreferrer">
-      {label}
-    </Link>
+    <li>
+      <Link url={url} label={label} />
+    </li>
   );
 }
 
@@ -42,7 +42,7 @@ export default function Page() {
       <Subheader>Hotels of the meet</Subheader>
       <div className="flex flex-col gap-x-28 gap-y-10 pl-10 sm:flex-row">
         <div className="basis-1/2">
-          <ExternalLink url={urls.hotels.embassySuites} label="Embassy Suites Irvine" />
+          <Link url={urls.hotels.embassySuites} label="Embassy Suites Irvine" />
           <p>2120 Main St., Irvine, 92614</p>
           <p className="pt-4">2 night minimum stay required</p>
           <p>King Bed Suite + Queen Size Sofa Bed Rate: $199.00</p>
@@ -54,7 +54,7 @@ export default function Page() {
           <p>949.705.5149</p>
         </div>
         <div className="basis-1/2">
-          <ExternalLink url={urls.hotels.comfortInn} label="Comfort Inn & Suites Irvine Spectrum" />
+          <Link url={urls.hotels.comfortInn} label="Comfort Inn & Suites Irvine Spectrum" />
           <p>23702 Rockfield Blvd., Lake Forest, CA 92630</p>
           <p>949.528.1278</p>
           <p className="pt-4">

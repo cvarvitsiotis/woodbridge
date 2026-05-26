@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Link } from "@heroui/react";
 import {
   divisions,
   genders,
@@ -11,6 +10,7 @@ import { DivisionType, RaceType } from "@/types";
 import { Card } from "@heroui/react";
 import { getSubheaderStyle } from "@/styles/styles";
 import clsx from "clsx";
+import BaseLink from "@/components/baseLink";
 
 function getDivisionForDivisionResultLink(division: DivisionType): string {
   return `d${division.num}`;
@@ -62,30 +62,29 @@ function getOverallResultUrl(isIndiv: boolean, selectedYear: string): string {
 }
 
 function ResultLink({
-  url,
+  href,
   isFontLight,
   label,
 }: {
-  url: string;
+  href: string;
   isFontLight: boolean;
   label: string;
 }) {
   return (
-    <Link
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={clsx("hover:underline", isFontLight && "font-light")}
+    <BaseLink
+      isExternal
+      href={href}
+      className={clsx("text-base hover:underline", isFontLight && "font-light")}
     >
       {label}
-    </Link>
+    </BaseLink>
   );
 }
 
 function OverallLink({ isIndiv, selectedYear }: { isIndiv: boolean; selectedYear: string }) {
   const url = getOverallResultUrl(isIndiv, selectedYear);
   const label = `Top 100 ${getBaseResultLabel(isIndiv)}`;
-  return <ResultLink url={url} isFontLight={false} label={label} />;
+  return <ResultLink href={url} isFontLight={false} label={label} />;
 }
 
 function getBaseResultLabel(isIndiv: boolean): string {
@@ -103,7 +102,7 @@ function RaceLink({
 }) {
   const label = getBaseResultLabel(isIndiv);
   const url = getRaceResultUrl(race, isIndiv, selectedYear);
-  return <ResultLink url={url} isFontLight={true} label={label} />;
+  return <ResultLink href={url} isFontLight={true} label={label} />;
 }
 
 function OverallSection({ selectedYear }: { selectedYear: string }) {
@@ -122,15 +121,15 @@ function OverallSection({ selectedYear }: { selectedYear: string }) {
 function getDivisionColor(division?: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
-      return "bg-accent-soft";
+      return "bg-blue-400";
     case divisions.two.num:
-      return "bg-warning";
+      return "bg-amber-300";
     case divisions.three.num:
-      return "bg-danger";
+      return "bg-rose-400";
     case divisions.four.num:
       return "bg-indigo-50";
     default:
-      return "bg-default-300";
+      return "bg-violet-400";
   }
 }
 
@@ -192,7 +191,7 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
   return (
-    <Card className="shadow-lg w-80">
+    <Card className="block w-80 rounded-2xl p-0 shadow-lg">
       <div
         className={clsx(
           "border-b border-gray-200 p-2 text-center font-medium",
