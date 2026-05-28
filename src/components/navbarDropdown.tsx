@@ -108,7 +108,7 @@ export default function NavbarDropdown({
     <li>
       <Dropdown>
         <NavbarDropdownTrigger isMenu={isMenu} pageParent={pageParent} isHomePage={isHomePage} />
-        <Dropdown.Popover>
+        <Dropdown.Popover className="max-w-full">
           <Dropdown.Menu onAction={onAction}>
             {pageItems.map((page) => (
               <Dropdown.Item

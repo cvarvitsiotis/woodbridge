@@ -164,7 +164,7 @@ function Menu({
         className="lg:hidden"
       >
         <Drawer.Content placement="right">
-          <Drawer.Dialog className="bg-linear-to-br from-indigo-200 from-65% to-[#ffd1b9]">
+          <Drawer.Dialog className="min-w-6/7 bg-linear-to-br from-indigo-200 from-65% to-[#ffd1b9]">
             <Drawer.CloseTrigger className="size-7" />
             <Drawer.Header>
               <Drawer.Heading className="border-b border-neutral-900/15 pb-4">
