@@ -5,39 +5,19 @@ import { FeaturedIndividualType, FeaturedTeamType } from "@/types";
 import { Table } from "@heroui/react";
 import clsx from "clsx";
 import StyledTableCell from "./styledTableCell";
+import { ColumnProps } from "react-aria-components/Table";
 
-const teamColumns = [
-  {
-    key: "name",
-    label: "School",
-  },
-  {
-    key: "city",
-    label: "City",
-  },
-  {
-    key: "state",
-    label: "State",
-  },
+const teamColumns: ColumnProps[] = [
+  { id: "name", textValue: "School", isRowHeader: true },
+  { id: "city", textValue: "City" },
+  { id: "state", textValue: "State" },
 ];
 
-const individualColumns = [
-  {
-    key: "name",
-    label: "Name",
-  },
-  {
-    key: "teamName",
-    label: "School",
-  },
-  {
-    key: "teamCity",
-    label: "City",
-  },
-  {
-    key: "teamState",
-    label: "State",
-  },
+const individualColumns: ColumnProps[] = [
+  { id: "name", textValue: "Name", isRowHeader: true },
+  { id: "teamName", textValue: "School" },
+  { id: "teamCity", textValue: "City" },
+  { id: "teamState", textValue: "State" },
 ];
 
 function TeamsSection({
@@ -56,8 +36,8 @@ function TeamsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={teamColumns}>
               {(column) => (
-                <Table.Column id={column.key} isRowHeader={column.key === "name"}>
-                  {column.label}
+                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                  {column.textValue}
                 </Table.Column>
               )}
             </Table.Header>
@@ -93,8 +73,8 @@ function IndividualsSection({
           <Table.Content aria-label={`${sectionDescription} ${header}`}>
             <Table.Header columns={individualColumns}>
               {(column) => (
-                <Table.Column id={column.key} isRowHeader={column.key === "name"}>
-                  {column.label}
+                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                  {column.textValue}
                 </Table.Column>
               )}
             </Table.Header>

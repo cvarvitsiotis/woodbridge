@@ -1,23 +1,18 @@
 "use client";
 
 import clsx from "clsx";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
-import { Input, Label, Radio, RadioGroup, TextField } from "@heroui/react";
+import { Input, Label, Radio, RadioGroup } from "@heroui/react";
 import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
 import StyledTableCell from "./styledTableCell";
 import StyledInput from "./styledInput";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  {
-    key: "bib",
-    label: "Bib",
-  },
-  {
-    key: "resultTime",
-    label: "Result Time",
-  },
+const columns: ColumnProps[] = [
+  { id: "bib", textValue: "Bib", isRowHeader: true },
+  { id: "resultTime", textValue: "Result Time" },
 ];
 
 const AnchorTypes = {
@@ -139,6 +134,22 @@ function getResults(
   setResultTime(orderedBibResults, startTime);
   return orderedBibResults;
 }
+
+function getResultsSafe(
+  fileContent: string | ArrayBuffer | null | undefined,
+  raceStartTime: string,
+  runnerResultTime: string,
+  runnerBib: string,
+): { results?: OrderedBibEntry[]; resultsError?: string } {
+  try {
+    if (!fileContent || typeof fileContent !== "string") return {};
+
+    return { results: getResults(fileContent, raceStartTime, runnerResultTime, runnerBib) };
+  } catch (error) {
+    return { resultsError: error instanceof Error ? error.message : "Unknown error" };
+  }
+}
+
 function AnchorTypeRadio({ value, label }: { value: string; label: string }) {
   return (
     <Radio value={value} className="mt-0">
@@ -178,14 +189,14 @@ function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
           <Table.Content aria-label={pages.timing.menuLabel}>
             <Table.Header columns={columns}>
               {(column) => (
-                <Table.Column id={column.key} isRowHeader={column.key === "bib"}>
-                  {column.label}
+                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                  {column.textValue}
                 </Table.Column>
               )}
             </Table.Header>
             <Table.Body items={results}>
               {(item) => (
-                <Table.Row id={item[1].originalOrder}>
+                <Table.Row id={item[0]}>
                   <StyledTableCell>{item[0]}</StyledTableCell>
                   <StyledTableCell>{item[1].resultTime}</StyledTableCell>
                 </Table.Row>
@@ -195,6 +206,15 @@ function ResultsTable({ results }: { results: OrderedBibEntry[] }) {
         </Table.ScrollContainer>
       </Table>
     </div>
+  );
+}
+
+function ErrorInfo({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <p>Error reading file:</p>
+      <p>{children}</p>
+    </>
   );
 }
 
@@ -238,10 +258,12 @@ export default function RewindUltra() {
     }
   }
 
-  const results =
-    fileContent && typeof fileContent === "string"
-      ? getResults(fileContent, raceStartTime, runnerResultTime, runnerBib)
-      : null;
+  const { results, resultsError } = getResultsSafe(
+    fileContent,
+    raceStartTime,
+    runnerResultTime,
+    runnerBib,
+  );
 
   return (
     <div className={clsx("space-y-2 sm:pl-6", getParagraphStyle(false, false))}>
@@ -301,20 +323,20 @@ export default function RewindUltra() {
           )}
         </div>
       </div>
-      {fileReadError && (
-        <>
-          <p>Error reading file:</p>
-          <p>
+      <div className="pt-4">
+        {fileReadError && (
+          <ErrorInfo>
             {fileReadError.name} - {fileReadError.message}
-          </p>
-        </>
-      )}
-      {results && (
-        <div className="pt-4">
-          <p>Results:</p>
-          <ResultsTable results={results} />
-        </div>
-      )}
+          </ErrorInfo>
+        )}
+        {resultsError && <ErrorInfo>{resultsError}</ErrorInfo>}
+        {results && (
+          <>
+            <p>Results:</p>
+            <ResultsTable results={results} />
+          </>
+        )}
+      </div>
     </div>
   );
 }

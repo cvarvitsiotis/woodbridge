@@ -8,15 +8,16 @@ import StyledSelect from "@/components/styledSelect";
 import StyledInput from "@/components/styledInput";
 import StyledTableCell from "@/components/styledTableCell";
 import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  { key: "place", label: "Place" },
-  { key: "name", label: "Name" },
-  { key: "team", label: "School" },
-  { key: "time", label: "Time" },
-  { key: "grade", label: "Grade" },
-  { key: "year", label: "Year" },
-  { key: "course", label: "Course" },
+const columns: ColumnProps[] = [
+  { id: "place", textValue: "Place", defaultWidth: "1fr", isRowHeader: true },
+  { id: "name", textValue: "Name", defaultWidth: "3fr" },
+  { id: "team", textValue: "School", defaultWidth: "3fr" },
+  { id: "time", textValue: "Time", defaultWidth: "1fr" },
+  { id: "grade", textValue: "Grade", defaultWidth: "1fr" },
+  { id: "year", textValue: "Year", defaultWidth: "1fr" },
+  { id: "course", textValue: "Course", defaultWidth: "2fr" },
 ];
 
 const genderOptions = ["M", "F"];
@@ -289,7 +290,6 @@ export default function AllTimeIndividualsTable() {
       tableKey={tableKey}
       topContent={topContent}
       columns={columns}
-      isRowHeaderColumn="place"
       ariaLabel={`${pages.allTimeLists.menuLabel} - Individuals`}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>

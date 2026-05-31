@@ -12,32 +12,15 @@ import StyledTableCell from "./styledTableCell";
 import DynamicTable, { TableEmptyState } from "./dynamicTable";
 import clsx from "clsx";
 import { dates } from "@/config/dates";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  {
-    key: "name",
-    label: "School",
-  },
-  {
-    key: "raceDay",
-    label: "Race Day",
-  },
-  {
-    key: "division",
-    label: "Division",
-  },
-  {
-    key: "varsityHeat",
-    label: "Varsity Heat",
-  },
-  {
-    key: "city",
-    label: "City",
-  },
-  {
-    key: "state",
-    label: "State",
-  },
+const columns: ColumnProps[] = [
+  { id: "name", textValue: "School", defaultWidth: "4fr", isRowHeader: true },
+  { id: "raceDay", textValue: "Race Day", defaultWidth: "2fr" },
+  { id: "division", textValue: "Division", defaultWidth: "1fr" },
+  { id: "varsityHeat", textValue: "Varsity Heat", defaultWidth: "1fr" },
+  { id: "city", textValue: "City", defaultWidth: "2fr" },
+  { id: "state", textValue: "State", defaultWidth: "1fr" },
 ];
 
 const divisionOptions = [{ num: 0, numRoman: "0", name: "All" }, ...Object.values(divisions)];
@@ -126,9 +109,8 @@ export default function ParticipatingTeamsTable() {
       columns={columns.filter(
         (column) =>
           displayDivisionAndVarsityHeat ||
-          (column.key !== "division" && column.key !== "varsityHeat"),
+          (column.id !== "division" && column.id !== "varsityHeat"),
       )}
-      isRowHeaderColumn="name"
       ariaLabel={pages.participatingTeams.menuLabel}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>

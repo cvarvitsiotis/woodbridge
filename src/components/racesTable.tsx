@@ -11,23 +11,15 @@ import { RaceType } from "@/types";
 import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
 import StyledTableCell from "./styledTableCell";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  {
-    key: "time",
-    label: "Time",
-  },
-  {
-    key: "division",
-    label: "Division",
-  },
-  {
-    key: "description",
-    label: "Race",
-  },
+const columns: ColumnProps[] = [
+  { id: "time", textValue: "Time", isRowHeader: true },
+  { id: "division", textValue: "Division" },
+  { id: "description", textValue: "Race" },
 ];
 
-const featuredColumns = columns.filter((column) => column.key !== "division");
+const featuredColumns = columns.filter((column) => column.id !== "division");
 
 function getDescription(race: RaceType): string {
   if (race.level.scheduleFormat) {
@@ -54,8 +46,8 @@ export default function RacesTable({
           <Table.Content aria-label={pages.schedule.menuLabel}>
             <Table.Header columns={isFeatured ? featuredColumns : columns}>
               {(column) => (
-                <Table.Column id={column.key} isRowHeader={column.key === "time"}>
-                  {column.label}
+                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                  {column.textValue}
                 </Table.Column>
               )}
             </Table.Header>

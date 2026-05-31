@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { Alert } from "@heroui/react";
 
 import clsx from "clsx";
@@ -108,7 +108,7 @@ function CamelCapClassic({
   children,
 }: {
   isScreenShort: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <span

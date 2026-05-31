@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { ReactNode } from "react";
 import { urls } from "@/config/data";
 import { pages, siteConfig } from "@/config/site";
 import PresentedByAsics from "@/components/presentedByAsics";
@@ -12,7 +12,7 @@ import { IrvineTimingLogo } from "@/components/icons";
 import clsx from "clsx";
 import BaseLink from "@/components/baseLink";
 
-function FooterLink({ url, children }: { url: string; children: React.ReactNode }) {
+function FooterLink({ url, children }: { url: string; children: ReactNode }) {
   return (
     <BaseLink isExternal href={url} className="text-sm">
       {children}
