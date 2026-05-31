@@ -12,10 +12,10 @@ import { ColumnProps } from "react-aria-components/Table";
 
 const columns: ColumnProps[] = [
   { id: "place", textValue: "Place", defaultWidth: "1fr", isRowHeader: true },
-  { id: "team", textValue: "School", defaultWidth: "3fr" },
-  { id: "time", textValue: "Time", defaultWidth: "1fr" },
-  { id: "year", textValue: "Year", defaultWidth: "1fr" },
-  { id: "course", textValue: "Course", defaultWidth: "2fr" },
+  { id: "team", textValue: "School", defaultWidth: "20fr" },
+  { id: "time", textValue: "Time", defaultWidth: "10fr" },
+  { id: "year", textValue: "Year", defaultWidth: "5fr" },
+  { id: "course", textValue: "Course", defaultWidth: "10fr" },
 ];
 
 const genderOptions = ["M", "F"];
@@ -153,6 +153,7 @@ export default function AllTimeTeamsTable() {
       tableKey={tableKey}
       topContent={topContent}
       columns={columns}
+      contentClassName="min-w-150"
       ariaLabel={`${pages.allTimeLists.menuLabel} - Teams`}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>

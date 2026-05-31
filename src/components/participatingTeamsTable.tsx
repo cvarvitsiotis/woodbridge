@@ -15,12 +15,12 @@ import { dates } from "@/config/dates";
 import { ColumnProps } from "react-aria-components/Table";
 
 const columns: ColumnProps[] = [
-  { id: "name", textValue: "School", defaultWidth: "4fr", isRowHeader: true },
-  { id: "raceDay", textValue: "Race Day", defaultWidth: "2fr" },
-  { id: "division", textValue: "Division", defaultWidth: "1fr" },
-  { id: "varsityHeat", textValue: "Varsity Heat", defaultWidth: "1fr" },
-  { id: "city", textValue: "City", defaultWidth: "2fr" },
-  { id: "state", textValue: "State", defaultWidth: "1fr" },
+  { id: "name", textValue: "School", defaultWidth: "20fr", isRowHeader: true },
+  { id: "raceDay", textValue: "Race Day", defaultWidth: "15fr" },
+  { id: "division", textValue: "Division", defaultWidth: "5fr" },
+  { id: "varsityHeat", textValue: "Varsity Heat", defaultWidth: "5fr" },
+  { id: "city", textValue: "City", defaultWidth: "15fr" },
+  { id: "state", textValue: "State", defaultWidth: "5fr" },
 ];
 
 const divisionOptions = [{ num: 0, numRoman: "0", name: "All" }, ...Object.values(divisions)];
@@ -111,6 +111,7 @@ export default function ParticipatingTeamsTable() {
           displayDivisionAndVarsityHeat ||
           (column.id !== "division" && column.id !== "varsityHeat"),
       )}
+      contentClassName="min-w-150"
       ariaLabel={pages.participatingTeams.menuLabel}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>

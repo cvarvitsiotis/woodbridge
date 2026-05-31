@@ -4,16 +4,19 @@ import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { EmptyState, Table, TableLayout, Virtualizer } from "@heroui/react";
 import { JSX, ReactNode, useEffect, useState } from "react";
 import { ColumnProps } from "react-aria-components/Table";
+import clsx from "clsx";
 
 export default function DynamicTable({
   tableKey,
   topContent,
   columns,
+  contentClassName,
   ariaLabel,
   children,
 }: {
   tableKey: string;
   topContent: JSX.Element;
+  contentClassName?: string;
   columns: ColumnProps[];
   ariaLabel: string;
   children: ReactNode;
@@ -39,7 +42,7 @@ export default function DynamicTable({
             <Table.ScrollContainer>
               <Table.Content
                 aria-label={ariaLabel}
-                className="min-h-52 overflow-auto"
+                className={clsx("min-h-52 overflow-auto", contentClassName)}
                 style={{ maxHeight: `${maxTableHeight}px` }}
               >
                 <Table.Header columns={columns} className="h-full">
