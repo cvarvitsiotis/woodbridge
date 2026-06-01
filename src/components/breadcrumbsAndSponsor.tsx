@@ -14,7 +14,7 @@ export default function BreadcrumbsAndSponsor() {
 
   return (
     <div className="flex w-full items-center justify-between">
-      <Breadcrumbs isDisabled>
+      <Breadcrumbs isDisabled className="flex-wrap">
         {page?.parent && <Breadcrumbs.Item>{page?.parent}</Breadcrumbs.Item>}
         <Breadcrumbs.Item>{page?.menuLabel}</Breadcrumbs.Item>
       </Breadcrumbs>
