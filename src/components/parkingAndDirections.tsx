@@ -198,7 +198,7 @@ function MainAccordionItem({
         </Accordion.Trigger>
       </Accordion.Heading>
       <Accordion.Panel>
-        <Accordion.Body>{children}</Accordion.Body>
+        <AccordionBody>{children}</AccordionBody>
       </Accordion.Panel>
     </Accordion.Item>
   );
@@ -222,26 +222,7 @@ function SpectatorsAccordionItem() {
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot6} />
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot7} />
         {/* <SpectatorLotAccordionItem instruction={instructions.freewayToLot8} /> */}
-        <Accordion.Item key="Portola High School">
-          <Accordion.Heading>
-            <Accordion.Trigger>
-              Portola High School
-              <Accordion.Indicator />
-            </Accordion.Trigger>
-          </Accordion.Heading>
-          <Accordion.Panel>
-            <Accordion.Body>
-              <p>
-                Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the
-                Great Park in Lot 4.
-              </p>
-              <p>There are 3 parking entrance options:</p>{" "}
-              <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance1} />
-              <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance2} />
-              <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance3} />
-            </Accordion.Body>
-          </Accordion.Panel>
-        </Accordion.Item>
+        <SpectatorLotPortolaAccordionItem />
       </Accordion>
     </>
   );
@@ -333,6 +314,10 @@ function DescriptionMapModalInDiv({ instruction }: { instruction: ParkingInstruc
   );
 }
 
+function AccordionBody({ children }: { children: ReactNode }) {
+  return <Accordion.Body className="text-foreground">{children}</Accordion.Body>;
+}
+
 function SpectatorLotAccordionItem({ instruction }: { instruction: ParkingInstructionType }) {
   return (
     <Accordion.Item key={instruction.accordionTitle}>
@@ -343,9 +328,34 @@ function SpectatorLotAccordionItem({ instruction }: { instruction: ParkingInstru
         </Accordion.Trigger>
       </Accordion.Heading>
       <Accordion.Panel>
-        <Accordion.Body>
+        <AccordionBody>
           <DescriptionMapModalInDiv instruction={instruction} />
-        </Accordion.Body>
+        </AccordionBody>
+      </Accordion.Panel>
+    </Accordion.Item>
+  );
+}
+
+function SpectatorLotPortolaAccordionItem() {
+  return (
+    <Accordion.Item key="Portola High School">
+      <Accordion.Heading>
+        <Accordion.Trigger>
+          Portola High School
+          <Accordion.Indicator />
+        </Accordion.Trigger>
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <AccordionBody>
+          <p>
+            Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great
+            Park in Lot 4.
+          </p>
+          <p>There are 3 parking entrance options:</p>{" "}
+          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance1} />
+          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance2} />
+          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance3} />
+        </AccordionBody>
       </Accordion.Panel>
     </Accordion.Item>
   );

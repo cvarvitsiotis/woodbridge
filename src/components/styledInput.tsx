@@ -38,6 +38,7 @@ export default function StyledInput({
           </InputGroup.Prefix>
         )}
         <InputGroup.Input
+          className="min-w-0"
           placeholder={placeholder}
           value={value}
           onChange={(e) => onValueChange(e.target.value)}
