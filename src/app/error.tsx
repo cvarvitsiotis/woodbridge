@@ -1,9 +1,15 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import StyledButton from "@/components/styledButton";
 import { useEffect } from "react";
 
-export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+export default function Error({
+  error,
+  unstable_retry,
+}: {
+  error: Error;
+  unstable_retry: () => void;
+}) {
   useEffect(
     function () {
       console.error(error);
@@ -14,9 +20,9 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
   return (
     <div className="flex flex-1 flex-col items-center justify-center space-y-4">
       <p>Something went wrong!</p>
-      <Button variant="primary" onPress={() => reset()}>
+      <StyledButton variant="primary" onPress={() => unstable_retry()}>
         Try again
-      </Button>
+      </StyledButton>
     </div>
   );
 }

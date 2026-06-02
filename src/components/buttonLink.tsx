@@ -1,4 +1,6 @@
-import { Button, ButtonRootProps } from "@heroui/react";
+import { ButtonRootProps } from "@heroui/react";
+import StyledButton from "@/components/styledButton";
+import { ReactNode } from "react";
 
 export default function ButtonLink({
   href,
@@ -10,12 +12,13 @@ export default function ButtonLink({
 }: {
   href: string;
   isExternal?: boolean;
+  children: ReactNode;
 } & ButtonRootProps) {
   return (
     <a href={href} {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}>
-      <Button variant={variant} size={size} className={className}>
+      <StyledButton variant={variant} size={size} className={className}>
         {children}
-      </Button>
+      </StyledButton>
     </a>
   );
 }
