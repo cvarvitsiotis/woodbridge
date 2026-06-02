@@ -37,7 +37,7 @@ export default function Page() {
         <p>Please contact {people.coachPacheco} and he will get in touch with you shortly.</p>
       </div>
       <div className="mx-auto pt-14">
-        <Card className="rounded-2xl p-0 shadow-lg">
+        <Card className="overflow-hidden rounded-2xl p-0 shadow-lg">
           <div className="flex items-center">
             <div className="relative aspect-400/415 h-32 sm:h-36">
               <Image
