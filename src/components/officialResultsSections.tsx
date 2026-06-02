@@ -191,7 +191,7 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
   return (
-    <Card className="block w-80 rounded-2xl p-0 shadow-lg">
+    <Card className="block w-80 overflow-hidden rounded-2xl p-0 shadow-lg">
       <div
         className={clsx(
           "border-b border-gray-200 p-2 text-center font-medium",
