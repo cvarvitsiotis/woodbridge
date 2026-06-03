@@ -162,17 +162,20 @@ const instructionSections = {
 function InstructionModal({ instruction }: { instruction: ParkingInstructionType }) {
   return (
     <Modal>
-      <Modal.Trigger className={getBaseLinkStyle()}>
+      <Modal.Trigger className={clsx(getBaseLinkStyle(), "text-base")}>
         Turn by turn instructions from {instruction.modalLinkLabel}
       </Modal.Trigger>
       <Modal.Backdrop>
-        <Modal.Container size="lg" placement="top" scroll="inside">
-          <Modal.Dialog>
+        <Modal.Container size="lg" placement="top" scroll="outside">
+          {/* Prefer scroll="inside", but not working as of 6-2-26 */}
+          <Modal.Dialog className="bg-surface">
             <Modal.CloseTrigger />
             <Modal.Header>
-              <Modal.Heading>{instruction.modalTitle}</Modal.Heading>
+              <Modal.Heading className="text-lg font-semibold">
+                {instruction.modalTitle}
+              </Modal.Heading>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="mt-4 text-base text-foreground">
               <ModalBodyInternal instruction={instruction} />
             </Modal.Body>
           </Modal.Dialog>
@@ -190,17 +193,12 @@ function MainAccordionItem({
   children?: ReactNode;
 }) {
   return (
-    <Accordion.Item key={instructionSection}>
-      <Accordion.Heading>
-        <Accordion.Trigger className={getParagraphStyle(true)}>
-          {instructionSection}
-          <Accordion.Indicator />
-        </Accordion.Trigger>
-      </Accordion.Heading>
-      <Accordion.Panel>
-        <AccordionBody>{children}</AccordionBody>
-      </Accordion.Panel>
-    </Accordion.Item>
+    <AccordionItem
+      accordionTitle={instructionSection}
+      accordionTitleClassNameOverride={getParagraphStyle(true)}
+    >
+      {children}
+    </AccordionItem>
   );
 }
 
@@ -286,6 +284,7 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
           `https://www.google.com/maps/dir/?api=1&destination=${location}` +
           (includeWaypoint ? `&waypoints=${locations.waypoint}` : "")
         }
+        className="text-base"
       >
         Google Maps
       </BaseLink>
@@ -314,50 +313,50 @@ function DescriptionMapModalInDiv({ instruction }: { instruction: ParkingInstruc
   );
 }
 
-function AccordionBody({ children }: { children: ReactNode }) {
-  return <Accordion.Body className="text-foreground">{children}</Accordion.Body>;
-}
-
-function SpectatorLotAccordionItem({ instruction }: { instruction: ParkingInstructionType }) {
+function AccordionItem({
+  accordionTitle,
+  accordionTitleClassNameOverride,
+  children,
+}: {
+  accordionTitle?: string;
+  accordionTitleClassNameOverride?: string;
+  children: ReactNode;
+}) {
   return (
-    <Accordion.Item key={instruction.accordionTitle}>
+    <Accordion.Item key={accordionTitle} className="after:bg-neutral-900/15 last:after:hidden">
       <Accordion.Heading>
-        <Accordion.Trigger>
-          {instruction.accordionTitle}
+        <Accordion.Trigger className={accordionTitleClassNameOverride ?? "text-base font-normal"}>
+          {accordionTitle}
           <Accordion.Indicator />
         </Accordion.Trigger>
       </Accordion.Heading>
       <Accordion.Panel>
-        <AccordionBody>
-          <DescriptionMapModalInDiv instruction={instruction} />
-        </AccordionBody>
+        <Accordion.Body className="text-base text-foreground">{children}</Accordion.Body>
       </Accordion.Panel>
     </Accordion.Item>
   );
 }
 
+function SpectatorLotAccordionItem({ instruction }: { instruction: ParkingInstructionType }) {
+  return (
+    <AccordionItem accordionTitle={instruction.accordionTitle}>
+      <DescriptionMapModalInDiv instruction={instruction} />
+    </AccordionItem>
+  );
+}
+
 function SpectatorLotPortolaAccordionItem() {
   return (
-    <Accordion.Item key="Portola High School">
-      <Accordion.Heading>
-        <Accordion.Trigger>
-          Portola High School
-          <Accordion.Indicator />
-        </Accordion.Trigger>
-      </Accordion.Heading>
-      <Accordion.Panel>
-        <AccordionBody>
-          <p>
-            Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great
-            Park in Lot 4.
-          </p>
-          <p>There are 3 parking entrance options:</p>{" "}
-          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance1} />
-          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance2} />
-          <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance3} />
-        </AccordionBody>
-      </Accordion.Panel>
-    </Accordion.Item>
+    <AccordionItem accordionTitle="Portola High School">
+      <p>
+        Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great Park
+        in Lot 4.
+      </p>
+      <p>There are 3 parking entrance options:</p>{" "}
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance1} />
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance2} />
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance3} />
+    </AccordionItem>
   );
 }
 
