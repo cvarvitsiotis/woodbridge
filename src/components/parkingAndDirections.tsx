@@ -175,7 +175,7 @@ function InstructionModal({ instruction }: { instruction: ParkingInstructionType
                 {instruction.modalTitle}
               </Modal.Heading>
             </Modal.Header>
-            <Modal.Body className="mt-4 text-base text-foreground">
+            <Modal.Body className="mt-4 space-y-3 text-base text-foreground">
               <ModalBodyInternal instruction={instruction} />
             </Modal.Body>
           </Modal.Dialog>
@@ -541,18 +541,15 @@ function Alerts() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 pt-6">
       <div>
-        <Alert status="danger" className="rounded-xl">
+        <Alert status="danger" className="rounded-xl border border-pink-200 bg-pink-100">
           <Alert.Indicator />
           <Alert.Content>
-            <Alert.Title className="text-base">
-              <span className="font-extrabold">DO NOT</span> exit at Sand Canyon
-            </Alert.Title>
-            <Alert.Description className="text-base font-normal">
+            <Alert.Description className="text-base font-normal text-danger-soft-foreground">
               <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
                 <div className="space-y-2 lg:basis-3/5">
                   <p>
-                    Exiting Interstate 5 or 405 at Sand Canyon will put you in 30-min gridlock. You
-                    must exit Jeffrey, instead.
+                    <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                    Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
                   </p>
                   <p>
                     Use the Google Maps links below. They force you through Jeffrey by including an{" "}
@@ -576,16 +573,15 @@ function Alerts() {
         </Alert>
       </div>
       <div>
-        <Alert status="accent" className="rounded-xl">
+        <Alert status="accent" className="rounded-xl border border-blue-200 bg-blue-50">
           <Alert.Indicator />
           <Alert.Content>
-            <Alert.Title className="text-base">
-              Parking passes <span className="font-bold">must be purchased online</span> prior to
-              arriving at the {siteConfig.greatPark}.
-            </Alert.Title>
-            <Alert.Description className="text-base font-normal">
+            <Alert.Description className="text-base font-normal text-accent-soft-foreground">
               <div className="space-y-2">
-                <p>No parking passes will be sold onsite.</p>
+                <p>
+                  Parking passes <span className="font-bold">must be purchased online</span> prior
+                  to arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
+                </p>
                 {new Date() < dates.parkingPassPurchaseDateParts.date && (
                   <p>
                     Passes will be available for purchase on this page starting{" "}
