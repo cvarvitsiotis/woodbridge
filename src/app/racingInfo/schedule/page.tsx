@@ -46,11 +46,12 @@ export default function Page() {
         <div className="space-y-5">
           <div className="space-y-3">
             <DayHeader date={dates.meetEndDateParts.dayDescriptionMonthDayYearLong} />
-            <RacesTable races={filteredRaces.saturdayNonFeaturedRaces} />
+            <RacesTable races={filteredRaces.saturdayMorningRaces} />
           </div>
+          <RacesTable races={filteredRaces.saturdayNightNonFeaturedRaces} />
           <div className="space-y-2">
             <FeaturedTableHeader />
-            <RacesTable races={filteredRaces.saturdayFeaturedRaces} isFeatured={true} />
+            <RacesTable races={filteredRaces.saturdayNightFeaturedRaces} isFeatured={true} />
           </div>
         </div>
       </div>

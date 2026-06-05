@@ -128,6 +128,8 @@ function getDivisionColor(division?: DivisionType): string {
       return "bg-rose-400";
     case divisions.four.num:
       return "bg-indigo-50";
+    case divisions.five.num:
+      return "bg-emerald-300";
     default:
       return "bg-violet-400";
   }
@@ -163,7 +165,10 @@ function GenderColumn({
           return (
             <div
               key={levelAndHeat}
-              className={`px-4 py-2 ${Number(selectedYear) > 2012 && race.level.resultSpan2 ? "row-span-2" : ""}`}
+              className={clsx(
+                "px-4 py-2",
+                Number(selectedYear) > 2012 && race.level.resultSpan2 && "row-span-2",
+              )}
             >
               <div className="font-medium">{levelAndHeat}</div>
               <div>
@@ -190,6 +195,8 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     ? getNonFeaturedRacesForResults(division, genders.boys, Number(selectedYear))
     : getFeaturedRacesForResults(genders.boys, Number(selectedYear));
 
+  if (girlsRaces.length === 0 || boysRaces.length === 0) return null;
+
   return (
     <Card className="block w-80 overflow-hidden rounded-2xl p-0 shadow-lg">
       <div
@@ -207,7 +214,9 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
             ? "grid-rows-[repeat(3,auto)]"
             : boysRaces.length === 5
               ? "grid-rows-[repeat(6,auto)]"
-              : "grid-rows-[repeat(8,auto)]",
+              : boysRaces.length === 6
+                ? "grid-rows-[repeat(7,auto)]"
+                : "grid-rows-[repeat(8,auto)]",
         )}
       >
         <GenderColumn division={division} races={girlsRaces} selectedYear={selectedYear} />
@@ -235,6 +244,7 @@ export default function OfficialResultsSections({ selectedYear }: { selectedYear
         <ResultGrid division={divisions.two} selectedYear={selectedYear} />
         <ResultGrid division={divisions.three} selectedYear={selectedYear} />
         <ResultGrid division={divisions.four} selectedYear={selectedYear} />
+        <ResultGrid division={divisions.five} selectedYear={selectedYear} />
       </div>
 
       <Subtitle>Boys & Girls Overall</Subtitle>
