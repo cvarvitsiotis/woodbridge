@@ -12,6 +12,7 @@ import PresentedByAsics from "@/components/presentedByAsics";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import BaseLink from "@/components/baseLink";
 import ButtonLink from "@/components/buttonLink";
+import StyledAlert from "@/components/styledAlert";
 
 function RegisterEarlyAlertMessageWrapper({ isScreenShort }: { isScreenShort: boolean }) {
   return (
@@ -54,7 +55,7 @@ function RegisterEarlyLink({ isScreenShort, text }: { isScreenShort: boolean; te
       href={pages.registration.path}
       className={clsx(
         "font-semibold",
-        siteConfig.showAmbientVideo ? "text-white" : "text-warning",
+        siteConfig.showAmbientVideo ? "text-white" : "text-warning-soft-foreground",
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
@@ -69,13 +70,14 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
       {siteConfig.showAmbientVideo ? (
         <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
       ) : (
-        <Alert status="warning" className="mt-2 py-2">
-          <Alert.Content className="text-center">
-            <Alert.Description className="font-normal">
-              <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
-            </Alert.Description>
-          </Alert.Content>
-        </Alert>
+        <StyledAlert
+          status="warning"
+          includeIndicator={false}
+          isBaseSize={false}
+          className="mt-2 py-2"
+        >
+          <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
+        </StyledAlert>
       )}
     </div>
   );

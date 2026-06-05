@@ -1,12 +1,11 @@
-import { Alert } from "@heroui/react";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import ParticipatingTeamsTable from "@/components/participatingTeamsTable";
 import PageHeader from "@/components/pageHeader";
 import { dates } from "@/config/dates";
-import { participatingTeams } from "@/config/participatingTeams";
 import { getParagraphStyle } from "@/styles/styles";
 import clsx from "clsx";
+import StyledAlert from "@/components/styledAlert";
 
 export const metadata: Metadata = {
   title: pages.participatingTeams.menuLabel,
@@ -15,13 +14,9 @@ export const metadata: Metadata = {
 function AlertMessage() {
   return (
     <div className="mx-auto pt-6">
-      <Alert status="accent">
-        <Alert.Content>
-          <Alert.Title>
-            {`Division and Varsity Heat will be added ${dates.participatingTeamsUpdateDateParts.monthDayLong}`}
-          </Alert.Title>
-        </Alert.Content>
-      </Alert>
+      <StyledAlert status="accent" includeIndicator={false} isBaseSize={false}>
+        {`Division and Varsity Heat will be added ${dates.participatingTeamsUpdateDateParts.monthDayLong}`}
+      </StyledAlert>
     </div>
   );
 }

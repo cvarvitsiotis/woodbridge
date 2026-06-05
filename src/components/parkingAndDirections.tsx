@@ -1,7 +1,7 @@
 import greatParkParkingLots from "@/../public/images/great-park-parking-lots.png";
 import directionsGridlock from "@/../public/images/woodbridge-gridlock.png";
 import Image from "next/image";
-import { Accordion, Modal, Alert } from "@heroui/react";
+import { Accordion, Modal } from "@heroui/react";
 import { ReactNode } from "react";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
@@ -11,6 +11,7 @@ import { dates } from "@/config/dates";
 import { urls } from "@/config/data";
 import BaseLink from "@/components/baseLink";
 import ButtonLink from "@/components/buttonLink";
+import StyledAlert from "@/components/styledAlert";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -541,60 +542,50 @@ function Alerts() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 pt-6">
       <div>
-        <Alert status="danger" className="rounded-xl border border-pink-200 bg-pink-100">
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Description className="text-base font-normal text-danger-soft-foreground">
-              <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
-                <div className="space-y-2 lg:basis-3/5">
-                  <p>
-                    <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
-                    Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
-                  </p>
-                  <p>
-                    Use the Google Maps links below. They force you through Jeffrey by including an{" "}
-                    <span className="font-bold">intermediate waypoint</span>. When getting to the
-                    waypoint, click CONTINUE in Google Maps to continue to the Great Park.
-                  </p>
-                </div>
-                <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
-                  <Image
-                    fill
-                    src={directionsGridlock}
-                    quality={100}
-                    placeholder="blur"
-                    alt="Directions Gridlock"
-                    className="rounded-lg border border-slate-300 object-contain shadow-lg"
-                  />
-                </div>
-              </div>
-            </Alert.Description>
-          </Alert.Content>
-        </Alert>
+        <StyledAlert status="danger" includeIndicator={true} isBaseSize={true}>
+          <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
+            <div className="space-y-2 lg:basis-3/5">
+              <p>
+                <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
+              </p>
+              <p>
+                Use the Google Maps links below. They force you through Jeffrey by including an{" "}
+                <span className="font-bold">intermediate waypoint</span>. When getting to the
+                waypoint, click CONTINUE in Google Maps to continue to the Great Park.
+              </p>
+            </div>
+            <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
+              <Image
+                fill
+                src={directionsGridlock}
+                quality={100}
+                placeholder="blur"
+                alt="Directions Gridlock"
+                className="rounded-lg border border-slate-300 object-contain shadow-lg"
+              />
+            </div>
+          </div>
+        </StyledAlert>
       </div>
       <div>
-        <Alert status="accent" className="rounded-xl border border-blue-200 bg-blue-50">
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Description className="text-base font-normal text-accent-soft-foreground">
-              <div className="space-y-2">
-                <p>
-                  Parking passes <span className="font-bold">must be purchased online</span> prior
-                  to arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
-                </p>
-                {new Date() < dates.parkingPassPurchaseDateParts.date && (
-                  <p>
-                    Passes will be available for purchase on this page starting{" "}
-                    <span className="font-semibold">
-                      {dates.parkingPassPurchaseDateParts.monthDayLong}
-                    </span>
-                    .
-                  </p>
-                )}
-              </div>
-            </Alert.Description>
-          </Alert.Content>
-        </Alert>
+        <StyledAlert status="accent" includeIndicator={true} isBaseSize={true}>
+          <div className="space-y-2">
+            <p>
+              Parking passes <span className="font-bold">must be purchased online</span> prior to
+              arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
+            </p>
+            {new Date() < dates.parkingPassPurchaseDateParts.date && (
+              <p>
+                Passes will be available for purchase on this page starting{" "}
+                <span className="font-semibold">
+                  {dates.parkingPassPurchaseDateParts.monthDayLong}
+                </span>
+                .
+              </p>
+            )}
+          </div>
+        </StyledAlert>
       </div>
     </div>
   );
