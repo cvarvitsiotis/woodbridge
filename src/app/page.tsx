@@ -237,11 +237,8 @@ export default function Home() {
             href={pages.about.path}
             variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
             size="lg"
-            className={clsx(
-              siteConfig.showAmbientVideo
-                ? "bg-yellow-100 text-zinc-600"
-                : "border-violet-500 text-violet-500",
-            )}
+            className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-zinc-600")}
+            customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
           >
             <HelpClinicIcon />
             {pages.about.menuLabel}
