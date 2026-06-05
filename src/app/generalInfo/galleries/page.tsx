@@ -1,11 +1,11 @@
 import { LinkType } from "@/types";
-import { Link } from "@heroui/link";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import { getParagraphStyle } from "@/styles/styles";
 import clsx from "clsx";
 import { ReactNode } from "react";
 import PageHeader from "@/components/pageHeader";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.galleries.menuLabel,
@@ -22,9 +22,9 @@ function Year({ year, links }: { year: string; links: LinkType[] }) {
       <div className="ml-4">
         {links.map((link) => (
           <div key={link.url}>
-            <Link isExternal href={link.url}>
+            <BaseLink isExternal href={link.url} className="text-base">
               {link.description}
-            </Link>
+            </BaseLink>
           </div>
         ))}
       </div>

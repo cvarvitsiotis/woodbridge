@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Link } from "@heroui/link";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
 import { getParagraphStyle } from "@/styles/styles";
@@ -9,18 +8,11 @@ import woodbridgeTShirt from "@/../public/images/woodbridge-tshirt-2025.jpg";
 import clsx from "clsx";
 import List from "@/components/list";
 import { dates } from "@/config/dates";
+import ParagraphLink from "@/components/paragraphLink";
 
 export const metadata: Metadata = {
   title: pages.preOrderTShirts.menuLabel,
 };
-
-function ParagraphLink({ url, name }: { url: string; name: string }) {
-  return (
-    <Link isExternal href={url} className={getParagraphStyle(false)}>
-      {name}
-    </Link>
-  );
-}
 
 export default function Page() {
   return (
@@ -47,8 +39,10 @@ export default function Page() {
             <List isOrdered={false}>
               <li>
                 Have someone enter the count of each size that your team needs using the{" "}
-                <ParagraphLink url={urls.other.preOrderTShirts} name="T-Shirt Pre-Order Form" /> by{" "}
-                {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}
+                <ParagraphLink isExternal href={urls.other.preOrderTShirts}>
+                  T-Shirt Pre-Order Form
+                </ParagraphLink>{" "}
+                by {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}
               </li>
               <li>Collect $25 from each athlete</li>
               <li>

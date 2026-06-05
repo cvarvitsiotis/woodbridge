@@ -1,20 +1,17 @@
-"use client";
-
 import greatParkParkingLots from "@/../public/images/great-park-parking-lots.png";
 import directionsGridlock from "@/../public/images/woodbridge-gridlock.png";
 import Image from "next/image";
-import { Link } from "@heroui/link";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
-import { ReactNode, useState } from "react";
+import { Accordion, Modal } from "@heroui/react";
+import { ReactNode } from "react";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
-import { Alert } from "@heroui/alert";
 import { ParkingInstructionType, ParkingInstructionTypes } from "@/types";
-import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
+import { getBaseLinkStyle, getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import { dates } from "@/config/dates";
 import { urls } from "@/config/data";
-import { Button } from "@heroui/button";
+import BaseLink from "@/components/baseLink";
+import ButtonLink from "@/components/buttonLink";
+import StyledAlert from "@/components/styledAlert";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -163,51 +160,50 @@ const instructionSections = {
   buses: "Buses",
 };
 
-function InstructionModal({
-  isOpen,
-  onOpenChange,
-  instruction,
-}: {
-  isOpen: boolean;
-  onOpenChange: () => void;
-  instruction: ParkingInstructionType;
-}) {
+function InstructionModal({ instruction }: { instruction: ParkingInstructionType }) {
   return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      size="xl"
-      placement="top"
-      scrollBehavior="inside"
-    >
-      <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{instruction.modalTitle}</ModalHeader>
-        <ModalBody>
-          <ModalBodyInternal instruction={instruction} />
-        </ModalBody>
-      </ModalContent>
+    <Modal>
+      <Modal.Trigger className={clsx(getBaseLinkStyle(), "text-base")}>
+        Turn by turn instructions from {instruction.modalLinkLabel}
+      </Modal.Trigger>
+      <Modal.Backdrop>
+        <Modal.Container size="lg" placement="top" scroll="outside">
+          {/* Prefer scroll="inside", but not working as of 6-2-26 */}
+          <Modal.Dialog className="bg-surface">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading className="text-lg font-semibold">
+                {instruction.modalTitle}
+              </Modal.Heading>
+            </Modal.Header>
+            <Modal.Body className="mt-4 space-y-3 text-base text-foreground">
+              <ModalBodyInternal instruction={instruction} />
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 }
 
-function getMainAccordionItem(instructionSection: string, child: ReactNode) {
+function MainAccordionItem({
+  instructionSection,
+  children,
+}: {
+  instructionSection: string;
+  children?: ReactNode;
+}) {
   return (
     <AccordionItem
-      key={instructionSection}
-      aria-label={instructionSection}
-      title={instructionSection}
-      classNames={{
-        title: getParagraphStyle(true),
-      }}
+      accordionTitle={instructionSection}
+      accordionTitleClassNameOverride={getParagraphStyle(true)}
     >
-      {child}
+      {children}
     </AccordionItem>
   );
 }
 
-function getSpectatorsAccordionItem(
-  handleOpenModal: (instruction: ParkingInstructionType) => void,
-) {
+function SpectatorsAccordionItem() {
   return (
     <>
       <p>
@@ -216,112 +212,63 @@ function getSpectatorsAccordionItem(
       </p>
 
       <Accordion>
-        {getSpectatorLotAccordionItem(instructions.freewayToLot0, handleOpenModal)}
-        {/*getSpectatorLotAccordionItem(instructions.freewayToLot1, handleOpenModal)*/}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot2, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot3, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot4, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot5, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot6, handleOpenModal)}
-        {getSpectatorLotAccordionItem(instructions.freewayToLot7, handleOpenModal)}
-        {/*getSpectatorLotAccordionItem(instructions.freewayToLot8, handleOpenModal)*/}
-        <AccordionItem
-          key="Portola High School"
-          aria-label="Portola High School"
-          title="Portola High School"
-        >
-          <div className="space-y-4 pl-6">
-            <p>
-              Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great
-              Park in Lot 4.
-            </p>
-            <p>There are 3 parking entrance options:</p>{" "}
-            <DescriptionMapModalInDiv
-              instruction={instructions.freewayToPortolaEntrance1}
-              handleOpenModal={handleOpenModal}
-            />
-            <DescriptionMapModalInDiv
-              instruction={instructions.freewayToPortolaEntrance2}
-              handleOpenModal={handleOpenModal}
-            />
-            <DescriptionMapModalInDiv
-              instruction={instructions.freewayToPortolaEntrance3}
-              handleOpenModal={handleOpenModal}
-            />
-          </div>
-        </AccordionItem>
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot0} />
+        {/* <SpectatorLotAccordionItem instruction={instructions.freewayToLot1} /> */}
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot2} />
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot3} />
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot4} />
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot5} />
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot6} />
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot7} />
+        {/* <SpectatorLotAccordionItem instruction={instructions.freewayToLot8} /> */}
+        <SpectatorLotPortolaAccordionItem />
       </Accordion>
     </>
   );
 }
 
-function getRunnerDropoffAndPickupAccordionItem(
-  handleOpenModal: (instruction: ParkingInstructionType) => void,
-) {
-  return (
-    <DescriptionMapModalInDiv
-      instruction={instructions.freewayToRunnerDropoffAndPickup}
-      handleOpenModal={handleOpenModal}
-    />
-  );
+function RunnerDropoffAndPickupAccordionItem() {
+  return <DescriptionMapModalInDiv instruction={instructions.freewayToRunnerDropoffAndPickup} />;
 }
 
-function getBusesAccordionItem(handleOpenModal: (instruction: ParkingInstructionType) => void) {
+function BusesAccordionItem() {
   return (
     <div className="space-y-4">
       <p>
         Drop off and pick up teams in Lot 1 on Phantom. Coordinate pickup via phone call when your
         team is ready to leave.
       </p>
-      <DescriptionMapModalInDiv
-        instruction={instructions.freewayToTeamDropoff}
-        handleOpenModal={handleOpenModal}
-      />
-      <DescriptionMapModalInDiv
-        instruction={instructions.teamDropoffToBusStagingArea}
-        handleOpenModal={handleOpenModal}
-      />
-      <DescriptionMapModalInDiv
-        instruction={instructions.busStagingAreaToTeamPickup}
-        handleOpenModal={handleOpenModal}
-      />
+      <DescriptionMapModalInDiv instruction={instructions.freewayToTeamDropoff} />
+      <DescriptionMapModalInDiv instruction={instructions.teamDropoffToBusStagingArea} />
+      <DescriptionMapModalInDiv instruction={instructions.busStagingAreaToTeamPickup} />
     </div>
   );
 }
 
-function Instructions({
-  handleOpenModal,
-}: {
-  handleOpenModal: (instruction: ParkingInstructionType) => void;
-}) {
+function Instructions() {
   return (
-    <div className="w-[768px] max-w-full basis-1/2 pl-6">
+    <div className="w-3xl max-w-full basis-1/2 pl-6">
       <Accordion>
-        {/* Must call get*AccordionItem as functions rather than nesting JSX components due to HeroUI limitation: https://github.com/heroui-inc/heroui/issues/2381 */}
-        {getMainAccordionItem(
-          instructionSections.spectators,
-          getSpectatorsAccordionItem(handleOpenModal),
-        )}
-        {getMainAccordionItem(
-          instructionSections.runnerDropoffAndPickup,
-          getRunnerDropoffAndPickupAccordionItem(handleOpenModal),
-        )}
-        {getMainAccordionItem(instructionSections.buses, getBusesAccordionItem(handleOpenModal))}
+        <MainAccordionItem instructionSection={instructionSections.spectators}>
+          <SpectatorsAccordionItem />
+        </MainAccordionItem>
+        <MainAccordionItem instructionSection={instructionSections.runnerDropoffAndPickup}>
+          <RunnerDropoffAndPickupAccordionItem />
+        </MainAccordionItem>
+        <MainAccordionItem instructionSection={instructionSections.buses}>
+          <BusesAccordionItem />
+        </MainAccordionItem>
       </Accordion>
     </div>
   );
 }
 
-function InstructionsSection({
-  handleOpenModal,
-}: {
-  handleOpenModal: (instruction: ParkingInstructionType) => void;
-}) {
+function InstructionsSection() {
   return (
     <>
       <h1 className={clsx("pt-6", getSubheaderStyle())}>Directions</h1>
       <div className="flex flex-col items-center justify-start gap-x-10 gap-y-8 lg:flex-row lg:items-start">
-        <Instructions handleOpenModal={handleOpenModal} />
+        <Instructions />
         <GreatParkParkingLots />
       </div>
     </>
@@ -331,16 +278,17 @@ function InstructionsSection({
 function MapLink({ location, includeWaypoint }: { location: string; includeWaypoint: boolean }) {
   return (
     <div>
-      <Link
+      <BaseLink
         isExternal
         aria-label="Google Maps"
         href={
           `https://www.google.com/maps/dir/?api=1&destination=${location}` +
           (includeWaypoint ? `&waypoints=${locations.waypoint}` : "")
         }
+        className="text-base"
       >
         Google Maps
-      </Link>
+      </BaseLink>
       {includeWaypoint && (
         <p className="inline">
           {" "}
@@ -352,50 +300,63 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
   );
 }
 
-function ModalLink({
-  instruction,
-  handleOpenModal,
-}: {
-  instruction: ParkingInstructionType;
-  handleOpenModal: (instruction: ParkingInstructionType) => void;
-}) {
-  return (
-    <p
-      onClick={() => handleOpenModal(instruction)}
-      className="cursor-pointer text-base text-primary transition-opacity tap-highlight-transparent hover:opacity-hover active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus"
-    >
-      Turn by turn instructions from {instruction.modalLinkLabel}
-    </p>
-  );
+function ModalLink({ instruction }: { instruction: ParkingInstructionType }) {
+  return <InstructionModal instruction={instruction} />;
 }
 
-function DescriptionMapModalInDiv({
-  instruction,
-  handleOpenModal,
-}: {
-  instruction: ParkingInstructionType;
-  handleOpenModal: (instruction: ParkingInstructionType) => void;
-}) {
+function DescriptionMapModalInDiv({ instruction }: { instruction: ParkingInstructionType }) {
   return (
     <div className="space-y-1">
       <p>{instruction.description}</p>
       <MapLink location={instruction.location} includeWaypoint={instruction.includeWaypoint} />
-      <ModalLink instruction={instruction} handleOpenModal={handleOpenModal} />
+      <ModalLink instruction={instruction} />
     </div>
   );
 }
 
-function getSpectatorLotAccordionItem(
-  instruction: ParkingInstructionType,
-  handleOpenModal: (instruction: ParkingInstructionType) => void,
-) {
+function AccordionItem({
+  accordionTitle,
+  accordionTitleClassNameOverride,
+  children,
+}: {
+  accordionTitle?: string;
+  accordionTitleClassNameOverride?: string;
+  children: ReactNode;
+}) {
   return (
-    <AccordionItem
-      key={instruction.accordionTitle}
-      aria-label={instruction.accordionTitle}
-      title={instruction.accordionTitle}
-    >
-      <DescriptionMapModalInDiv instruction={instruction} handleOpenModal={handleOpenModal} />
+    <Accordion.Item key={accordionTitle} className="after:bg-neutral-900/15 last:after:hidden">
+      <Accordion.Heading>
+        <Accordion.Trigger className={accordionTitleClassNameOverride ?? "text-base font-normal"}>
+          {accordionTitle}
+          <Accordion.Indicator />
+        </Accordion.Trigger>
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <Accordion.Body className="text-base text-foreground">{children}</Accordion.Body>
+      </Accordion.Panel>
+    </Accordion.Item>
+  );
+}
+
+function SpectatorLotAccordionItem({ instruction }: { instruction: ParkingInstructionType }) {
+  return (
+    <AccordionItem accordionTitle={instruction.accordionTitle}>
+      <DescriptionMapModalInDiv instruction={instruction} />
+    </AccordionItem>
+  );
+}
+
+function SpectatorLotPortolaAccordionItem() {
+  return (
+    <AccordionItem accordionTitle="Portola High School">
+      <p>
+        Shuttles leave Portola every 10 minutes from the Cadence lot and drop off at the Great Park
+        in Lot 4.
+      </p>
+      <p>There are 3 parking entrance options:</p>{" "}
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance1} />
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance2} />
+      <DescriptionMapModalInDiv instruction={instructions.freewayToPortolaEntrance3} />
     </AccordionItem>
   );
 }
@@ -581,64 +542,50 @@ function Alerts() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 pt-6">
       <div>
-        <Alert
-          hideIconWrapper
-          color="danger"
-          title={
-            <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
-              <div className="space-y-2 lg:basis-3/5">
-                <p>
-                  <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
-                  Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
-                </p>
-                <p>
-                  Use the Google Maps links below. They force you through Jeffrey by including an{" "}
-                  <span className="font-bold">intermediate waypoint</span>. When getting to the
-                  waypoint, click CONTINUE in Google Maps to continue to the Great Park.
-                </p>
-              </div>
-              <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
-                <Image
-                  fill
-                  src={directionsGridlock}
-                  quality={100}
-                  placeholder="blur"
-                  alt="Directions Gridlock"
-                  className="rounded-lg border border-slate-300 object-contain shadow-lg"
-                />
-              </div>
+        <StyledAlert status="danger" includeIndicator={true} isBaseSize={true}>
+          <div className="flex flex-col justify-start gap-x-10 gap-y-4 lg:flex-row">
+            <div className="space-y-2 lg:basis-3/5">
+              <p>
+                <span className="font-extrabold">DO NOT</span> exit Interstate 5 or 405 at Sand
+                Canyon. You will hit 30-min gridlock. You must exit Jeffrey, instead.
+              </p>
+              <p>
+                Use the Google Maps links below. They force you through Jeffrey by including an{" "}
+                <span className="font-bold">intermediate waypoint</span>. When getting to the
+                waypoint, click CONTINUE in Google Maps to continue to the Great Park.
+              </p>
             </div>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{ title: "text-medium font-normal" }}
-        />
+            <div className="relative aspect-3741/3614 max-h-56 w-full max-w-56 lg:basis-2/5">
+              <Image
+                fill
+                src={directionsGridlock}
+                quality={100}
+                placeholder="blur"
+                alt="Directions Gridlock"
+                className="rounded-lg border border-slate-300 object-contain shadow-lg"
+              />
+            </div>
+          </div>
+        </StyledAlert>
       </div>
       <div>
-        <Alert
-          hideIconWrapper
-          color="primary"
-          title={
-            <div className="space-y-2">
+        <StyledAlert status="accent" includeIndicator={true} isBaseSize={true}>
+          <div className="space-y-2">
+            <p>
+              Parking passes <span className="font-bold">must be purchased online</span> prior to
+              arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
+            </p>
+            {new Date() < dates.parkingPassPurchaseDateParts.date && (
               <p>
-                Parking passes <span className="font-bold">must be purchased online</span> prior to
-                arriving at the {siteConfig.greatPark}. No parking passes will be sold onsite.
+                Passes will be available for purchase on this page starting{" "}
+                <span className="font-semibold">
+                  {dates.parkingPassPurchaseDateParts.monthDayLong}
+                </span>
+                .
               </p>
-              {new Date() < dates.parkingPassPurchaseDateParts.date && (
-                <p>
-                  Passes will be available for purchase on this page starting{" "}
-                  <span className="font-semibold">
-                    {dates.parkingPassPurchaseDateParts.monthDayLong}
-                  </span>
-                  .
-                </p>
-              )}
-            </div>
-          }
-          variant="faded"
-          radius="sm"
-          classNames={{ title: "text-medium font-normal" }}
-        />
+            )}
+          </div>
+        </StyledAlert>
       </div>
     </div>
   );
@@ -663,19 +610,16 @@ function GreatParkParkingLots() {
 
 function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
   return (
-    <Button
-      isExternal
-      as={Link}
-      color={isStartDate ? "primary" : "secondary"}
-      radius="full"
-      variant="ghost"
+    <ButtonLink
       href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
+      isExternal
+      variant="secondary"
     >
       Purchase{" "}
       {isStartDate
         ? dates.meetStartDateParts.dayDescriptionLong
         : dates.meetEndDateParts.dayDescriptionLong}
-    </Button>
+    </ButtonLink>
   );
 }
 
@@ -702,22 +646,11 @@ function ParkingPasses() {
 }
 
 export default function ParkingAndDirections() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [instruction, setInstruction] = useState<ParkingInstructionType | undefined>();
-
-  function handleOpenModal(instruction: ParkingInstructionType) {
-    setInstruction(() => instruction);
-    onOpen();
-  }
-
   return (
     <>
-      {instruction && (
-        <InstructionModal isOpen={isOpen} onOpenChange={onOpenChange} instruction={instruction} />
-      )}
       <Alerts />
       <ParkingPasses />
-      <InstructionsSection handleOpenModal={handleOpenModal} />
+      <InstructionsSection />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import { people } from "@/config/data";
-import { Card } from "@heroui/card";
-import { Link } from "@heroui/link";
+import { Card } from "@heroui/react";
 import clsx from "clsx";
 import Image from "next/image";
 import bryanPacheco from "@/../public/images/bryan-pacheco.jpg";
@@ -10,6 +9,7 @@ import { MailIcon, CallIcon } from "@/components/icons";
 import { ReactNode } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.contact.menuLabel,
@@ -19,9 +19,9 @@ function IconAndLink({ url, name, icon }: { url: string; name: string; icon: Rea
   return (
     <div className="flex items-center gap-2">
       {icon}
-      <Link isExternal href={url} className="text-indigo-600 sm:text-lg">
+      <BaseLink isExternal href={url} className="text-indigo-600 sm:text-lg">
         {name}
-      </Link>
+      </BaseLink>
     </div>
   );
 }
@@ -37,7 +37,7 @@ export default function Page() {
         <p>Please contact {people.coachPacheco} and he will get in touch with you shortly.</p>
       </div>
       <div className="mx-auto pt-14">
-        <Card shadow="lg">
+        <Card className="overflow-hidden rounded-2xl p-0 shadow-lg">
           <div className="flex items-center">
             <div className="relative aspect-400/415 h-32 sm:h-36">
               <Image

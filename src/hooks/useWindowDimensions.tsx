@@ -1,32 +1,42 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+let windowDimensions: { width: number | undefined; height: number | undefined } = {
+  width: undefined,
+  height: undefined,
+};
+
+const serverSnapshot = { width: undefined, height: undefined };
+
+function getSnapshot() {
+  return windowDimensions;
+}
+
+function getServerSnapshot() {
+  return serverSnapshot;
+}
+
+function subscribe(callback: () => void) {
+  if (typeof window === "undefined") {
+    return function () {};
+  }
+
+  function handleResize() {
+    windowDimensions = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+    callback();
+  }
+
+  handleResize();
+
+  window.addEventListener("resize", handleResize);
+
+  return function () {
+    window.removeEventListener("resize", handleResize);
+  };
+}
 
 export function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState<{
-    width: number | undefined;
-    height: number | undefined;
-  }>({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(function () {
-    if (window === undefined) return;
-
-    function handleResize() {
-      setWindowDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return function () {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return windowDimensions;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

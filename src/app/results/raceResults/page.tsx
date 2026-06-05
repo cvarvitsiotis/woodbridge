@@ -1,11 +1,9 @@
-import { Link } from "@heroui/link";
-import { Button } from "@heroui/button";
-
 import { urls } from "@/config/data";
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import OfficialResults from "@/components/officialResults";
 import PageHeader from "@/components/pageHeader";
+import ButtonLink from "@/components/buttonLink";
 
 export const metadata: Metadata = {
   title: pages.raceResults.menuLabel,
@@ -13,16 +11,14 @@ export const metadata: Metadata = {
 
 function LiveLink({ url, label, isPrimary }: { url: string; label: string; isPrimary: boolean }) {
   return (
-    <Button
-      isExternal
-      as={Link}
-      color={isPrimary ? "primary" : "secondary"}
-      radius="full"
-      variant="ghost"
+    <ButtonLink
       href={url}
+      isExternal
+      variant="outline"
+      customVariantColor={isPrimary ? "ghostPrimary" : "ghostSecondary"}
     >
       {label}
-    </Button>
+    </ButtonLink>
   );
 }
 

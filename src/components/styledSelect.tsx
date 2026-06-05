@@ -1,42 +1,48 @@
-import { Select, SelectItem } from "@heroui/select";
-import { SelectSlots, SlotsToClasses } from "@heroui/theme";
+import { ListBox, Select } from "@heroui/react";
+import type { Key } from "@heroui/react";
 
 export default function StyledSelect({
   options,
   onChange,
   selectedKey,
   label,
-  labelPlacement,
-  size,
-  className,
-  classNames,
+  selectClassName,
+  valueClassName,
+  isPrimary = true,
 }: {
   options: string[];
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
   selectedKey: string;
-  label: string;
-  labelPlacement?: "outside" | "outside-left" | "inside" | undefined;
-  size?: "sm" | "md" | "lg" | undefined;
-  className?: string;
-  classNames?: SlotsToClasses<SelectSlots>;
+  label?: string;
+  selectClassName?: string;
+  valueClassName?: string;
+  isPrimary?: boolean;
 }) {
   return (
     <Select
-      selectedKeys={[selectedKey]}
-      size={size ?? "sm"}
-      onChange={onChange}
-      label={label}
-      labelPlacement={labelPlacement ?? "inside"}
-      variant="faded"
-      className={className}
-      classNames={{
-        trigger: "border border-default-300",
-        ...classNames,
-      }}
+      fullWidth
+      value={selectedKey}
+      onChange={(value: Key | null) => onChange(String(value ?? ""))}
+      className={selectClassName}
+      variant={isPrimary ? "primary" : "secondary"}
     >
-      {options.map((option) => (
-        <SelectItem key={option}>{option}</SelectItem>
-      ))}
+      <Select.Trigger className="py-1.5">
+        <div className="flex flex-col">
+          {label && <div className="text-xs font-medium text-zinc-500">{label}</div>}
+          <Select.Value className={valueClassName} />
+        </div>
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          {options.map((option) => (
+            <ListBox.Item key={option} id={option} textValue={option}>
+              {option}
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          ))}
+        </ListBox>
+      </Select.Popover>
     </Select>
   );
 }

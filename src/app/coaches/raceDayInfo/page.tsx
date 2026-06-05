@@ -1,4 +1,3 @@
-import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { pages, siteConfig } from "@/config/site";
@@ -6,18 +5,11 @@ import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import List from "@/components/list";
 import { people } from "@/config/data";
+import ParagraphLink from "@/components/paragraphLink";
 
 export const metadata: Metadata = {
   title: pages.raceDayInfo.menuLabel,
 };
-
-function ParagraphLink({ url, name }: { url: string; name: string }) {
-  return (
-    <Link href={url} className={getParagraphStyle()}>
-      {name}
-    </Link>
-  );
-}
 
 export default function Page() {
   return (
@@ -34,7 +26,10 @@ export default function Page() {
           <li>
             Results (live streaming, live results of the 1-mile split, 2-mile split, and finish
             line, and verified final results) can be accessed on our{" "}
-            <ParagraphLink url={pages.raceResults.path} name={pages.raceResults.menuLabel} /> page.
+            <ParagraphLink href={pages.raceResults.path}>
+              {pages.raceResults.menuLabel}
+            </ParagraphLink>{" "}
+            page.
           </li>
           <li>
             If you need to make any adjustments (add or change info) to your roster, they must be

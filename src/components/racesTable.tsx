@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  getKeyValue,
-} from "@heroui/table";
+import { Table } from "@heroui/react";
 
 import {
   scheduleLevelGenderToken,
@@ -18,33 +10,16 @@ import {
 import { RaceType } from "@/types";
 import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
-import { fontSerif } from "@/styles/fonts";
-import clsx from "clsx";
+import StyledTableCell from "./styledTableCell";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  {
-    key: "time",
-    label: "Time",
-  },
-  {
-    key: "division",
-    label: "Division",
-  },
-  {
-    key: "description",
-    label: "Race",
-  },
+const columns: ColumnProps[] = [
+  { id: "time", textValue: "Time", isRowHeader: true },
+  { id: "division", textValue: "Division" },
+  { id: "description", textValue: "Race" },
 ];
 
-const featuredColumns = columns.filter((column) => column.key !== "division");
-
-function FeaturedTableHeader() {
-  return (
-    <div className={clsx("text-center text-2xl font-medium", fontSerif.className)}>
-      Featured Races
-    </div>
-  );
-}
+const featuredColumns = columns.filter((column) => column.id !== "division");
 
 function getDescription(race: RaceType): string {
   if (race.level.scheduleFormat) {
@@ -64,34 +39,34 @@ export default function RacesTable({
   races: RaceType[];
   isFeatured?: boolean;
 }) {
-  return (
-    <Table
-      isCompact
-      hideHeader={isFeatured}
-      topContent={isFeatured && <FeaturedTableHeader />}
-      topContentPlacement={isFeatured ? "inside" : "outside"}
-      aria-label={pages.schedule.menuLabel}
-    >
-      <TableHeader columns={isFeatured ? featuredColumns : columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-      </TableHeader>
-      <TableBody items={races}>
-        {(item) => (
-          <TableRow key={item.num}>
-            {(columnKey) => (
-              <TableCell>
-                {columnKey === "division" ? (
-                  <Divisions divisions={item.divisions} />
-                ) : columnKey === "description" ? (
-                  getDescription(item)
-                ) : (
-                  getKeyValue(item, columnKey)
-                )}
-              </TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
-  );
+  {
+    return (
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label={pages.schedule.menuLabel}>
+            <Table.Header columns={isFeatured ? featuredColumns : columns}>
+              {(column) => (
+                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                  {column.textValue}
+                </Table.Column>
+              )}
+            </Table.Header>
+            <Table.Body items={races}>
+              {(item) => (
+                <Table.Row id={item.num}>
+                  <StyledTableCell>{item.time}</StyledTableCell>
+                  {!isFeatured && (
+                    <StyledTableCell>
+                      <Divisions divisions={item.divisions} />
+                    </StyledTableCell>
+                  )}
+                  <StyledTableCell>{getDescription(item)}</StyledTableCell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
+    );
+  }
 }

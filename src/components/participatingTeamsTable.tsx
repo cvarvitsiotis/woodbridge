@@ -1,66 +1,37 @@
 "use client";
 
 import { participatingTeams } from "@/config/participatingTeams";
-import {
-  getKeyValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { Table } from "@heroui/react";
 import Divisions from "@/components/divisions";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { divisions, heats } from "@/config/races";
 import { useMemo, useState } from "react";
 import { pages } from "@/config/site";
-import StyledSelect from "./styledSelect";
-import StyledInput from "./styledInput";
-import { useUserAgent } from "@/hooks/useUserAgent";
-import { isFirefox } from "@/utils/userAgent";
-import AlertMessageFirefox from "./alertMessageFirefox";
+import StyledSelect from "@/components/styledSelect";
+import StyledInput from "@/components/styledInput";
+import StyledTableCell from "./styledTableCell";
+import DynamicTable, { TableEmptyState } from "./dynamicTable";
 import clsx from "clsx";
 import { dates } from "@/config/dates";
+import { ColumnProps } from "react-aria-components/Table";
 
-const columns = [
-  {
-    key: "name",
-    label: "School",
-  },
-  {
-    key: "raceDay",
-    label: "Race Day",
-  },
-  {
-    key: "division",
-    label: "Division",
-  },
-  {
-    key: "varsityHeat",
-    label: "Varsity Heat",
-  },
-  {
-    key: "city",
-    label: "City",
-  },
-  {
-    key: "state",
-    label: "State",
-  },
+const columns: ColumnProps[] = [
+  { id: "name", textValue: "School", defaultWidth: "20fr", isRowHeader: true },
+  { id: "raceDay", textValue: "Race Day", defaultWidth: "15fr" },
+  { id: "division", textValue: "Division", defaultWidth: "5fr" },
+  { id: "varsityHeat", textValue: "Varsity Heat", defaultWidth: "5fr" },
+  { id: "city", textValue: "City", defaultWidth: "15fr" },
+  { id: "state", textValue: "State", defaultWidth: "5fr" },
 ];
 
 const divisionOptions = [{ num: 0, numRoman: "0", name: "All" }, ...Object.values(divisions)];
 const heatOptions = ["All", ...Object.values(heats)];
 
+const displayDivisionAndVarsityHeat = new Date() >= dates.participatingTeamsUpdateDateParts.date;
+
 export default function ParticipatingTeamsTable() {
   const [divisionFilter, setDivisionFilter] = useState("All");
   const [varsityHeatFilter, setVarsityHeatFilter] = useState("All");
   const [teamFilter, setTeamFilter] = useState("");
-
-  const windowDimensions = useWindowDimensions();
-  const maxTableHeight =
-    windowDimensions.height !== undefined ? windowDimensions.height * 0.7 : 300;
 
   const tableKey = `${divisionFilter}_${varsityHeatFilter}`;
 
@@ -87,23 +58,25 @@ export default function ParticipatingTeamsTable() {
     [divisionFilter, varsityHeatFilter, teamFilter],
   );
 
-  const getTopContent = useMemo(
+  const topContent = useMemo(
     function () {
-      function onDivisionFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setDivisionFilter(() => event.target.value);
+      function onDivisionFilterChange(value: string): void {
+        setDivisionFilter(value);
       }
-      function onVarsityHeatFilterChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-        setVarsityHeatFilter(() => event.target.value);
+      function onVarsityHeatFilterChange(value: string): void {
+        setVarsityHeatFilter(value);
       }
       return (
-        <div className="flex flex-col justify-between gap-3 sm:flex-row">
+        <div className="flex flex-col justify-between gap-2 pt-3 sm:flex-row">
           <StyledInput
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            className={clsx(
+            textFieldClassName={clsx(
               new Date() >= dates.participatingTeamsUpdateDateParts.date && "basis-2/5",
             )}
+            fillVertically={true}
+            isPrimary={false}
           />
           {new Date() >= dates.participatingTeamsUpdateDateParts.date && (
             <div className="flex basis-3/5 gap-3">
@@ -112,12 +85,14 @@ export default function ParticipatingTeamsTable() {
                 onChange={onDivisionFilterChange}
                 label="Division"
                 options={divisionOptions.map((division) => division.name)}
+                isPrimary={false}
               />
               <StyledSelect
                 selectedKey={varsityHeatFilter}
                 onChange={onVarsityHeatFilterChange}
                 label="Varsity Heat"
                 options={heatOptions}
+                isPrimary={false}
               />
             </div>
           )}
@@ -127,53 +102,36 @@ export default function ParticipatingTeamsTable() {
     [teamFilter, divisionFilter, varsityHeatFilter],
   );
 
-  const userAgent = useUserAgent();
-
-  if (isFirefox(userAgent)) return <AlertMessageFirefox />;
-
   return (
-    <Table
-      isCompact
-      isHeaderSticky
-      isVirtualized
-      maxTableHeight={maxTableHeight}
-      aria-label={pages.participatingTeams.menuLabel}
-      topContent={getTopContent}
-      topContentPlacement="outside"
-      classNames={{ base: "pt-10", wrapper: "p-2", td: "px-1" }}
-      key={tableKey} //to force rerender - bug was preventing
+    <DynamicTable
+      tableKey={tableKey}
+      topContent={topContent}
+      columns={columns.filter(
+        (column) =>
+          displayDivisionAndVarsityHeat ||
+          (column.id !== "division" && column.id !== "varsityHeat"),
+      )}
+      contentClassName="min-w-150"
+      ariaLabel={pages.participatingTeams.menuLabel}
     >
-      <TableHeader
-        columns={columns.filter(
-          (column) =>
-            new Date() >= dates.participatingTeamsUpdateDateParts.date ||
-            (column.key !== "division" && column.key !== "varsityHeat"),
-        )}
-      >
-        {(column) => (
-          <TableColumn
-            key={column.key}
-            align={column.key === "varsityHeat" || column.key === "state" ? "center" : "start"}
-          >
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={filteredItems}>
+      <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
         {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                {columnKey === "division" ? (
+          <Table.Row id={item.id}>
+            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell>{item.raceDay}</StyledTableCell>
+            {displayDivisionAndVarsityHeat && (
+              <>
+                <StyledTableCell>
                   <Divisions divisions={item.division ? [item.division] : []} />
-                ) : (
-                  getKeyValue(item, columnKey)
-                )}
-              </TableCell>
+                </StyledTableCell>
+                <StyledTableCell>{item.varsityHeat}</StyledTableCell>
+              </>
             )}
-          </TableRow>
+            <StyledTableCell>{item.city}</StyledTableCell>
+            <StyledTableCell>{item.state}</StyledTableCell>
+          </Table.Row>
         )}
-      </TableBody>
-    </Table>
+      </Table.Body>
+    </DynamicTable>
   );
 }

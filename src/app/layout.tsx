@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
-import { Providers } from "./providers";
+import { Providers } from "@/app/providers";
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -21,7 +21,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
