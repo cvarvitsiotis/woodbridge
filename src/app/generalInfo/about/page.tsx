@@ -22,12 +22,15 @@ export default function Page() {
       <div className={clsx("space-y-4 pt-10", getParagraphStyle(false, true))}>
         <p>
           The {dates.meetStartDateParts.year} {siteConfig.woodbridgeCrossCountryClassic}{" "}
-          {siteConfig.presentedByAsics} is scheduled for{" "}
-          {dates.meetStartDateParts.dayDescriptionMonthDayYearLong} (first race at{" "}
-          {filteredRaces.fridayRaces[0]?.time}) and{" "}
-          {dates.meetEndDateParts.dayDescriptionMonthDayYearLong} (first race at{" "}
-          {filteredRaces.saturdayRaces[0]?.time}) at the {siteConfig.greatPark} in Irvine,
-          California.
+          {siteConfig.presentedByAsics} is scheduled for {dates.meetStartDateParts.monthDayLong}-
+          {dates.meetEndDateParts.day}, {dates.meetEndDateParts.year} (
+          {dates.meetStartDateParts.dayDescriptionLong}-{dates.meetEndDateParts.dayDescriptionLong}
+          ). {dates.meetStartDateParts.dayDescriptionLong} starts at{" "}
+          {filteredRaces.fridayRaces[0]?.time}. {dates.meetEndDateParts.dayDescriptionLong} morning
+          starts at {filteredRaces.saturdayMorningRaces[0]?.time}.{" "}
+          {dates.meetEndDateParts.dayDescriptionLong} night starts at{" "}
+          {filteredRaces.saturdayNightNonFeaturedRaces[0]?.time}. It will be held at the{" "}
+          {siteConfig.greatPark} in Irvine, California.
         </p>
         <p>
           The {siteConfig.greatPark} is an excellent venue for our meet. The facility provides the

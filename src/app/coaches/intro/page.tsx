@@ -27,10 +27,15 @@ export default function Page() {
           {siteConfig.presentedByAsics}!
         </p>
         <p>
-          The meet will be contested on {dates.meetStartDateParts.dayDescriptionMonthDayYearLong}{" "}
-          starting at {filteredRaces.fridayRaces[0]?.time} (Red and White divisions) and{" "}
-          {dates.meetEndDateParts.dayDescriptionMonthDayYearLong} starting at{" "}
-          {filteredRaces.saturdayRaces[0]?.time} (Blue and Gold divisions).
+          The meet will be contested on {dates.meetStartDateParts.monthDayLong}-
+          {dates.meetEndDateParts.day}, {dates.meetEndDateParts.year} (
+          {dates.meetStartDateParts.dayDescriptionLong}-{dates.meetEndDateParts.dayDescriptionLong}
+          ). {dates.meetStartDateParts.dayDescriptionLong} starts at{" "}
+          {filteredRaces.fridayRaces[0]?.time} (Red and White divisions).{" "}
+          {dates.meetEndDateParts.dayDescriptionLong} morning starts at{" "}
+          {filteredRaces.saturdayMorningRaces[0]?.time} (Green division).{" "}
+          {dates.meetEndDateParts.dayDescriptionLong} night starts at{" "}
+          {filteredRaces.saturdayNightNonFeaturedRaces[0]?.time} (Blue and Gold divisions).
         </p>
         {new Date() > dates.athleteRegistrationEndDateParts.date ? (
           <p>
