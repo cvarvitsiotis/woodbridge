@@ -118,43 +118,43 @@ function OverallSection({ selectedYear }: { selectedYear: string }) {
   );
 }
 
-function getDivisionColor(division?: DivisionType): string {
+function getDivisionBackgroundColor(division?: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
-      return "bg-blue-300 border-blue-400/70";
+      return "bg-blue-300";
     case divisions.two.num:
-      return "bg-amber-200 border-amber-400/90";
+      return "bg-amber-200";
     case divisions.three.num:
-      return "bg-rose-300 border-rose-400/60";
+      return "bg-rose-300";
     case divisions.four.num:
-      return "bg-indigo-50 border-gray-400/70";
+      return "bg-indigo-50";
     case divisions.five.num:
-      return "bg-green-200 border-green-400/40";
+      return "bg-green-200";
     default:
-      return "bg-violet-300 border-violet-400/60";
+      return "bg-violet-300";
   }
 }
 
-function GenderColumn({
-  division,
-  races,
-  selectedYear,
-}: {
-  division?: DivisionType;
-  races: RaceType[];
-  selectedYear: string;
-}) {
+function getDivisionBorderColor(division?: DivisionType): string {
+  switch (division?.num) {
+    case divisions.one.num:
+      return "border-blue-400/70";
+    case divisions.two.num:
+      return "border-amber-400/90";
+    case divisions.three.num:
+      return "border-rose-400/60";
+    case divisions.four.num:
+      return "border-gray-400/70";
+    case divisions.five.num:
+      return "border-green-400/40";
+    default:
+      return "border-violet-400/60";
+  }
+}
+
+function GenderColumn({ races, selectedYear }: { races: RaceType[]; selectedYear: string }) {
   return (
     <>
-      <div
-        className={clsx(
-          "border-b px-4 py-2 text-center font-medium",
-          races[0].gender === genders.girls ? "border-l-2" : "border-r-2",
-          getDivisionColor(division),
-        )}
-      >
-        {races[0].gender}
-      </div>
       {[...races]
         .sort(
           (a, b) =>
@@ -202,26 +202,35 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     <Card className="block w-80 overflow-hidden rounded-2xl p-0 shadow-lg">
       <div
         className={clsx(
-          "rounded-t-[inherit] border-2 border-b p-2 text-center font-medium",
-          getDivisionColor(division),
+          "rounded-t-[inherit] border-2 border-b-0 text-center font-medium",
+          getDivisionBackgroundColor(division),
+          getDivisionBorderColor(division),
         )}
       >
-        {division ? `${division.name} (Div ${division.numRoman})` : "Featured"}
+        <div className={clsx("border-b py-2", getDivisionBorderColor(division))}>
+          {division ? `${division.name} (Div ${division.numRoman})` : "Featured"}
+        </div>
+        <div
+          className={clsx("flex justify-around border-b py-2", getDivisionBorderColor(division))}
+        >
+          <div>{girlsRaces[0].gender}</div>
+          <div>{boysRaces[0].gender}</div>
+        </div>
       </div>
       <div
         className={clsx(
-          "grid grid-flow-col grid-cols-2 items-center",
+          "grid grid-flow-col grid-cols-2 items-center rounded-b-[inherit] border-2 border-t-0 border-gray-300",
           boysRaces.length === 2
-            ? "grid-rows-[repeat(3,auto)]"
+            ? "grid-rows-[repeat(2,auto)]"
             : boysRaces.length === 5
-              ? "grid-rows-[repeat(6,auto)]"
+              ? "grid-rows-[repeat(5,auto)]"
               : boysRaces.length === 6
-                ? "grid-rows-[repeat(7,auto)]"
-                : "grid-rows-[repeat(8,auto)]",
+                ? "grid-rows-[repeat(6,auto)]"
+                : "grid-rows-[repeat(7,auto)]",
         )}
       >
-        <GenderColumn division={division} races={girlsRaces} selectedYear={selectedYear} />
-        <GenderColumn division={division} races={boysRaces} selectedYear={selectedYear} />
+        <GenderColumn races={girlsRaces} selectedYear={selectedYear} />
+        <GenderColumn races={boysRaces} selectedYear={selectedYear} />
       </div>
     </Card>
   );
