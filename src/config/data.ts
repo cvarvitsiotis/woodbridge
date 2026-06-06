@@ -11,7 +11,7 @@ export const data = {
   participatingTeamsPublishDate: new Date(2026, 4, 9, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2026, 7, 1, 0, 0, 0),
   featuredEntriesPublishDate: new Date(2026, 8, 1, 0, 0, 0),
-  preOrderTShirtsStartDate: new Date(2026, 7, 0, 0, 0, 0),
+  preOrderTShirtsStartDate: new Date(2026, 7, 1, 0, 0, 0),
   preOrderTShirtsEndDate: new Date(2026, 8, 16, 23, 59, 59),
   hotelReservationEndDateEmbassySuites: new Date(2026, 7, 27, 0, 0, 0),
   hotelReservationEndDateComfortInn: new Date(2026, 7, 21, 0, 0, 0),

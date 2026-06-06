@@ -121,17 +121,17 @@ function OverallSection({ selectedYear }: { selectedYear: string }) {
 function getDivisionColor(division?: DivisionType): string {
   switch (division?.num) {
     case divisions.one.num:
-      return "bg-blue-400";
+      return "bg-blue-300 border-blue-400/70";
     case divisions.two.num:
-      return "bg-amber-300";
+      return "bg-amber-200 border-amber-400/90";
     case divisions.three.num:
-      return "bg-rose-400";
+      return "bg-rose-300 border-rose-400/60";
     case divisions.four.num:
-      return "bg-indigo-50";
+      return "bg-indigo-50 border-gray-400/70";
     case divisions.five.num:
-      return "bg-emerald-300";
+      return "bg-green-200 border-green-400/40";
     default:
-      return "bg-violet-400";
+      return "bg-violet-300 border-violet-400/60";
   }
 }
 
@@ -148,7 +148,8 @@ function GenderColumn({
     <>
       <div
         className={clsx(
-          "border-b border-gray-200 px-4 py-2 text-center font-medium",
+          "border-b px-4 py-2 text-center font-medium",
+          races[0].gender === genders.girls ? "border-l-2" : "border-r-2",
           getDivisionColor(division),
         )}
       >
@@ -201,7 +202,7 @@ function ResultGrid({ division, selectedYear }: { division?: DivisionType; selec
     <Card className="block w-80 overflow-hidden rounded-2xl p-0 shadow-lg">
       <div
         className={clsx(
-          "border-b border-gray-200 p-2 text-center font-medium",
+          "rounded-t-[inherit] border-2 border-b p-2 text-center font-medium",
           getDivisionColor(division),
         )}
       >
