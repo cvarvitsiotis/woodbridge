@@ -74,7 +74,7 @@ function ResultLink({
     <BaseLink
       isExternal
       href={href}
-      className={clsx("text-base hover:underline", isFontLight && "font-light")}
+      className={clsx("hover:underline", isFontLight && "font-light")}
     >
       {label}
     </BaseLink>

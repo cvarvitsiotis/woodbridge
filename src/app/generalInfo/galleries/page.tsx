@@ -22,7 +22,7 @@ function Year({ year, links }: { year: string; links: LinkType[] }) {
       <div className="ml-4">
         {links.map((link) => (
           <div key={link.url}>
-            <BaseLink isExternal href={link.url} className="text-base">
+            <BaseLink isExternal href={link.url}>
               {link.description}
             </BaseLink>
           </div>

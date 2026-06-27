@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 function Link({ url, label }: { url: string; label: string }) {
   return (
-    <BaseLink isExternal href={url} className="text-base">
+    <BaseLink isExternal href={url}>
       {label}
     </BaseLink>
   );
