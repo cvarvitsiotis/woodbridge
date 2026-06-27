@@ -163,12 +163,11 @@ const instructionSections = {
 function InstructionModal({ instruction }: { instruction: ParkingInstructionType }) {
   return (
     <Modal>
-      <Modal.Trigger className={clsx(getBaseLinkStyle(), "text-base")}>
+      <Modal.Trigger className={getBaseLinkStyle()}>
         Turn by turn instructions from {instruction.modalLinkLabel}
       </Modal.Trigger>
       <Modal.Backdrop>
-        <Modal.Container size="lg" placement="top" scroll="outside">
-          {/* Prefer scroll="inside", but not working as of 6-2-26 */}
+        <Modal.Container size="lg" placement="top" scroll="inside">
           <Modal.Dialog className="bg-surface">
             <Modal.CloseTrigger />
             <Modal.Header>
@@ -285,7 +284,6 @@ function MapLink({ location, includeWaypoint }: { location: string; includeWaypo
           `https://www.google.com/maps/dir/?api=1&destination=${location}` +
           (includeWaypoint ? `&waypoints=${locations.waypoint}` : "")
         }
-        className="text-base"
       >
         Google Maps
       </BaseLink>
