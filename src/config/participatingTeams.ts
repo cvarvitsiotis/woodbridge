@@ -361,7 +361,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
   { name: "North Bakersfield", raceDay: "Friday", city: "Bakersfield", state: "CA" },
   { name: "North Hollywood", raceDay: "Saturday Morning", city: "North Hollywood", state: "CA" },
   { name: "North Phoenix Prep", raceDay: "Saturday Night", city: "Phoenix", state: "AZ" },
-  { name: "North Tahoe", raceDay: "Saturday Morning", city: "Tahoe City", state: "CA" },
   { name: "North Torrance", raceDay: "Friday", city: "Torrance", state: "CA" },
   { name: "Northfield", raceDay: "Saturday Night", city: "Denver", state: "CO" },
   { name: "Northridge", raceDay: "Saturday Night", city: "Layton", state: "UT" },

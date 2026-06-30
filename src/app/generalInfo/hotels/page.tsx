@@ -58,7 +58,9 @@ function ComfortInn() {
       <Link url={urls.hotels.comfortInn} label="Comfort Inn & Suites Irvine Spectrum" />
       <p>23702 Rockfield Blvd., Lake Forest, CA 92630</p>
       <p>949.528.1278</p>
-      <p className="pt-4">$164.00 plus tax, per night and inclusive of a hot buffet breakfast</p>
+      <p className="pt-4">
+        $189.00 plus tax, per night and inclusive of a hot buffet breakfast, parking and Wi-Fi
+      </p>
       <p>
         Reservations must be made by midnight of{" "}
         {dates.hotelReservationEndDateComfortInn.monthDayLong}, to guarantee the special group rate.
