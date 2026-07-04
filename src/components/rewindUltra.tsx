@@ -153,11 +153,11 @@ function getResultsSafe(
 function AnchorTypeRadio({ value, label }: { value: string; label: string }) {
   return (
     <Radio value={value} className="mt-0">
-      <Radio.Control>
-        <Radio.Indicator />
-      </Radio.Control>
       <Radio.Content>
-        <Label className="text-lg font-light">{label}</Label>
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <div className="text-lg font-light">{label}</div>
       </Radio.Content>
     </Radio>
   );
@@ -331,10 +331,10 @@ export default function RewindUltra() {
         )}
         {resultsError && <ErrorInfo>{resultsError}</ErrorInfo>}
         {results && (
-          <>
+          <div className="space-y-2">
             <p>Results:</p>
             <ResultsTable results={results} />
-          </>
+          </div>
         )}
       </div>
     </div>
