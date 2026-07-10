@@ -1,7 +1,8 @@
+import ParseUltra from "@/components/parseUltra";
+import GenerateResultsFromUltra from "@/components/generateResultsFromUltra";
 import PageHeader from "@/components/pageHeader";
-import RewindUltra from "@/components/rewindUltra";
 import { pages } from "@/config/site";
-import { getSubheaderStyle } from "@/styles/styles";
+import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { ReactNode } from "react";
@@ -10,16 +11,12 @@ export const metadata: Metadata = {
   title: pages.timing.menuLabel,
 };
 
-function Subheader({ padTop, children }: { padTop?: boolean; children: ReactNode }) {
-  return <h1 className={clsx(padTop && "pt-4", getSubheaderStyle())}>{children}</h1>;
-}
-
-function RewindUltraSection() {
+function Section({ subheader, children }: { subheader: string; children: ReactNode }) {
   return (
-    <>
-      <Subheader>Rewind Ultra</Subheader>
-      <RewindUltra />
-    </>
+    <div className="space-y-4">
+      <h1 className={getSubheaderStyle()}>{subheader}</h1>
+      <div className={clsx("space-y-4 sm:pl-12", getParagraphStyle(false, false))}>{children}</div>
+    </div>
   );
 }
 
@@ -29,7 +26,14 @@ export default function Page() {
       <PageHeader>
         <span className="font-bold">Timing</span> Tools
       </PageHeader>
-      <RewindUltraSection />
+      <div className="space-y-12">
+        <Section subheader="Parse Ultra">
+          <ParseUltra />
+        </Section>
+        <Section subheader="Generate Results from Ultra">
+          <GenerateResultsFromUltra />
+        </Section>
+      </div>
     </>
   );
 }
