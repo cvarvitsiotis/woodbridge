@@ -123,3 +123,37 @@ export interface ParkingInstructionType {
 export interface ParkingInstructionTypes {
   [key: string]: ParkingInstructionType;
 }
+
+export interface ParseUltraStateType {
+  raceStartTime: string;
+  setRaceStartTime: (value: string) => void;
+  runnerResultTime: string;
+  setRunnerResultTime: (value: string) => void;
+  runnerBib: string;
+  setRunnerBib: (value: string) => void;
+  fileContent: string | ArrayBuffer | null;
+  setFileContent: (value: string | ArrayBuffer | null) => void;
+}
+
+export interface BibResult {
+  finishTime: number;
+  originalOrder: number;
+  resultOrder?: number;
+  resultTime?: string;
+}
+
+export type OrderedBibEntry = [string, BibResult];
+
+export interface IndividualType {
+  bib: number;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  age: string;
+  team: string;
+}
+
+export interface RaceResultType extends IndividualType {
+  resultOrder?: number;
+  resultTime?: string;
+}
