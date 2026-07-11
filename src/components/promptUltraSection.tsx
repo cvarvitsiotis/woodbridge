@@ -1,29 +1,18 @@
 "use client";
 
 import clsx from "clsx";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
-import { Input, Label, Radio, RadioGroup } from "@heroui/react";
+import { Input, Label, RadioGroup } from "@heroui/react";
 import StyledInput from "./styledInput";
 import { ParseUltraStateType } from "@/types";
+import StyledRadio from "./styledRadio";
+import FileErrorInfo from "./fileErrorInfo";
 
 const AnchorTypes = {
   RaceStartTime: "1",
   RunnerResultTime: "2",
 };
-
-function AnchorTypeRadio({ value, label }: { value: string; label: string }) {
-  return (
-    <Radio value={value} className="mt-0">
-      <Radio.Content>
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <div className="text-lg font-light">{label}</div>
-      </Radio.Content>
-    </Radio>
-  );
-}
 
 function AnchorTypeRadioGroup({
   anchorType,
@@ -33,26 +22,24 @@ function AnchorTypeRadioGroup({
   handleAnchorTypeChange: (value: string) => void;
 }) {
   return (
-    <RadioGroup value={anchorType} onChange={handleAnchorTypeChange} className="pl-4">
-      <AnchorTypeRadio value={AnchorTypes.RaceStartTime} label="Race start time" />
-      <AnchorTypeRadio
-        value={AnchorTypes.RunnerResultTime}
-        label="Particular athlete's result time"
-      />
+    <RadioGroup value={anchorType} onChange={handleAnchorTypeChange}>
+      <div className="flex gap-4">
+        <StyledRadio
+          value={AnchorTypes.RaceStartTime}
+          title="Race start time"
+          description="The exact time of day the race started. If you have a stopwatch running, then do some math to figure out the start time."
+        />
+        <StyledRadio
+          value={AnchorTypes.RunnerResultTime}
+          title="Particular runner's result time"
+          description="The exact result time of a particular runner. This is not the time of the day, but rather how fast they ran."
+        />
+      </div>
     </RadioGroup>
   );
 }
 
-function ErrorInfo({ children }: { children: ReactNode }) {
-  return (
-    <div>
-      <p>Error reading file:</p>
-      <p className="text-rose-700">{children}</p>
-    </div>
-  );
-}
-
-export default function PromptUltra({
+function PromptUltra({
   raceStartTime,
   setRaceStartTime,
   runnerResultTime,
@@ -62,7 +49,7 @@ export default function PromptUltra({
   setFileContent,
   handlePromptUltraAction,
 }: ParseUltraStateType & {
-  handlePromptUltraAction?: () => void;
+  handlePromptUltraAction: () => void;
 }) {
   const [anchorType, setAnchorType] = useState("");
   const [fileReadError, setFileReadError] = useState<DOMException | null>();
@@ -83,7 +70,7 @@ export default function PromptUltra({
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     function handleFileLoad(event: ProgressEvent<FileReader>) {
-      setFileContent(event.target?.result ?? null);
+      setFileContent((event.target?.result as string) ?? null);
       setIsDisabled(true);
     }
 
@@ -105,7 +92,7 @@ export default function PromptUltra({
     <div className={clsx("space-y-4", getParagraphStyle(false, false))}>
       <div className="space-y-2">
         <p>
-          We need to convert the Ultra data from time of day to result time. To do so, we need an
+          We need to convert the Ultra data from time-of-day to result time. To do so, we need an
           anchor point.
         </p>
         <p>Pick the one that you know most-accurately:</p>
@@ -161,10 +148,27 @@ export default function PromptUltra({
         </div>
       </div>
       {fileReadError && (
-        <ErrorInfo>
+        <FileErrorInfo>
           {fileReadError.name} - {fileReadError.message}
-        </ErrorInfo>
+        </FileErrorInfo>
       )}
     </div>
+  );
+}
+
+export default function PromptUltraSection({
+  parseUltraState,
+  handlePromptUltraAction,
+  ultraResultsError,
+}: {
+  parseUltraState: ParseUltraStateType;
+  handlePromptUltraAction: () => void;
+  ultraResultsError: string | undefined;
+}) {
+  return (
+    <>
+      <PromptUltra {...parseUltraState} handlePromptUltraAction={handlePromptUltraAction} />
+      <FileErrorInfo>{ultraResultsError}</FileErrorInfo>
+    </>
   );
 }

@@ -131,8 +131,8 @@ export interface ParseUltraStateType {
   setRunnerResultTime: (value: string) => void;
   runnerBib: string;
   setRunnerBib: (value: string) => void;
-  fileContent: string | ArrayBuffer | null;
-  setFileContent: (value: string | ArrayBuffer | null) => void;
+  fileContent: string | null;
+  setFileContent: (value: string | null) => void;
 }
 
 export interface BibResult {
@@ -140,6 +140,7 @@ export interface BibResult {
   originalOrder: number;
   resultOrder?: number;
   resultTime?: string;
+  resultTimeFull?: string;
 }
 
 export type OrderedBibEntry = [string, BibResult];

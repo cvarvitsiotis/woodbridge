@@ -1,19 +1,21 @@
 "use client";
 
-import { ReactNode, useState } from "react";
-import { Switch, Table } from "@heroui/react";
+import { memo, useMemo, useState } from "react";
+import { PressEvent, Switch, Table } from "@heroui/react";
 import { pages } from "@/config/site";
 import StyledTableCell from "./styledTableCell";
 import { ColumnProps } from "react-aria-components/Table";
 import { RaceResultType } from "@/types";
 import parseUltra from "@/utils/parseUltra";
 import useParseUltra from "@/hooks/useParseUltra";
-import PromptUltra from "./promptUltra";
 import PromptIndividuals from "./promptIndividuals";
 import parseIndividuals from "@/utils/parseIndividuals";
 import getIndividualResults from "@/utils/getIndividualResults";
-import PromptAgeGroups from "./promptAgeGroups";
 import getAgeGroupResults from "@/utils/ageGroups";
+import PromptUltraSection from "./promptUltraSection";
+import FileErrorInfo from "./fileErrorInfo";
+import StyledInput from "./styledInput";
+import StyledButton from "./styledButton";
 
 const individualResultsColumns: ColumnProps[] = [
   { id: "bib", textValue: "Bib", isRowHeader: true },
@@ -39,7 +41,7 @@ const ageGroupResultsColumns: ColumnProps[] = [
   { id: "resultTime", textValue: "Result Time" },
 ];
 
-function AgeGroupResultsTableWrapper({
+const AgeGroupResultsTableWrapper = memo(function AgeGroupResultsTableWrapper({
   ageGroupResults,
 }: {
   ageGroupResults: Array<RaceResultType & { rank: number; ageGroup: string }>;
@@ -51,14 +53,13 @@ function AgeGroupResultsTableWrapper({
       <AgeGroupResultsTable ageGroupResults={ageGroupResults} />
     </div>
   );
-}
+});
 
 function AgeGroupResultsTable({
   ageGroupResults,
 }: {
   ageGroupResults: Array<RaceResultType & { rank: number; ageGroup: string }>;
 }) {
-  console.log(ageGroupResults);
   return (
     <Table>
       <Table.ScrollContainer>
@@ -107,36 +108,48 @@ function ShouldPromptAgeGroups({
       isSelected={shouldPromptAgeGroups}
       onChange={handleShouldPromptAgeGroupsAction}
       className="mt-8"
+      size="lg"
     >
       <Switch.Content>
-        Show age group results
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
+        <div className="text-lg font-light">Show age group results</div>
       </Switch.Content>
     </Switch>
   );
 }
 
-function PromptAgeGroupsWrapper({
+function PromptAgeGroups({
   show,
   ageGroups,
   handlePromptAgeGroupsAction,
+  handlePromptAgeGroupsSubmissionAction,
 }: {
   show: boolean;
   ageGroups: string;
   handlePromptAgeGroupsAction: (value: string) => void;
+  handlePromptAgeGroupsSubmissionAction: (e: PressEvent) => void;
 }) {
   if (!show) return null;
   return (
-    <PromptAgeGroups
-      ageGroups={ageGroups}
-      handlePromptAgeGroupsAction={handlePromptAgeGroupsAction}
-    />
+    <div className="flex items-end gap-2 space-y-4 pt-2">
+      <StyledInput
+        label="Age Groups (e.g. 10, 20, ...)"
+        value={ageGroups}
+        onValueChange={handlePromptAgeGroupsAction}
+        includeSearchIcon={false}
+        isPrimary={false}
+        textFieldClassName="w-xs"
+      />
+      <StyledButton onPress={handlePromptAgeGroupsSubmissionAction} className="mb-4">
+        Submit
+      </StyledButton>
+    </div>
   );
 }
 
-function IndividualResultsTableWrapper({
+const IndividualResultsTableWrapper = memo(function IndividualResultsTableWrapper({
   individualResults,
 }: {
   individualResults: RaceResultType[] | undefined;
@@ -148,7 +161,7 @@ function IndividualResultsTableWrapper({
       <IndividualResultsTable individualResults={individualResults} />
     </div>
   );
-}
+});
 
 function IndividualResultsTable({ individualResults }: { individualResults: RaceResultType[] }) {
   return (
@@ -187,7 +200,7 @@ function PromptIndividualsWrapper({
   handlePromptIndividualsAction,
 }: {
   show: boolean;
-  handlePromptIndividualsAction: (individualsFileContent: string | ArrayBuffer | null) => void;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
 }) {
   if (!show) return null;
   return (
@@ -197,29 +210,70 @@ function PromptIndividualsWrapper({
   );
 }
 
-function ErrorInfo({ children }: { children: ReactNode }) {
-  if (!children) return null;
+function PromptAgeGroupsSection({
+  show,
+  shouldPromptAgeGroups,
+  handleShouldPromptAgeGroupsAction,
+  ageGroups,
+  handlePromptAgeGroupsAction,
+  handlePromptAgeGroupsSubmissionAction,
+}: {
+  show: boolean;
+  shouldPromptAgeGroups: boolean;
+  handleShouldPromptAgeGroupsAction: (value: boolean) => void;
+  ageGroups: string;
+  handlePromptAgeGroupsAction: (value: string) => void;
+  handlePromptAgeGroupsSubmissionAction: (e: PressEvent) => void;
+}) {
   return (
-    <div>
-      <p>Error reading file:</p>
-      <p className="text-rose-700">{children}</p>
-    </div>
+    <>
+      <ShouldPromptAgeGroups
+        show={show}
+        shouldPromptAgeGroups={shouldPromptAgeGroups}
+        handleShouldPromptAgeGroupsAction={handleShouldPromptAgeGroupsAction}
+      />
+      <PromptAgeGroups
+        show={shouldPromptAgeGroups}
+        ageGroups={ageGroups}
+        handlePromptAgeGroupsAction={handlePromptAgeGroupsAction}
+        handlePromptAgeGroupsSubmissionAction={handlePromptAgeGroupsSubmissionAction}
+      />
+    </>
   );
 }
 
-export default function GenerateResultsFromUltra() {
-  const parseUltraState = useParseUltra();
-  const [individualsFileContent, setIndividualsFileContent] = useState<string | ArrayBuffer | null>(
-    null,
+function PromptIndividualsSection({
+  show,
+  handlePromptIndividualsAction,
+  individualsError,
+}: {
+  show: boolean;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+  individualsError: string | undefined;
+}) {
+  return (
+    <>
+      <PromptIndividualsWrapper
+        show={show}
+        handlePromptIndividualsAction={handlePromptIndividualsAction}
+      />
+      <FileErrorInfo>{individualsError}</FileErrorInfo>
+    </>
   );
+}
+
+export default function ParseUltraAndGenerateResults() {
+  const parseUltraState = useParseUltra();
+  const [individualsFileContent, setIndividualsFileContent] = useState<string | null>(null);
   const [shouldPromptAgeGroups, setShouldPromptAgeGroups] = useState(false);
   const [ageGroups, setAgeGroups] = useState("");
+  const [submittedAgeGroups, setSubmittedAgeGroups] = useState("");
 
   function handlePromptUltraAction() {
     handlePromptIndividualsAction(null);
   }
 
-  function handlePromptIndividualsAction(individualsFileContent: string | ArrayBuffer | null) {
+  function handlePromptIndividualsAction(individualsFileContent: string | null) {
     setIndividualsFileContent(individualsFileContent);
     handleShouldPromptAgeGroupsAction(false);
   }
@@ -227,37 +281,80 @@ export default function GenerateResultsFromUltra() {
   function handleShouldPromptAgeGroupsAction(shouldPromptAgeGroups: boolean) {
     setShouldPromptAgeGroups(shouldPromptAgeGroups);
     handlePromptAgeGroupsAction("");
+    setSubmittedAgeGroups("");
   }
 
   function handlePromptAgeGroupsAction(newAgeGroups: string) {
     setAgeGroups(newAgeGroups);
   }
 
-  const { ultraResults, ultraResultsError } = parseUltra(parseUltraState);
-  const { individuals, individualsError } = parseIndividuals(individualsFileContent);
-  const individualResults = getIndividualResults(ultraResults, individuals);
-  const ageGroupResults = getAgeGroupResults(individualResults, ageGroups);
+  function handlePromptAgeGroupsSubmissionAction() {
+    setSubmittedAgeGroups(ageGroups);
+  }
+
+  const { ultraResults, ultraResultsError } = useMemo(
+    function () {
+      return parseUltra(
+        parseUltraState.fileContent,
+        parseUltraState.raceStartTime,
+        parseUltraState.runnerResultTime,
+        parseUltraState.runnerBib,
+      );
+    },
+    [
+      parseUltraState.fileContent,
+      parseUltraState.raceStartTime,
+      parseUltraState.runnerResultTime,
+      parseUltraState.runnerBib,
+    ],
+  );
+
+  const { individuals, individualsError } = useMemo(
+    function () {
+      return parseIndividuals(individualsFileContent);
+    },
+    [individualsFileContent],
+  );
+
+  const individualResults = useMemo(
+    function () {
+      return getIndividualResults(ultraResults, individuals);
+    },
+    [ultraResults, individuals],
+  );
+
+  const ageGroupResults = useMemo(
+    function () {
+      return getAgeGroupResults(individualResults, submittedAgeGroups);
+    },
+    [individualResults, submittedAgeGroups],
+  );
 
   return (
     <div className="space-y-4">
-      <PromptUltra {...parseUltraState} handlePromptUltraAction={handlePromptUltraAction} />
-      <ErrorInfo>{ultraResultsError}</ErrorInfo>
-      <PromptIndividualsWrapper
+      <PromptUltraSection
+        parseUltraState={parseUltraState}
+        handlePromptUltraAction={handlePromptUltraAction}
+        ultraResultsError={ultraResultsError}
+      />
+
+      <PromptIndividualsSection
         show={!!ultraResults}
         handlePromptIndividualsAction={handlePromptIndividualsAction}
+        individualsError={individualsError}
       />
-      <ErrorInfo>{individualsError}</ErrorInfo>
+
       <IndividualResultsTableWrapper individualResults={individualResults} />
-      <ShouldPromptAgeGroups
+
+      <PromptAgeGroupsSection
         show={individualResults?.length > 0}
         shouldPromptAgeGroups={shouldPromptAgeGroups}
         handleShouldPromptAgeGroupsAction={handleShouldPromptAgeGroupsAction}
-      />
-      <PromptAgeGroupsWrapper
-        show={shouldPromptAgeGroups}
         ageGroups={ageGroups}
         handlePromptAgeGroupsAction={handlePromptAgeGroupsAction}
+        handlePromptAgeGroupsSubmissionAction={handlePromptAgeGroupsSubmissionAction}
       />
+
       <AgeGroupResultsTableWrapper ageGroupResults={ageGroupResults} />
     </div>
   );
