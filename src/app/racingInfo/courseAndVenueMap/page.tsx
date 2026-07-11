@@ -18,7 +18,7 @@ export default async function Page() {
         <span className="font-bold">Course</span> & <span className="font-bold">Venue</span> Map
       </PageHeader>
       <div className="pt-7">
-        <div className="max-w-200 text-right">
+        <div className="mx-auto max-w-200 text-right">
           <BaseLink isExternal href="/images/woodbridge-course.pdf">
             <div className="flex items-center gap-0.5 text-zinc-600">
               <PrintIcon size={30} />
