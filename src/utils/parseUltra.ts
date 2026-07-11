@@ -1,4 +1,4 @@
-import { BibResult, OrderedBibEntry, ParseUltraStateType } from "@/types";
+import { BibResult, OrderedBibEntry } from "@/types";
 
 function getBibResults(lines: string[]): Map<string, BibResult> {
   const bibFinishTimes = new Map<string, BibResult>();
@@ -70,6 +70,7 @@ function setResultOrderAndTime(bibResults: OrderedBibEntry[], startTime: number)
     bibResult[1].resultOrder = i + 1;
     bibResult[1].resultTime =
       (hours ? `${hoursStr}:` : "") + `${minutesStr}:${secondsStr}.${thousandthsStr}`;
+    bibResult[1].resultTimeFull = `${hoursStr}:${minutesStr}:${secondsStr}.${thousandthsStr}`;
   }
 }
 
@@ -109,12 +110,12 @@ function parseUltraInternal(
   return orderedBibResults;
 }
 
-export default function parseUltra({
-  fileContent,
-  raceStartTime,
-  runnerResultTime,
-  runnerBib,
-}: ParseUltraStateType): { ultraResults?: OrderedBibEntry[]; ultraResultsError?: string } {
+export default function parseUltra(
+  fileContent: string | null,
+  raceStartTime: string,
+  runnerResultTime: string,
+  runnerBib: string,
+): { ultraResults?: OrderedBibEntry[]; ultraResultsError?: string } {
   try {
     if (!fileContent || typeof fileContent !== "string") return {};
 

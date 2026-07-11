@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { ChangeEvent, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import { Input, Label } from "@heroui/react";
 
@@ -17,13 +17,13 @@ function ErrorInfo({ children }: { children: ReactNode }) {
 export default function PromptIndividuals({
   handlePromptIndividualsAction,
 }: {
-  handlePromptIndividualsAction: (individualsFileContent: string | ArrayBuffer | null) => void;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
 }) {
   const [fileReadError, setFileReadError] = useState<DOMException | null>();
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     function handleFileLoad(event: ProgressEvent<FileReader>) {
-      handlePromptIndividualsAction(event.target?.result ?? null);
+      handlePromptIndividualsAction((event.target?.result as string) ?? null);
     }
 
     function handleFileError(event: ProgressEvent<FileReader>) {

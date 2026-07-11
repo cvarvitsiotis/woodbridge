@@ -1,23 +1,28 @@
 import { ButtonRootProps } from "@heroui/react";
 import StyledButton from "@/components/styledButton";
-import { ReactNode } from "react";
+import { AnchorHTMLAttributes, ReactNode } from "react";
 
 export default function ButtonLink({
   href,
   isExternal = false,
+  download,
   variant,
   customVariantColor,
   size,
   className,
   children,
 }: {
-  href: string;
   isExternal?: boolean;
   customVariantColor?: "ghostPrimary" | "ghostSecondary";
   children: ReactNode;
-} & ButtonRootProps) {
+} & AnchorHTMLAttributes<HTMLAnchorElement> &
+  ButtonRootProps) {
   return (
-    <a href={href} {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}>
+    <a
+      href={href}
+      {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+      download={download}
+    >
       <StyledButton
         variant={variant}
         customVariantColor={customVariantColor}

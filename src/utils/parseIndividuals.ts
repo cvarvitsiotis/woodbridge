@@ -21,7 +21,7 @@ function parseIndividualsInternal(fileContent: string) {
   return getIndividuals(lines);
 }
 
-export default function parseIndividuals(fileContent: string | ArrayBuffer | null): {
+export default function parseIndividuals(fileContent: string | null): {
   individuals?: IndividualType[];
   individualsError?: string;
 } {
