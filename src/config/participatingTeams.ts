@@ -3259,7 +3259,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Las Vegas",
+    name: "Faith Lutheran",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -3467,7 +3467,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "SC",
   },
   {
-    name: "Mead Spokane",
+    name: "Mead",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.b,
