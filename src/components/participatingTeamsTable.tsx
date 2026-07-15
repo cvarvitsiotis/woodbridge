@@ -72,13 +72,11 @@ export default function ParticipatingTeamsTable() {
             placeholder="Filter school..."
             value={teamFilter}
             onValueChange={setTeamFilter}
-            textFieldClassName={clsx(
-              new Date() >= dates.participatingTeamsUpdateDateParts.date && "basis-2/5",
-            )}
+            textFieldClassName={clsx(displayDivisionAndVarsityHeat && "basis-2/5")}
             fillVertically={true}
             isPrimary={false}
           />
-          {new Date() >= dates.participatingTeamsUpdateDateParts.date && (
+          {displayDivisionAndVarsityHeat && (
             <div className="flex basis-3/5 gap-3">
               <StyledSelect
                 selectedKey={divisionFilter}
