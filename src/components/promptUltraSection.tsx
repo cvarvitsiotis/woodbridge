@@ -104,7 +104,7 @@ function PromptUltra({
           <div className="space-y-2">
             {anchorType === AnchorTypes.RaceStartTime && (
               <StyledInput
-                label="Start Time (HH:mm:ss.fff)"
+                label="Start Time (HH:mm:ss)"
                 value={raceStartTime}
                 onValueChange={setRaceStartTime}
                 includeSearchIcon={false}
@@ -115,7 +115,7 @@ function PromptUltra({
             {anchorType === AnchorTypes.RunnerResultTime && (
               <div className="space-y-2">
                 <StyledInput
-                  label="Result Time (HH:mm:ss.fff)"
+                  label="Result Time (HH:mm:ss)"
                   value={runnerResultTime}
                   onValueChange={setRunnerResultTime}
                   includeSearchIcon={false}

@@ -1,30 +1,33 @@
-import { OrderedBibEntry, RaceResultType, IndividualType } from "@/types";
+import { OrderedBibEntry, IndividualResultType, IndividualType } from "@/types";
+
+export const Unknown = "Unknown";
 
 export default function getIndividualResults(
   ultraResults: OrderedBibEntry[] | undefined,
   individuals: IndividualType[] | undefined,
-): RaceResultType[] {
+): IndividualResultType[] {
   if (!ultraResults || !individuals) return [];
 
   const bibIndividuals = new Map(
     individuals.map((individual) => [String(individual.bib), individual]),
   );
 
-  return ultraResults.reduce<RaceResultType[]>((individualResults, [bib, bibResult]) => {
+  return ultraResults.reduce<IndividualResultType[]>((individualResults, [bib, bibResult]) => {
     const individual = bibIndividuals.get(bib);
     const registeredIndividual = individual ?? {
       bib: Number(bib),
-      firstName: "Unknown",
-      lastName: "Unknown",
+      firstName: Unknown,
+      lastName: Unknown,
       gender: "?",
       age: "?",
-      team: "Unknown",
+      team: Unknown,
     };
 
     individualResults.push({
       ...registeredIndividual,
-      resultOrder: bibResult.resultOrder,
-      resultTime: bibResult.resultTime,
+      place: bibResult.place,
+      resultTime: bibResult.resultTimeRounded,
+      resultTimeStr: bibResult.resultTimeRoundedStr,
     });
 
     return individualResults;

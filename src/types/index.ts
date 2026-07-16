@@ -138,9 +138,11 @@ export interface ParseUltraStateType {
 export interface BibResult {
   finishTime: number;
   originalOrder: number;
-  resultOrder?: number;
-  resultTime?: string;
-  resultTimeFull?: string;
+  place?: number;
+  resultTime?: number;
+  resultTimeStrFull?: string;
+  resultTimeRounded?: number;
+  resultTimeRoundedStr?: string;
 }
 
 export type OrderedBibEntry = [string, BibResult];
@@ -154,7 +156,21 @@ export interface IndividualType {
   team: string;
 }
 
-export interface RaceResultType extends IndividualType {
-  resultOrder?: number;
-  resultTime?: string;
+export interface IndividualResultType extends IndividualType {
+  place?: number;
+  resultTime?: number;
+  resultTimeStr?: string;
+  scoringPlace?: number;
+}
+
+export interface TeamResultType {
+  rank?: number;
+  team: string;
+  score?: number;
+  sixthRunnerPlace?: number;
+  scoringTime?: number;
+  scoringTimeStr?: string;
+  averageTimeStr?: string;
+  spreadTimeStr?: string;
+  individualResults: IndividualResultType[];
 }
