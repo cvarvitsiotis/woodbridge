@@ -13,7 +13,7 @@ import { DownloadIcon } from "./icons";
 import { memo, useMemo, useState } from "react";
 
 const columns: ColumnProps[] = [
-  { id: "resultOrder", textValue: "Place", isRowHeader: true },
+  { id: "place", textValue: "Place", isRowHeader: true },
   { id: "bib", textValue: "Bib" },
   { id: "resultTime", textValue: "Result Time" },
 ];
@@ -47,9 +47,9 @@ function UltraResultsTable({ ultraResults }: { ultraResults: OrderedBibEntry[] }
           <Table.Body items={ultraResults}>
             {(item) => (
               <Table.Row id={item[0]}>
-                <StyledTableCell>{item[1].resultOrder}</StyledTableCell>
+                <StyledTableCell>{item[1].place}</StyledTableCell>
                 <StyledTableCell>{item[0]}</StyledTableCell>
-                <StyledTableCell>{item[1].resultTime}</StyledTableCell>
+                <StyledTableCell>{item[1].resultTimeStrFull}</StyledTableCell>
               </Table.Row>
             )}
           </Table.Body>
@@ -158,7 +158,7 @@ function DownloadLink({
     function () {
       const lines = [`${raceNumber},,,,,,,,,,`];
       for (const [bib, result] of ultraResults) {
-        lines.push(`${result.resultOrder},${bib},,,,,${result.resultTimeFull},,,,,,,,,,,,`);
+        lines.push(`${result.place},${bib},,,,,${result.resultTimeStrFull},,,,,,,,,,,,`);
       }
       const lifContent = lines.join("\n");
       return `data:text/csv;charset=utf-8,${encodeURIComponent("\uFEFF" + lifContent)}`;

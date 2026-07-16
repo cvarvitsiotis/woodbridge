@@ -1,5 +1,8 @@
 import { BibResult, OrderedBibEntry } from "@/types";
 
+const ultraFinishTimePattern = /^\d{2}:\d{2}:\d{2}\.\d{3}$/;
+const raceStartTimePattern = /^\d{2}:\d{2}:\d{2}$/;
+
 function getBibResults(lines: string[]): Map<string, BibResult> {
   const bibFinishTimes = new Map<string, BibResult>();
 
@@ -9,7 +12,11 @@ function getBibResults(lines: string[]): Map<string, BibResult> {
     const fields = lines[i].split(",");
     const bib = fields[1];
     const finishTimeStr = fields[3].slice(1, -1);
-    const finishTime = parseTime(finishTimeStr);
+
+    if (!ultraFinishTimePattern.test(finishTimeStr))
+      throw new Error("Unexpected finish time in Ultra data");
+
+    const finishTime = parseTime(finishTimeStr, true);
 
     const existing = bibFinishTimes.get(bib);
     if (existing && existing.finishTime <= finishTime) continue;
@@ -26,11 +33,11 @@ function getOrderedBibResults(bibResults: Map<string, BibResult>): OrderedBibEnt
   return arr;
 }
 
-function parseTime(timeStr: string): number {
+function parseTime(timeStr: string, hasThousandths: boolean): number {
   const hours = Number(timeStr.slice(0, 2));
   const minutes = Number(timeStr.slice(3, 5));
   const seconds = Number(timeStr.slice(6, 8));
-  const thousandths = Number(timeStr.slice(9, 12));
+  const thousandths = hasThousandths ? Number(timeStr.slice(9, 12)) : 0;
 
   return 1000 * 60 * 60 * hours + 1000 * 60 * minutes + 1000 * seconds + thousandths;
 }
@@ -41,9 +48,12 @@ function getStartTime(
   runnerBib: string,
   bibResults: Map<string, BibResult>,
 ): number {
-  return raceStartTime
-    ? parseTime(raceStartTime)
-    : getStartTimeFromRunnerResultTime(runnerResultTime, runnerBib, bibResults);
+  if (raceStartTime) {
+    if (!raceStartTimePattern.test(raceStartTime)) throw new Error("Unexpected race start time");
+    return parseTime(raceStartTime, false);
+  }
+
+  return getStartTimeFromRunnerResultTime(runnerResultTime, runnerBib, bibResults);
 }
 
 function getStartTimeFromRunnerResultTime(
@@ -51,7 +61,9 @@ function getStartTimeFromRunnerResultTime(
   runnerBib: string,
   bibResults: Map<string, BibResult>,
 ): number {
-  const resultTime = parseTime(runnerResultTime);
+  if (!raceStartTimePattern.test(runnerResultTime))
+    throw new Error("Unexpected runner result time");
+  const resultTime = parseTime(runnerResultTime, false);
   const result = bibResults.get(runnerBib);
   if (!result) throw new Error("Bib not found");
   if (result.finishTime < resultTime) throw new Error("Cannot cross midnight");
@@ -62,15 +74,13 @@ function setResultOrderAndTime(bibResults: OrderedBibEntry[], startTime: number)
   for (let i = 0; i < bibResults.length; i++) {
     const bibResult = bibResults[i];
     const resultTime = getResultTime(bibResult[1].finishTime, startTime);
-    const { hours, minutes, seconds, thousandths } = getTimeComponents(resultTime);
-    const hoursStr = hours.toString().padStart(2, "0");
-    const minutesStr = minutes.toString().padStart(2, "0");
-    const secondsStr = seconds.toString().padStart(2, "0");
-    const thousandthsStr = thousandths.toString().padStart(3, "0");
-    bibResult[1].resultOrder = i + 1;
-    bibResult[1].resultTime =
-      (hours ? `${hoursStr}:` : "") + `${minutesStr}:${secondsStr}.${thousandthsStr}`;
-    bibResult[1].resultTimeFull = `${hoursStr}:${minutesStr}:${secondsStr}.${thousandthsStr}`;
+    const resultTimeRounded = getResultTimeRounded(resultTime);
+
+    bibResult[1].place = i + 1;
+    bibResult[1].resultTime = resultTime;
+    bibResult[1].resultTimeStrFull = getResultTimeStr(resultTime, 3).resultTimeStrFull;
+    bibResult[1].resultTimeRounded = resultTimeRounded;
+    bibResult[1].resultTimeRoundedStr = getResultTimeStr(resultTimeRounded, 1).resultTimeStr;
   }
 }
 
@@ -78,6 +88,26 @@ function getResultTime(finishTime: number, startTime: number): number {
   const resultTime = finishTime - startTime;
   if (resultTime < 0) throw new Error("Cannot cross midnight");
   return resultTime;
+}
+
+function getResultTimeRounded(resultTime: number) {
+  return Math.ceil(resultTime / 100) * 100;
+}
+
+export function getResultTimeStr(resultTime: number, fractionLen: number) {
+  const { hours, minutes, seconds, thousandths } = getTimeComponents(resultTime);
+
+  const hoursStr = hours.toString().padStart(2, "0");
+  const minutesStr = minutes.toString().padStart(2, "0");
+  const secondsStr = seconds.toString().padStart(2, "0");
+  const fractionStr = thousandths.toString().padStart(fractionLen, "0").slice(0, fractionLen);
+
+  const resultTimeStr =
+    (hours ? `${hoursStr}:` : "") + `${minutesStr}:${secondsStr}.${fractionStr}`;
+
+  const resultTimeStrFull = `${hoursStr}:${minutesStr}:${secondsStr}.${fractionStr}`;
+
+  return { resultTimeStr, resultTimeStrFull };
 }
 
 function getTimeComponents(timeInThousandths: number): {

@@ -1,4 +1,4 @@
-import { RaceResultType } from "@/types";
+import { IndividualResultType } from "@/types";
 
 interface AgeGroupInfo {
   ageGroupsWithLabels: Map<string, string>;
@@ -6,9 +6,9 @@ interface AgeGroupInfo {
 }
 
 export default function getAgeGroupResults(
-  individualResults: RaceResultType[],
+  individualResults: IndividualResultType[],
   ageGroups: string,
-): Array<RaceResultType & { rank: number; ageGroup: string }> {
+): Array<IndividualResultType & { rank: number; ageGroup: string }> {
   if (!individualResults || individualResults.length === 0 || !ageGroups) return [];
 
   const ageGroupInfo = getAgeGroupInfo(ageGroups);
@@ -59,21 +59,21 @@ function normalizeGender(gender?: string | null): string {
 }
 
 function groupIndividualResults(
-  individualResults: RaceResultType[],
+  individualResults: IndividualResultType[],
   ageGroupInfo: AgeGroupInfo,
-): Map<string, { label: string; results: Map<string, RaceResultType[]> }> {
+): Map<string, { label: string; results: Map<string, IndividualResultType[]> }> {
   if (!ageGroupInfo || ageGroupInfo.ageToAgeGroups.size === 0)
-    return new Map<string, { label: string; results: Map<string, RaceResultType[]> }>();
+    return new Map<string, { label: string; results: Map<string, IndividualResultType[]> }>();
 
   const ageGroupResults = new Map<
     string,
-    { label: string; results: Map<string, RaceResultType[]> }
+    { label: string; results: Map<string, IndividualResultType[]> }
   >();
 
   ageGroupInfo.ageGroupsWithLabels.forEach((label, maxAge) => {
     ageGroupResults.set(maxAge, {
       label,
-      results: new Map<string, RaceResultType[]>([
+      results: new Map<string, IndividualResultType[]>([
         ["F", []],
         ["M", []],
         ["?", []],
@@ -96,9 +96,12 @@ function groupIndividualResults(
 }
 
 function getAgeGroupResultsInternal(
-  groupedIndividualResults: Map<string, { label: string; results: Map<string, RaceResultType[]> }>,
-): Array<RaceResultType & { rank: number; ageGroup: string }> {
-  const ageGroupResults: Array<RaceResultType & { rank: number; ageGroup: string }> = [];
+  groupedIndividualResults: Map<
+    string,
+    { label: string; results: Map<string, IndividualResultType[]> }
+  >,
+): Array<IndividualResultType & { rank: number; ageGroup: string }> {
+  const ageGroupResults: Array<IndividualResultType & { rank: number; ageGroup: string }> = [];
 
   groupedIndividualResults.forEach((groupValue) => {
     groupValue.results.forEach((results) => {

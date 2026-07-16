@@ -1,25 +1,26 @@
 "use client";
 
-import { memo, useMemo, useState } from "react";
+import { memo, ReactNode, useMemo, useState } from "react";
 import { PressEvent, Switch, Table } from "@heroui/react";
 import { pages } from "@/config/site";
 import StyledTableCell from "./styledTableCell";
 import { ColumnProps } from "react-aria-components/Table";
-import { RaceResultType } from "@/types";
+import { IndividualResultType, TeamResultType } from "@/types";
 import parseUltra from "@/utils/parseUltra";
 import useParseUltra from "@/hooks/useParseUltra";
 import PromptIndividuals from "./promptIndividuals";
 import parseIndividuals from "@/utils/parseIndividuals";
 import getIndividualResults from "@/utils/getIndividualResults";
-import getAgeGroupResults from "@/utils/ageGroups";
+import getAgeGroupResults from "@/utils/getAgeGroupResults";
 import PromptUltraSection from "./promptUltraSection";
 import FileErrorInfo from "./fileErrorInfo";
 import StyledInput from "./styledInput";
 import StyledButton from "./styledButton";
+import getTeamResults from "@/utils/getTeamResults";
 
 const individualResultsColumns: ColumnProps[] = [
   { id: "bib", textValue: "Bib", isRowHeader: true },
-  { id: "resultOrder", textValue: "Place" },
+  { id: "place", textValue: "Place" },
   { id: "firstName", textValue: "First Name" },
   { id: "lastName", textValue: "Last Name" },
   { id: "gender", textValue: "Gender" },
@@ -33,7 +34,7 @@ const ageGroupResultsColumns: ColumnProps[] = [
   { id: "gender", textValue: "Gender" },
   { id: "rank", textValue: "Rank" },
   { id: "bib", textValue: "Bib", isRowHeader: true },
-  { id: "resultOrder", textValue: "Place" },
+  { id: "place", textValue: "Place" },
   { id: "firstName", textValue: "First Name" },
   { id: "lastName", textValue: "Last Name" },
   { id: "age", textValue: "Age" },
@@ -41,55 +42,131 @@ const ageGroupResultsColumns: ColumnProps[] = [
   { id: "resultTime", textValue: "Result Time" },
 ];
 
-const AgeGroupResultsTableWrapper = memo(function AgeGroupResultsTableWrapper({
-  ageGroupResults,
+const teamResultsColumns: ColumnProps[] = [
+  { id: "rank", textValue: "Rank" },
+  { id: "team", textValue: "Team", isRowHeader: true },
+  { id: "score", textValue: "Score" },
+  { id: "scoringTime", textValue: "Time" },
+  { id: "averageTime", textValue: "Average Time" },
+  { id: "spread", textValue: "Spread" },
+  { id: "individualActualPlaces", textValue: "Actual Order" },
+  { id: "individualScoringPlaces", textValue: "Scoring Order" },
+];
+
+function PromptIndividualsSection({
+  show,
+  handlePromptIndividualsAction,
+  individualsError,
 }: {
-  ageGroupResults: Array<RaceResultType & { rank: number; ageGroup: string }>;
+  show: boolean;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+  individualsError: string | undefined;
 }) {
-  if (!ageGroupResults || ageGroupResults.length === 0) return null;
+  return (
+    <>
+      <PromptIndividualsWrapper
+        show={show}
+        handlePromptIndividualsAction={handlePromptIndividualsAction}
+      />
+      <FileErrorInfo>{individualsError}</FileErrorInfo>
+    </>
+  );
+}
+
+function PromptIndividualsWrapper({
+  show,
+  handlePromptIndividualsAction,
+}: {
+  show: boolean;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+}) {
+  if (!show) return null;
+  return (
+    <div className="-mt-2">
+      <PromptIndividuals handlePromptIndividualsAction={handlePromptIndividualsAction} />
+    </div>
+  );
+}
+
+const IndividualResultsTableWrapper = memo(function IndividualResultsTableWrapper({
+  individualResults,
+}: {
+  individualResults: IndividualResultType[] | undefined;
+}) {
+  if (!individualResults || individualResults.length === 0) return null;
   return (
     <div className="space-y-2">
-      <p>Results:</p>
-      <AgeGroupResultsTable ageGroupResults={ageGroupResults} />
+      <p>Individual Results:</p>
+      <IndividualResultsTable individualResults={individualResults} />
     </div>
   );
 });
 
-function AgeGroupResultsTable({
-  ageGroupResults,
+function IndividualResultsTable({
+  individualResults,
 }: {
-  ageGroupResults: Array<RaceResultType & { rank: number; ageGroup: string }>;
+  individualResults: IndividualResultType[];
 }) {
   return (
     <Table>
       <Table.ScrollContainer>
         <Table.Content aria-label={pages.timing.menuLabel}>
-          <Table.Header columns={ageGroupResultsColumns}>
+          <Table.Header columns={individualResultsColumns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
                 {column.textValue}
               </Table.Column>
             )}
           </Table.Header>
-          <Table.Body items={ageGroupResults}>
-            {(item) => (
-              <Table.Row id={item.bib}>
-                <StyledTableCell>{item.ageGroup}</StyledTableCell>
-                <StyledTableCell>{item.gender}</StyledTableCell>
-                <StyledTableCell>{item.rank}</StyledTableCell>
-                <StyledTableCell>{item.bib}</StyledTableCell>
-                <StyledTableCell>{item.resultOrder}</StyledTableCell>
-                <StyledTableCell>{item.firstName}</StyledTableCell>
-                <StyledTableCell>{item.lastName}</StyledTableCell>
-                <StyledTableCell>{item.age}</StyledTableCell>
-                <StyledTableCell>{item.team}</StyledTableCell>
-                <StyledTableCell>{item.resultTime}</StyledTableCell>
+          <Table.Body items={individualResults}>
+            {(individualResult) => (
+              <Table.Row id={individualResult.bib}>
+                <StyledTableCell>{individualResult.place}</StyledTableCell>
+                <StyledTableCell>{individualResult.bib}</StyledTableCell>
+                <StyledTableCell>{individualResult.firstName}</StyledTableCell>
+                <StyledTableCell>{individualResult.lastName}</StyledTableCell>
+                <StyledTableCell>{individualResult.gender}</StyledTableCell>
+                <StyledTableCell>{individualResult.age}</StyledTableCell>
+                <StyledTableCell>{individualResult.team}</StyledTableCell>
+                <StyledTableCell>{individualResult.resultTimeStr}</StyledTableCell>
               </Table.Row>
             )}
           </Table.Body>
         </Table.Content>
       </Table.ScrollContainer>
     </Table>
+  );
+}
+
+function PromptAgeGroupsSection({
+  show,
+  shouldPromptAgeGroups,
+  handleShouldPromptAgeGroupsAction,
+  ageGroups,
+  handlePromptAgeGroupsAction,
+  handlePromptAgeGroupsSubmissionAction,
+}: {
+  show: boolean;
+  shouldPromptAgeGroups: boolean;
+  handleShouldPromptAgeGroupsAction: (value: boolean) => void;
+  ageGroups: string;
+  handlePromptAgeGroupsAction: (value: string) => void;
+  handlePromptAgeGroupsSubmissionAction: (e: PressEvent) => void;
+}) {
+  return (
+    <>
+      <ShouldPromptAgeGroups
+        show={show}
+        shouldPromptAgeGroups={shouldPromptAgeGroups}
+        handleShouldPromptAgeGroupsAction={handleShouldPromptAgeGroupsAction}
+      />
+      <PromptAgeGroups
+        show={shouldPromptAgeGroups}
+        ageGroups={ageGroups}
+        handlePromptAgeGroupsAction={handlePromptAgeGroupsAction}
+        handlePromptAgeGroupsSubmissionAction={handlePromptAgeGroupsSubmissionAction}
+      />
+    </>
   );
 }
 
@@ -149,43 +226,49 @@ function PromptAgeGroups({
   );
 }
 
-const IndividualResultsTableWrapper = memo(function IndividualResultsTableWrapper({
-  individualResults,
+const AgeGroupResultsTableWrapper = memo(function AgeGroupResultsTableWrapper({
+  ageGroupResults,
 }: {
-  individualResults: RaceResultType[] | undefined;
+  ageGroupResults: Array<IndividualResultType & { rank: number; ageGroup: string }>;
 }) {
-  if (!individualResults || individualResults.length === 0) return null;
+  if (!ageGroupResults || ageGroupResults.length === 0) return null;
   return (
     <div className="space-y-2">
-      <p>Results:</p>
-      <IndividualResultsTable individualResults={individualResults} />
+      <p>Age Group Results:</p>
+      <AgeGroupResultsTable ageGroupResults={ageGroupResults} />
     </div>
   );
 });
 
-function IndividualResultsTable({ individualResults }: { individualResults: RaceResultType[] }) {
+function AgeGroupResultsTable({
+  ageGroupResults,
+}: {
+  ageGroupResults: Array<IndividualResultType & { rank: number; ageGroup: string }>;
+}) {
   return (
     <Table>
       <Table.ScrollContainer>
         <Table.Content aria-label={pages.timing.menuLabel}>
-          <Table.Header columns={individualResultsColumns}>
+          <Table.Header columns={ageGroupResultsColumns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
                 {column.textValue}
               </Table.Column>
             )}
           </Table.Header>
-          <Table.Body items={individualResults}>
-            {(item) => (
-              <Table.Row id={item.bib}>
-                <StyledTableCell>{item.resultOrder}</StyledTableCell>
-                <StyledTableCell>{item.bib}</StyledTableCell>
-                <StyledTableCell>{item.firstName}</StyledTableCell>
-                <StyledTableCell>{item.lastName}</StyledTableCell>
-                <StyledTableCell>{item.gender}</StyledTableCell>
-                <StyledTableCell>{item.age}</StyledTableCell>
-                <StyledTableCell>{item.team}</StyledTableCell>
-                <StyledTableCell>{item.resultTime}</StyledTableCell>
+          <Table.Body items={ageGroupResults}>
+            {(ageGroupResult) => (
+              <Table.Row id={ageGroupResult.bib}>
+                <StyledTableCell>{ageGroupResult.ageGroup}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.gender}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.rank}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.bib}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.place}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.firstName}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.lastName}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.age}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.team}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.resultTimeStr}</StyledTableCell>
               </Table.Row>
             )}
           </Table.Body>
@@ -195,71 +278,113 @@ function IndividualResultsTable({ individualResults }: { individualResults: Race
   );
 }
 
-function PromptIndividualsWrapper({
+function ShouldPromptTeams({
   show,
-  handlePromptIndividualsAction,
+  shouldPromptTeams,
+  handleShouldPromptTeamsAction,
 }: {
   show: boolean;
-  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+  shouldPromptTeams: boolean;
+  handleShouldPromptTeamsAction: (value: boolean) => void;
 }) {
   if (!show) return null;
   return (
-    <div className="-mt-2">
-      <PromptIndividuals handlePromptIndividualsAction={handlePromptIndividualsAction} />
+    <Switch
+      isSelected={shouldPromptTeams}
+      onChange={handleShouldPromptTeamsAction}
+      className="mt-8"
+      size="lg"
+    >
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <div className="text-lg font-light">Show team results</div>
+      </Switch.Content>
+    </Switch>
+  );
+}
+
+const TeamResultsTableWrapper = memo(function TeamResultsTableWrapper({
+  teamResults,
+}: {
+  teamResults: TeamResultType[];
+}) {
+  if (!teamResults || teamResults.length === 0) return null;
+  return (
+    <div className="space-y-2">
+      <p>Team Results:</p>
+      <TeamResultsTable teamResults={teamResults} />
     </div>
   );
-}
+});
 
-function PromptAgeGroupsSection({
-  show,
-  shouldPromptAgeGroups,
-  handleShouldPromptAgeGroupsAction,
-  ageGroups,
-  handlePromptAgeGroupsAction,
-  handlePromptAgeGroupsSubmissionAction,
-}: {
-  show: boolean;
-  shouldPromptAgeGroups: boolean;
-  handleShouldPromptAgeGroupsAction: (value: boolean) => void;
-  ageGroups: string;
-  handlePromptAgeGroupsAction: (value: string) => void;
-  handlePromptAgeGroupsSubmissionAction: (e: PressEvent) => void;
-}) {
+function TeamResultsTable({ teamResults }: { teamResults: TeamResultType[] }) {
   return (
-    <>
-      <ShouldPromptAgeGroups
-        show={show}
-        shouldPromptAgeGroups={shouldPromptAgeGroups}
-        handleShouldPromptAgeGroupsAction={handleShouldPromptAgeGroupsAction}
-      />
-      <PromptAgeGroups
-        show={shouldPromptAgeGroups}
-        ageGroups={ageGroups}
-        handlePromptAgeGroupsAction={handlePromptAgeGroupsAction}
-        handlePromptAgeGroupsSubmissionAction={handlePromptAgeGroupsSubmissionAction}
-      />
-    </>
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label={pages.timing.menuLabel}>
+          <Table.Header columns={teamResultsColumns}>
+            {(column) => (
+              <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                {column.textValue}
+              </Table.Column>
+            )}
+          </Table.Header>
+          <Table.Body items={teamResults}>
+            {(teamResult) => (
+              <Table.Row id={teamResult.team}>
+                <StyledTableCell>{teamResult.rank}</StyledTableCell>
+                <StyledTableCell>{teamResult.team}</StyledTableCell>
+                <StyledTableCell>{teamResult.score}</StyledTableCell>
+                <StyledTableCell>{teamResult.scoringTimeStr}</StyledTableCell>
+                <StyledTableCell>{teamResult.averageTimeStr}</StyledTableCell>
+                <StyledTableCell>{teamResult.spreadTimeStr}</StyledTableCell>
+                <TeamResultIndividualPlacesTableCell
+                  teamResult={teamResult}
+                  useScoringPlace={false}
+                />
+                <TeamResultIndividualPlacesTableCell
+                  teamResult={teamResult}
+                  useScoringPlace={true}
+                />
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
   );
 }
 
-function PromptIndividualsSection({
-  show,
-  handlePromptIndividualsAction,
-  individualsError,
+function TeamResultIndividualPlacesTableCell({
+  teamResult,
+  useScoringPlace,
 }: {
-  show: boolean;
-  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
-  individualsError: string | undefined;
+  teamResult: TeamResultType;
+  useScoringPlace: boolean;
 }) {
   return (
-    <>
-      <PromptIndividualsWrapper
-        show={show}
-        handlePromptIndividualsAction={handlePromptIndividualsAction}
-      />
-      <FileErrorInfo>{individualsError}</FileErrorInfo>
-    </>
+    <StyledTableCell>
+      <div className="flex">
+        {teamResult.individualResults.map((individualResult) => {
+          const place = useScoringPlace ? individualResult.scoringPlace : individualResult.place;
+          if (!place) return null;
+          return (
+            <TeamResultIndividualsTableCellItem
+              key={`${teamResult.team}-${useScoringPlace}-${place}`}
+            >
+              {place}
+            </TeamResultIndividualsTableCellItem>
+          );
+        })}
+      </div>
+    </StyledTableCell>
   );
+}
+
+function TeamResultIndividualsTableCellItem({ children }: { children: ReactNode }) {
+  return <div className="-me-px w-9 border-r border-l text-center">{children}</div>;
 }
 
 export default function ParseUltraAndGenerateResults() {
@@ -268,18 +393,20 @@ export default function ParseUltraAndGenerateResults() {
   const [shouldPromptAgeGroups, setShouldPromptAgeGroups] = useState(false);
   const [ageGroups, setAgeGroups] = useState("");
   const [submittedAgeGroups, setSubmittedAgeGroups] = useState("");
+  const [shouldPromptTeams, setShouldPromptTeams] = useState(false);
 
   function handlePromptUltraAction() {
     handlePromptIndividualsAction(null);
   }
 
-  function handlePromptIndividualsAction(individualsFileContent: string | null) {
-    setIndividualsFileContent(individualsFileContent);
+  function handlePromptIndividualsAction(newIndividualsFileContent: string | null) {
+    setIndividualsFileContent(newIndividualsFileContent);
     handleShouldPromptAgeGroupsAction(false);
+    handleShouldPromptTeamsAction(false);
   }
 
-  function handleShouldPromptAgeGroupsAction(shouldPromptAgeGroups: boolean) {
-    setShouldPromptAgeGroups(shouldPromptAgeGroups);
+  function handleShouldPromptAgeGroupsAction(newShouldPromptAgeGroups: boolean) {
+    setShouldPromptAgeGroups(newShouldPromptAgeGroups);
     handlePromptAgeGroupsAction("");
     setSubmittedAgeGroups("");
   }
@@ -290,6 +417,10 @@ export default function ParseUltraAndGenerateResults() {
 
   function handlePromptAgeGroupsSubmissionAction() {
     setSubmittedAgeGroups(ageGroups);
+  }
+
+  function handleShouldPromptTeamsAction(newShouldPromptTeams: boolean) {
+    setShouldPromptTeams(newShouldPromptTeams);
   }
 
   const { ultraResults, ultraResultsError } = useMemo(
@@ -330,6 +461,13 @@ export default function ParseUltraAndGenerateResults() {
     [individualResults, submittedAgeGroups],
   );
 
+  const teamResults = useMemo(
+    function () {
+      return getTeamResults(individualResults, shouldPromptTeams);
+    },
+    [shouldPromptTeams, individualResults],
+  );
+
   return (
     <div className="space-y-4">
       <PromptUltraSection
@@ -356,6 +494,14 @@ export default function ParseUltraAndGenerateResults() {
       />
 
       <AgeGroupResultsTableWrapper ageGroupResults={ageGroupResults} />
+
+      <ShouldPromptTeams
+        show={individualResults?.length > 0}
+        shouldPromptTeams={shouldPromptTeams}
+        handleShouldPromptTeamsAction={handleShouldPromptTeamsAction}
+      />
+
+      <TeamResultsTableWrapper teamResults={teamResults} />
     </div>
   );
 }

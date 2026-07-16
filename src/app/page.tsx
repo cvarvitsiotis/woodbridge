@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect, ReactNode } from "react";
-import { Alert } from "@heroui/react";
-
 import clsx from "clsx";
 import { pages, siteConfig } from "@/config/site";
 import { CalendarIcon, HelpClinicIcon, HowToRegIcon } from "@/components/icons";
