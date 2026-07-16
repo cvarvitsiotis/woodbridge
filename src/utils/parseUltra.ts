@@ -97,20 +97,22 @@ function getResultTimeRounded(resultTime: number) {
 export function getResultTimeStr(resultTime: number, fractionLen: number) {
   const { hours, minutes, seconds, thousandths } = getTimeComponents(resultTime);
 
+  const hoursStrAbbr = hours.toString();
   const hoursStr = hours.toString().padStart(2, "0");
+  const minutesStrAbbr = minutes.toString();
   const minutesStr = minutes.toString().padStart(2, "0");
   const secondsStr = seconds.toString().padStart(2, "0");
   const fractionStr = thousandths.toString().padStart(fractionLen, "0").slice(0, fractionLen);
 
   const resultTimeStr =
-    (hours ? `${hoursStr}:` : "") + `${minutesStr}:${secondsStr}.${fractionStr}`;
-
+    (hours ? `${hoursStrAbbr}:` : "") +
+    `${hours ? minutesStr : minutesStrAbbr}:${secondsStr}.${fractionStr}`;
   const resultTimeStrFull = `${hoursStr}:${minutesStr}:${secondsStr}.${fractionStr}`;
 
   return { resultTimeStr, resultTimeStrFull };
 }
 
-function getTimeComponents(timeInThousandths: number): {
+export function getTimeComponents(timeInThousandths: number): {
   hours: number;
   minutes: number;
   seconds: number;
@@ -121,8 +123,7 @@ function getTimeComponents(timeInThousandths: number): {
   const seconds = timeInSeconds % 60;
   const timeInMinutes = Math.floor(timeInSeconds / 60);
   const minutes = timeInMinutes % 60;
-  const timeInHours = Math.floor(timeInMinutes / 60);
-  const hours = Math.floor(timeInHours / 60);
+  const hours = Math.floor(timeInMinutes / 60);
   return { hours, minutes, seconds, thousandths };
 }
 
