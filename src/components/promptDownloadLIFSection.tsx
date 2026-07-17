@@ -46,7 +46,6 @@ function PromptDownloadLIF({
       <NumberField
         value={raceNumber}
         onChange={handlePromptDownloadLIFAction}
-        name="width"
         minValue={1}
         variant="secondary"
       >

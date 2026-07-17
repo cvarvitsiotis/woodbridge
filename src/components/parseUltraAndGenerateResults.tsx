@@ -1,52 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import getRawResultsFromUltra from "@/utils/getRawResultsFromUltra";
 import useParseUltra from "@/hooks/useParseUltra";
-import getIndividualResults from "@/utils/getIndividualResults";
-import getAgeGroupResults from "@/utils/getAgeGroupResults";
-import getTeamResults from "@/utils/getTeamResults";
+import useIndividualAgeGroupAndTeamResults from "@/hooks/useIndividualAgeGroupAndTeamResults";
 import TeamResultsWrapper from "./teamResultsWrapper";
 import AgeGroupResultsWrapper from "./ageGroupResultsWrapper";
 import IndividualResultsWrapper from "./individualResultsWrapper";
-import getIndividuals from "@/utils/getIndividuals";
 import UltraResultsWrapper from "./ultraResultsWrapper";
 
 export default function ParseUltraAndGenerateResults() {
   const parseUltraState = useParseUltra();
-  const [individualsFileContent, setIndividualsFileContent] = useState<string | null>(null);
-  const [shouldPromptAgeGroups, setShouldPromptAgeGroups] = useState(false);
-  const [ageGroups, setAgeGroups] = useState("");
-  const [submittedAgeGroups, setSubmittedAgeGroups] = useState("");
-  const [shouldPromptTeams, setShouldPromptTeams] = useState(false);
-
-  function handlePromptUltraAction() {
-    handlePromptIndividualsAction(null);
-  }
-
-  function handlePromptIndividualsAction(newIndividualsFileContent: string | null) {
-    setIndividualsFileContent(newIndividualsFileContent);
-    handleShouldPromptAgeGroupsAction(false);
-    handleShouldPromptTeamsAction(false);
-  }
-
-  function handleShouldPromptAgeGroupsAction(newShouldPromptAgeGroups: boolean) {
-    setShouldPromptAgeGroups(newShouldPromptAgeGroups);
-    handlePromptAgeGroupsAction("");
-    setSubmittedAgeGroups("");
-  }
-
-  function handlePromptAgeGroupsAction(newAgeGroups: string) {
-    setAgeGroups(newAgeGroups);
-  }
-
-  function handlePromptAgeGroupsSubmissionAction() {
-    setSubmittedAgeGroups(ageGroups);
-  }
-
-  function handleShouldPromptTeamsAction(newShouldPromptTeams: boolean) {
-    setShouldPromptTeams(newShouldPromptTeams);
-  }
 
   const { rawResults, rawResultsError } = useMemo(
     function () {
@@ -65,33 +29,24 @@ export default function ParseUltraAndGenerateResults() {
     ],
   );
 
-  const { individuals, individualsError } = useMemo(
-    function () {
-      return getIndividuals(individualsFileContent);
-    },
-    [individualsFileContent],
-  );
+  const {
+    handlePromptIndividualsAction,
+    individualsError,
+    individualResults,
+    shouldPromptAgeGroups,
+    handleShouldPromptAgeGroupsAction,
+    ageGroups,
+    handlePromptAgeGroupsAction,
+    handlePromptAgeGroupsSubmissionAction,
+    ageGroupResults,
+    shouldPromptTeams,
+    handleShouldPromptTeamsAction,
+    teamResults,
+  } = useIndividualAgeGroupAndTeamResults(rawResults);
 
-  const individualResults = useMemo(
-    function () {
-      return getIndividualResults(rawResults, individuals);
-    },
-    [rawResults, individuals],
-  );
-
-  const ageGroupResults = useMemo(
-    function () {
-      return getAgeGroupResults(individualResults, submittedAgeGroups);
-    },
-    [individualResults, submittedAgeGroups],
-  );
-
-  const teamResults = useMemo(
-    function () {
-      return getTeamResults(individualResults, shouldPromptTeams);
-    },
-    [shouldPromptTeams, individualResults],
-  );
+  function handlePromptUltraAction() {
+    handlePromptIndividualsAction(null);
+  }
 
   return (
     <div className="space-y-4">

@@ -43,11 +43,11 @@ export default function Page() {
               LIF from Ultra
               <Tabs.Indicator />
             </Tab>
-            <Tab id="parseUltraAndGenerateResults" className="h-10">
+            <Tab id="parseUltraAndGenerateResults">
               Results from Ultra
               <Tabs.Indicator />
             </Tab>
-            <Tab id="parseLIFAndGenerateResults" className="h-10">
+            <Tab id="parseLIFAndGenerateResults">
               Results from LIF
               <Tabs.Indicator />
             </Tab>

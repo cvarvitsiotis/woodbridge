@@ -14,7 +14,7 @@ export default function UltraResultsWrapper({
   parseUltraState: ParseUltraStateType;
   handlePromptUltraAction: () => void;
   rawResultsError: string | undefined;
-  rawResults?: RawResult[] | undefined;
+  rawResults?: RawResult[];
 }) {
   return (
     <>
