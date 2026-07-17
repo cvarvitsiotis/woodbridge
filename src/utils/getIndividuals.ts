@@ -1,6 +1,7 @@
 import { IndividualType } from "@/types";
 
-function getIndividuals(lines: string[]) {
+function getIndividualsInternal(fileContent: string) {
+  const lines = fileContent.split(/\r?\n/);
   return lines
     .filter((line) => line)
     .map((line) => {
@@ -16,12 +17,7 @@ function getIndividuals(lines: string[]) {
     });
 }
 
-function parseIndividualsInternal(fileContent: string) {
-  const lines = fileContent.split(/\r?\n/);
-  return getIndividuals(lines);
-}
-
-export default function parseIndividuals(fileContent: string | null): {
+export default function getIndividuals(fileContent: string | null): {
   individuals?: IndividualType[];
   individualsError?: string;
 } {
@@ -29,7 +25,7 @@ export default function parseIndividuals(fileContent: string | null): {
     if (!fileContent || typeof fileContent !== "string") return {};
 
     return {
-      individuals: parseIndividualsInternal(fileContent),
+      individuals: getIndividualsInternal(fileContent),
     };
   } catch (error) {
     return { individualsError: error instanceof Error ? error.message : "Unknown error" };

@@ -1,32 +1,21 @@
 "use client";
 
-import { useMemo } from "react";
-import getRawResultsFromUltra from "@/utils/getRawResultsFromUltra";
-import useParseUltra from "@/hooks/useParseUltra";
+import { useMemo, useState } from "react";
 import useIndividualAgeGroupAndTeamResults from "@/hooks/useIndividualAgeGroupAndTeamResults";
 import TeamResultsWrapper from "./teamResultsWrapper";
 import AgeGroupResultsWrapper from "./ageGroupResultsWrapper";
 import IndividualResultsWrapper from "./individualResultsWrapper";
-import UltraResultsWrapper from "./ultraResultsWrapper";
+import LIFResultsWrapper from "./lifResultsWrapper";
+import getRawResultsFromLIF from "@/utils/getRawResultsFromLIF";
 
-export default function ParseUltraAndGenerateResults() {
-  const parseUltraState = useParseUltra();
+export default function ParseLIFAndGenerateResults() {
+  const [lifFileContent, setLIFFileContent] = useState<string | null>(null);
 
   const { rawResults, rawResultsError } = useMemo(
     function () {
-      return getRawResultsFromUltra(
-        parseUltraState.fileContent,
-        parseUltraState.raceStartTime,
-        parseUltraState.runnerResultTime,
-        parseUltraState.runnerBib,
-      );
+      return getRawResultsFromLIF(lifFileContent);
     },
-    [
-      parseUltraState.fileContent,
-      parseUltraState.raceStartTime,
-      parseUltraState.runnerResultTime,
-      parseUltraState.runnerBib,
-    ],
+    [lifFileContent],
   );
 
   const {
@@ -44,15 +33,15 @@ export default function ParseUltraAndGenerateResults() {
     teamResults,
   } = useIndividualAgeGroupAndTeamResults(rawResults);
 
-  function handlePromptUltraAction() {
+  function handlePromptLIFAction(newLIFFileContent: string | null) {
+    setLIFFileContent(newLIFFileContent);
     handlePromptIndividualsAction(null);
   }
 
   return (
     <div className="space-y-4">
-      <UltraResultsWrapper
-        parseUltraState={parseUltraState}
-        handlePromptUltraAction={handlePromptUltraAction}
+      <LIFResultsWrapper
+        handlePromptLIFAction={handlePromptLIFAction}
         rawResultsError={rawResultsError}
       />
 

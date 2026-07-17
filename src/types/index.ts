@@ -135,17 +135,20 @@ export interface ParseUltraStateType {
   setFileContent: (value: string | null) => void;
 }
 
-export interface BibResult {
+export interface UltraResult {
+  bib: string;
   finishTime: number;
   originalOrder: number;
-  place?: number;
-  resultTime?: number;
-  resultTimeStrFull?: string;
-  resultTimeRounded?: number;
-  resultTimeRoundedStr?: string;
 }
 
-export type OrderedBibEntry = [string, BibResult];
+export interface RawResult {
+  bib: string;
+  place: number;
+  resultTime: number;
+  resultTimeStrFull: string;
+  resultTimeRounded: number;
+  resultTimeRoundedStr: string;
+}
 
 export interface IndividualType {
   bib: number;

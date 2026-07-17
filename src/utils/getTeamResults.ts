@@ -1,6 +1,6 @@
 import { IndividualResultType, TeamResultType } from "@/types";
 import { Unknown } from "./getIndividualResults";
-import { getResultTimeStr } from "./parseUltra";
+import { getResultTimeStr } from "./getRawResultsFromUltra";
 
 const SCORING_TEAM_SIZE = 5;
 
@@ -25,15 +25,19 @@ function initializeTeamResults(individualResults: IndividualResultType[]): TeamR
   const individualResultsByTeam = new Map<string, IndividualResultType[]>();
 
   individualResults.forEach((individualResult) => {
-    const individualResults = individualResultsByTeam.get(individualResult.team) ?? [];
-    individualResults.push(individualResult);
-    individualResultsByTeam.set(individualResult.team, individualResults);
+    const teamIndividualResults = individualResultsByTeam.get(individualResult.team) ?? [];
+    teamIndividualResults.push(getClonedIndividualResultToPreventMutationOfMemo(individualResult));
+    individualResultsByTeam.set(individualResult.team, teamIndividualResults);
   });
 
   return Array.from(individualResultsByTeam, ([team, individualResults]) => ({
     team,
     individualResults,
   }));
+}
+
+function getClonedIndividualResultToPreventMutationOfMemo(individualResult: IndividualResultType) {
+  return { ...individualResult };
 }
 
 function setIndividualScoringPlaces(teamResults: TeamResultType[]) {

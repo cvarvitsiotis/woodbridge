@@ -1,10 +1,22 @@
-import { BibResult, OrderedBibEntry } from "@/types";
+import { RawResult, UltraResult } from "@/types";
 
-const ultraFinishTimePattern = /^\d{2}:\d{2}:\d{2}\.\d{3}$/;
+export const finishTimePattern = /^\d{2}:\d{2}:\d{2}\.\d{3}$/;
 const raceStartTimePattern = /^\d{2}:\d{2}:\d{2}$/;
 
-function getBibResults(lines: string[]): Map<string, BibResult> {
-  const bibFinishTimes = new Map<string, BibResult>();
+function getRawResults(
+  fileContent: string,
+  raceStartTime: string,
+  runnerResultTime: string,
+  runnerBib: string,
+) {
+  const lines = fileContent.split(/\r?\n/);
+  const bibUltraResults = getBibUltraResults(lines);
+  const startTime = getStartTime(raceStartTime, runnerResultTime, runnerBib, bibUltraResults);
+  return getOrderedRawResults(bibUltraResults, startTime);
+}
+
+function getBibUltraResults(lines: string[]): Map<string, UltraResult> {
+  const bibUltraResults = new Map<string, UltraResult>();
 
   for (let i = 0; i < lines.length; i++) {
     if (!lines[i]) continue;
@@ -13,27 +25,21 @@ function getBibResults(lines: string[]): Map<string, BibResult> {
     const bib = fields[1];
     const finishTimeStr = fields[3].slice(1, -1);
 
-    if (!ultraFinishTimePattern.test(finishTimeStr))
+    if (!finishTimePattern.test(finishTimeStr))
       throw new Error("Unexpected finish time in Ultra data");
 
     const finishTime = parseTime(finishTimeStr, true);
 
-    const existing = bibFinishTimes.get(bib);
+    const existing = bibUltraResults.get(bib);
     if (existing && existing.finishTime <= finishTime) continue;
 
-    bibFinishTimes.set(bib, { finishTime, originalOrder: i });
+    bibUltraResults.set(bib, { bib, finishTime, originalOrder: i });
   }
 
-  return bibFinishTimes;
+  return bibUltraResults;
 }
 
-function getOrderedBibResults(bibResults: Map<string, BibResult>): OrderedBibEntry[] {
-  const arr = Array.from(bibResults.entries()) as OrderedBibEntry[];
-  arr.sort((a, b) => a[1].finishTime - b[1].finishTime || a[1].originalOrder - b[1].originalOrder);
-  return arr;
-}
-
-function parseTime(timeStr: string, hasThousandths: boolean): number {
+export function parseTime(timeStr: string, hasThousandths: boolean): number {
   const hours = Number(timeStr.slice(0, 2));
   const minutes = Number(timeStr.slice(3, 5));
   const seconds = Number(timeStr.slice(6, 8));
@@ -46,42 +52,49 @@ function getStartTime(
   raceStartTime: string,
   runnerResultTime: string,
   runnerBib: string,
-  bibResults: Map<string, BibResult>,
+  bibUltraResults: Map<string, UltraResult>,
 ): number {
   if (raceStartTime) {
     if (!raceStartTimePattern.test(raceStartTime)) throw new Error("Unexpected race start time");
     return parseTime(raceStartTime, false);
   }
 
-  return getStartTimeFromRunnerResultTime(runnerResultTime, runnerBib, bibResults);
+  return getStartTimeFromRunnerResultTime(runnerResultTime, runnerBib, bibUltraResults);
 }
 
 function getStartTimeFromRunnerResultTime(
   runnerResultTime: string,
   runnerBib: string,
-  bibResults: Map<string, BibResult>,
+  bibUltraResults: Map<string, UltraResult>,
 ): number {
   if (!raceStartTimePattern.test(runnerResultTime))
     throw new Error("Unexpected runner result time");
   const resultTime = parseTime(runnerResultTime, false);
-  const result = bibResults.get(runnerBib);
-  if (!result) throw new Error("Bib not found");
-  if (result.finishTime < resultTime) throw new Error("Cannot cross midnight");
-  return result.finishTime - resultTime;
+  const ultraResult = bibUltraResults.get(runnerBib);
+  if (!ultraResult) throw new Error("Bib not found");
+  if (ultraResult.finishTime < resultTime) throw new Error("Cannot cross midnight");
+  return ultraResult.finishTime - resultTime;
 }
 
-function setResultOrderAndTime(bibResults: OrderedBibEntry[], startTime: number) {
-  for (let i = 0; i < bibResults.length; i++) {
-    const bibResult = bibResults[i];
-    const resultTime = getResultTime(bibResult[1].finishTime, startTime);
-    const resultTimeRounded = getResultTimeRounded(resultTime);
+function getOrderedRawResults(
+  bibUltraResults: Map<string, UltraResult>,
+  startTime: number,
+): RawResult[] {
+  return [...bibUltraResults.values()]
+    .sort((a, b) => a.finishTime - b.finishTime || a.originalOrder - b.originalOrder)
+    .map((ultraResult, index) => {
+      const resultTime = getResultTime(ultraResult.finishTime, startTime);
+      const resultTimeRounded = getResultTimeRounded(resultTime);
 
-    bibResult[1].place = i + 1;
-    bibResult[1].resultTime = resultTime;
-    bibResult[1].resultTimeStrFull = getResultTimeStr(resultTime, 3).resultTimeStrFull;
-    bibResult[1].resultTimeRounded = resultTimeRounded;
-    bibResult[1].resultTimeRoundedStr = getResultTimeStr(resultTimeRounded, 1).resultTimeStr;
-  }
+      return {
+        bib: ultraResult.bib,
+        place: index + 1,
+        resultTime,
+        resultTimeStrFull: getResultTimeStr(resultTime, 3).resultTimeStrFull,
+        resultTimeRounded,
+        resultTimeRoundedStr: getResultTimeStr(resultTimeRounded, 1).resultTimeStr,
+      };
+    });
 }
 
 function getResultTime(finishTime: number, startTime: number): number {
@@ -90,7 +103,7 @@ function getResultTime(finishTime: number, startTime: number): number {
   return resultTime;
 }
 
-function getResultTimeRounded(resultTime: number) {
+export function getResultTimeRounded(resultTime: number) {
   return Math.ceil(resultTime / 100) * 100;
 }
 
@@ -127,33 +140,19 @@ export function getTimeComponents(timeInThousandths: number): {
   return { hours, minutes, seconds, thousandths };
 }
 
-function parseUltraInternal(
-  fileContent: string,
-  raceStartTime: string,
-  runnerResultTime: string,
-  runnerBib: string,
-) {
-  const lines = fileContent.split(/\r?\n/);
-  const bibResults = getBibResults(lines);
-  const orderedBibResults = getOrderedBibResults(bibResults);
-  const startTime = getStartTime(raceStartTime, runnerResultTime, runnerBib, bibResults);
-  setResultOrderAndTime(orderedBibResults, startTime);
-  return orderedBibResults;
-}
-
-export default function parseUltra(
+export default function getRawResultsFromUltra(
   fileContent: string | null,
   raceStartTime: string,
   runnerResultTime: string,
   runnerBib: string,
-): { ultraResults?: OrderedBibEntry[]; ultraResultsError?: string } {
+): { rawResults?: RawResult[]; rawResultsError?: string } {
   try {
     if (!fileContent || typeof fileContent !== "string") return {};
 
     return {
-      ultraResults: parseUltraInternal(fileContent, raceStartTime, runnerResultTime, runnerBib),
+      rawResults: getRawResults(fileContent, raceStartTime, runnerResultTime, runnerBib),
     };
   } catch (error) {
-    return { ultraResultsError: error instanceof Error ? error.message : "Unknown error" };
+    return { rawResultsError: error instanceof Error ? error.message : "Unknown error" };
   }
 }
