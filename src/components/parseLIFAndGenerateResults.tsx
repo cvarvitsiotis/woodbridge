@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import getRawResultsFromUltra from "@/utils/getRawResultsFromUltra";
-import useParseUltra from "@/hooks/useParseUltra";
 import getIndividualResults from "@/utils/getIndividualResults";
 import getAgeGroupResults from "@/utils/getAgeGroupResults";
 import getTeamResults from "@/utils/getTeamResults";
@@ -10,18 +8,19 @@ import TeamResultsWrapper from "./teamResultsWrapper";
 import AgeGroupResultsWrapper from "./ageGroupResultsWrapper";
 import IndividualResultsWrapper from "./individualResultsWrapper";
 import getIndividuals from "@/utils/getIndividuals";
-import UltraResultsWrapper from "./ultraResultsWrapper";
+import LIFResultsWrapper from "./lifResultsWrapper";
+import getRawResultsFromLIF from "@/utils/getRawResultsFromLIF";
 
-export default function ParseUltraAndGenerateResults() {
-  const parseUltraState = useParseUltra();
+export default function ParseLIFAndGenerateResults() {
+  const [lifFileContent, setLIFFileContent] = useState<string | null>(null);
   const [individualsFileContent, setIndividualsFileContent] = useState<string | null>(null);
   const [shouldPromptAgeGroups, setShouldPromptAgeGroups] = useState(false);
   const [ageGroups, setAgeGroups] = useState("");
   const [submittedAgeGroups, setSubmittedAgeGroups] = useState("");
   const [shouldPromptTeams, setShouldPromptTeams] = useState(false);
 
-  function handlePromptUltraAction() {
-    handlePromptIndividualsAction(null);
+  function handlePromptLIFAction(newLIFFileContent: string | null) {
+    setLIFFileContent(newLIFFileContent);
   }
 
   function handlePromptIndividualsAction(newIndividualsFileContent: string | null) {
@@ -50,19 +49,9 @@ export default function ParseUltraAndGenerateResults() {
 
   const { rawResults, rawResultsError } = useMemo(
     function () {
-      return getRawResultsFromUltra(
-        parseUltraState.fileContent,
-        parseUltraState.raceStartTime,
-        parseUltraState.runnerResultTime,
-        parseUltraState.runnerBib,
-      );
+      return getRawResultsFromLIF(lifFileContent);
     },
-    [
-      parseUltraState.fileContent,
-      parseUltraState.raceStartTime,
-      parseUltraState.runnerResultTime,
-      parseUltraState.runnerBib,
-    ],
+    [lifFileContent],
   );
 
   const { individuals, individualsError } = useMemo(
@@ -95,9 +84,8 @@ export default function ParseUltraAndGenerateResults() {
 
   return (
     <div className="space-y-4">
-      <UltraResultsWrapper
-        parseUltraState={parseUltraState}
-        handlePromptUltraAction={handlePromptUltraAction}
+      <LIFResultsWrapper
+        handlePromptLIFAction={handlePromptLIFAction}
         rawResultsError={rawResultsError}
       />
 

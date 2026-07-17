@@ -1,6 +1,6 @@
 import { IndividualResultType, TeamResultType } from "@/types";
 import { Unknown } from "./getIndividualResults";
-import { getResultTimeStr } from "./parseUltra";
+import { getResultTimeStr } from "./getRawResultsFromUltra";
 
 const SCORING_TEAM_SIZE = 5;
 

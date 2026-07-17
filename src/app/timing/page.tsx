@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { TabProps, Tabs } from "@heroui/react";
+import ParseLIFAndGenerateResults from "@/components/parseLIFAndGenerateResults";
 
 export const metadata: Metadata = {
   title: pages.timing.menuLabel,
@@ -39,23 +40,32 @@ export default function Page() {
         <Tabs.ListContainer className="mx-auto w-full max-w-sm">
           <Tabs.List aria-label="Options">
             <Tab id="parseUltra">
-              Parse Ultra
+              LIF from Ultra
               <Tabs.Indicator />
             </Tab>
-            <Tab id="generateResultsFromUltra" className="h-10">
-              Parse Ultra and Generate Results
+            <Tab id="parseUltraAndGenerateResults" className="h-10">
+              Results from Ultra
+              <Tabs.Indicator />
+            </Tab>
+            <Tab id="parseLIFAndGenerateResults" className="h-10">
+              Results from LIF
               <Tabs.Indicator />
             </Tab>
           </Tabs.List>
         </Tabs.ListContainer>
         <Tabs.Panel id="parseUltra">
-          <Section subheader="Parse Ultra">
+          <Section subheader="LIF from Ultra">
             <ParseUltra />
           </Section>
         </Tabs.Panel>
-        <Tabs.Panel id="generateResultsFromUltra">
-          <Section subheader="Parse Ultra and Generate Results">
+        <Tabs.Panel id="parseUltraAndGenerateResults">
+          <Section subheader="Results from Ultra">
             <ParseUltraAndGenerateResults />
+          </Section>
+        </Tabs.Panel>
+        <Tabs.Panel id="parseLIFAndGenerateResults">
+          <Section subheader="Results from LIF">
+            <ParseLIFAndGenerateResults />
           </Section>
         </Tabs.Panel>
       </Tabs>

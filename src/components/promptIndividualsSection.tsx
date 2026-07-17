@@ -1,20 +1,27 @@
 "use client";
 
 import clsx from "clsx";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import { Input, Label } from "@heroui/react";
+import FileErrorInfo from "./fileErrorInfo";
 
-function ErrorInfo({ children }: { children: ReactNode }) {
+function PromptIndividualsWrapper({
+  show,
+  handlePromptIndividualsAction,
+}: {
+  show: boolean;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+}) {
+  if (!show) return null;
   return (
-    <div>
-      <p>Error reading file:</p>
-      <p className="text-rose-700">{children}</p>
+    <div className="-mt-2">
+      <PromptIndividuals handlePromptIndividualsAction={handlePromptIndividualsAction} />
     </div>
   );
 }
 
-export default function PromptIndividuals({
+function PromptIndividuals({
   handlePromptIndividualsAction,
 }: {
   handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
@@ -52,10 +59,30 @@ export default function PromptIndividuals({
         />
       </div>
       {fileReadError && (
-        <ErrorInfo>
+        <FileErrorInfo>
           {fileReadError.name} - {fileReadError.message}
-        </ErrorInfo>
+        </FileErrorInfo>
       )}
     </div>
+  );
+}
+
+export default function PromptIndividualsSection({
+  show,
+  handlePromptIndividualsAction,
+  individualsError,
+}: {
+  show: boolean;
+  handlePromptIndividualsAction: (individualsFileContent: string | null) => void;
+  individualsError: string | undefined;
+}) {
+  return (
+    <>
+      <PromptIndividualsWrapper
+        show={show}
+        handlePromptIndividualsAction={handlePromptIndividualsAction}
+      />
+      <FileErrorInfo>{individualsError}</FileErrorInfo>
+    </>
   );
 }

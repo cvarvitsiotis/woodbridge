@@ -159,16 +159,16 @@ function PromptUltra({
 export default function PromptUltraSection({
   parseUltraState,
   handlePromptUltraAction,
-  ultraResultsError,
+  rawResultsError,
 }: {
   parseUltraState: ParseUltraStateType;
   handlePromptUltraAction: () => void;
-  ultraResultsError: string | undefined;
+  rawResultsError: string | undefined;
 }) {
   return (
     <>
       <PromptUltra {...parseUltraState} handlePromptUltraAction={handlePromptUltraAction} />
-      <FileErrorInfo>{ultraResultsError}</FileErrorInfo>
+      <FileErrorInfo>{rawResultsError}</FileErrorInfo>
     </>
   );
 }
