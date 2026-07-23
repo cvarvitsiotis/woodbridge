@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   title: pages.timing.menuLabel,
 };
 
+const tabLabels = {
+  parseUltra: "Ultra to LIF",
+  parseUltraAndGenerateResults: "Ultra to Results",
+  parseLIFAndGenerateResults: "LIF to Results",
+};
+
 function Section({ subheader, children }: { subheader: string; children: ReactNode }) {
   return (
     <div className="space-y-4 pt-6">
@@ -24,7 +30,7 @@ function Section({ subheader, children }: { subheader: string; children: ReactNo
 
 function Tab({ id, children }: TabProps) {
   return (
-    <Tabs.Tab id={id} className="h-10">
+    <Tabs.Tab id={id} className="h-10 px-2">
       {children}
     </Tabs.Tab>
   );
@@ -40,31 +46,33 @@ export default function Page() {
         <Tabs.ListContainer className="mx-auto w-full max-w-sm">
           <Tabs.List aria-label="Options">
             <Tab id="parseUltra">
-              LIF from Ultra
+              {tabLabels.parseUltra}
               <Tabs.Indicator />
             </Tab>
             <Tab id="parseUltraAndGenerateResults">
-              Results from Ultra
+              <Tabs.Separator />
+              {tabLabels.parseUltraAndGenerateResults}
               <Tabs.Indicator />
             </Tab>
             <Tab id="parseLIFAndGenerateResults">
-              Results from LIF
+              <Tabs.Separator />
+              {tabLabels.parseLIFAndGenerateResults}
               <Tabs.Indicator />
             </Tab>
           </Tabs.List>
         </Tabs.ListContainer>
         <Tabs.Panel id="parseUltra">
-          <Section subheader="LIF from Ultra">
+          <Section subheader={tabLabels.parseUltra}>
             <ParseUltra />
           </Section>
         </Tabs.Panel>
         <Tabs.Panel id="parseUltraAndGenerateResults">
-          <Section subheader="Results from Ultra">
+          <Section subheader={tabLabels.parseUltraAndGenerateResults}>
             <ParseUltraAndGenerateResults />
           </Section>
         </Tabs.Panel>
         <Tabs.Panel id="parseLIFAndGenerateResults">
-          <Section subheader="Results from LIF">
+          <Section subheader={tabLabels.parseLIFAndGenerateResults}>
             <ParseLIFAndGenerateResults />
           </Section>
         </Tabs.Panel>
