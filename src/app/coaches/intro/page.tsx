@@ -37,7 +37,7 @@ export default function Page() {
           {dates.meetEndDateParts.dayDescriptionLong} night starts at{" "}
           {filteredRaces.saturdayNightNonFeaturedRaces[0]?.time} (Blue and Gold divisions).
         </p>
-        {new Date() > dates.athleteRegistrationEndDateParts.date ? (
+        {new Date() > dates.teamRegistrationEndDateParts.date ? (
           <p>
             TEAM registration is now FULL for the {dates.meetStartDateParts.year}{" "}
             {siteConfig.woodbridgeCrossCountryClassic}.
