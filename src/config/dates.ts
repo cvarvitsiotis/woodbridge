@@ -15,6 +15,7 @@ function getDates() {
   );
   const teamRegistrationEndDateParts = getDateParts(data.teamRegistrationEndDate);
   const athleteRegistrationStartDateParts = getDateParts(data.athleteRegistrationStartDate);
+  const athleteRegistrationLinkStartDateParts = getDateParts(data.athleteRegistrationLinkStartDate);
   const athleteRegistrationEndDateParts = getDateParts(data.athleteRegistrationEndDate);
   const participatingTeamsPublishDateParts = getDateParts(data.participatingTeamsPublishDate);
   const participatingTeamsUpdateDateParts = getDateParts(data.participatingTeamsUpdateDate);
@@ -45,6 +46,7 @@ function getDates() {
     teamRegistrationSaturdayMorningOnlyStartDateParts,
     teamRegistrationEndDateParts,
     athleteRegistrationStartDateParts,
+    athleteRegistrationLinkStartDateParts,
     athleteRegistrationEndDateParts,
     participatingTeamsPublishDateParts,
     participatingTeamsUpdateDateParts,

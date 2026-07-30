@@ -96,7 +96,7 @@ export default function Page() {
                 at{" "}
                 <ParagraphLink
                   href={
-                    new Date() < dates.athleteRegistrationStartDateParts.date
+                    new Date() < dates.athleteRegistrationLinkStartDateParts.date
                       ? urls.athleticNet.home
                       : urls.athleticNet.athleteRegistration
                   }
