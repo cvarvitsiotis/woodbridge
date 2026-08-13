@@ -606,17 +606,10 @@ function GreatParkParkingLots() {
   );
 }
 
-function ParkingLink({ isStartDate }: { isStartDate: boolean }) {
+function ParkingLink({ href, description }: { href: string; description: string }) {
   return (
-    <ButtonLink
-      href={isStartDate ? urls.parkingPasses.startDate : urls.parkingPasses.endDate}
-      isExternal
-      variant="secondary"
-    >
-      Purchase{" "}
-      {isStartDate
-        ? dates.meetStartDateParts.dayDescriptionLong
-        : dates.meetEndDateParts.dayDescriptionLong}
+    <ButtonLink href={href} isExternal variant="secondary">
+      Purchase {description}
     </ButtonLink>
   );
 }
@@ -634,9 +627,10 @@ function ParkingPasses() {
         )}
       </div>
       {new Date() >= dates.parkingPassPurchaseDateParts.date && (
-        <div className="flex justify-center gap-6 pt-2 sm:justify-start sm:pl-6">
-          <ParkingLink isStartDate={true} />
-          <ParkingLink isStartDate={false} />
+        <div className="flex flex-col flex-wrap gap-4 pt-2 pl-6 sm:flex-row sm:gap-6">
+          <ParkingLink href={urls.parkingPasses.friday} description="Friday" />
+          <ParkingLink href={urls.parkingPasses.saturdayMorning} description="Saturday Morning" />
+          <ParkingLink href={urls.parkingPasses.saturdayNight} description="Saturday Night" />
         </div>
       )}
     </>

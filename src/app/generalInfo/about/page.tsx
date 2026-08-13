@@ -45,10 +45,11 @@ export default function Page() {
           apparel and footwear, ample bathrooms, etc. Everyone will enjoy a great experience.
         </p>
         <p>
-          Red and White divisions will run on {dates.meetStartDateParts.dayDescriptionLong}. Blue
-          and Gold divisions will run on {dates.meetEndDateParts.dayDescriptionLong}. Divisions are
-          based on school size (White, Red, Gold, Blue is the order from small to large), team
-          strength (White to Blue is the order) and coach&apos;s/team travel plan requests.
+          Red and White divisions will run on {dates.meetStartDateParts.dayDescriptionLong}. Blue,
+          Gold, and Green divisions will run on {dates.meetEndDateParts.dayDescriptionLong}.
+          Divisions are based on school size (White, Red, Gold, Blue is the order from small to
+          large), team strength (White to Blue is the order) and coach&apos;s/team travel plan
+          requests. Green is the overflow division to accommodate additional teams.
         </p>
         <p>
           The staff of this well-organized/festive meet are committed to continue to work very hard

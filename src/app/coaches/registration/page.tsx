@@ -44,13 +44,17 @@ export default function Page() {
     <>
       <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
         <RegistrationSection sectionName="Team">
-          {new Date() >= dates.teamRegistrationEndDateParts.date ? (
+          {new Date() >= dates.teamRegistrationWaitingListOnlyStartDateParts.date ? (
             <>
               <p>Team registration is now full.</p>
-              <p>
-                If you wish to be placed on the waiting list, please fill out the{" "}
-                <TeamEntryFormLink />.
-              </p>
+              {new Date() < dates.teamRegistrationEndDateParts.date ? (
+                <p>
+                  If you wish to be placed on the waiting list, please fill out the{" "}
+                  <TeamEntryFormLink />.
+                </p>
+              ) : (
+                <p>The waiting list is closed.</p>
+              )}
             </>
           ) : new Date() >= dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
             <>
