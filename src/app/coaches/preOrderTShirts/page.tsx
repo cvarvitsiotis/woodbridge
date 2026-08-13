@@ -4,7 +4,7 @@ import PageHeader from "@/components/pageHeader";
 import { getParagraphStyle } from "@/styles/styles";
 import { urls } from "@/config/data";
 import Image from "next/image";
-import woodbridgeTShirt from "@/../public/images/woodbridge-tshirt-2025.jpg";
+import woodbridgeTShirt from "@/../public/images/woodbridge-tshirt.jpg";
 import clsx from "clsx";
 import List from "@/components/list";
 import { dates } from "@/config/dates";
@@ -44,7 +44,7 @@ export default function Page() {
                 </ParagraphLink>{" "}
                 by {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}
               </li>
-              <li>Collect $25 from each athlete</li>
+              <li>Collect $30 from each athlete</li>
               <li>
                 On race day, proceed to the ASICS booth to pay the total (cash or card) and pick up
                 your bundle
@@ -55,7 +55,7 @@ export default function Page() {
       </div>
       {new Date() >= dates.preOrderTShirtsStartDateParts.date && (
         <div className="pt-10">
-          <div className="relative mx-auto aspect-1920/2560 w-64 max-w-full sm:w-96">
+          <div className="relative mx-auto aspect-2835/3440 w-64 max-w-full sm:w-96">
             <Image
               fill
               src={woodbridgeTShirt}

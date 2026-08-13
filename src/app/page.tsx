@@ -15,7 +15,7 @@ import StyledAlert from "@/components/styledAlert";
 function RegisterEarlyAlertMessageWrapper({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <>
-      {new Date() < dates.teamRegistrationEndDateParts.date && (
+      {new Date() < dates.teamRegistrationWaitingListOnlyStartDateParts.date && (
         <div className="space-y-2">
           <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
         </div>
