@@ -361,7 +361,7 @@ function SpectatorLotPortolaAccordionItem() {
 
 function ModalBodyList({ start, children }: { start?: number; children: ReactNode }) {
   return (
-    <ol start={start ?? 1} className="list-outside list-decimal space-y-4 pl-4">
+    <ol start={start ?? 1} className="list-outside list-decimal space-y-4 pl-6">
       {children}
     </ol>
   );
@@ -619,7 +619,9 @@ function ParkingPasses() {
     <>
       <h1 className={clsx("pt-6", getSubheaderStyle())}>Parking Passes</h1>
       <div className="space-y-4 pl-6">
-        <p>All vehicles (including school vans) must purchase a $20 parking pass online.</p>
+        <p>
+          All vehicles (including school vans) must purchase a parking pass online for $20 + fee.
+        </p>
         {new Date() < dates.parkingPassPurchaseDateParts.date && (
           <p>
             Return here for the link starting {dates.parkingPassPurchaseDateParts.monthDayLong}.
