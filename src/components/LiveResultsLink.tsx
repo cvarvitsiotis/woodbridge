@@ -33,7 +33,7 @@ export default function LiveResultsLink({
           <div>
             <Ripple />
             <div className="border-b border-blue-800/20 py-1 text-center">{label}</div>
-            <div className={clsx("relative m-3 h-10", imageAspectRatio, imageClass)}>
+            <div className={clsx("relative m-2 h-9 sm:h-10", imageAspectRatio, imageClass)}>
               <Image fill src={imageSrc} quality={100} alt={label} />
             </div>
           </div>
