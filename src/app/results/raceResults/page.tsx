@@ -5,7 +5,7 @@ import OfficialResults from "@/components/officialResults";
 import PageHeader from "@/components/pageHeader";
 import athletic from "@/../public/images/athleticRed.png";
 import runnerSpace from "@/../public/images/runnerSpace.png";
-import LiveResultsLink from "@/components/LiveResultsLink";
+import LiveResultsLink from "@/components/liveResultsLink";
 
 export const metadata: Metadata = {
   title: pages.raceResults.menuLabel,

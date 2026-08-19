@@ -24,7 +24,8 @@ export default function Page() {
         <p>
           Every year, T-Shirts sell out and some athletes/families miss out on this unique souvenir.
           By pre-ordering T-Shirts for your team, you ensure that everyone gets the size they want
-          without the hassle of waiting in long lines.
+          without the hassle of waiting in long lines. This year&apos;s T-Shirt is made of technical
+          fabric.
         </p>
         {new Date() > dates.preOrderTShirtsEndDateParts.date ? (
           <p>
