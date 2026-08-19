@@ -6,7 +6,7 @@ export const data = {
   teamRegistrationStartDate: new Date(2026, 0, 1, 0, 0, 0),
   teamRegistrationSaturdayMorningOnlyStartDate: new Date(2026, 3, 4, 0, 0, 0),
   teamRegistrationWaitingListOnlyStartDate: new Date(2026, 6, 29, 0, 0, 0),
-  teamRegistrationEndDate: new Date(2026, 7, 12, 23, 59, 59),
+  teamRegistrationEndDate: new Date(2026, 7, 31, 23, 59, 59),
   athleteRegistrationLinkStartDate: new Date(2026, 6, 29, 0, 0, 0),
   athleteRegistrationStartDate: new Date(2026, 7, 1, 0, 0, 0),
   athleteRegistrationEndDate: new Date(2026, 8, 4, 23, 59, 59),
@@ -24,7 +24,6 @@ export const data = {
   parkingGoFanSaturdayNightEventId: "6763968",
   altheticNetMeet: 273870,
   altheticLIVEMeet: 56371,
-  runnerSpaceEvent: 361,
   teamRegistrationGoogleForm: "MAh4FtBGYtyrhVWs9",
 };
 
@@ -49,7 +48,7 @@ export const urls = {
     athleteRegistration: `https://www.athletic.net/Help/CrossCountry.aspx?Meet=${data.altheticNetMeet}`,
     irvineTiming,
     altheticLIVEMeet: `${irvineTiming}/meets/${data.altheticLIVEMeet}`,
-    runnerSpaceMeet: `https://cross-country-classic.runnerspace.com/eprofile.php?event_id=${data.runnerSpaceEvent}&do=videos&folder_id=11828`,
+    runnerSpaceMeet: `https://cross-country-classic.runnerspace.com/eprofile.php?event_id=361&do=videos&folder_id=11828`,
   },
   parkingPasses: {
     friday: `https://gofan.co/event/${data.parkingGoFanFridayEventId}`,
