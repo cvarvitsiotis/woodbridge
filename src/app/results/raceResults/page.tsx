@@ -18,7 +18,7 @@ export default function Page() {
         <span className="font-bold">Live</span> Results
       </PageHeader>
 
-      <div className="flex justify-evenly pt-4 sm:justify-center sm:gap-15 sm:pt-8">
+      <div className="flex justify-around pt-4 sm:justify-center sm:gap-15 sm:pt-8">
         <LiveResultsLink
           url={urls.athleticNet.altheticLIVEMeet}
           label="Live Results"
