@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import Image from "next/image";
-import athletic from "@/../public/images/athletic.png";
+import athleticPink from "@/../public/images/athleticPink.png";
 import BaseLink from "@/components/baseLink";
 import greatPark from "@/../public/images/great-park.png";
 
@@ -50,7 +50,7 @@ export default function Page() {
         </Sponsor>
         <Sponsor url={urls.partners.athletic} motto="The digital hub for the running community">
           <div className="relative aspect-8977/2235 h-15">
-            <Image fill src={athletic} quality={100} alt={siteConfig.athleticNet} />
+            <Image fill src={athleticPink} quality={100} alt={siteConfig.athleticNet} />
           </div>
         </Sponsor>
         <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">

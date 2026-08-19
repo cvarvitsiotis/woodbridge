@@ -8,6 +8,7 @@ export default function BaseLink({
   isExternal = false,
   className,
   accentColor,
+  applyBaseLinkStyle = true,
   onClick,
   children,
 }: {
@@ -15,6 +16,7 @@ export default function BaseLink({
   isExternal?: boolean;
   className?: string;
   accentColor?: boolean;
+  applyBaseLinkStyle?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   children: ReactNode;
 }) {
@@ -22,7 +24,7 @@ export default function BaseLink({
     <NextLink
       href={href}
       {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
-      className={clsx(getBaseLinkStyle(accentColor), className)}
+      className={clsx(applyBaseLinkStyle && getBaseLinkStyle(accentColor), className)}
       onClick={onClick}
     >
       {children}

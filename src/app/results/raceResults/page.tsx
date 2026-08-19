@@ -3,24 +3,13 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import OfficialResults from "@/components/officialResults";
 import PageHeader from "@/components/pageHeader";
-import ButtonLink from "@/components/buttonLink";
+import athletic from "@/../public/images/athleticRed.png";
+import runnerSpace from "@/../public/images/runnerSpace.png";
+import LiveResultsLink from "@/components/LiveResultsLink";
 
 export const metadata: Metadata = {
   title: pages.raceResults.menuLabel,
 };
-
-function LiveLink({ url, label, isPrimary }: { url: string; label: string; isPrimary: boolean }) {
-  return (
-    <ButtonLink
-      href={url}
-      isExternal
-      variant="outline"
-      customVariantColor={isPrimary ? "ghostPrimary" : "ghostSecondary"}
-    >
-      {label}
-    </ButtonLink>
-  );
-}
 
 export default function Page() {
   return (
@@ -28,12 +17,20 @@ export default function Page() {
       <PageHeader>
         <span className="font-bold">Live</span> Results
       </PageHeader>
-      <div className="mx-auto max-w-fit space-x-8 pt-4 sm:pt-8">
-        <LiveLink url={urls.athleticNet.altheticLIVEMeet} label="Live Results" isPrimary={true} />
-        <LiveLink
+
+      <div className="flex justify-evenly pt-4 sm:justify-center sm:gap-15 sm:pt-8">
+        <LiveResultsLink
+          url={urls.athleticNet.altheticLIVEMeet}
+          label="Live Results"
+          imageSrc={athletic}
+          imageAspectRatio="aspect-8977/2235"
+          imageClass="opacity-70"
+        />
+        <LiveResultsLink
           url={urls.athleticNet.runnerSpaceMeet}
           label="Live Video Stream"
-          isPrimary={false}
+          imageSrc={runnerSpace}
+          imageAspectRatio="aspect-11650/2554"
         />
       </div>
 
