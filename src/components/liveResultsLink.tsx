@@ -11,6 +11,7 @@ export default function LiveResultsLink({
   url,
   label,
   linkClass,
+  labelClass,
   imageSrc,
   imageAspectRatio,
   imageClass,
@@ -18,6 +19,7 @@ export default function LiveResultsLink({
   url: string;
   label: string;
   linkClass: string;
+  labelClass: string;
   imageSrc: StaticImageData;
   imageAspectRatio: string;
   imageClass?: string;
@@ -35,7 +37,7 @@ export default function LiveResultsLink({
       )}
     >
       <Ripple />
-      <div className="bg-yellow-50 py-1 text-center tracking-wide text-gray-800">{label}</div>
+      <div className={clsx("border-b py-1 text-center tracking-wide", labelClass)}>{label}</div>
       <div className={clsx("relative mx-3 mt-4 mb-2 h-9 sm:h-10", imageAspectRatio, imageClass)}>
         <Image fill src={imageSrc} quality={100} alt={label} />
       </div>

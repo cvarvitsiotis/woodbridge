@@ -22,7 +22,8 @@ export default function Page() {
         <LiveResultsLink
           url={urls.athleticNet.altheticLIVEMeet}
           label="Live Results"
-          linkClass="bg-gray-950/10"
+          linkClass="bg-pink-100"
+          labelClass="text-pink-800/70 border-pink-600/20 font-semibold"
           imageSrc={athletic}
           imageAspectRatio="aspect-8977/2235"
           imageClass="opacity-80"
@@ -31,6 +32,7 @@ export default function Page() {
           url={urls.athleticNet.runnerSpaceMeet}
           label="Live Video Stream"
           linkClass="bg-blue-800/40"
+          labelClass="text-gray-50 border-zinc-100/30"
           imageSrc={runnerSpace}
           imageAspectRatio="aspect-11650/2554"
         />
