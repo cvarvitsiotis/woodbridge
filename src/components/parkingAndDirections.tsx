@@ -205,10 +205,7 @@ function MainAccordionItem({
 function SpectatorsAccordionItem() {
   return (
     <>
-      <p>
-        All vehicles (including school vans) will park in Lots 0, 2 through 7, or Portola High
-        School (shuttle service available).
-      </p>
+      <p>All vehicles (including school vans) will park in Lots 0 through 7 (excluding Lot 1).</p>
 
       <Accordion>
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot0} />
@@ -220,7 +217,7 @@ function SpectatorsAccordionItem() {
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot6} />
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot7} />
         {/* <SpectatorLotAccordionItem instruction={instructions.freewayToLot8} /> */}
-        <SpectatorLotPortolaAccordionItem />
+        {/* <SpectatorLotPortolaAccordionItem /> */}
       </Accordion>
     </>
   );

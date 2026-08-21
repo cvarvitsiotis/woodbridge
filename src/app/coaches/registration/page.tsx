@@ -7,25 +7,37 @@ import { ReactNode } from "react";
 import { getParagraphStyle } from "@/styles/styles";
 import PageHeader from "@/components/pageHeader";
 import ParagraphLink from "@/components/paragraphLink";
+import StyledAlert from "@/components/styledAlert";
 
 export const metadata: Metadata = {
   title: pages.registration.menuLabel,
 };
 
 function RegistrationSection({
+  step,
   sectionName,
+  alertMessage,
   children,
 }: {
+  step: string;
   sectionName: string;
+  alertMessage?: string;
   children: ReactNode;
 }) {
   return (
     <div className="flex-1">
       <PageHeader>
-        <span className="font-bold">{sectionName}</span> Registration
+        Step {step}: <span className="font-bold">{sectionName}</span> Registration
       </PageHeader>
-      <div className={clsx("space-y-4 pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
-        {children}
+      <div className="space-y-6 pt-8 sm:pt-10">
+        {alertMessage && (
+          <div className="mx-auto max-w-md">
+            <StyledAlert status="accent" includeIndicator={true} isBaseSize={true} className="py-2">
+              {alertMessage}
+            </StyledAlert>
+          </div>
+        )}
+        <div className={clsx("space-y-4 text-center", getParagraphStyle(true))}>{children}</div>
       </div>
     </div>
   );
@@ -43,7 +55,7 @@ export default function Page() {
   return (
     <>
       <div className="flex flex-col justify-center-safe gap-x-20 gap-y-16 pt-4 sm:flex-row sm:pt-8">
-        <RegistrationSection sectionName="Team">
+        <RegistrationSection step="1" sectionName="Team">
           {new Date() >= dates.teamRegistrationWaitingListOnlyStartDateParts.date ? (
             <>
               <p>Team registration is now full.</p>
@@ -81,7 +93,11 @@ export default function Page() {
             </>
           )}
         </RegistrationSection>
-        <RegistrationSection sectionName="Athlete">
+        <RegistrationSection
+          step="2"
+          sectionName="Athlete"
+          alertMessage="You must first register your team, even if you are only running an individual."
+        >
           {new Date() > dates.athleteRegistrationEndDateParts.date ? (
             <>
               <p>

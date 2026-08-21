@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { pages } from "@/config/site";
 import OfficialResults from "@/components/officialResults";
 import PageHeader from "@/components/pageHeader";
-import athletic from "@/../public/images/athleticRed.png";
+import athletic from "@/../public/images/athletic.png";
 import runnerSpace from "@/../public/images/runnerSpace.png";
 import LiveResultsLink from "@/components/liveResultsLink";
 
@@ -22,13 +22,15 @@ export default function Page() {
         <LiveResultsLink
           url={urls.athleticNet.altheticLIVEMeet}
           label="Live Results"
+          linkClass="bg-gray-950/10"
           imageSrc={athletic}
           imageAspectRatio="aspect-8977/2235"
-          imageClass="opacity-70"
+          imageClass="opacity-80"
         />
         <LiveResultsLink
           url={urls.athleticNet.runnerSpaceMeet}
           label="Live Video Stream"
+          linkClass="bg-blue-800/50"
           imageSrc={runnerSpace}
           imageAspectRatio="aspect-11650/2554"
         />
