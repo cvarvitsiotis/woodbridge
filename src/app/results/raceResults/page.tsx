@@ -38,7 +38,7 @@ export default function Page() {
         />
       </div>
 
-      <div className="pt-2 sm:pt-6">
+      <div className="pt-10">
         <PageHeader>
           <span className="font-bold">Official</span> Results
         </PageHeader>
