@@ -30,7 +30,7 @@ export default function Page() {
         <LiveResultsLink
           url={urls.athleticNet.runnerSpaceMeet}
           label="Live Video Stream"
-          linkClass="bg-blue-800/50"
+          linkClass="bg-blue-800/40"
           imageSrc={runnerSpace}
           imageAspectRatio="aspect-11650/2554"
         />
