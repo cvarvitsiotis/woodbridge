@@ -26,7 +26,7 @@ export default function Page() {
           labelClass="text-pink-800/70 border-pink-600/20 font-semibold"
           imageSrc={athletic}
           imageAspectRatio="aspect-8977/2235"
-          imageClass="opacity-80"
+          imageClass="opacity-70"
         />
         <LiveResultsLink
           url={urls.athleticNet.runnerSpaceMeet}
