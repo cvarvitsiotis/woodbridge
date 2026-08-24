@@ -27,7 +27,8 @@ function RegistrationSection({
   return (
     <div className="flex-1">
       <PageHeader>
-        Step {step}: <span className="font-bold">{sectionName}</span> Registration
+        <span className="font-light text-indigo-600">Step {step}:</span>{" "}
+        <span className="font-bold">{sectionName}</span> Registration
       </PageHeader>
       <div className="space-y-6 pt-8 sm:pt-10">
         {alertMessage && (
