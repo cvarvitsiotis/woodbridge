@@ -995,6 +995,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "NV",
   },
   {
+    name: "Academy for Academic Excellence",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "Apple Valley",
+    state: "CA",
+  },
+  {
     name: "ALA - Queen Creek",
     raceDay: "Friday",
     division: divisions.four,
@@ -1072,6 +1080,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.four,
     varsityHeat: heats.b,
     city: "La Puente",
+    state: "CA",
+  },
+  {
+    name: "Bolsa Grande",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
+    city: "Garden Grove",
     state: "CA",
   },
   {
@@ -1187,14 +1203,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Coronado",
-    raceDay: "Friday",
-    division: divisions.four,
-    varsityHeat: heats.a,
-    city: "Coronado",
-    state: "CA",
-  },
-  {
     name: "Corvallis",
     raceDay: "Friday",
     division: divisions.four,
@@ -1305,6 +1313,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     varsityHeat: heats.b,
     city: "Enumclaw",
     state: "WA",
+  },
+  {
+    name: "Esperanza",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
+    city: "Anaheim",
+    state: "CA",
   },
   {
     name: "Estancia",
@@ -3379,7 +3395,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Christian",
+    name: "Christian (El Cajon)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -4403,6 +4419,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Christian Brothers (Sacramento)",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Sacramento",
+    state: "CA",
+  },
+  {
     name: "Compton",
     raceDay: "Saturday Morning",
     division: divisions.five,
@@ -4728,6 +4752,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.five,
     varsityHeat: heats.a,
     city: "Oxnard",
+    state: "CA",
+  },
+  {
+    name: "Salesian",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Los Angeles",
     state: "CA",
   },
   {
