@@ -12,7 +12,7 @@ export const data = {
   athleteRegistrationEndDate: new Date(2026, 8, 4, 23, 59, 59),
   participatingTeamsPublishDate: new Date(2026, 4, 9, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2026, 6, 14, 0, 0, 0),
-  featuredEntriesPublishDate: new Date(2026, 8, 4, 0, 0, 0),
+  featuredEntriesPublishDate: new Date(2026, 8, 1, 0, 0, 0),
   preOrderTShirtsStartDate: new Date(2026, 7, 14, 0, 0, 0),
   preOrderTShirtsEndDate: new Date(2026, 8, 9, 23, 59, 59),
   hotelReservationEndDateEmbassySuites: new Date(2026, 7, 27, 23, 59, 59),
