@@ -23,7 +23,7 @@ export const data = {
   parkingGoFanSaturdayMorningEventId: "6753143",
   parkingGoFanSaturdayNightEventId: "6763968",
   altheticNetMeet: 273870,
-  altheticLIVEMeet: 56371,
+  altheticLIVEMeet: 76887,
   teamRegistrationGoogleForm: "MAh4FtBGYtyrhVWs9",
 };
 
