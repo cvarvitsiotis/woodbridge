@@ -23,6 +23,10 @@ export default function Page() {
         <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
           <p>Entries will be posted on {dates.featuredEntriesPublishDateParts.monthDayLong}.</p>
         </div>
+      ) : !featuredTeams.sweepstakesBoysTeams?.length ? (
+        <div className={clsx("pt-8 text-center sm:pt-10", getParagraphStyle(true))}>
+          <p>Entries will be posted in the next day or two.</p>
+        </div>
       ) : (
         <>
           <FeaturedTeamsAndIndividualsSection
@@ -38,10 +42,12 @@ export default function Page() {
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Boys Rated"
             teams={featuredTeams.ratedBoysTeams}
+            individuals={featuredIndividuals.ratedBoysIndividuals}
           />
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Girls Rated"
             teams={featuredTeams.ratedGirlsTeams}
+            individuals={featuredIndividuals.ratedGirlsIndividuals}
           />
         </>
       )}

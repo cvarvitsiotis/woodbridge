@@ -97,8 +97,11 @@ export default function Page() {
           </li>
           <li>
             The Sweepstakes (top 25 teams) and Rated (teams 26-55) selections will be announced by
-            Rich Gonzalez on {dates.featuredEntriesPublishDateParts.monthDayLong}. If you have a
-            team that you would like for Rich to consider, please{" "}
+            Rich Gonzalez on {dates.featuredEntriesPublishDateParts.monthDayLong} and posted to the{" "}
+            <ParagraphLink href={pages.featuredEntries.path}>
+              {pages.featuredEntries.menuLabel}
+            </ParagraphLink>{" "}
+            page. If you have a team that you would like for Rich to consider, please{" "}
             <ParagraphLink href={pages.contact.path}>{pages.contact.menuLabel}</ParagraphLink> us.
           </li>
         </List>
