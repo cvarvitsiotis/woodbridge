@@ -7,6 +7,9 @@ import FeaturedTeamsAndIndividualsSection from "@/components/featuredTeamsAndInd
 import { featuredTeams } from "@/config/featuredTeams";
 import { featuredIndividuals } from "@/config/featuredIndividuals";
 import { getParagraphStyle } from "@/styles/styles";
+import StyledAlert from "@/components/styledAlert";
+import { urls } from "@/config/data";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.featuredEntries.menuLabel,
@@ -29,6 +32,23 @@ export default function Page() {
         </div>
       ) : (
         <>
+          <div className="mx-auto pt-6">
+            <StyledAlert
+              status="accent"
+              includeIndicator={false}
+              isBaseSize={true}
+              className="py-2 text-center"
+            >
+              <p>Curious how the selection works?</p>
+              <p>
+                Rich Gonzalez of PrepCalTrack explains his methodology in{" "}
+                <BaseLink isExternal href={urls.other.featuredEntriesArticle}>
+                  this article
+                </BaseLink>
+                .
+              </p>
+            </StyledAlert>
+          </div>
           <FeaturedTeamsAndIndividualsSection
             sectionDescription="Boys Sweepstakes"
             teams={featuredTeams.sweepstakesBoysTeams}

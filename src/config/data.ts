@@ -25,6 +25,7 @@ export const data = {
   altheticNetMeet: 273870,
   altheticLIVEMeet: 76887,
   teamRegistrationGoogleForm: "MAh4FtBGYtyrhVWs9",
+  featuredEntriesArticle: "2026/09/02/woodbridge-classic-featured-entries-2/",
 };
 
 const irvineTiming = "https://irvinetiming.anet.live";
@@ -34,6 +35,7 @@ export const urls = {
     teamRegistration: `https://forms.gle/${data.teamRegistrationGoogleForm}`,
     preOrderTShirts:
       "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Z2gZHYB4SkOiqb-NDwFoAdS3lvPXvRFDq_VQWeCNRdxUNTRUMzBQMjEzOVdVVEJWUlZXVU9aSlJBNi4u",
+    featuredEntriesArticle: `https://prepcaltrack.com/${data.featuredEntriesArticle}`,
   },
   schools: {
     woodbridgeHighSchool: "https://woodbridgehigh.iusd.org/",
