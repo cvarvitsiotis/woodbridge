@@ -110,7 +110,7 @@ export default function FeaturedTeamsAndIndividualsSection({
       {teams?.length ? (
         <div
           className={clsx(
-            "flex flex-wrap items-start justify-center gap-x-5 gap-y-8 sm:justify-start sm:pl-8",
+            "flex flex-wrap items-start justify-center gap-x-10 gap-y-8 sm:justify-start sm:pl-8",
           )}
         >
           <TeamsSection sectionDescription={sectionDescription} teams={teams} />
