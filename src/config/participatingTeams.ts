@@ -187,6 +187,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Dana Hills",
+    raceDay: "Friday",
+    division: divisions.three,
+    varsityHeat: heats.b,
+    city: "Dana Point",
+    state: "CA",
+  },
+  {
     name: "Deer Valley",
     raceDay: "Friday",
     division: divisions.three,
@@ -1571,6 +1579,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Mica Mountain",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
+    city: "Tucson",
+    state: "AZ",
+  },
+  {
     name: "Middle College",
     raceDay: "Friday",
     division: divisions.four,
@@ -1600,6 +1616,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.four,
     varsityHeat: heats.b,
     city: "El Monte",
+    state: "CA",
+  },
+  {
+    name: "Muir",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "Pasadena",
     state: "CA",
   },
   {
@@ -2171,6 +2195,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Perryton",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "Perryton",
+    state: "TX",
+  },
+  {
     name: "University Prep (Victorville)",
     raceDay: "Friday",
     division: divisions.four,
@@ -2643,12 +2675,12 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Lewisville Flower Mound",
+    name: "Leigh",
     raceDay: "Saturday Night",
     division: divisions.one,
-    varsityHeat: heats.b,
-    city: "Flower Mound",
-    state: "TX",
+    varsityHeat: heats.a,
+    city: "San Jose",
+    state: "CA",
   },
   {
     name: "Liberty (Winchester)",
@@ -2848,6 +2880,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.one,
     varsityHeat: heats.a,
     city: "Riverside",
+    state: "CA",
+  },
+  {
+    name: "Poway",
+    raceDay: "Saturday Night",
+    division: divisions.one,
+    varsityHeat: heats.b,
+    city: "Poway",
     state: "CA",
   },
   {
@@ -3491,14 +3531,6 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "NV",
   },
   {
-    name: "Dana Hills",
-    raceDay: "Saturday Night",
-    division: divisions.two,
-    varsityHeat: heats.a,
-    city: "Dana Point",
-    state: "CA",
-  },
-  {
     name: "Davis (UT)",
     raceDay: "Saturday Night",
     division: divisions.two,
@@ -3635,7 +3667,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Golden Valley (San Joaquin)",
+    name: "Golden Valley (Merced)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -3891,7 +3923,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CO",
   },
   {
-    name: "Northridge",
+    name: "Northridge (UT)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -4051,7 +4083,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "AR",
   },
   {
-    name: "Silverado",
+    name: "Silverado (Victorville)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -4267,6 +4299,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Fort Worth Christian",
+    raceDay: "Saturday Night",
+    division: divisions.two,
+    varsityHeat: heats.a,
+    city: "North Richland Hills",
+    state: "TX",
+  },
+  {
     name: "Carmel",
     raceDay: "Saturday Night",
     division: divisions.two,
@@ -4393,6 +4433,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     varsityHeat: heats.a,
     city: "Bend",
     state: "OR",
+  },
+  {
+    name: "Calvary Chapel",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Santa Ana",
+    state: "CA",
   },
   {
     name: "Canyon View",
@@ -4675,6 +4723,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "UT",
   },
   {
+    name: "Olympian",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.b,
+    city: "Chula Vista",
+    state: "CA",
+  },
+  {
     name: "Orange County Classical Academy",
     raceDay: "Saturday Morning",
     division: divisions.five,
@@ -4755,6 +4811,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Sabino",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Tucson",
+    state: "AZ",
+  },
+  {
     name: "Salesian",
     raceDay: "Saturday Morning",
     division: divisions.five,
@@ -4825,6 +4889,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     varsityHeat: heats.a,
     city: "Chandler",
     state: "AZ",
+  },
+  {
+    name: "Silverado (NV)",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.b,
+    city: "Las Vegas",
+    state: "NV",
   },
   {
     name: "Skyline",
@@ -5024,6 +5096,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.five,
     varsityHeat: heats.a,
     city: "Tracy",
+    state: "CA",
+  },
+  {
+    name: "Palma",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Salinas",
     state: "CA",
   },
 ]
