@@ -34,15 +34,19 @@ export default function Page() {
         <>
           <div className="mx-auto pt-6">
             <StyledAlert
-              status="accent"
+              status="warning"
               includeIndicator={false}
               isBaseSize={true}
               className="py-2 text-center"
             >
-              <p>Curious how the selection works?</p>
+              <p>Want to know about the selection process?</p>
               <p>
                 Rich Gonzalez of PrepCalTrack explains his methodology in{" "}
-                <BaseLink isExternal href={urls.other.featuredEntriesArticle}>
+                <BaseLink
+                  isExternal
+                  href={urls.other.featuredEntriesArticle}
+                  className={clsx("font-bold", "text-warning-soft-foreground")}
+                >
                   this article
                 </BaseLink>
                 .
