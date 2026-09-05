@@ -40,11 +40,7 @@ function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
 function NextYearRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <AlertMessage isScreenShort={isScreenShort}>
-      <div>
-        We&apos;ll see you next Fall on{" "}
-        {`${dates.meetStartDateParts.monthShort} ${dates.meetStartDateParts.day}-${dates.meetEndDateParts.day}, ${dates.meetStartDateParts.year}`}
-        .
-      </div>
+      <div>We&apos;ll see you next Fall on {dates.meetStartToEndDateShort}.</div>
       <div>
         <AlertMessageLink
           href={pages.registration.path}
@@ -387,7 +383,7 @@ export default function Home() {
           </p>
           <div className="-mt-2 flex items-center justify-center gap-1">
             <CalendarIcon />
-            <div>{dates.meetStartToEndDateShort}</div>
+            <div>{dates.meetStartToEndDateShortWithDays}</div>
           </div>
         </div>
       </div>
