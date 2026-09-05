@@ -6,7 +6,8 @@ export const dates = getDates();
 function getDates() {
   const meetStartDateParts = getDateParts(data.meetStartDate);
   const meetEndDateParts = getDateParts(getMeetEndDate());
-  const meetStartToEndDateShort = `${meetStartDateParts.monthShort} ${meetStartDateParts.day}-${meetEndDateParts.day}, ${meetStartDateParts.year} (${meetStartDateParts.dayDescriptionShort}-${meetEndDateParts.dayDescriptionShort})`;
+  const meetStartToEndDateShort = `${meetStartDateParts.monthShort} ${meetStartDateParts.day}-${meetEndDateParts.day}, ${meetStartDateParts.year}`;
+  const meetStartToEndDateShortWithDays = `${meetStartToEndDateShort} (${meetStartDateParts.dayDescriptionShort}-${meetEndDateParts.dayDescriptionShort})`;
   const meetAge = meetStartDateParts.year - data.firstMeetYear;
   const meetAgeOrdinal = getOrdinal(meetAge);
   const teamRegistrationStartDateParts = getDateParts(data.teamRegistrationStartDate);
@@ -43,6 +44,7 @@ function getDates() {
     meetStartDateParts,
     meetEndDateParts,
     meetStartToEndDateShort,
+    meetStartToEndDateShortWithDays,
     meetAge,
     meetAgeOrdinal,
     teamRegistrationStartDateParts,

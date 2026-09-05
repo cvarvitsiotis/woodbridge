@@ -9,13 +9,14 @@ import { ReactNode } from "react";
 import Body from "@/components/body";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { dates } from "@/config/dates";
 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.woodbridgeClassic,
     template: `%s - ${siteConfig.woodbridgeClassic}`,
   },
-  description: siteConfig.woodbridgeCrossCountryClassic,
+  description: `${siteConfig.woodbridgeCrossCountryClassic}. The road to championships. ${dates.meetStartToEndDateShort}. ${dates.meetAge}${dates.meetAgeOrdinal} Annual.`,
   icons: {
     icon: "/favicon.ico",
   },
