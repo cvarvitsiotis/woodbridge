@@ -96,6 +96,7 @@ function getDateParts(date: Date) {
 function getMeetEndDate(): Date {
   const meetEndDate = new Date(data.meetStartDate);
   meetEndDate.setDate(meetEndDate.getDate() + 1);
+  meetEndDate.setHours(23, 59, 59);
   return meetEndDate;
 }
 

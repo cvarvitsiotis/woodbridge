@@ -9,7 +9,7 @@ export const data = {
   teamRegistrationEndDate: new Date(2026, 7, 31, 23, 59, 59),
   athleteRegistrationLinkStartDate: new Date(2026, 6, 29, 0, 0, 0),
   athleteRegistrationStartDate: new Date(2026, 7, 1, 0, 0, 0),
-  athleteRegistrationEndDate: new Date(2026, 8, 4, 23, 59, 59),
+  athleteRegistrationEndDate: new Date(2026, 8, 3, 23, 59, 59),
   participatingTeamsPublishDate: new Date(2026, 4, 9, 0, 0, 0),
   participatingTeamsUpdateDate: new Date(2026, 6, 14, 0, 0, 0),
   featuredEntriesPublishDate: new Date(2026, 8, 1, 0, 0, 0),
