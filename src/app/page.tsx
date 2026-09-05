@@ -28,7 +28,10 @@ function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   if (new Date() < dates.teamRegistrationWaitingListOnlyStartDateParts.date) {
     return <SaturdayMorningOnlyRegistrationAlertMessage isScreenShort={isScreenShort} />;
   }
-  if (new Date() < dates.meetEndDateParts.date) {
+  if (new Date() <= dates.preOrderTShirtsEndDateParts.date) {
+    return <PreOrderTShirtsAlertMessage isScreenShort={isScreenShort} />;
+  }
+  if (new Date() <= dates.meetEndDateParts.date) {
     return <ParkingAndDirectionsAlertMessage isScreenShort={isScreenShort} />;
   }
   return <ThankYouAlertMessage isScreenShort={isScreenShort} />;
@@ -57,6 +60,20 @@ function SaturdayMorningOnlyRegistrationAlertMessage({
       Registration is almost full.{" "}
       <AlertMessageLink href={pages.registration.path} isScreenShort={isScreenShort} text="Enter" />{" "}
       your team soon.
+    </AlertMessage>
+  );
+}
+
+function PreOrderTShirtsAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      <span className="font-semibold">Coaches</span>, you can{" "}
+      <AlertMessageLink
+        href={pages.preOrderTShirts.path}
+        isScreenShort={isScreenShort}
+        text="pre-order T-Shirts"
+      />{" "}
+      for your team until {dates.preOrderTShirtsEndDateParts.dayDescriptionMonthDayShort}.
     </AlertMessage>
   );
 }
