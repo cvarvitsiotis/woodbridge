@@ -2,8 +2,14 @@
 
 import { useState, useEffect, ReactNode } from "react";
 import clsx from "clsx";
-import { pages, siteConfig } from "@/config/site";
-import { CalendarIcon, HelpClinicIcon, HowToRegIcon } from "@/components/icons";
+import { pageParents, pages, siteConfig } from "@/config/site";
+import {
+  CalendarIcon,
+  FormatListBulletedIcon,
+  HelpClinicIcon,
+  HowToRegIcon,
+  OverviewIcon,
+} from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import PresentedByAsics from "@/components/presentedByAsics";
@@ -12,19 +18,101 @@ import BaseLink from "@/components/baseLink";
 import ButtonLink from "@/components/buttonLink";
 import StyledAlert from "@/components/styledAlert";
 
-function RegisterEarlyAlertMessageWrapper({ isScreenShort }: { isScreenShort: boolean }) {
+function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  if (new Date().getFullYear() < dates.meetStartDateParts.year) {
+    return <NextYearRegistrationAlertMessage isScreenShort={isScreenShort} />;
+  }
+  if (new Date() < dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date) {
+    return <FullRegistrationAlertMessage isScreenShort={isScreenShort} />;
+  }
+  if (new Date() < dates.teamRegistrationWaitingListOnlyStartDateParts.date) {
+    return <SaturdayMorningOnlyRegistrationAlertMessage isScreenShort={isScreenShort} />;
+  }
+  if (new Date() < dates.meetEndDateParts.date) {
+    return <ParkingAndDirectionsAlertMessage isScreenShort={isScreenShort} />;
+  }
+  return <ThankYouAlertMessage isScreenShort={isScreenShort} />;
+}
+
+function FullRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
-    <>
-      {new Date() < dates.teamRegistrationWaitingListOnlyStartDateParts.date && (
-        <div className="space-y-2">
-          <RegisterEarlyAlertMessage isScreenShort={isScreenShort} />
-        </div>
-      )}
-    </>
+    <AlertMessage isScreenShort={isScreenShort}>
+      <AlertMessageLink
+        href={pages.registration.path}
+        isScreenShort={isScreenShort}
+        text="Register"
+      />{" "}
+      early (starting {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
+    </AlertMessage>
   );
 }
 
-function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+function SaturdayMorningOnlyRegistrationAlertMessage({
+  isScreenShort,
+}: {
+  isScreenShort: boolean;
+}) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      Registration is almost full.{" "}
+      <AlertMessageLink href={pages.registration.path} isScreenShort={isScreenShort} text="Enter" />{" "}
+      your team soon.
+    </AlertMessage>
+  );
+}
+
+function ParkingAndDirectionsAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      Read about{" "}
+      <AlertMessageLink
+        href={pages.parkingAndDirections.path}
+        isScreenShort={isScreenShort}
+        text={pages.parkingAndDirections.menuLabel}
+      />{" "}
+      to avoid 30-min gridlock and buy your parking pass.
+    </AlertMessage>
+  );
+}
+
+function ThankYouAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      Thank you, <span className="font-semibold">runners</span>,{" "}
+      <span className="font-semibold">spectators</span>, and{" "}
+      <span className="font-semibold">coaches</span> for a great meet! Good luck this season.
+    </AlertMessage>
+  );
+}
+
+function NextYearRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      <p>
+        We&apos;ll see you <span className="font-semibold">next Fall</span> on{" "}
+        {`${dates.meetStartDateParts.day}-${dates.meetEndDateParts.day}, ${dates.meetStartDateParts.year}`}
+        .
+      </p>
+      <p>
+        <AlertMessageLink
+          href={pages.registration.path}
+          isScreenShort={isScreenShort}
+          text="Register"
+        />{" "}
+        <span className="font-semibold">early</span> (starting{" "}
+        {dates.teamRegistrationStartDateParts.monthDayShort}) because space is limited.
+      </p>
+    </AlertMessage>
+  );
+}
+
+function AlertMessage({
+  isScreenShort,
+  children,
+}: {
+  isScreenShort: boolean;
+  children: ReactNode;
+}) {
   return (
     <p
       className={clsx(
@@ -32,25 +120,23 @@ function RegisterEarlyAlertMessage({ isScreenShort }: { isScreenShort: boolean }
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
-      {new Date() >= dates.teamRegistrationSaturdayMorningOnlyStartDateParts.date ? (
-        <>
-          Registration is almost full.{" "}
-          <RegisterEarlyLink isScreenShort={isScreenShort} text="Enter" /> your team soon.
-        </>
-      ) : (
-        <>
-          <RegisterEarlyLink isScreenShort={isScreenShort} text="Register" /> early (starting{" "}
-          {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
-        </>
-      )}
+      {children}
     </p>
   );
 }
 
-function RegisterEarlyLink({ isScreenShort, text }: { isScreenShort: boolean; text: string }) {
+function AlertMessageLink({
+  href,
+  isScreenShort,
+  text,
+}: {
+  href: string;
+  isScreenShort: boolean;
+  text: string;
+}) {
   return (
     <BaseLink
-      href={pages.registration.path}
+      href={href}
       className={clsx(
         "font-semibold",
         siteConfig.showAmbientVideo ? "text-white" : "text-warning-soft-foreground",
@@ -63,10 +149,12 @@ function RegisterEarlyLink({ isScreenShort, text }: { isScreenShort: boolean; te
 }
 
 function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
+  //get alert
+
   return (
     <div className="z-10 mx-auto">
       {siteConfig.showAmbientVideo ? (
-        <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
+        <SingleAlertMessage isScreenShort={isScreenShort} />
       ) : (
         <StyledAlert
           status="warning"
@@ -74,7 +162,7 @@ function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
           isBaseSize={false}
           className="mt-2 py-2"
         >
-          <RegisterEarlyAlertMessageWrapper isScreenShort={isScreenShort} />
+          <SingleAlertMessage isScreenShort={isScreenShort} />
         </StyledAlert>
       )}
     </div>
@@ -124,6 +212,8 @@ function CamelCapClassic({
     </span>
   );
 }
+
+const isAthleteRegistrationOpen = new Date() < dates.athleteRegistrationEndDateParts.date;
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -227,19 +317,41 @@ export default function Home() {
             siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
           )}
         >
-          <ButtonLink href={pages.registration.path} variant="primary" size="lg">
-            <HowToRegIcon />
-            Register
+          <ButtonLink
+            href={isAthleteRegistrationOpen ? pages.registration.path : pages.raceResults.path}
+            variant="primary"
+            size="lg"
+          >
+            {isAthleteRegistrationOpen ? (
+              <>
+                <HowToRegIcon />
+                Register
+              </>
+            ) : (
+              <>
+                <FormatListBulletedIcon />
+                {pageParents.results}
+              </>
+            )}
           </ButtonLink>
           <ButtonLink
-            href={pages.about.path}
+            href={isAthleteRegistrationOpen ? pages.about.path : pages.schedule.path}
             variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
             size="lg"
             className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-zinc-600")}
             customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
           >
-            <HelpClinicIcon />
-            {pages.about.menuLabel}
+            {isAthleteRegistrationOpen ? (
+              <>
+                <HelpClinicIcon />
+                {pages.about.menuLabel}
+              </>
+            ) : (
+              <>
+                <OverviewIcon />
+                {pages.schedule.menuLabel}
+              </>
+            )}
           </ButtonLink>
         </div>
 
