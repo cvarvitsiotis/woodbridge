@@ -37,6 +37,26 @@ function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return <ThankYouAlertMessage isScreenShort={isScreenShort} />;
 }
 
+function NextYearRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
+  return (
+    <AlertMessage isScreenShort={isScreenShort}>
+      <div>
+        We&apos;ll see you next Fall on{" "}
+        {`${dates.meetStartDateParts.monthShort} ${dates.meetStartDateParts.day}-${dates.meetEndDateParts.day}, ${dates.meetStartDateParts.year}`}
+        .
+      </div>
+      <div>
+        <AlertMessageLink
+          href={pages.registration.path}
+          isScreenShort={isScreenShort}
+          text="Register"
+        />{" "}
+        early (starting {dates.teamRegistrationStartDateParts.monthDayShort}) as space is limited.
+      </div>
+    </AlertMessage>
+  );
+}
+
 function FullRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <AlertMessage isScreenShort={isScreenShort}>
@@ -67,7 +87,7 @@ function SaturdayMorningOnlyRegistrationAlertMessage({
 function PreOrderTShirtsAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <AlertMessage isScreenShort={isScreenShort}>
-      <span className="font-semibold">Coaches</span>, you can{" "}
+      Coaches, you can{" "}
       <AlertMessageLink
         href={pages.preOrderTShirts.path}
         isScreenShort={isScreenShort}
@@ -97,28 +117,7 @@ function ThankYouAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
     <AlertMessage isScreenShort={isScreenShort}>
       Thank you, <span className="font-semibold">runners</span>,{" "}
       <span className="font-semibold">spectators</span>, and{" "}
-      <span className="font-semibold">coaches</span> for a great meet! Good luck this season.
-    </AlertMessage>
-  );
-}
-
-function NextYearRegistrationAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
-  return (
-    <AlertMessage isScreenShort={isScreenShort}>
-      <p>
-        We&apos;ll see you <span className="font-semibold">next Fall</span> on{" "}
-        {`${dates.meetStartDateParts.day}-${dates.meetEndDateParts.day}, ${dates.meetStartDateParts.year}`}
-        .
-      </p>
-      <p>
-        <AlertMessageLink
-          href={pages.registration.path}
-          isScreenShort={isScreenShort}
-          text="Register"
-        />{" "}
-        <span className="font-semibold">early</span> (starting{" "}
-        {dates.teamRegistrationStartDateParts.monthDayShort}) because space is limited.
-      </p>
+      <span className="font-semibold">coaches</span> for a great meet. Good luck this season!
     </AlertMessage>
   );
 }
@@ -131,14 +130,14 @@ function AlertMessage({
   children: ReactNode;
 }) {
   return (
-    <p
+    <div
       className={clsx(
         siteConfig.showAmbientVideo && "text-white",
         siteConfig.showAmbientVideo && !isScreenShort && "md:text-lg",
       )}
     >
       {children}
-    </p>
+    </div>
   );
 }
 
@@ -166,12 +165,12 @@ function AlertMessageLink({
 }
 
 function AlertMessages({ isScreenShort }: { isScreenShort: boolean }) {
-  //get alert
-
   return (
     <div className="z-10 mx-auto">
       {siteConfig.showAmbientVideo ? (
-        <SingleAlertMessage isScreenShort={isScreenShort} />
+        <div className="text-center">
+          <SingleAlertMessage isScreenShort={isScreenShort} />
+        </div>
       ) : (
         <StyledAlert
           status="warning"
