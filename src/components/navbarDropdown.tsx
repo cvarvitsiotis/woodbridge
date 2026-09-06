@@ -28,7 +28,7 @@ import { PageType } from "@/types";
 import { pages, siteConfig } from "@/config/site";
 import clsx from "clsx";
 
-function DropdownItemIcon({ page }: { page: PageType }) {
+export function DropdownItemIcon({ page }: { page: PageType }) {
   return page === pages.coachesIntro ? (
     <StepIcon />
   ) : page === pages.registration ? (

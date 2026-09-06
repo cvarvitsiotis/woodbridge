@@ -6,6 +6,7 @@ import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
 import { PrintIcon } from "@/components/icons";
 import BaseLink from "@/components/baseLink";
+import StyledAlert from "@/components/styledAlert";
 
 export const metadata: Metadata = {
   title: pages.courseAndVenueMap.menuLabel,
@@ -17,6 +18,18 @@ export default async function Page() {
       <PageHeader>
         <span className="font-bold">Course</span> & <span className="font-bold">Venue</span> Map
       </PageHeader>
+      <div className="mx-auto pt-6">
+        <StyledAlert status="accent" includeIndicator={true} isBaseSize={true} className="py-2">
+          We also have a{" "}
+          <BaseLink
+            href={pages.courseAerialTour.path}
+            className="font-semibold text-accent-soft-foreground"
+          >
+            {pages.courseAerialTour.menuLabel}
+          </BaseLink>
+          .
+        </StyledAlert>
+      </div>
       <div className="pt-7">
         <div className="mx-auto max-w-200 text-right">
           <BaseLink isExternal href="/images/woodbridge-course.pdf">

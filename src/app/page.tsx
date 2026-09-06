@@ -3,13 +3,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import clsx from "clsx";
 import { pageParents, pages, siteConfig } from "@/config/site";
-import {
-  CalendarIcon,
-  FormatListBulletedIcon,
-  HelpClinicIcon,
-  HowToRegIcon,
-  OverviewIcon,
-} from "@/components/icons";
+import { CalendarIcon } from "@/components/icons";
 import { dates } from "@/config/dates";
 import { fontSerif } from "@/styles/fonts";
 import PresentedByAsics from "@/components/presentedByAsics";
@@ -17,6 +11,8 @@ import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import BaseLink from "@/components/baseLink";
 import ButtonLink from "@/components/buttonLink";
 import StyledAlert from "@/components/styledAlert";
+import { DropdownItemIcon } from "@/components/navbarDropdown";
+import { PageType } from "@/types";
 
 function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   if (new Date().getFullYear() < dates.meetStartDateParts.year) {
@@ -225,7 +221,57 @@ function CamelCapClassic({
   );
 }
 
-const isAthleteRegistrationOpen = new Date() < dates.athleteRegistrationEndDateParts.date;
+function CTAButtons({ isScreenShort }: { isScreenShort: boolean }) {
+  const isAthleteRegistrationClosed = new Date() > dates.athleteRegistrationEndDateParts.date;
+  const isMeetStarted = new Date() > dates.meetStartDateParts.date;
+
+  return (
+    <div
+      className={clsx(
+        "z-10 flex gap-3",
+        siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
+      )}
+    >
+      {isMeetStarted ? (
+        <PrimaryCTAButton page={pages.raceResults} label={pageParents.results} />
+      ) : isAthleteRegistrationClosed ? (
+        <PrimaryCTAButton page={pages.courseAerialTour} label={pages.courseAerialTour.menuLabel} />
+      ) : (
+        <PrimaryCTAButton page={pages.registration} label="Register" />
+      )}
+
+      {isAthleteRegistrationClosed ? (
+        <SecondaryCTAButton page={pages.schedule} label={pages.schedule.menuLabel} />
+      ) : (
+        <SecondaryCTAButton page={pages.about} label={pages.about.menuLabel} />
+      )}
+    </div>
+  );
+}
+
+function PrimaryCTAButton({ page, label }: { page: PageType; label: string }) {
+  return (
+    <ButtonLink href={page.path} variant="primary" size="lg">
+      <DropdownItemIcon page={page} />
+      {label}
+    </ButtonLink>
+  );
+}
+
+function SecondaryCTAButton({ page, label }: { page: PageType; label: string }) {
+  return (
+    <ButtonLink
+      href={page.path}
+      variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
+      size="lg"
+      className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-zinc-600")}
+      customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
+    >
+      <DropdownItemIcon page={page} />
+      {label}
+    </ButtonLink>
+  );
+}
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -323,49 +369,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div
-          className={clsx(
-            "z-10 flex gap-3",
-            siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
-          )}
-        >
-          <ButtonLink
-            href={isAthleteRegistrationOpen ? pages.registration.path : pages.raceResults.path}
-            variant="primary"
-            size="lg"
-          >
-            {isAthleteRegistrationOpen ? (
-              <>
-                <HowToRegIcon />
-                Register
-              </>
-            ) : (
-              <>
-                <FormatListBulletedIcon />
-                {pageParents.results}
-              </>
-            )}
-          </ButtonLink>
-          <ButtonLink
-            href={isAthleteRegistrationOpen ? pages.about.path : pages.schedule.path}
-            variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
-            size="lg"
-            className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-zinc-600")}
-            customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
-          >
-            {isAthleteRegistrationOpen ? (
-              <>
-                <HelpClinicIcon />
-                {pages.about.menuLabel}
-              </>
-            ) : (
-              <>
-                <OverviewIcon />
-                {pages.schedule.menuLabel}
-              </>
-            )}
-          </ButtonLink>
-        </div>
+        <CTAButtons isScreenShort={isScreenShort} />
 
         <div
           className={clsx(

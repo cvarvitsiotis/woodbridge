@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { pages } from "@/config/site";
 import PageHeader from "@/components/pageHeader";
+import StyledAlert from "@/components/styledAlert";
+import BaseLink from "@/components/baseLink";
 
 export const metadata: Metadata = {
   title: pages.courseAerialTour.menuLabel,
@@ -12,6 +14,18 @@ export default function Page() {
       <PageHeader>
         Course <span className="font-bold">Aerial Tour</span>
       </PageHeader>
+      <div className="mx-auto pt-6">
+        <StyledAlert status="accent" includeIndicator={true} isBaseSize={true} className="py-2">
+          We also have a{" "}
+          <BaseLink
+            href={pages.courseAndVenueMap.path}
+            className="font-semibold text-accent-soft-foreground"
+          >
+            {pages.courseAndVenueMap.menuLabel}
+          </BaseLink>
+          .
+        </StyledAlert>
+      </div>
       <div className="pt-10">
         <iframe
           allowFullScreen
