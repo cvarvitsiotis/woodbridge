@@ -20,7 +20,7 @@ export default async function Page() {
       </PageHeader>
       <div className="mx-auto pt-6">
         <StyledAlert status="accent" includeIndicator={true} isBaseSize={true} className="py-2">
-          We also have a{" "}
+          We also provide a{" "}
           <BaseLink
             href={pages.courseAerialTour.path}
             className="font-semibold text-accent-soft-foreground"
