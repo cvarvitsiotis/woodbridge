@@ -459,7 +459,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Mater Dei",
+    name: "Mater Dei (Santa Ana)",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -619,7 +619,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Portola",
+    name: "Portola (Irvine)",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -707,7 +707,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Rowland Heights",
+    name: "Rowland",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.b,
@@ -963,7 +963,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Xavier College Prep",
+    name: "Xavier College Prep (AZ)",
     raceDay: "Friday",
     division: divisions.three,
     varsityHeat: heats.a,
@@ -1099,6 +1099,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Calvary Chapel (Downey)",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "Downey",
+    state: "CA",
+  },
+  {
     name: "Campbell Hall",
     raceDay: "Friday",
     division: divisions.four,
@@ -1195,7 +1203,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Community Charter",
+    name: "Community Charter Early College",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -1243,7 +1251,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Crismon Queen Creek (AZ)",
+    name: "Crismon (AZ)",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
@@ -1419,10 +1427,18 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "High Tech High Mesa",
+    name: "High Tech High (Mesa)",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
+    city: "San Diego",
+    state: "CA",
+  },
+  {
+    name: "High Tech High (San Diego)",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
     city: "San Diego",
     state: "CA",
   },
@@ -1451,7 +1467,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Hurricane Tigers",
+    name: "Hurricane",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
@@ -1467,11 +1483,11 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "JW North",
+    name: "John W. North",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
-    city: "Riverside, CA",
+    city: "Riverside",
     state: "CA",
   },
   {
@@ -1539,11 +1555,19 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Maranatha",
+    name: "Maranatha (Pasadena)",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.b,
     city: "Pasadena",
+    state: "CA",
+  },
+  {
+    name: "Maranatha Christian Schools (San Diego)",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "San Diego",
     state: "CA",
   },
   {
@@ -1552,6 +1576,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.four,
     varsityHeat: heats.a,
     city: "San Pedro",
+    state: "CA",
+  },
+  {
+    name: "Mater Dei Catholic (Chula Vista)",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.a,
+    city: "Chula Vista",
     state: "CA",
   },
   {
@@ -1723,6 +1755,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Pacifica (Oxnard)",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
+    city: "Oxnard",
+    state: "CA",
+  },
+  {
     name: "Pacifica Christian (Newport Beach)",
     raceDay: "Friday",
     division: divisions.four,
@@ -1787,7 +1827,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Sacred Heart",
+    name: "Sacred Heart (Los Angeles)",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -1803,7 +1843,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Saint Bonaventure",
+    name: "St. Bonaventure",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
@@ -1979,11 +2019,19 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Temecula Preparatory School",
+    name: "Temecula Prep",
     raceDay: "Friday",
     division: divisions.four,
     varsityHeat: heats.a,
     city: "Winchester",
+    state: "CA",
+  },
+  {
+    name: "Temple City",
+    raceDay: "Friday",
+    division: divisions.four,
+    varsityHeat: heats.b,
+    city: "Temple City",
     state: "CA",
   },
   {
@@ -2523,7 +2571,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Edison",
+    name: "Edison (Fresno)",
     raceDay: "Saturday Night",
     division: divisions.one,
     varsityHeat: heats.a,
@@ -2563,11 +2611,35 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Georgetown East View",
+    raceDay: "Saturday Night",
+    division: divisions.one,
+    varsityHeat: heats.a,
+    city: "Georgetown",
+    state: "TX",
+  },
+  {
+    name: "Golden Valley (Bakersfield)",
+    raceDay: "Saturday Night",
+    division: divisions.one,
+    varsityHeat: heats.a,
+    city: "Bakersfield",
+    state: "CA",
+  },
+  {
     name: "Golden Valley (Santa Clarita)",
     raceDay: "Saturday Night",
     division: divisions.one,
     varsityHeat: heats.a,
     city: "Santa Clarita",
+    state: "CA",
+  },
+  {
+    name: "Granada Hills",
+    raceDay: "Saturday Night",
+    division: divisions.one,
+    varsityHeat: heats.b,
+    city: "Granada Hills",
     state: "CA",
   },
   {
@@ -2632,6 +2704,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.one,
     varsityHeat: heats.a,
     city: "Hesperia",
+    state: "CA",
+  },
+  {
+    name: "Highland (Palmdale)",
+    raceDay: "Saturday Night",
+    division: divisions.one,
+    varsityHeat: heats.a,
+    city: "Palmdale",
     state: "CA",
   },
   {
@@ -2707,7 +2787,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Long Beach Poly",
+    name: "Poly (Long Beach)",
     raceDay: "Saturday Night",
     division: divisions.one,
     varsityHeat: heats.b,
@@ -3715,7 +3795,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "JSerra Catholic",
+    name: "J Serra Catholic",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -4003,7 +4083,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "San Franciso University",
+    name: "University (San Francisco)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -4099,7 +4179,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Somerset Sky Pointe",
+    name: "Somerset Academy Sky Pointe",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.a,
@@ -4139,7 +4219,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Taft",
+    name: "Taft (Woodland Hills)",
     raceDay: "Saturday Night",
     division: divisions.two,
     varsityHeat: heats.b,
@@ -4419,7 +4499,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Cabrillo",
+    name: "Cabrillo (Lompoc)",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.a,
@@ -4435,7 +4515,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "OR",
   },
   {
-    name: "Calvary Chapel",
+    name: "Calvary Chapel (Santa Ana)",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.a,
@@ -4507,11 +4587,27 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Duarte",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Duarte",
+    state: "CA",
+  },
+  {
     name: "El Camino Real",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.b,
     city: "Woodland Hills",
+    state: "CA",
+  },
+  {
+    name: "El Monte",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "El Monte",
     state: "CA",
   },
   {
@@ -4675,6 +4771,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
+    name: "Mission Bay",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.b,
+    city: "San Diego",
+    state: "CA",
+  },
+  {
     name: "Monte Vista Christian",
     raceDay: "Saturday Morning",
     division: divisions.five,
@@ -4704,6 +4808,14 @@ export const participatingTeams: ParticipatingTeamType[] = [
     division: divisions.five,
     varsityHeat: heats.b,
     city: "Norco",
+    state: "CA",
+  },
+  {
+    name: "Norwalk",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.b,
+    city: "Norwalk",
     state: "CA",
   },
   {
@@ -4755,7 +4867,15 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Palo Verde",
+    name: "Palo Verde (Blythe)",
+    raceDay: "Saturday Morning",
+    division: divisions.five,
+    varsityHeat: heats.a,
+    city: "Blythe",
+    state: "CA",
+  },
+  {
+    name: "Palo Verde (NV)",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.b,
@@ -4939,7 +5059,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Taft Union",
+    name: "Taft Union (Taft)",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.a,
@@ -4971,7 +5091,7 @@ export const participatingTeams: ParticipatingTeamType[] = [
     state: "CA",
   },
   {
-    name: "Valley Christian",
+    name: "Valley Christian (Cerritos)",
     raceDay: "Saturday Morning",
     division: divisions.five,
     varsityHeat: heats.a,
