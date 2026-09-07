@@ -12,14 +12,20 @@ import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
 import StyledTableCell from "./styledTableCell";
 import { ColumnProps } from "react-aria-components/Table";
+import clsx from "clsx";
 
 const columns: ColumnProps[] = [
-  { id: "time", textValue: "Time", isRowHeader: true },
+  { id: "num", textValue: "Num", isRowHeader: true },
+  { id: "time", textValue: "Time" },
   { id: "division", textValue: "Division" },
   { id: "description", textValue: "Race" },
 ];
 
 const featuredColumns = columns.filter((column) => column.id !== "division");
+
+function getColumnInlinePadding(isNum: boolean) {
+  return clsx(isNum ? "px-2" : "px-3", "lg:px-4");
+}
 
 function getDescription(race: RaceType): string {
   if (race.level.scheduleFormat) {
@@ -46,7 +52,11 @@ export default function RacesTable({
           <Table.Content aria-label={pages.schedule.menuLabel}>
             <Table.Header columns={isFeatured ? featuredColumns : columns}>
               {(column) => (
-                <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
+                <Table.Column
+                  id={column.id}
+                  isRowHeader={column.isRowHeader}
+                  className={getColumnInlinePadding(column.id === "num")}
+                >
                   {column.textValue}
                 </Table.Column>
               )}
@@ -54,13 +64,20 @@ export default function RacesTable({
             <Table.Body items={races}>
               {(item) => (
                 <Table.Row id={item.num}>
-                  <StyledTableCell>{item.time}</StyledTableCell>
+                  <StyledTableCell className={getColumnInlinePadding(true)}>
+                    {item.num}
+                  </StyledTableCell>
+                  <StyledTableCell className={getColumnInlinePadding(false)}>
+                    {item.time}
+                  </StyledTableCell>
                   {!isFeatured && (
-                    <StyledTableCell>
+                    <StyledTableCell className={getColumnInlinePadding(false)}>
                       <Divisions divisions={item.divisions} />
                     </StyledTableCell>
                   )}
-                  <StyledTableCell>{getDescription(item)}</StyledTableCell>
+                  <StyledTableCell className={getColumnInlinePadding(false)}>
+                    {getDescription(item)}
+                  </StyledTableCell>
                 </Table.Row>
               )}
             </Table.Body>
