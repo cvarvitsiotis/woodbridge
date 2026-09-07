@@ -38,12 +38,12 @@ export default function Page() {
           <List isOrdered={false}>
             <li>
               If you do not have a bib for a new runner, fill out the ADD ATHLETES SHEET at the
-              checkin table, pay the $20.00, and take the add ticket to the coaches&apos; corner at
+              checkin table, pay the $25.00, and take the add ticket to the coaches&apos; corner at
               the finish line.
             </li>
             <li>
               If you need to make a change to the information for one of your runners, fill out the
-              CHANGE OF INFORMATION SHEET at the checkin table, pay the $5.00, and take the change
+              CHANGE OF INFORMATION SHEET at the checkin table, pay the $10.00, and take the change
               ticket to the coaches&apos; corner at the finish line.
             </li>
           </List>
