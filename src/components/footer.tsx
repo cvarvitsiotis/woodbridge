@@ -68,7 +68,7 @@ export default function Footer() {
   return (
     <footer
       className={clsx(
-        "z-10 flex w-full max-w-(--breakpoint-2xl) items-start justify-between p-3 sm:items-end",
+        "z-10 flex w-full max-w-384 items-start justify-between py-3 sm:items-end",
         !isHomePage && "pt-20",
       )}
     >
