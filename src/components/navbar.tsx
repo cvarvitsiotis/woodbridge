@@ -26,8 +26,8 @@ function Brand({ isHomePage, isMenu }: { isHomePage: boolean; isMenu: boolean })
   return (
     <div
       className={clsx(
-        "mb-0.5 text-2xl font-bold tracking-tighter",
-        isHomePage && siteConfig.showAmbientVideo && !isMenu ? "text-white" : "text-sky-950",
+        "mb-1 text-3xl font-bold tracking-[-0.08em]",
+        isHomePage && siteConfig.showAmbientVideo && !isMenu ? "text-white" : "text-sky-950/90",
       )}
     >
       {siteConfig.woodbridge}
@@ -228,7 +228,7 @@ export function Navbar() {
     >
       <header
         className={clsx(
-          "mx-auto flex h-16 max-w-384 items-center justify-between gap-4 px-6",
+          "mx-auto flex h-16 max-w-384 items-center justify-between gap-4",
           isBlurred && "backdrop-blur-lg",
         )}
       >

@@ -32,9 +32,9 @@ export default function RootLayout({
       <head />
       <Body>
         <Providers>
-          <div className="relative flex min-h-dvh flex-col items-center space-y-3 sm:space-y-4">
+          <div className="relative flex min-h-dvh flex-col items-center space-y-3 px-3 sm:space-y-4 sm:px-6">
             <Navbar />
-            <main className="container flex grow flex-col space-y-3 px-3 sm:px-6">
+            <main className="container flex grow flex-col space-y-3">
               <BreadcrumbsAndSponsor />
               <div className="flex grow flex-col space-y-4">{children}</div>
             </main>
