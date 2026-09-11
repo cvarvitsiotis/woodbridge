@@ -175,6 +175,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   {
+    name: "Torrey Pines",
+    city: "San Diego",
+    state: "CA",
+    level: levels.sweepstakes,
+    gender: genders.boys,
+  },
+  {
     name: "Trabuco Hills",
     city: "Mission Viejo",
     state: "CA",
@@ -233,6 +240,8 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     level: levels.rated,
     gender: genders.boys,
   },
+  { name: "Chaminade", city: "West Hills", state: "CA", level: levels.rated, gender: genders.boys },
+  { name: "Claremont", city: "Claremont", state: "CA", level: levels.rated, gender: genders.boys },
   { name: "Clovis", city: "Clovis", state: "CA", level: levels.rated, gender: genders.boys },
   { name: "Clovis North", city: "Fresno", state: "CA", level: levels.rated, gender: genders.boys },
   {
@@ -262,6 +271,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     name: "Hazel Green",
     city: "Hazel Green",
     state: "AL",
+    level: levels.rated,
+    gender: genders.boys,
+  },
+  {
+    name: "Highland (AZ)",
+    city: "Gilbert",
+    state: "AZ",
     level: levels.rated,
     gender: genders.boys,
   },
@@ -313,13 +329,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   {
-    name: "Eleanor Roosevelt",
-    city: "Eastvale",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.boys,
-  },
-  {
     name: "San Juan Hills",
     city: "San Juan Capistrano",
     state: "CA",
@@ -328,10 +337,18 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
   },
   { name: "Saugus", city: "Saugus", state: "CA", level: levels.rated, gender: genders.boys },
   { name: "Servite", city: "Anaheim", state: "CA", level: levels.rated, gender: genders.boys },
+  { name: "Shadow Hills", city: "Indio", state: "CA", level: levels.rated, gender: genders.boys },
   {
     name: "Somerset Academy Sky Pointe",
     city: "Las Vegas",
     state: "NV",
+    level: levels.rated,
+    gender: genders.boys,
+  },
+  {
+    name: "South Torrance",
+    city: "Torrance",
+    state: "CA",
     level: levels.rated,
     gender: genders.boys,
   },
@@ -345,13 +362,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
   {
     name: "Temecula Valley",
     city: "Temecula",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.boys,
-  },
-  {
-    name: "Torrey Pines",
-    city: "San Diego",
     state: "CA",
     level: levels.rated,
     gender: genders.boys,
@@ -549,6 +559,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   {
+    name: "Shiloh Christian",
+    city: "Springdale",
+    state: "AR",
+    level: levels.sweepstakes,
+    gender: genders.girls,
+  },
+  {
     name: "Somerset Academy Sky Pointe",
     city: "Las Vegas",
     state: "NV",
@@ -609,6 +626,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     city: "Yorba Linda",
     state: "CA",
     level: levels.sweepstakes,
+    gender: genders.girls,
+  },
+  {
+    name: "Big Bear",
+    city: "Big Bear City",
+    state: "CA",
+    level: levels.rated,
     gender: genders.girls,
   },
   {
@@ -766,13 +790,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   {
-    name: "Rio Americano",
-    city: "Sacramento",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.girls,
-  },
-  {
     name: "Eleanor Roosevelt",
     city: "Eastvale",
     state: "CA",
@@ -819,6 +836,7 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   { name: "Ventura", city: "Ventura", state: "CA", level: levels.rated, gender: genders.girls },
+  { name: "Viewmont", city: "Bountiful", state: "UT", level: levels.rated, gender: genders.girls },
   { name: "Warren", city: "Downey", state: "CA", level: levels.rated, gender: genders.girls },
 ]
   .map((team, index) => ({
