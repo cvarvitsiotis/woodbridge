@@ -5,8 +5,8 @@ import { pages } from "@/config/site";
 import { ColumnProps } from "react-aria-components/Table";
 
 const individualResultsColumns: ColumnProps[] = [
-  { id: "bib", textValue: "Bib", isRowHeader: true },
-  { id: "place", textValue: "Place" },
+  { id: "place", textValue: "Place", isRowHeader: true },
+  { id: "bib", textValue: "Bib" },
   { id: "firstName", textValue: "First Name" },
   { id: "lastName", textValue: "Last Name" },
   { id: "gender", textValue: "Gender" },
