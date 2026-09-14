@@ -6,11 +6,22 @@ import StyledSelect from "@/components/styledSelect";
 import OfficialResultsSections from "@/components/officialResultsSections";
 
 const allYears = Array.from(
-  { length: data.pdfResultEndYear - data.pdfResultStartYear + 1 },
-  (_, i) => data.pdfResultStartYear + i,
+  { length: data.pdfResultEndYear - data.htmlResultStartYear + 1 },
+  (_, i) => data.htmlResultStartYear + i,
 )
   .sort((a, b) => b - a)
-  .map((year) => year.toString());
+  .map((year) => GetYearOption(year));
+
+const disabledYears = Array.from(
+  { length: data.pdfResultStartYear - data.htmlResultStartYear },
+  (_, i) => data.htmlResultStartYear + i,
+)
+  .sort((a, b) => b - a)
+  .map((year) => GetYearOption(year));
+
+function GetYearOption(year: number) {
+  return year.toString() + (year < data.pdfResultStartYear ? " (coming soon)" : "");
+}
 
 function YearSelect({
   selectedYear,
@@ -26,6 +37,7 @@ function YearSelect({
       selectClassName="w-32"
       valueClassName="text-base"
       options={allYears}
+      disabledKeys={disabledYears}
     />
   );
 }
