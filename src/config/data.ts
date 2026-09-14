@@ -1,5 +1,6 @@
 export const data = {
   firstMeetYear: 1981,
+  htmlResultStartYear: 1998,
   pdfResultStartYear: 2007,
   pdfResultEndYear: 2025,
   meetStartDate: new Date(2026, 8, 18, 17, 0, 0),

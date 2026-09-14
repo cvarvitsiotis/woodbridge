@@ -9,6 +9,7 @@ export default function StyledSelect({
   selectClassName,
   valueClassName,
   isPrimary = true,
+  disabledKeys,
 }: {
   options: string[];
   onChange: (value: string) => void;
@@ -17,6 +18,7 @@ export default function StyledSelect({
   selectClassName?: string;
   valueClassName?: string;
   isPrimary?: boolean;
+  disabledKeys?: Iterable<Key>;
 }) {
   return (
     <Select
@@ -25,6 +27,7 @@ export default function StyledSelect({
       onChange={(value: Key | null) => onChange(String(value ?? ""))}
       className={selectClassName}
       variant={isPrimary ? "primary" : "secondary"}
+      disabledKeys={disabledKeys}
     >
       <Select.Trigger className="py-1.5">
         <div className="flex flex-col">
