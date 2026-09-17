@@ -12,6 +12,7 @@ import { urls } from "@/config/data";
 import BaseLink from "@/components/baseLink";
 import ButtonLink from "@/components/buttonLink";
 import StyledAlert from "@/components/styledAlert";
+import StyledButton from "./styledButton";
 
 const locations = {
   lot0: "33.67441530099316%2C-117.74813794406717",
@@ -216,7 +217,7 @@ function SpectatorsAccordionItem() {
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot5} />
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot6} />
         <SpectatorLotAccordionItem instruction={instructions.freewayToLot7} />
-        {/* <SpectatorLotAccordionItem instruction={instructions.freewayToLot8} /> */}
+        <SpectatorLotAccordionItem instruction={instructions.freewayToLot8} />
         {/* <SpectatorLotPortolaAccordionItem /> */}
       </Accordion>
     </>
@@ -611,6 +612,38 @@ function ParkingLink({ href, description }: { href: string; description: string 
   );
 }
 
+function SaturdayNightSoldOutModal() {
+  return (
+    <Modal>
+      <StyledButton variant="secondary">Purchase Saturday Night</StyledButton>
+      <Modal.Backdrop>
+        <Modal.Container size="lg" placement="top" scroll="inside">
+          <Modal.Dialog className="bg-surface">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading className="text-lg font-semibold">
+                Saturday Night parking is{" "}
+                <span className="font-black text-danger-soft-foreground">SOLD OUT</span>
+              </Modal.Heading>
+            </Modal.Header>
+            <Modal.Body className="mt-4 space-y-3 text-base text-foreground">
+              <p>Here are your options:</p>
+              <ModalBodyList>
+                <li>Carpool with someone you know that purchased a parking pass</li>
+                <li>Call Uber or Lyft for a dropoff</li>
+                <li>
+                  If you&apos;re coming after 5 PM, you can park in{" "}
+                  {instructions.freewayToLot8.accordionTitle}. You will pay when you arrive.
+                </li>
+              </ModalBodyList>
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+
 function ParkingPasses() {
   return (
     <>
@@ -629,7 +662,8 @@ function ParkingPasses() {
         <div className="flex flex-col flex-wrap gap-4 pt-2 pl-6 sm:flex-row sm:gap-6">
           <ParkingLink href={urls.parkingPasses.friday} description="Friday" />
           <ParkingLink href={urls.parkingPasses.saturdayMorning} description="Saturday Morning" />
-          <ParkingLink href={urls.parkingPasses.saturdayNight} description="Saturday Night" />
+          {/* <ParkingLink href={urls.parkingPasses.saturdayNight} description="Saturday Night" /> */}
+          <SaturdayNightSoldOutModal />
         </div>
       )}
     </>
