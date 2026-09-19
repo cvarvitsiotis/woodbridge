@@ -13,6 +13,7 @@ import ButtonLink from "@/components/buttonLink";
 import StyledAlert from "@/components/styledAlert";
 import { DropdownItemIcon } from "@/components/navbarDropdown";
 import { PageType } from "@/types";
+import { urls } from "@/config/data";
 
 function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   if (new Date().getFullYear() < dates.meetStartDateParts.year) {
@@ -228,23 +229,39 @@ function CTAButtons({ isScreenShort }: { isScreenShort: boolean }) {
   return (
     <div
       className={clsx(
-        "z-10 flex gap-3",
+        "z-10 flex flex-col items-center gap-3",
         siteConfig.showAmbientVideo ? (isScreenShort ? "mt-20" : "mt-30") : "mt-16 sm:mt-20",
       )}
     >
-      {isMeetStarted ? (
-        <PrimaryCTAButton page={pages.raceResults} label={pageParents.results} />
-      ) : isAthleteRegistrationClosed ? (
-        <PrimaryCTAButton page={pages.courseAerialTour} label={pages.courseAerialTour.menuLabel} />
-      ) : (
-        <PrimaryCTAButton page={pages.registration} label="Register" />
-      )}
+      <ButtonLink
+        isExternal={true}
+        href={urls.other.featuredEntriesVideo}
+        variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
+        size="lg"
+        className={clsx(siteConfig.showAmbientVideo && "bg-rose-200 text-zinc-600")}
+        customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
+      >
+        <DropdownItemIcon page={pages.courseAerialTour} />
+        Sweepstakes Preview
+      </ButtonLink>
+      <div className="flex justify-center gap-3">
+        {isMeetStarted ? (
+          <PrimaryCTAButton page={pages.raceResults} label={pageParents.results} />
+        ) : isAthleteRegistrationClosed ? (
+          <PrimaryCTAButton
+            page={pages.courseAerialTour}
+            label={pages.courseAerialTour.menuLabel}
+          />
+        ) : (
+          <PrimaryCTAButton page={pages.registration} label="Register" />
+        )}
 
-      {isAthleteRegistrationClosed ? (
-        <SecondaryCTAButton page={pages.schedule} label={pages.schedule.menuLabel} />
-      ) : (
-        <SecondaryCTAButton page={pages.about} label={pages.about.menuLabel} />
-      )}
+        {isAthleteRegistrationClosed ? (
+          <SecondaryCTAButton page={pages.schedule} label={pages.schedule.menuLabel} />
+        ) : (
+          <SecondaryCTAButton page={pages.about} label={pages.about.menuLabel} />
+        )}
+      </div>
     </div>
   );
 }

@@ -37,6 +37,7 @@ export const urls = {
     preOrderTShirts:
       "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Z2gZHYB4SkOiqb-NDwFoAdS3lvPXvRFDq_VQWeCNRdxUNTRUMzBQMjEzOVdVVEJWUlZXVU9aSlJBNi4u",
     featuredEntriesArticle: `https://prepcaltrack.com/${data.featuredEntriesArticle}`,
+    featuredEntriesVideo: `https://youtu.be/P_ZGHPBe2TQ?si=fBM9oyUr0V5IL4g4`,
   },
   schools: {
     woodbridgeHighSchool: "https://woodbridgehigh.iusd.org/",
