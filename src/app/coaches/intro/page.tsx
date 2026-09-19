@@ -83,11 +83,11 @@ export default function Page() {
             deadline and you also can add new runners at the meet on race day for a fee.
           </li>
           <li>
-            The NOVICE races require a fee like all other races. They are designed to give boys that
-            run 23:00 or slower and girls that run 24:00 or slower a more meaningful experience by
-            competing against those with similar abilities. They also serve to reduce congestion in
-            the regular races. And, we keep the clocks running longer than regular races, so every
-            athlete gets their time recorded.
+            The NOVICE races require a fee like all other races. They are designed to boys and girls
+            that run 24 minutes or slower a more meaningful experience by competing against those
+            with similar abilities. They also serve to reduce congestion in the regular races. And,
+            we keep the clocks running longer than regular races, so every athlete gets their time
+            recorded. There are no individual or team awards for the NOVICE races.
           </li>
           <li>
             Bring the ENTRY FEE to the checkin table at our meet. If mailing it, do so by{" "}

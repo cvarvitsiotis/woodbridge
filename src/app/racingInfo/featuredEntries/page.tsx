@@ -41,7 +41,15 @@ export default function Page() {
             >
               <p>Want to know about the selection process?</p>
               <p>
-                Rich Gonzalez of PrepCalTrack explains his methodology in{" "}
+                Rich Gonzalez of PrepCalTrack explains his methodology and previews the field in{" "}
+                <BaseLink
+                  isExternal
+                  href={urls.other.featuredEntriesVideo}
+                  className={clsx("font-bold", "text-warning-soft-foreground")}
+                >
+                  this video
+                </BaseLink>{" "}
+                and{" "}
                 <BaseLink
                   isExternal
                   href={urls.other.featuredEntriesArticle}

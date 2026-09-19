@@ -4,6 +4,8 @@ import { useState } from "react";
 import { data } from "@/config/data";
 import StyledSelect from "@/components/styledSelect";
 import OfficialResultsSections from "@/components/officialResultsSections";
+import { dates } from "@/config/dates";
+import StyledAlert from "./styledAlert";
 
 const allYears = Array.from(
   { length: data.pdfResultEndYear - data.htmlResultStartYear + 1 },
@@ -42,6 +44,17 @@ function YearSelect({
   );
 }
 
+function OfficialResultsAlert() {
+  return (
+    <div className="mx-auto py-2">
+      <StyledAlert status="warning" includeIndicator={true} isBaseSize={true} className="py-2">
+        For <span className="font-extrabold">{dates.meetStartDateParts.year}</span>, until we post
+        official results, use the Live Results link above
+      </StyledAlert>
+    </div>
+  );
+}
+
 export default function OfficialResults() {
   const [selectedYear, setSelectedYear] = useState(allYears[0]);
 
@@ -51,6 +64,9 @@ export default function OfficialResults() {
 
   return (
     <>
+      {new Date() >= dates.meetStartDateParts.date &&
+        data.pdfResultEndYear < dates.meetStartDateParts.year && <OfficialResultsAlert />}
+
       <div className="flex items-center justify-center gap-3">
         <div className="text-lg font-light">YEAR</div>
         <YearSelect

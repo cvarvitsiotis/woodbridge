@@ -76,6 +76,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   {
+    name: "Matilda Torres",
+    city: "Madera",
+    state: "CA",
+    level: levels.sweepstakes,
+    gender: genders.boys,
+  },
+  {
     name: "Mira Costa",
     city: "Manhattan Beach",
     state: "CA",
@@ -245,6 +252,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
   { name: "Clovis", city: "Clovis", state: "CA", level: levels.rated, gender: genders.boys },
   { name: "Clovis North", city: "Fresno", state: "CA", level: levels.rated, gender: genders.boys },
   {
+    name: "Del Oro (Bakersfield)",
+    city: "Bakersfield",
+    state: "CA",
+    level: levels.rated,
+    gender: genders.boys,
+  },
+  {
     name: "Desert Vista (AZ)",
     city: "Phoenix",
     state: "AZ",
@@ -252,6 +266,7 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.boys,
   },
   { name: "Dos Pueblos", city: "Goleta", state: "CA", level: levels.rated, gender: genders.boys },
+  { name: "El Toro", city: "Lake Forest", state: "CA", level: levels.rated, gender: genders.boys },
   {
     name: "Foothill Technology (Ventura)",
     city: "Ventura",
@@ -411,8 +426,8 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   {
-    name: "Canyon (Anaheim)",
-    city: "Anaheim",
+    name: "Cajon",
+    city: "San Bernardino",
     state: "CA",
     level: levels.sweepstakes,
     gender: genders.girls,
@@ -467,6 +482,7 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     level: levels.sweepstakes,
     gender: genders.girls,
   },
+  { name: "Mead", city: "Spokane", state: "WA", level: levels.sweepstakes, gender: genders.girls },
   {
     name: "Mira Costa",
     city: "Manhattan Beach",
@@ -601,6 +617,13 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   {
+    name: "Trabuco Hills",
+    city: "Mission Viejo",
+    state: "CA",
+    level: levels.sweepstakes,
+    gender: genders.girls,
+  },
+  {
     name: "Tri-Valley",
     city: "Grahamsville",
     state: "NY",
@@ -629,15 +652,8 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     gender: genders.girls,
   },
   {
-    name: "Big Bear",
-    city: "Big Bear City",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.girls,
-  },
-  {
-    name: "Cajon",
-    city: "San Bernardino",
+    name: "Canyon (Anaheim)",
+    city: "Anaheim",
     state: "CA",
     level: levels.rated,
     gender: genders.girls,
@@ -715,7 +731,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
     level: levels.rated,
     gender: genders.girls,
   },
-  { name: "La Canada", city: "La Canada", state: "CA", level: levels.rated, gender: genders.girls },
   {
     name: "La Costa Canyon",
     city: "Carlsbad",
@@ -820,13 +835,6 @@ const internalFeaturedTeams: FeaturedTeamType[] = [
   },
   { name: "Tesoro", city: "Las Flores", state: "CA", level: levels.rated, gender: genders.girls },
   { name: "Timpanogos", city: "Orem", state: "UT", level: levels.rated, gender: genders.girls },
-  {
-    name: "Trabuco Hills",
-    city: "Mission Viejo",
-    state: "CA",
-    level: levels.rated,
-    gender: genders.girls,
-  },
   { name: "Vacaville", city: "Vacaville", state: "CA", level: levels.rated, gender: genders.girls },
   {
     name: "Valencia (Valencia)",
