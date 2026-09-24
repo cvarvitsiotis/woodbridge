@@ -249,7 +249,7 @@ export default function OfficialResultsSections({ selectedYear }: { selectedYear
       </div>
 
       <Subtitle>Divisions</Subtitle>
-      <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 md:justify-items-start md:pl-5 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 items-start justify-items-center gap-6 md:grid-cols-2 md:justify-items-start md:pl-5 xl:grid-cols-3 2xl:grid-cols-4">
         <ResultGrid division={divisions.one} selectedYear={selectedYear} />
         <ResultGrid division={divisions.two} selectedYear={selectedYear} />
         <ResultGrid division={divisions.three} selectedYear={selectedYear} />
