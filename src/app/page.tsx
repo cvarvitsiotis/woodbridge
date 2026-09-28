@@ -302,8 +302,8 @@ function HighlightsCTAButton() {
               </Modal.Heading>
             </Modal.Header>
             <Modal.Body className="mt-8 space-y-8 text-base text-foreground">
-              <YouTubeLinkAndDescription videoId="-s5vcLtg-lQ" description="Boys Sweepstakes" />
               <YouTubeLinkAndDescription videoId="karGxuX56yY" description="Girls Sweepstakes" />
+              <YouTubeLinkAndDescription videoId="-s5vcLtg-lQ" description="Boys Sweepstakes" />
               <YouTubeLinkAndDescription
                 videoId="1fT3kE_5X6A"
                 description="Recap by Rich Gonzalez of PrepCalTrack"
