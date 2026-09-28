@@ -13,6 +13,10 @@ import ButtonLink from "@/components/buttonLink";
 import StyledAlert from "@/components/styledAlert";
 import { DropdownItemIcon } from "@/components/navbarDropdown";
 import { PageType } from "@/types";
+import { Modal } from "@heroui/react";
+import StyledButton from "@/components/styledButton";
+import Image from "next/image";
+import { getParagraphStyle } from "@/styles/styles";
 
 function SingleAlertMessage({ isScreenShort }: { isScreenShort: boolean }) {
   if (new Date().getFullYear() < dates.meetStartDateParts.year) {
@@ -224,6 +228,7 @@ function CamelCapClassic({
 function CTAButtons({ isScreenShort }: { isScreenShort: boolean }) {
   const isAthleteRegistrationClosed = new Date() > dates.athleteRegistrationEndDateParts.date;
   const isMeetStarted = new Date() > dates.meetStartDateParts.date;
+  const isMeetEnded = new Date() > dates.meetEndDateParts.date;
 
   return (
     <div
@@ -240,7 +245,9 @@ function CTAButtons({ isScreenShort }: { isScreenShort: boolean }) {
         <PrimaryCTAButton page={pages.registration} label="Register" />
       )}
 
-      {isAthleteRegistrationClosed ? (
+      {isMeetEnded ? (
+        <HighlightsCTAButton />
+      ) : isAthleteRegistrationClosed ? (
         <SecondaryCTAButton page={pages.schedule} label={pages.schedule.menuLabel} />
       ) : (
         <SecondaryCTAButton page={pages.about} label={pages.about.menuLabel} />
@@ -270,6 +277,84 @@ function SecondaryCTAButton({ page, label }: { page: PageType; label: string }) 
       <DropdownItemIcon page={page} />
       {label}
     </ButtonLink>
+  );
+}
+
+function HighlightsCTAButton() {
+  return (
+    <Modal>
+      <StyledButton
+        variant={siteConfig.showAmbientVideo ? "secondary" : "outline"}
+        size="lg"
+        className={clsx(siteConfig.showAmbientVideo && "bg-yellow-100 text-zinc-600")}
+        customVariantColor={!siteConfig.showAmbientVideo ? "ghostSecondary" : undefined}
+      >
+        <DropdownItemIcon page={pages.about} />
+        Weekend Highlights
+      </StyledButton>
+      <Modal.Backdrop>
+        <Modal.Container size="md" placement="top" scroll="inside">
+          <Modal.Dialog className="bg-surface">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading className="text-center text-xl font-semibold">
+                Weekend Highlights
+              </Modal.Heading>
+            </Modal.Header>
+            <Modal.Body className="mt-8 space-y-8 text-base text-foreground">
+              <YouTubeLinkAndDescription videoId="-s5vcLtg-lQ" description="Boys Sweepstakes" />
+              <YouTubeLinkAndDescription videoId="karGxuX56yY" description="Girls Sweepstakes" />
+              <YouTubeLinkAndDescription
+                videoId="1fT3kE_5X6A"
+                description="Recap by Rich Gonzalez of PrepCalTrack"
+              />
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+
+function YouTubeLinkAndDescription({
+  videoId,
+  description,
+}: {
+  videoId: string;
+  description: string;
+}) {
+  return (
+    <div className="flex items-center justify-start gap-4">
+      <YouTubeLink videoId={videoId} description={description} />
+      <div className={getParagraphStyle()}>{description}</div>
+    </div>
+  );
+}
+
+function YouTubeLink({ videoId, description }: { videoId: string; description: string }) {
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+  return (
+    <BaseLink
+      isExternal
+      href={videoUrl}
+      className="group relative block aspect-video w-full max-w-38 cursor-pointer overflow-hidden rounded-lg bg-black shadow-md transition-all hover:shadow-lg"
+    >
+      <Image
+        fill
+        src={thumbnailUrl}
+        quality={100}
+        alt={description}
+        className="object-cover transition-transform duration-300 group-hover:scale-105"
+        priority={false}
+      />
+      <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
+        <div className="relative flex h-10 w-14 items-center justify-center rounded-xl bg-neutral-900/80 shadow-md transition-all duration-200 group-hover:scale-110 group-hover:bg-red-600">
+          <div className="ml-0.5 h-0 w-0 border-y-[6px] border-l-11 border-y-transparent border-l-white" />
+        </div>
+      </div>
+    </BaseLink>
   );
 }
 
