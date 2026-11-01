@@ -50,11 +50,7 @@ function setIndividualScoringPlaces(teamResults: TeamResultType[]) {
         teamResult.team !== Unknown && teamResult.individualResults.length >= SCORING_TEAM_SIZE,
     )
     .flatMap((teamResult) => teamResult.individualResults)
-    .filter(
-      (individualResult) =>
-        individualResult.place !== undefined && individualResult.resultTime !== undefined,
-    )
-    .sort((a, b) => a.place! - b.place!)
+    .sort((a, b) => a.place - b.place)
     .forEach((individualResult) => {
       const currentTeamCount = currentTeamCounts.get(individualResult.team) ?? 0;
       if (currentTeamCount >= SCORING_TEAM_SIZE + 2) return;
@@ -73,16 +69,22 @@ function setTeamScores(teamResults: TeamResultType[]) {
 
     const topScorers = scorers.slice(0, SCORING_TEAM_SIZE);
     teamResult.score = topScorers.reduce((sum, scorer) => sum + scorer.scoringPlace!, 0);
-    teamResult.scoringTime = topScorers.reduce((sum, scorer) => sum + scorer.resultTime!, 0);
-    teamResult.scoringTimeStr = getResultTimeStr(teamResult.scoringTime, 1).resultTimeStr;
-    teamResult.averageTimeStr = getResultTimeStr(
-      teamResult.scoringTime / SCORING_TEAM_SIZE,
-      1,
-    ).resultTimeStr;
-    teamResult.spreadTimeStr = getResultTimeStr(
-      scorers[SCORING_TEAM_SIZE - 1].resultTime! - scorers[0].resultTime!,
-      1,
-    ).resultTimeStr;
+    teamResult.firstFourScore = topScorers
+      .slice(0, SCORING_TEAM_SIZE - 1)
+      .reduce((sum, scorer) => sum + scorer.scoringPlace!, 0);
+
+    if (topScorers.every((scorer) => scorer.resultTime !== undefined)) {
+      teamResult.scoringTime = topScorers.reduce((sum, scorer) => sum + scorer.resultTime!, 0);
+      teamResult.scoringTimeStr = getResultTimeStr(teamResult.scoringTime, 1).resultTimeStr;
+      teamResult.averageTimeStr = getResultTimeStr(
+        teamResult.scoringTime / SCORING_TEAM_SIZE,
+        1,
+      ).resultTimeStr;
+      teamResult.spreadTimeStr = getResultTimeStr(
+        scorers[SCORING_TEAM_SIZE - 1].resultTime! - scorers[0].resultTime!,
+        1,
+      ).resultTimeStr;
+    }
 
     if (scorers.length < SCORING_TEAM_SIZE + 1) return;
 
@@ -97,7 +99,7 @@ function setTeamRanks(teamResults: TeamResultType[]) {
       (a, b) =>
         a.score! - b.score! ||
         (a.sixthRunnerPlace ?? Infinity) - (b.sixthRunnerPlace ?? Infinity) ||
-        a.scoringTime! - b.scoringTime!,
+        a.firstFourScore! - b.firstFourScore!,
     )
     .forEach((teamResult, index) => {
       teamResult.rank = index + 1;

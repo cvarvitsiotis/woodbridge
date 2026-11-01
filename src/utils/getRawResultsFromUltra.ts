@@ -115,7 +115,7 @@ export function getResultTimeStr(resultTime: number, fractionLen: number) {
   const minutesStrAbbr = minutes.toString();
   const minutesStr = minutes.toString().padStart(2, "0");
   const secondsStr = seconds.toString().padStart(2, "0");
-  const fractionStr = thousandths.toString().padStart(fractionLen, "0").slice(0, fractionLen);
+  const fractionStr = thousandths.toString().padStart(3, "0").slice(0, fractionLen);
 
   const resultTimeStr =
     (hours ? `${hoursStrAbbr}:` : "") +
