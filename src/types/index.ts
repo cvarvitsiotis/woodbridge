@@ -160,7 +160,7 @@ export interface IndividualType {
 }
 
 export interface IndividualResultType extends IndividualType {
-  place?: number;
+  place: number;
   resultTime?: number;
   resultTimeStr?: string;
   scoringPlace?: number;
@@ -170,6 +170,7 @@ export interface TeamResultType {
   rank?: number;
   team: string;
   score?: number;
+  firstFourScore?: number;
   sixthRunnerPlace?: number;
   scoringTime?: number;
   scoringTimeStr?: string;
