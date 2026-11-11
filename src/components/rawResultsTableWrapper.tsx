@@ -12,9 +12,9 @@ const columns: ColumnProps[] = [
 
 function RawResultsTable({ rawResults }: { rawResults: RawResult[] }) {
   return (
-    <Table>
+    <Table className="mx-auto w-fit md:mx-0">
       <Table.ScrollContainer>
-        <Table.Content aria-label={pages.timing.menuLabel}>
+        <Table.Content aria-label={pages.timing.menuLabel} className="whitespace-nowrap">
           <Table.Header columns={columns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
@@ -44,7 +44,7 @@ export default function RawResultsTableWrapper({
 }) {
   if (!rawResults) return null;
   return (
-    <div className="max-w-sm space-y-2">
+    <div className="space-y-2">
       <p>Results:</p>
       <RawResultsTable rawResults={rawResults} />
     </div>

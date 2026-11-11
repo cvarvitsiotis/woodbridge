@@ -31,9 +31,9 @@ function RaceIndividualResultsTable({
   );
 
   return (
-    <Table>
+    <Table className="mx-auto w-fit md:mx-0">
       <Table.ScrollContainer>
-        <Table.Content aria-label={pages.raceResults.menuLabel}>
+        <Table.Content aria-label={pages.raceResults.menuLabel} className="whitespace-nowrap">
           <Table.Header columns={columns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>

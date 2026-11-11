@@ -34,7 +34,7 @@ export default function RacesTable({
     return (
       <Table>
         <Table.ScrollContainer>
-          <Table.Content aria-label={pages.schedule.menuLabel}>
+          <Table.Content aria-label={pages.schedule.menuLabel} className="whitespace-nowrap">
             <Table.Header columns={isFeatured ? featuredColumns : columns}>
               {(column) => (
                 <Table.Column

@@ -29,11 +29,14 @@ function TeamsSection({
 }) {
   const header = "TEAMS";
   return (
-    <div className="min-w-[40%] space-y-3">
+    <div className="space-y-3">
       <div className="text-center">{header}</div>
-      <Table>
+      <Table className="mx-auto w-fit">
         <Table.ScrollContainer>
-          <Table.Content aria-label={`${sectionDescription} ${header}`}>
+          <Table.Content
+            aria-label={`${sectionDescription} ${header}`}
+            className="whitespace-nowrap"
+          >
             <Table.Header columns={teamColumns}>
               {(column) => (
                 <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
@@ -66,11 +69,14 @@ function IndividualsSection({
 }) {
   const header = "INDIVIDUALS";
   return (
-    <div className="min-w-[55%] space-y-3">
+    <div className="space-y-3">
       <div className="text-center">INDIVIDUALS</div>
-      <Table>
+      <Table className="mx-auto w-fit">
         <Table.ScrollContainer>
-          <Table.Content aria-label={`${sectionDescription} ${header}`}>
+          <Table.Content
+            aria-label={`${sectionDescription} ${header}`}
+            className="whitespace-nowrap"
+          >
             <Table.Header columns={individualColumns}>
               {(column) => (
                 <Table.Column id={column.id} isRowHeader={column.isRowHeader}>

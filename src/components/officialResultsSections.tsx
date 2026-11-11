@@ -86,6 +86,7 @@ function ResultLink({
     <BaseLink
       isExternal={isExternal}
       prefetch={false}
+      scroll={false}
       href={href}
       className={clsx("hover:underline", isFontLight && "font-light")}
     >
@@ -356,8 +357,8 @@ function OverallCard({ selectedYear }: { selectedYear: number }) {
   return (
     <ResultCard
       title="Overall"
-      backgroundColor="bg-orange-200"
-      borderColor="border-orange-400/60"
+      backgroundColor="bg-teal-200"
+      borderColor="border-teal-400/60"
       gridRowsClassName="grid-rows-[repeat(2,auto)]"
     >
       <OverallGenderColumn gender={overallGenders.girls} selectedYear={selectedYear} />

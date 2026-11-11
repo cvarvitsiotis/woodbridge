@@ -34,10 +34,11 @@ function TeamResultsTable({
   );
 
   return (
-    <Table>
+    <Table className="mx-auto w-fit md:mx-0">
       <Table.ScrollContainer>
         <Table.Content
           aria-label={isRaceResults ? pages.raceResults.menuLabel : pages.timing.menuLabel}
+          className="whitespace-nowrap"
         >
           <Table.Header columns={columns}>
             {(column) => (
