@@ -26,7 +26,6 @@ export interface RaceType {
 export interface LevelType {
   level: string;
   scheduleFormat?: string;
-  resultSpan2?: boolean;
   isIndivOnly?: boolean;
   resultLink: string;
   resultOrder: number;
@@ -151,23 +150,36 @@ export interface RawResult {
 }
 
 export interface IndividualType {
-  bib: number;
-  firstName: string;
-  lastName: string;
+  bib?: number;
+  firstName?: string;
+  lastName?: string;
   gender: string;
-  age: string;
+  age?: number;
   team: string;
 }
 
 export interface IndividualResultType extends IndividualType {
+  year?: number;
+  raceNum?: number;
   place: number;
+  overallPlace?: number;
   resultTime?: number;
   resultTimeStr?: string;
   scoringPlace?: number;
 }
 
+export interface OverallGenderType {
+  param: string;
+  label: string;
+  code: string;
+}
+
+export interface OverallGendersType {
+  [key: string]: OverallGenderType;
+}
+
 export interface TeamResultType {
-  rank?: number;
+  place?: number;
   team: string;
   score?: number;
   firstFourScore?: number;

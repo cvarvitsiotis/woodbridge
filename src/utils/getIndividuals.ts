@@ -6,12 +6,13 @@ function getIndividualsInternal(fileContent: string) {
     .filter((line) => line)
     .map((line) => {
       const fields = line.split(",");
+      const age = parseInt(fields[4], 10);
       return {
         bib: Number(fields[0]),
         firstName: fields[1],
         lastName: fields[2],
         gender: fields[3],
-        age: fields[4],
+        age: Number.isNaN(age) ? undefined : age,
         team: fields[5],
       };
     });

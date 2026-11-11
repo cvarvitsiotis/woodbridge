@@ -1,45 +1,31 @@
 "use client";
 
-import { useState } from "react";
-import { data } from "@/config/data";
+import { ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { data, resultYears } from "@/config/data";
+import { pages } from "@/config/site";
 import StyledSelect from "@/components/styledSelect";
 import OfficialResultsSections from "@/components/officialResultsSections";
+import { NoResultsAlert } from "@/components/resultSection";
 import { dates } from "@/config/dates";
 import StyledAlert from "./styledAlert";
 
-const allYears = Array.from(
-  { length: data.pdfResultEndYear - data.htmlResultStartYear + 1 },
-  (_, i) => data.htmlResultStartYear + i,
-)
-  .sort((a, b) => b - a)
-  .map((year) => GetYearOption(year));
-
-const disabledYears = Array.from(
-  { length: data.pdfResultStartYear - data.htmlResultStartYear },
-  (_, i) => data.htmlResultStartYear + i,
-)
-  .sort((a, b) => b - a)
-  .map((year) => GetYearOption(year));
-
-function GetYearOption(year: number) {
-  return year.toString() + (year < data.pdfResultStartYear ? " (coming soon)" : "");
-}
+const allYears = [...resultYears].reverse().map((year) => year.toString());
 
 function YearSelect({
   selectedYear,
   handleChangeSelectedYear,
 }: {
-  selectedYear: string;
+  selectedYear: number;
   handleChangeSelectedYear: (value: string) => void;
 }) {
   return (
     <StyledSelect
-      selectedKey={selectedYear}
+      selectedKey={selectedYear.toString()}
       onChange={handleChangeSelectedYear}
       selectClassName="w-32"
       valueClassName="text-base"
       options={allYears}
-      disabledKeys={disabledYears}
     />
   );
 }
@@ -55,11 +41,17 @@ function OfficialResultsAlert() {
   );
 }
 
-export default function OfficialResults() {
-  const [selectedYear, setSelectedYear] = useState(allYears[0]);
+export default function OfficialResults({
+  selectedYear,
+  children,
+}: {
+  selectedYear: number;
+  children?: ReactNode;
+}) {
+  const router = useRouter();
 
   function handleChangeSelectedYear(value: string): void {
-    setSelectedYear(value);
+    router.push(`${pages.raceResults.path}/${value}`, { scroll: false });
   }
 
   return (
@@ -75,7 +67,15 @@ export default function OfficialResults() {
         />
       </div>
 
-      <OfficialResultsSections selectedYear={selectedYear} />
+      {selectedYear === 2020 ? (
+        <div className="pt-8">
+          <NoResultsAlert>No meet in 2020.</NoResultsAlert>
+        </div>
+      ) : (
+        <OfficialResultsSections selectedYear={selectedYear} />
+      )}
+
+      {children}
     </>
   );
 }

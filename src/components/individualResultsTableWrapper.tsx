@@ -33,7 +33,7 @@ function IndividualResultsTable({
           </Table.Header>
           <Table.Body items={individualResults}>
             {(individualResult) => (
-              <Table.Row id={individualResult.bib}>
+              <Table.Row id={`${individualResult.place}-${individualResult.bib ?? ""}`}>
                 <StyledTableCell>{individualResult.place}</StyledTableCell>
                 <StyledTableCell>{individualResult.bib}</StyledTableCell>
                 <StyledTableCell>{individualResult.firstName}</StyledTableCell>

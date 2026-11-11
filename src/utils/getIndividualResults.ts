@@ -20,7 +20,6 @@ export default function getIndividualResults(
       firstName: Unknown,
       lastName: Unknown,
       gender: "?",
-      age: "?",
       team: Unknown,
     };
 

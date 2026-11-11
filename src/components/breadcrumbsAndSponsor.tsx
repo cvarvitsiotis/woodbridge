@@ -2,13 +2,13 @@
 
 import { Breadcrumbs } from "@heroui/react";
 import { usePathname } from "next/navigation";
-import { pages } from "@/config/site";
+import { isCurrentPage, pages } from "@/config/site";
 import PresentedByAsics from "@/components/presentedByAsics";
 
 export default function BreadcrumbsAndSponsor() {
   const pathname = usePathname();
 
-  const page = Object.values(pages).find((page) => page.path === pathname);
+  const page = Object.values(pages).find((page) => isCurrentPage(page, pathname));
 
   if (page === pages.home) return null;
 

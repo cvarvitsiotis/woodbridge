@@ -23,8 +23,12 @@ export default function TeamResultsWrapper({
         shouldPromptTeams={shouldPromptTeams}
         handleShouldPromptTeamsAction={handleShouldPromptTeamsAction}
       />
-
-      <MemoizedTeamResultsTableWrapper teamResults={teamResults} />
+      {teamResults.length > 0 && (
+        <div className="space-y-2">
+          <p>Team Results:</p>
+          <MemoizedTeamResultsTableWrapper teamResults={teamResults} />
+        </div>
+      )}
     </>
   );
 }

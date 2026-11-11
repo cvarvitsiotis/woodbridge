@@ -2,11 +2,7 @@
 
 import { Table } from "@heroui/react";
 
-import {
-  scheduleLevelGenderToken,
-  scheduleLevelSweepstakesNameToken,
-  sweepstakesLevelName,
-} from "@/config/races";
+import { getRaceDescription } from "@/config/races";
 import { RaceType } from "@/types";
 import Divisions from "@/components/divisions";
 import { pages } from "@/config/site";
@@ -25,17 +21,6 @@ const featuredColumns = columns.filter((column) => column.id !== "division");
 
 function getColumnInlinePadding(isNum: boolean) {
   return clsx(isNum ? "px-2" : "px-3", "lg:px-4");
-}
-
-function getDescription(race: RaceType): string {
-  if (race.level.scheduleFormat) {
-    return race.level.scheduleFormat
-      .replace(scheduleLevelGenderToken, race.gender)
-      .replace(scheduleLevelSweepstakesNameToken, sweepstakesLevelName[race.gender]);
-  }
-
-  const heat = race.heat ? ` - ${race.heat}` : "";
-  return `${race.level.level} ${race.gender}${heat}`;
 }
 
 export default function RacesTable({
@@ -76,7 +61,7 @@ export default function RacesTable({
                     </StyledTableCell>
                   )}
                   <StyledTableCell className={getColumnInlinePadding(false)}>
-                    {getDescription(item)}
+                    {getRaceDescription(item)}
                   </StyledTableCell>
                 </Table.Row>
               )}

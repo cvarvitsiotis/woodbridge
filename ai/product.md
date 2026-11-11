@@ -47,13 +47,20 @@ The Woodbridge Cross Country Classic website is the official online hub for the 
 - Live video streaming of the race via RunnerSpace
 - Direct links to Athletic.net timing platform
 
+**Timing Tools**
+
+- Convert Ultra timing files to LIF
+- Generate individual, age group, and team results from Ultra or LIF files
+
 **Historical Results**
 
 - **All-Time Lists**:
   - All-time individual records (fastest times by gender and level)
   - All-time team results and averages
-  - Records spanning 40+ years (1981-2025)
-- **Official Results**: Year-by-year race results with downloadable PDFs (2007-2025)
+  - Records spanning 40+ years (1981-2026)
+- **Official Results**: Year-by-year race results
+  - 1998-2006: Web pages with each race's individual and team results, plus overall Top Individuals (top 100) and Teams (each school's five fastest times across all races) for girls and boys
+  - 2007-2026: Downloadable PDFs (no meet in 2020)
 
 ### 4. Race Categories & Divisions
 
@@ -61,16 +68,16 @@ The event accommodates multiple participant levels:
 
 **Divisions**
 
-- Division I (Blue), II (Gold), III (Red), IV (White)
+- Division I (Blue), II (Gold), III (Red), IV (White), V (Green)
 
 **Competition Levels**
 
 - Novice (individual entries only)
-- Freshman
-- Sophomore
+- Frosh, Soph, Frosh / Soph
 - Junior Varsity
-- Junior / Senior
-- Junior, Senior (split levels)
+- Junior / Senior, Junior, Senior
+- Varsity
+- Rated and Sweepstakes (featured races)
 
 **Gender Categories**
 
@@ -147,19 +154,19 @@ The event accommodates multiple participant levels:
 | **Racing Info**  | Schedule, Maps, Teams, Entries, Aerial Tour        | Race logistics and participant info                       |
 | **General Info** | About, Hotels, Parking, Partners, Galleries        | Event context and practical information                   |
 | **Results**      | Live Results, All-Time Lists, Official Results     | Race outcomes and historical records                      |
-| **Other**        | Contact, Timing                                    | Additional resources                                      |
+| **Other**        | Contact, Timing                                    | Contact info and race-day timing tools                    |
 
 ## Timeline-Based Content
 
-The site displays content based on event dates:
+The site displays content based on event dates set in `src/config/data.ts` (2026 dates shown):
 
-- **Team Registration**: Opens January 1, closes July 1
-- **Athlete Registration**: Opens August 1, closes September 4
-- **T-Shirt Pre-Orders**: Opens August 0, closes September 16
-- **Participating Teams Published**: July 1 (updated August 1)
+- **Team Registration**: Opens January 1; Saturday morning session only from April 4; waiting list only from July 29; closes August 31
+- **Athlete Registration**: Opens August 1 on Athletic.net (link posted July 29), closes September 3
+- **T-Shirt Pre-Orders**: Opens August 14, closes September 11
+- **Participating Teams Published**: May 9 (division and varsity heat added July 14)
 - **Featured Entries Published**: September 1
-- **Hotel Reservations Deadline**: August 21
-- **Parking Purchase Window**: August 30 onwards
+- **Hotel Reservation Deadlines**: August 21 (Comfort Inn), August 27 (Embassy Suites), September 1 (Hilton Garden Inn)
+- **Parking Passes**: On sale from August 13
 - **Race Date**: September 18, 2026 (5:00 PM start)
 
 ## Responsive Design
