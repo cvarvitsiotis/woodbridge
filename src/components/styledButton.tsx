@@ -11,6 +11,8 @@ export default function StyledButton({
   variant,
   customVariantColor,
   size,
+  isIconOnly,
+  "aria-label": ariaLabel,
   onPress,
   className,
   children,
@@ -22,6 +24,8 @@ export default function StyledButton({
     <Button
       variant={variant}
       size={size}
+      isIconOnly={isIconOnly}
+      aria-label={ariaLabel}
       className={clsx(
         className,
         customVariantColor === "ghostPrimary" && "border-accent text-accent hover:bg-accent",

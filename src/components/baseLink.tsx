@@ -7,6 +7,7 @@ export default function BaseLink({
   href,
   isExternal = false,
   prefetch,
+  scroll,
   className,
   accentColor,
   applyBaseLinkStyle = true,
@@ -16,6 +17,7 @@ export default function BaseLink({
   href: string;
   isExternal?: boolean;
   prefetch?: boolean;
+  scroll?: boolean;
   className?: string;
   accentColor?: boolean;
   applyBaseLinkStyle?: boolean;
@@ -26,6 +28,7 @@ export default function BaseLink({
     <NextLink
       href={href}
       prefetch={prefetch}
+      scroll={scroll}
       {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
       className={clsx(applyBaseLinkStyle && getBaseLinkStyle(accentColor), className)}
       onClick={onClick}

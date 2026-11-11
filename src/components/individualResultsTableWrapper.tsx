@@ -21,9 +21,9 @@ function IndividualResultsTable({
   individualResults: IndividualResultType[];
 }) {
   return (
-    <Table>
+    <Table className="mx-auto w-fit md:mx-0">
       <Table.ScrollContainer>
-        <Table.Content aria-label={pages.timing.menuLabel}>
+        <Table.Content aria-label={pages.timing.menuLabel} className="whitespace-nowrap">
           <Table.Header columns={individualResultsColumns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>

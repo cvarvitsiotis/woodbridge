@@ -68,7 +68,7 @@ export default function OfficialResults({
       </div>
 
       {selectedYear === 2020 ? (
-        <div className="pt-8">
+        <div className="flex justify-center pt-8">
           <NoResultsAlert>No meet in 2020.</NoResultsAlert>
         </div>
       ) : (
