@@ -1,3 +1,5 @@
+"use client";
+
 import { IndividualResultType } from "@/types";
 import StyledTableCell from "./styledTableCell";
 import { Table } from "@heroui/react";
@@ -6,42 +8,72 @@ import { ColumnProps } from "react-aria-components/Table";
 
 const individualResultsColumns: ColumnProps[] = [
   { id: "place", textValue: "Place", isRowHeader: true },
-  { id: "bib", textValue: "Bib" },
-  { id: "firstName", textValue: "First Name" },
-  { id: "lastName", textValue: "Last Name" },
-  { id: "gender", textValue: "Gender" },
-  { id: "age", textValue: "Age" },
+  { id: "name", textValue: "Name" },
   { id: "team", textValue: "Team" },
-  { id: "resultTime", textValue: "Result Time" },
+  { id: "time", textValue: "Time" },
+  { id: "age", textValue: "Age" },
+  { id: "gender", textValue: "Gender" },
+  { id: "bib", textValue: "Bib" },
 ];
+
+function getName({ firstName, lastName }: IndividualResultType): string {
+  return [firstName, lastName].filter(Boolean).join(" ");
+}
+
+function getColumnLabel(column: ColumnProps, isRaceResults: boolean): string | undefined {
+  if (isRaceResults && column.id === "team") return "School";
+  if (isRaceResults && column.id === "age") return "Grade";
+  return column.textValue;
+}
 
 function IndividualResultsTable({
   individualResults,
+  isRaceResults,
 }: {
   individualResults: IndividualResultType[];
+  isRaceResults: boolean;
 }) {
+  const showAge =
+    !isRaceResults ||
+    individualResults.some((individualResult) => individualResult.age !== undefined);
+  const showBib =
+    !isRaceResults ||
+    individualResults.some((individualResult) => individualResult.bib !== undefined);
+  const columns = individualResultsColumns.filter(
+    (column) =>
+      (column.id !== "age" || showAge) &&
+      (column.id !== "gender" || !isRaceResults) &&
+      (column.id !== "bib" || showBib),
+  );
+
   return (
     <Table className="mx-auto w-fit md:mx-0">
       <Table.ScrollContainer>
-        <Table.Content aria-label={pages.timing.menuLabel} className="whitespace-nowrap">
-          <Table.Header columns={individualResultsColumns}>
+        <Table.Content
+          aria-label={isRaceResults ? pages.raceResults.menuLabel : pages.timing.menuLabel}
+          className="whitespace-nowrap"
+        >
+          <Table.Header columns={columns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
-                {column.textValue}
+                {getColumnLabel(column, isRaceResults)}
               </Table.Column>
             )}
           </Table.Header>
           <Table.Body items={individualResults}>
             {(individualResult) => (
-              <Table.Row id={`${individualResult.place}-${individualResult.bib ?? ""}`}>
-                <StyledTableCell>{individualResult.place}</StyledTableCell>
-                <StyledTableCell>{individualResult.bib}</StyledTableCell>
-                <StyledTableCell>{individualResult.firstName}</StyledTableCell>
-                <StyledTableCell>{individualResult.lastName}</StyledTableCell>
-                <StyledTableCell>{individualResult.gender}</StyledTableCell>
-                <StyledTableCell>{individualResult.age}</StyledTableCell>
+              <Table.Row
+                id={`${individualResult.raceNum ?? ""}-${individualResult.place}-${individualResult.bib ?? ""}`}
+              >
+                <StyledTableCell>
+                  {individualResult.overallPlace ?? individualResult.place}
+                </StyledTableCell>
+                <StyledTableCell>{getName(individualResult)}</StyledTableCell>
                 <StyledTableCell>{individualResult.team}</StyledTableCell>
                 <StyledTableCell>{individualResult.resultTimeStr}</StyledTableCell>
+                {showAge && <StyledTableCell>{individualResult.age}</StyledTableCell>}
+                {!isRaceResults && <StyledTableCell>{individualResult.gender}</StyledTableCell>}
+                {showBib && <StyledTableCell>{individualResult.bib}</StyledTableCell>}
               </Table.Row>
             )}
           </Table.Body>
@@ -53,14 +85,13 @@ function IndividualResultsTable({
 
 export default function IndividualResultsTableWrapper({
   individualResults,
+  isRaceResults = false,
 }: {
-  individualResults: IndividualResultType[] | undefined;
+  individualResults: IndividualResultType[];
+  isRaceResults?: boolean;
 }) {
-  if (!individualResults || individualResults.length === 0) return null;
+  if (individualResults.length === 0) return null;
   return (
-    <div className="space-y-2">
-      <p>Individual Results:</p>
-      <IndividualResultsTable individualResults={individualResults} />
-    </div>
+    <IndividualResultsTable individualResults={individualResults} isRaceResults={isRaceResults} />
   );
 }

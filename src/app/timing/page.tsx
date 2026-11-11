@@ -2,8 +2,7 @@ import ParseUltra from "@/components/parseUltra";
 import ParseUltraAndGenerateResults from "@/components/parseUltraAndGenerateResults";
 import PageHeader from "@/components/pageHeader";
 import { pages } from "@/config/site";
-import { getParagraphStyle, getSubheaderStyle } from "@/styles/styles";
-import clsx from "clsx";
+import { getSubheaderStyle } from "@/styles/styles";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { TabProps, Tabs } from "@heroui/react";
@@ -23,7 +22,7 @@ function Section({ subheader, children }: { subheader: string; children: ReactNo
   return (
     <div className="space-y-4 pt-6">
       <h1 className={getSubheaderStyle()}>{subheader}</h1>
-      <div className={clsx("space-y-4", getParagraphStyle(false, false))}>{children}</div>
+      <div className="space-y-4">{children}</div>
     </div>
   );
 }
