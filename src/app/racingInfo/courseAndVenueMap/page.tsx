@@ -32,7 +32,7 @@ export default async function Page() {
       </div>
       <div className="pt-7">
         <div className="mx-auto max-w-200 text-right">
-          <BaseLink isExternal href="/images/woodbridge-course.pdf">
+          <BaseLink isExternal prefetch={false} href="/images/woodbridge-course.pdf">
             <div className="flex items-center gap-0.5 text-zinc-600">
               <PrintIcon size={30} />
               <p>PRINT</p>

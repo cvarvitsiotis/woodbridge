@@ -29,6 +29,13 @@ export const data = {
   featuredEntriesArticle: "2026/09/02/woodbridge-classic-featured-entries-2/",
 };
 
+export const resultYears = Array.from(
+  { length: data.pdfResultEndYear - data.htmlResultStartYear + 1 },
+  (_, i) => data.htmlResultStartYear + i,
+);
+
+export const htmlResultYears = resultYears.filter((year) => year < data.pdfResultStartYear);
+
 const irvineTiming = "https://irvinetiming.anet.live";
 
 export const urls = {

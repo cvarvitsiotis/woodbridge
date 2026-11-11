@@ -2,7 +2,7 @@ import { IndividualResultType } from "@/types";
 
 interface AgeGroupInfo {
   ageGroupsWithLabels: Map<string, string>;
-  ageToAgeGroups: Map<string, string>;
+  ageToAgeGroups: Map<number, string>;
 }
 
 export default function getAgeGroupResults(
@@ -26,7 +26,7 @@ function getAgeGroupInfo(ageGroupsStr: string): AgeGroupInfo {
 
   ageGroups.sort((a, b) => Number(a) - Number(b));
 
-  const ageToAgeGroups = new Map<string, string>();
+  const ageToAgeGroups = new Map<number, string>();
   const ageGroupsWithLabels = new Map<string, string>();
   let previousMaxAge = -1;
 
@@ -37,7 +37,7 @@ function getAgeGroupInfo(ageGroupsStr: string): AgeGroupInfo {
     const ageGroupLabel = `${minAge} - ${maxAgeNum}`;
 
     for (let age = minAge; age <= maxAgeNum; age += 1) {
-      ageToAgeGroups.set(String(age), maxAge);
+      ageToAgeGroups.set(age, maxAge);
     }
 
     ageGroupsWithLabels.set(maxAge, ageGroupLabel);
@@ -82,7 +82,10 @@ function groupIndividualResults(
   });
 
   individualResults.forEach((individualResult) => {
-    const groupMaxAge = ageGroupInfo.ageToAgeGroups.get(individualResult.age) ?? "?";
+    const groupMaxAge =
+      individualResult.age === undefined
+        ? "?"
+        : (ageGroupInfo.ageToAgeGroups.get(individualResult.age) ?? "?");
 
     const gender = normalizeGender(individualResult.gender);
     const existingEntry = ageGroupResults.get(groupMaxAge)!;

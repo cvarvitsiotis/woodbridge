@@ -1,4 +1,5 @@
 import { RawResult, UltraResult } from "@/types";
+import { data } from "@/config/data";
 
 export const finishTimePattern = /^\d{2}:\d{2}:\d{2}\.\d{3}$/;
 const raceStartTimePattern = /^\d{2}:\d{2}:\d{2}$/;
@@ -107,7 +108,8 @@ export function getResultTimeRounded(resultTime: number) {
   return Math.ceil(resultTime / 100) * 100;
 }
 
-export function getResultTimeStr(resultTime: number, fractionLen: number) {
+export function getResultTimeStr(resultTime: number, fractionLen?: number, year?: number) {
+  if (year !== undefined) fractionLen = getResultTimeFractionLen(year);
   const { hours, minutes, seconds, thousandths } = getTimeComponents(resultTime);
 
   const hoursStrAbbr = hours.toString();
@@ -115,14 +117,21 @@ export function getResultTimeStr(resultTime: number, fractionLen: number) {
   const minutesStrAbbr = minutes.toString();
   const minutesStr = minutes.toString().padStart(2, "0");
   const secondsStr = seconds.toString().padStart(2, "0");
-  const fractionStr = thousandths.toString().padStart(3, "0").slice(0, fractionLen);
+  const fractionStr = fractionLen
+    ? `.${thousandths.toString().padStart(3, "0").slice(0, fractionLen)}`
+    : "";
 
   const resultTimeStr =
     (hours ? `${hoursStrAbbr}:` : "") +
-    `${hours ? minutesStr : minutesStrAbbr}:${secondsStr}.${fractionStr}`;
-  const resultTimeStrFull = `${hoursStr}:${minutesStr}:${secondsStr}.${fractionStr}`;
+    `${hours ? minutesStr : minutesStrAbbr}:${secondsStr}${fractionStr}`;
+  const resultTimeStrFull = `${hoursStr}:${minutesStr}:${secondsStr}${fractionStr}`;
 
   return { resultTimeStr, resultTimeStrFull };
+}
+
+function getResultTimeFractionLen(year: number): number {
+  if (year < data.pdfResultStartYear) return 0;
+  throw new Error(`Result time fraction length is not defined for ${year}`);
 }
 
 export function getTimeComponents(timeInThousandths: number): {

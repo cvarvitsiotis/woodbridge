@@ -2,11 +2,12 @@ import { IndividualResultType, TeamResultType } from "@/types";
 import { Unknown } from "./getIndividualResults";
 import { getResultTimeStr } from "./getRawResultsFromUltra";
 
-const SCORING_TEAM_SIZE = 5;
+export const SCORING_TEAM_SIZE = 5;
 
 export default function getTeamResults(
   individualResults: IndividualResultType[],
   shouldPromptTeams: boolean,
+  year?: number,
 ): TeamResultType[] {
   if (!individualResults || individualResults.length === 0 || !shouldPromptTeams) return [];
 
@@ -14,9 +15,9 @@ export default function getTeamResults(
 
   setIndividualScoringPlaces(teamResults);
 
-  setTeamScores(teamResults);
+  setTeamScores(teamResults, year);
 
-  setTeamRanks(teamResults);
+  setTeamPlaces(teamResults);
 
   return getSortedTeamResults(teamResults);
 }
@@ -59,7 +60,7 @@ function setIndividualScoringPlaces(teamResults: TeamResultType[]) {
     });
 }
 
-function setTeamScores(teamResults: TeamResultType[]) {
+function setTeamScores(teamResults: TeamResultType[], year: number | undefined) {
   teamResults.forEach((teamResult) => {
     const scorers = teamResult.individualResults
       .filter((individualResult) => individualResult.scoringPlace !== undefined)
@@ -75,14 +76,16 @@ function setTeamScores(teamResults: TeamResultType[]) {
 
     if (topScorers.every((scorer) => scorer.resultTime !== undefined)) {
       teamResult.scoringTime = topScorers.reduce((sum, scorer) => sum + scorer.resultTime!, 0);
-      teamResult.scoringTimeStr = getResultTimeStr(teamResult.scoringTime, 1).resultTimeStr;
+      teamResult.scoringTimeStr = getResultTimeStr(teamResult.scoringTime, 1, year).resultTimeStr;
       teamResult.averageTimeStr = getResultTimeStr(
         teamResult.scoringTime / SCORING_TEAM_SIZE,
         1,
+        year,
       ).resultTimeStr;
       teamResult.spreadTimeStr = getResultTimeStr(
         scorers[SCORING_TEAM_SIZE - 1].resultTime! - scorers[0].resultTime!,
         1,
+        year,
       ).resultTimeStr;
     }
 
@@ -92,7 +95,7 @@ function setTeamScores(teamResults: TeamResultType[]) {
   });
 }
 
-function setTeamRanks(teamResults: TeamResultType[]) {
+function setTeamPlaces(teamResults: TeamResultType[]) {
   teamResults
     .filter((teamResult) => teamResult.score !== undefined)
     .sort(
@@ -102,12 +105,12 @@ function setTeamRanks(teamResults: TeamResultType[]) {
         a.firstFourScore! - b.firstFourScore!,
     )
     .forEach((teamResult, index) => {
-      teamResult.rank = index + 1;
+      teamResult.place = index + 1;
     });
 }
 
 function getSortedTeamResults(teamResults: TeamResultType[]): TeamResultType[] {
   return teamResults.sort(
-    (a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.team.localeCompare(b.team),
+    (a, b) => (a.place ?? Infinity) - (b.place ?? Infinity) || a.team.localeCompare(b.team),
   );
 }

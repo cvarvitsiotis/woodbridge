@@ -1,4 +1,4 @@
-import { PagesType } from "@/types";
+import { PagesType, PageType } from "@/types";
 
 export const siteConfig = {
   woodbridge: "Woodbridge",
@@ -120,3 +120,7 @@ export const pages: PagesType = {
     path: "/timing",
   },
 };
+
+export function isCurrentPage(page: PageType, pathname: string): boolean {
+  return pathname === page.path || pathname.startsWith(`${page.path}/`);
+}

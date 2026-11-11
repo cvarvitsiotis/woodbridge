@@ -1,3 +1,5 @@
+"use client";
+
 import { ColumnProps } from "react-aria-components/Table";
 import { TeamResultType } from "@/types";
 import StyledTableCell from "./styledTableCell";
@@ -6,7 +8,7 @@ import { Table } from "@heroui/react";
 import { pages } from "@/config/site";
 
 const teamResultsColumns: ColumnProps[] = [
-  { id: "rank", textValue: "Rank" },
+  { id: "place", textValue: "Place" },
   { id: "team", textValue: "Team", isRowHeader: true },
   { id: "score", textValue: "Score" },
   { id: "scoringTime", textValue: "Time" },
@@ -16,35 +18,55 @@ const teamResultsColumns: ColumnProps[] = [
   { id: "individualScoringPlaces", textValue: "Scoring Order" },
 ];
 
-function TeamResultsTable({ teamResults }: { teamResults: TeamResultType[] }) {
+const scoreColumnIds = ["score", "individualActualPlaces", "individualScoringPlaces"];
+
+function TeamResultsTable({
+  teamResults,
+  isOverall,
+  isRaceResults,
+}: {
+  teamResults: TeamResultType[];
+  isOverall: boolean;
+  isRaceResults: boolean;
+}) {
+  const columns = teamResultsColumns.filter(
+    (column) => !isOverall || !scoreColumnIds.includes(String(column.id)),
+  );
+
   return (
     <Table>
       <Table.ScrollContainer>
-        <Table.Content aria-label={pages.timing.menuLabel}>
-          <Table.Header columns={teamResultsColumns}>
+        <Table.Content
+          aria-label={isRaceResults ? pages.raceResults.menuLabel : pages.timing.menuLabel}
+        >
+          <Table.Header columns={columns}>
             {(column) => (
               <Table.Column id={column.id} isRowHeader={column.isRowHeader}>
-                {column.textValue}
+                {isRaceResults && column.id === "team" ? "School" : column.textValue}
               </Table.Column>
             )}
           </Table.Header>
           <Table.Body items={teamResults}>
             {(teamResult) => (
               <Table.Row id={teamResult.team}>
-                <StyledTableCell>{teamResult.rank}</StyledTableCell>
+                <StyledTableCell>{teamResult.place}</StyledTableCell>
                 <StyledTableCell>{teamResult.team}</StyledTableCell>
-                <StyledTableCell>{teamResult.score}</StyledTableCell>
+                {!isOverall && <StyledTableCell>{teamResult.score}</StyledTableCell>}
                 <StyledTableCell>{teamResult.scoringTimeStr}</StyledTableCell>
                 <StyledTableCell>{teamResult.averageTimeStr}</StyledTableCell>
                 <StyledTableCell>{teamResult.spreadTimeStr}</StyledTableCell>
-                <TeamResultIndividualPlacesTableCell
-                  teamResult={teamResult}
-                  useScoringPlace={false}
-                />
-                <TeamResultIndividualPlacesTableCell
-                  teamResult={teamResult}
-                  useScoringPlace={true}
-                />
+                {!isOverall && (
+                  <TeamResultIndividualPlacesTableCell
+                    teamResult={teamResult}
+                    useScoringPlace={false}
+                  />
+                )}
+                {!isOverall && (
+                  <TeamResultIndividualPlacesTableCell
+                    teamResult={teamResult}
+                    useScoringPlace={true}
+                  />
+                )}
               </Table.Row>
             )}
           </Table.Body>
@@ -61,10 +83,19 @@ function TeamResultIndividualPlacesTableCell({
   teamResult: TeamResultType;
   useScoringPlace: boolean;
 }) {
+  const isScoringTeam = teamResult.score !== undefined;
+  const shownIndividualResults = isScoringTeam
+    ? teamResult.individualResults.filter(
+        (individualResult) => individualResult.scoringPlace !== undefined,
+      )
+    : teamResult.individualResults;
+  const hasCollapsedRunners =
+    !useScoringPlace && shownIndividualResults.length < teamResult.individualResults.length;
+
   return (
     <StyledTableCell>
       <div className="flex">
-        {teamResult.individualResults.map((individualResult) => {
+        {shownIndividualResults.map((individualResult) => {
           const place = useScoringPlace ? individualResult.scoringPlace : individualResult.place;
           if (!place) return null;
           return (
@@ -75,6 +106,9 @@ function TeamResultIndividualPlacesTableCell({
             </TeamResultIndividualsTableCellItem>
           );
         })}
+        {hasCollapsedRunners && (
+          <TeamResultIndividualsTableCellItem>...</TeamResultIndividualsTableCellItem>
+        )}
       </div>
     </StyledTableCell>
   );
@@ -86,14 +120,19 @@ function TeamResultIndividualsTableCellItem({ children }: { children: ReactNode 
 
 export default function TeamResultsTableWrapper({
   teamResults,
+  isOverall = false,
+  isRaceResults = false,
 }: {
   teamResults: TeamResultType[];
+  isOverall?: boolean;
+  isRaceResults?: boolean;
 }) {
   if (!teamResults || teamResults.length === 0) return null;
   return (
-    <div className="space-y-2">
-      <p>Team Results:</p>
-      <TeamResultsTable teamResults={teamResults} />
-    </div>
+    <TeamResultsTable
+      teamResults={teamResults}
+      isOverall={isOverall}
+      isRaceResults={isRaceResults}
+    />
   );
 }

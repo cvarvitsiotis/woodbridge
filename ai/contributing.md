@@ -2,7 +2,7 @@
 
 ## Setup & Development
 
-**Prerequisites**: Node.js 18+ and npm
+**Prerequisites**: Node.js 20.9+ and npm
 
 **Install & Run**
 
@@ -27,14 +27,14 @@ npm start            # Start production server
 
 - Maintain strict mode (`"strict": true`)
 - Define types in `src/types/index.ts` for shared types
-- Use path aliases: `@/components`, `@/config`, `@/hooks`, `@/utils`
+- Use the `@/*` path alias for `src/*` (e.g. `@/components`, `@/config`, `@/results`, `@/utils`)
 - Avoid `any` types; use unions or generics instead
 
 ### Naming Conventions
 
-- **Components**: PascalCase (`MyComponent.tsx`)
+- **Components**: PascalCase names in camelCase files (`TeamResultsTableWrapper` in `teamResultsTableWrapper.tsx`)
 - **Utilities & Hooks**: camelCase (`useWindowDimensions.tsx`)
-- **Files**: kebab-case except for React components
+- **Files**: camelCase, except Next.js special files (`page.tsx`, `layout.tsx`, `not-found.tsx`)
 - **Config exports**: camelCase objects (`siteConfig`, `pageParents`)
 
 ## Project Organization
@@ -42,7 +42,7 @@ npm start            # Start production server
 **Adding Pages**
 
 1. Create directory under `src/app/[section]/[feature]/`
-2. Add `page.tsx` with `"use client"` and metadata export
+2. Add `page.tsx` as a Server Component with a `metadata` export; put interactive parts in `"use client"` components
 3. Update `src/config/site.ts` with page route
 4. Add navbar/breadcrumb entries if needed
 
@@ -66,7 +66,7 @@ npm start            # Start production server
 - **HeroUI v3 Components**: Use for buttons, alerts, tables, forms
 - **No direct CSS**: Avoid CSS files except `src/styles/globals.css` and `fonts.ts`
 - **Responsive Hooks**: Use `useWindowDimensions()` for viewport tracking
-- **Class Sorting**: Prettier auto-sorts Tailwind classes alphabetically
+- **Class Sorting**: Prettier sorts Tailwind classes in Tailwind's recommended order
 
 ## Common Patterns
 

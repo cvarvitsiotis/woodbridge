@@ -35,7 +35,7 @@ function AgeGroupResultsTable({
           </Table.Header>
           <Table.Body items={ageGroupResults}>
             {(ageGroupResult) => (
-              <Table.Row id={ageGroupResult.bib}>
+              <Table.Row id={`${ageGroupResult.place}-${ageGroupResult.bib ?? ""}`}>
                 <StyledTableCell>{ageGroupResult.ageGroup}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.gender}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.rank}</StyledTableCell>

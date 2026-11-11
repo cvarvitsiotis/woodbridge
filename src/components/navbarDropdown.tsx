@@ -25,7 +25,7 @@ import {
 } from "./icons";
 
 import { PageType } from "@/types";
-import { pages, siteConfig } from "@/config/site";
+import { isCurrentPage, pages, siteConfig } from "@/config/site";
 import clsx from "clsx";
 
 export function DropdownItemIcon({ page }: { page: PageType }) {
@@ -117,11 +117,14 @@ export default function NavbarDropdown({
                 href={page.path}
                 textValue={page.menuLabel}
               >
-                <div className={clsx(pathname === page.path && "text-accent")}>
+                <div className={clsx(isCurrentPage(page, pathname) && "text-accent")}>
                   <DropdownItemIcon page={page} />
                 </div>
                 <Label
-                  className={clsx("text-lg font-normal", pathname === page.path && "text-accent")}
+                  className={clsx(
+                    "text-lg font-normal",
+                    isCurrentPage(page, pathname) && "text-accent",
+                  )}
                 >
                   {page.menuLabel}
                 </Label>
