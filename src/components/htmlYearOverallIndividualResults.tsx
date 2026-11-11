@@ -1,5 +1,5 @@
+import IndividualResultsTableWrapper from "@/components/individualResultsTableWrapper";
 import { overallResultTypes } from "@/components/officialResultsSections";
-import RaceIndividualResultsTableWrapper from "@/components/raceIndividualResultsTableWrapper";
 import ResultSection, { NoResultsAlert, ResultDescription } from "@/components/resultSection";
 import { getYearResults } from "@/results";
 import { OverallGenderType } from "@/types";
@@ -24,7 +24,7 @@ export default async function HtmlYearOverallIndividualResults({
         <span className="font-semibold">{`${gender.label} ${overallResultTypes.individuals.label}`}</span>
       </ResultDescription>
       {individualResults.length > 0 ? (
-        <RaceIndividualResultsTableWrapper individualResults={individualResults} />
+        <IndividualResultsTableWrapper individualResults={individualResults} isRaceResults={true} />
       ) : (
         <NoResultsAlert>No results available.</NoResultsAlert>
       )}

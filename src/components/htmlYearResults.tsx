@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import RaceIndividualResultsTableWrapper from "@/components/raceIndividualResultsTableWrapper";
+import IndividualResultsTableWrapper from "@/components/individualResultsTableWrapper";
 import ResultSection, { NoResultsAlert, ResultDescription } from "@/components/resultSection";
 import TeamResultsTableWrapper from "@/components/teamResultsTableWrapper";
 import { getRaceDescription, getRacesForYear } from "@/config/races";
@@ -57,7 +57,10 @@ export default async function HtmlYearResults({
               isRaceResults={true}
             />
           )}
-          <RaceIndividualResultsTableWrapper individualResults={individualResults} />
+          <IndividualResultsTableWrapper
+            individualResults={individualResults}
+            isRaceResults={true}
+          />
         </>
       ) : (
         <NoResultsAlert>No results available for this race.</NoResultsAlert>

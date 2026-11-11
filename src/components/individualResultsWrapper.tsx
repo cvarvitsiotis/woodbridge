@@ -24,7 +24,12 @@ export default function IndividualResultsWrapper({
         individualsError={individualsError}
       />
 
-      <MemoizedIndividualResultsTableWrapper individualResults={individualResults} />
+      {individualResults.length > 0 && (
+        <div className="space-y-2">
+          <p>Individual Results:</p>
+          <MemoizedIndividualResultsTableWrapper individualResults={individualResults} />
+        </div>
+      )}
     </>
   );
 }
