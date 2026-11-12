@@ -8,6 +8,7 @@ export default function StyledSelect({
   label,
   selectClassName,
   valueClassName,
+  itemClassName,
   isPrimary = true,
   disabledKeys,
 }: {
@@ -17,6 +18,7 @@ export default function StyledSelect({
   label?: string;
   selectClassName?: string;
   valueClassName?: string;
+  itemClassName?: string;
   isPrimary?: boolean;
   disabledKeys?: Iterable<Key>;
 }) {
@@ -39,7 +41,7 @@ export default function StyledSelect({
       <Select.Popover>
         <ListBox>
           {options.map((option) => (
-            <ListBox.Item key={option} id={option} textValue={option}>
+            <ListBox.Item key={option} id={option} textValue={option} className={itemClassName}>
               {option}
               <ListBox.ItemIndicator />
             </ListBox.Item>

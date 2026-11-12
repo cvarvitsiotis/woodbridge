@@ -11,6 +11,7 @@ import { Card } from "@heroui/react";
 import { getSubheaderStyle } from "@/styles/styles";
 import clsx from "clsx";
 import BaseLink from "@/components/baseLink";
+import LinkPendingSpinner from "@/components/linkPendingSpinner";
 import { data } from "@/config/data";
 import { pages } from "@/config/site";
 
@@ -88,9 +89,10 @@ function ResultLink({
       prefetch={false}
       scroll={false}
       href={href}
-      className={clsx("hover:underline", isFontLight && "font-light")}
+      className={clsx("hover:underline", isFontLight && "font-light", !isExternal && "relative")}
     >
       {label}
+      {!isExternal && <LinkPendingSpinner />}
     </BaseLink>
   );
 }

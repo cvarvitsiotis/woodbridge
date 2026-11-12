@@ -1,7 +1,7 @@
 import { IconSvgProps } from "@/types";
 import clsx from "clsx";
 
-export function ChevronDown({ fill, size, height, width, ...props }: IconSvgProps) {
+export function ChevronDown({ fill, size, height, width, strokeWidth, ...props }: IconSvgProps) {
   return (
     <svg
       fill="none"
@@ -18,7 +18,7 @@ export function ChevronDown({ fill, size, height, width, ...props }: IconSvgProp
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeMiterlimit={10}
-        strokeWidth={1.5}
+        strokeWidth={strokeWidth || 1.5}
       />
     </svg>
   );
