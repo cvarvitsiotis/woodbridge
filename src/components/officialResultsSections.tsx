@@ -196,7 +196,11 @@ function GenderColumn({ races, selectedYear }: { races: RaceType[]; selectedYear
           return (
             <div
               key={levelAndHeat}
-              className={clsx("px-4 py-2", getRowSpanStyling(race, selectedYear))}
+              className={clsx(
+                "px-4 py-2",
+                isHtmlResultYear(selectedYear) && "text-center",
+                getRowSpanStyling(race, selectedYear),
+              )}
             >
               {isHtmlResultYear(selectedYear) ? (
                 <ResultLink
@@ -248,14 +252,14 @@ function ResultCard({
         )}
       >
         <div className={clsx("border-b py-2", borderColor)}>{title}</div>
-        <div className={clsx("flex justify-around border-b py-2", borderColor)}>
+        <div className={clsx("grid grid-cols-2 border-b py-2", borderColor)}>
           <div>{genders.girls}</div>
           <div>{genders.boys}</div>
         </div>
       </div>
       <div
         className={clsx(
-          "grid grid-flow-col grid-cols-2 items-center rounded-b-[inherit] border-2 border-t-0 border-gray-300",
+          "grid grid-flow-col grid-cols-2 items-center rounded-b-[inherit] border-2 border-t-0 border-gray-300 py-2",
           gridRowsClassName,
         )}
       >
@@ -321,7 +325,7 @@ function OverallGenderColumnItem({
   selectedYear: number;
 }) {
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-2 text-center">
       <ResultLink
         href={getHtmlResultPath(selectedYear, `${resultType.segment}/${gender.param}`)}
         isExternal={false}
