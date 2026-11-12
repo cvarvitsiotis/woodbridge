@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { data, resultYears } from "@/config/data";
 import { pages } from "@/config/site";
@@ -14,15 +14,18 @@ const allYears = [...resultYears].reverse().map((year) => year.toString());
 
 function YearSelect({
   selectedYear,
+  isPending,
   handleChangeSelectedYear,
 }: {
   selectedYear: number;
+  isPending: boolean;
   handleChangeSelectedYear: (value: string) => void;
 }) {
   return (
     <StyledSelect
       selectedKey={selectedYear.toString()}
       onChange={handleChangeSelectedYear}
+      isPending={isPending}
       selectClassName="w-32"
       valueClassName="text-base"
       itemClassName="text-base"
@@ -50,9 +53,12 @@ export default function OfficialResults({
   children?: ReactNode;
 }) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   function handleChangeSelectedYear(value: string): void {
-    router.push(`${pages.raceResults.path}/${value}`, { scroll: false });
+    startTransition(() => {
+      router.push(`${pages.raceResults.path}/${value}`, { scroll: false });
+    });
   }
 
   return (
@@ -64,6 +70,7 @@ export default function OfficialResults({
         <div className="text-lg font-light">YEAR</div>
         <YearSelect
           selectedYear={selectedYear}
+          isPending={isPending}
           handleChangeSelectedYear={handleChangeSelectedYear}
         />
       </div>
