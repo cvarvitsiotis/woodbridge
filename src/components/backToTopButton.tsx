@@ -11,9 +11,10 @@ export default function BackToTopButton() {
         variant="primary"
         aria-label="Back to top"
         className="shadow-lg shadow-black/25"
+        size="lg"
         onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <ChevronDown fill="currentColor" className="rotate-180" />
+        <ChevronDown fill="currentColor" strokeWidth={3} className="rotate-180" />
       </StyledButton>
     </div>
   );

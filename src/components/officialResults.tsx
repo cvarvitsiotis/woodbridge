@@ -25,6 +25,7 @@ function YearSelect({
       onChange={handleChangeSelectedYear}
       selectClassName="w-32"
       valueClassName="text-base"
+      itemClassName="text-base"
       options={allYears}
     />
   );
