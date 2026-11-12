@@ -10,6 +10,10 @@ import Body from "@/components/body";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { dates } from "@/config/dates";
+import { getPageGutterStyle } from "@/styles/styles";
+import clsx from "clsx";
+
+const verticalStackStyle = "flex flex-col space-y-3 sm:space-y-4";
 
 export const metadata: Metadata = {
   title: {
@@ -32,13 +36,17 @@ export default function RootLayout({
       <head />
       <Body>
         <Providers>
-          <div className="relative flex min-h-dvh flex-col items-center space-y-3 px-3 sm:space-y-4 sm:px-6">
+          <div className={clsx("relative min-h-dvh items-center", verticalStackStyle)}>
             <Navbar />
-            <main className="container flex grow flex-col space-y-3">
-              <BreadcrumbsAndSponsor />
-              <div className="flex grow flex-col space-y-4">{children}</div>
-            </main>
-            <Footer />
+            <div
+              className={clsx("w-full grow items-center", verticalStackStyle, getPageGutterStyle())}
+            >
+              <main className={clsx("container grow", verticalStackStyle)}>
+                <BreadcrumbsAndSponsor />
+                <div className="flex grow flex-col space-y-4">{children}</div>
+              </main>
+              <Footer />
+            </div>
           </div>
         </Providers>
         <Analytics />

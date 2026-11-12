@@ -11,7 +11,7 @@ import { XIcon, InstagramIcon, MenuLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import BaseLink from "@/components/baseLink";
 import { useWindowScrollPositions } from "@/hooks/useWindowScrollPositions";
-import { getBaseLinkStyle } from "@/styles/styles";
+import { getBaseLinkStyle, getPageGutterStyle } from "@/styles/styles";
 import { Drawer } from "@heroui/react";
 import PresentedByAsics from "@/components/presentedByAsics";
 
@@ -167,7 +167,7 @@ function Menu({
           <Drawer.Dialog className="min-w-6/7 bg-linear-to-br from-indigo-200 from-65% to-[#ffd1b9] sm:min-w-1/2">
             <Drawer.CloseTrigger className="size-7" />
             <Drawer.Header>
-              <Drawer.Heading className="border-b border-neutral-900/15 pb-4">
+              <Drawer.Heading className="border-b border-neutral-900/15 pb-3">
                 <Brand isHomePage={isHomePage} isMenu={true} />
               </Drawer.Heading>
             </Drawer.Header>
@@ -219,6 +219,8 @@ export function Navbar() {
     <nav
       className={clsx(
         "sticky top-0 z-40 w-full bg-transparent transition-transform duration-500",
+        getPageGutterStyle(),
+        isBlurred && "backdrop-blur-lg",
         shouldHideOnScroll && !isVisible && "-translate-y-full",
         isBordered &&
           (isHomePage && siteConfig.showAmbientVideo
@@ -226,12 +228,7 @@ export function Navbar() {
             : "border-b border-neutral-900/15"),
       )}
     >
-      <header
-        className={clsx(
-          "mx-auto flex h-16 max-w-384 items-center justify-between gap-4",
-          isBlurred && "backdrop-blur-lg",
-        )}
-      >
+      <header className="mx-auto flex h-16 max-w-384 items-center justify-between gap-4">
         <BrandLink isHomePage={isHomePage} isMenu={false} />
         <ul className="ml-2 hidden basis-1/5 items-center gap-4 lg:flex lg:basis-full">
           <Menus
