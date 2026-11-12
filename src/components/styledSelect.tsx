@@ -1,6 +1,5 @@
 import { ListBox, Select } from "@heroui/react";
 import type { Key } from "@heroui/react";
-import DelayedSpinner from "@/components/delayedSpinner";
 
 export default function StyledSelect({
   options,
@@ -11,7 +10,6 @@ export default function StyledSelect({
   valueClassName,
   itemClassName,
   isPrimary = true,
-  isPending = false,
   disabledKeys,
 }: {
   options: string[];
@@ -22,7 +20,6 @@ export default function StyledSelect({
   valueClassName?: string;
   itemClassName?: string;
   isPrimary?: boolean;
-  isPending?: boolean;
   disabledKeys?: Iterable<Key>;
 }) {
   return (
@@ -39,7 +36,7 @@ export default function StyledSelect({
           {label && <div className="text-xs font-medium text-zinc-500">{label}</div>}
           <Select.Value className={valueClassName} />
         </div>
-        <Select.Indicator>{isPending && <DelayedSpinner />}</Select.Indicator>
+        <Select.Indicator />
       </Select.Trigger>
       <Select.Popover>
         <ListBox>
