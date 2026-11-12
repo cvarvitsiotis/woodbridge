@@ -25,6 +25,10 @@ export function getSubheaderStyle() {
   return "text-xl sm:text-2xl";
 }
 
+export function getPageGutterStyle() {
+  return "px-3 sm:px-6";
+}
+
 export function getBaseLinkStyle(accentColor: boolean = true) {
   const linkSlots = linkVariants();
 
