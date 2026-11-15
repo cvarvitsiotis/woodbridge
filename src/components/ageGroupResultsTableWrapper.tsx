@@ -8,14 +8,17 @@ const ageGroupResultsColumns: ColumnProps[] = [
   { id: "ageGroup", textValue: "Age Group" },
   { id: "gender", textValue: "Gender" },
   { id: "rank", textValue: "Rank" },
-  { id: "bib", textValue: "Bib", isRowHeader: true },
-  { id: "place", textValue: "Place" },
-  { id: "firstName", textValue: "First Name" },
-  { id: "lastName", textValue: "Last Name" },
-  { id: "age", textValue: "Age" },
+  { id: "name", textValue: "Name", isRowHeader: true },
   { id: "team", textValue: "Team" },
-  { id: "resultTime", textValue: "Result Time" },
+  { id: "age", textValue: "Age" },
+  { id: "place", textValue: "Place" },
+  { id: "time", textValue: "Time" },
+  { id: "bib", textValue: "Bib" },
 ];
+
+function getName({ firstName, lastName }: IndividualResultType): string {
+  return [firstName, lastName].filter(Boolean).join(" ");
+}
 
 function AgeGroupResultsTable({
   ageGroupResults,
@@ -39,13 +42,12 @@ function AgeGroupResultsTable({
                 <StyledTableCell>{ageGroupResult.ageGroup}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.gender}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.rank}</StyledTableCell>
-                <StyledTableCell>{ageGroupResult.bib}</StyledTableCell>
-                <StyledTableCell>{ageGroupResult.place}</StyledTableCell>
-                <StyledTableCell>{ageGroupResult.firstName}</StyledTableCell>
-                <StyledTableCell>{ageGroupResult.lastName}</StyledTableCell>
-                <StyledTableCell>{ageGroupResult.age}</StyledTableCell>
+                <StyledTableCell>{getName(ageGroupResult)}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.team}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.age}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.place}</StyledTableCell>
                 <StyledTableCell>{ageGroupResult.resultTimeStr}</StyledTableCell>
+                <StyledTableCell>{ageGroupResult.bib}</StyledTableCell>
               </Table.Row>
             )}
           </Table.Body>
