@@ -50,7 +50,7 @@ export default async function HtmlYearResults({
     <ResultSection>
       <FullRaceDescription race={race} year={year} />
       {individualResults.length > 0 ? (
-        <>
+        <div className="space-y-8">
           {!race.level.isIndivOnly && (
             <TeamResultsTableWrapper
               teamResults={getTeamResults(individualResults, true, year)}
@@ -61,7 +61,7 @@ export default async function HtmlYearResults({
             individualResults={individualResults}
             isRaceResults={true}
           />
-        </>
+        </div>
       ) : (
         <NoResultsAlert>No results available for this race.</NoResultsAlert>
       )}
