@@ -1,4 +1,4 @@
-import { AsicsLogo, IrvineTimingLogo } from "@/components/icons";
+import { AsicsLogo } from "@/components/icons";
 import { urls } from "@/config/data";
 import clsx from "clsx";
 import { Metadata } from "next";
@@ -9,6 +9,7 @@ import PageHeader from "@/components/pageHeader";
 import Image from "next/image";
 import athletic from "@/../public/images/athletic.png";
 import BaseLink from "@/components/baseLink";
+import irvineTiming from "@/../public/images/irvine-timing.webp";
 import greatPark from "@/../public/images/great-park.png";
 
 export const metadata: Metadata = {
@@ -54,7 +55,9 @@ export default function Page() {
           </div>
         </Sponsor>
         <Sponsor url={urls.athleticNet.irvineTiming} motto="Measure the moment">
-          <IrvineTimingLogo height="h-32" />
+          <div className="relative aspect-350/350 h-32 contrast-75">
+            <Image fill src={irvineTiming} quality={100} alt="Irvine Timing" />
+          </div>
         </Sponsor>
         <Sponsor url={urls.partners.greatPark} motto="Grounded in history, driven by community">
           <div className="relative aspect-3600/3600 h-32">
