@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import Image, { StaticImageData } from "next/image";
 import woodbridgeHigh from "@/../public/images/woodbridge-high-solo.png";
 import northwoodHigh from "@/../public/images/northwood-high-solo.png";
-import { IrvineTimingLogo } from "@/components/icons";
+import irvineTiming from "@/../public/images/irvine-timing.webp";
 import clsx from "clsx";
 import BaseLink from "@/components/baseLink";
 
@@ -97,7 +97,9 @@ export default function Footer() {
       </div>
       <div className="flex justify-end self-center sm:basis-1/3">
         <FooterLink url={urls.athleticNet.irvineTiming}>
-          <IrvineTimingLogo />
+          <div className="relative aspect-350/350 h-18 contrast-75 sm:h-20">
+            <Image fill src={irvineTiming} quality={100} alt="Irvine Timing" />
+          </div>
         </FooterLink>
       </div>
     </footer>
