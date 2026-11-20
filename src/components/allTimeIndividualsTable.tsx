@@ -11,13 +11,13 @@ import DynamicTable, { TableEmptyState } from "@/components/dynamicTable";
 import { ColumnProps } from "react-aria-components/Table";
 
 const columns: ColumnProps[] = [
-  { id: "place", textValue: "Place", defaultWidth: "1fr", isRowHeader: true },
-  { id: "name", textValue: "Name", defaultWidth: "20fr" },
-  { id: "team", textValue: "School", defaultWidth: "20fr" },
-  { id: "time", textValue: "Time", defaultWidth: "10fr" },
-  { id: "grade", textValue: "Grade", defaultWidth: "5fr" },
-  { id: "year", textValue: "Year", defaultWidth: "5fr" },
-  { id: "course", textValue: "Course", defaultWidth: "10fr" },
+  { id: "place", textValue: "Place", width: 70, isRowHeader: true },
+  { id: "name", textValue: "Name", width: 230 },
+  { id: "team", textValue: "School", width: 280 },
+  { id: "time", textValue: "Time", width: 90 },
+  { id: "grade", textValue: "Grade", width: 70 },
+  { id: "year", textValue: "Year", width: 70 },
+  { id: "course", textValue: "Course", width: 115 },
 ];
 
 const genderOptions = ["M", "F"];
@@ -290,15 +290,14 @@ export default function AllTimeIndividualsTable() {
       tableKey={tableKey}
       topContent={topContent}
       columns={columns}
-      contentClassName="min-w-200"
       ariaLabel={`${pages.allTimeLists.menuLabel} - Individuals`}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
         {(item) => (
           <Table.Row id={item.id}>
             <StyledTableCell>{item.place}</StyledTableCell>
-            <StyledTableCell>{item.name}</StyledTableCell>
-            <StyledTableCell>{item.team}</StyledTableCell>
+            <StyledTableCell className="truncate">{item.name}</StyledTableCell>
+            <StyledTableCell className="truncate">{item.team}</StyledTableCell>
             <StyledTableCell>{item.time}</StyledTableCell>
             <StyledTableCell>{item.grade}</StyledTableCell>
             <StyledTableCell>{item.year}</StyledTableCell>

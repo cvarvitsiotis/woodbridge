@@ -7,6 +7,7 @@ import { getYearResults } from "@/results";
 import { IndividualResultType, RaceType } from "@/types";
 import { getResultTimeStr } from "@/utils/getRawResultsFromUltra";
 import getTeamResults from "@/utils/getTeamResults";
+import { Tabs } from "@heroui/react";
 
 function FullRaceDescription({ race, year }: { race: RaceType; year: number }) {
   const raceInfo = [String(year), `Race ${race.num}`, race.time].filter(Boolean).join(" · ");
@@ -50,18 +51,49 @@ export default async function HtmlYearResults({
     <ResultSection>
       <FullRaceDescription race={race} year={year} />
       {individualResults.length > 0 ? (
-        <div className="space-y-8">
-          {!race.level.isIndivOnly && (
-            <TeamResultsTableWrapper
-              teamResults={getTeamResults(individualResults, true, year)}
+        <>
+          {race.level.isIndivOnly ? (
+            <IndividualResultsTableWrapper
+              individualResults={individualResults}
               isRaceResults={true}
             />
+          ) : (
+            <Tabs className="pt-2">
+              <Tabs.ListContainer className="mx-auto w-full max-w-xs md:mx-0">
+                <Tabs.List aria-label="Options">
+                  <Tabs.Tab id="teams" className="text-base">
+                    TEAMS
+                    <Tabs.Indicator />
+                  </Tabs.Tab>
+                  <Tabs.Tab id="individuals" className="text-base">
+                    INDIVIDUALS
+                    <Tabs.Indicator />
+                  </Tabs.Tab>
+                </Tabs.List>
+              </Tabs.ListContainer>
+              <Tabs.Panel
+                id="teams"
+                className="px-0 pt-6 data-[inert=true]:hidden"
+                shouldForceMount
+              >
+                <TeamResultsTableWrapper
+                  teamResults={getTeamResults(individualResults, true, year)}
+                  isRaceResults={true}
+                />
+              </Tabs.Panel>
+              <Tabs.Panel
+                id="individuals"
+                className="px-0 pt-6 data-[inert=true]:hidden"
+                shouldForceMount
+              >
+                <IndividualResultsTableWrapper
+                  individualResults={individualResults}
+                  isRaceResults={true}
+                />
+              </Tabs.Panel>
+            </Tabs>
           )}
-          <IndividualResultsTableWrapper
-            individualResults={individualResults}
-            isRaceResults={true}
-          />
-        </div>
+        </>
       ) : (
         <NoResultsAlert>No results available for this race.</NoResultsAlert>
       )}
