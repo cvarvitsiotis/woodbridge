@@ -32,7 +32,7 @@ export default function RacesTable({
 }) {
   {
     return (
-      <Table>
+      <Table className="w-full">
         <Table.ScrollContainer>
           <Table.Content aria-label={pages.schedule.menuLabel} className="whitespace-nowrap">
             <Table.Header columns={isFeatured ? featuredColumns : columns}>

@@ -15,12 +15,12 @@ import { dates } from "@/config/dates";
 import { ColumnProps } from "react-aria-components/Table";
 
 const columns: ColumnProps[] = [
-  { id: "name", textValue: "School", defaultWidth: "20fr", isRowHeader: true },
-  { id: "raceDay", textValue: "Race Day", defaultWidth: "15fr" },
-  { id: "division", textValue: "Division", defaultWidth: "5fr" },
-  { id: "varsityHeat", textValue: "Varsity Heat", defaultWidth: "5fr" },
-  { id: "city", textValue: "City", defaultWidth: "15fr" },
-  { id: "state", textValue: "State", defaultWidth: "5fr" },
+  { id: "name", textValue: "School", width: 280, isRowHeader: true },
+  { id: "raceDay", textValue: "Race Day", width: 150 },
+  { id: "division", textValue: "Division", width: 80 },
+  { id: "varsityHeat", textValue: "Varsity Heat", width: 110 },
+  { id: "city", textValue: "City", width: 190 },
+  { id: "state", textValue: "State", width: 70 },
 ];
 
 const divisionOptions = [{ num: 0, numRoman: "0", name: "All" }, ...Object.values(divisions)];
@@ -109,13 +109,12 @@ export default function ParticipatingTeamsTable() {
           displayDivisionAndVarsityHeat ||
           (column.id !== "division" && column.id !== "varsityHeat"),
       )}
-      contentClassName="min-w-150"
       ariaLabel={pages.participatingTeams.menuLabel}
     >
       <Table.Body items={filteredItems} renderEmptyState={() => <TableEmptyState />}>
         {(item) => (
           <Table.Row id={item.id}>
-            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell className="truncate">{item.name}</StyledTableCell>
             <StyledTableCell>{item.raceDay}</StyledTableCell>
             {displayDivisionAndVarsityHeat && (
               <>
@@ -125,7 +124,7 @@ export default function ParticipatingTeamsTable() {
                 <StyledTableCell>{item.varsityHeat}</StyledTableCell>
               </>
             )}
-            <StyledTableCell>{item.city}</StyledTableCell>
+            <StyledTableCell className="truncate">{item.city}</StyledTableCell>
             <StyledTableCell>{item.state}</StyledTableCell>
           </Table.Row>
         )}
